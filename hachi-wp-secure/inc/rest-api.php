@@ -40,7 +40,7 @@ add_action( 'rest_api_init', function (): void {
         // hachi/v1 名前空間のみにレートリミットを適用
         $route = $request->get_route();
         if ( strpos( $route, '/hachi/v1' ) === 0 ) {
-            $rate = hachi_check_rate_limit( 'search' ); // 30req/min を流用
+            $rate = hachi_check_rate_limit( 'rest_api' ); // REST API 専用: 60req/min
             if ( ! $rate['allowed'] ) {
                 return new WP_REST_Response(
                     [

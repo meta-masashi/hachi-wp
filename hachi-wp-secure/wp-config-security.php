@@ -142,6 +142,24 @@ define( 'HACHI_SLACK_WEBHOOK_URL', getenv( 'SLACK_WEBHOOK_URL' ) ?: '' );
 define( 'HACHI_CONTACT_TO_EMAIL', getenv( 'CONTACT_FORM_TO_EMAIL' ) ?: '' );
 
 // ────────────────────────────────────────────────────────────
+// 20. Supabase 接続設定
+//
+//     SUPABASE_URL         : Supabase プロジェクト URL
+//                           例: https://xyzcompany.supabase.co
+//     SUPABASE_SERVICE_KEY : service_role JWT キー
+//                           ⚠ サーバーサイド専用・絶対に公開しないこと
+//                           ⚠ anon キー (公開鍵) ではなく service_role を使用
+//
+//     設定方法:
+//       本番: サーバーの環境変数に設定 (例: /etc/environment または .env)
+//       開発: wp-config.php に直接記述 (.gitignore に wp-config.php を追加)
+//
+//     Supabase ダッシュボード > Settings > API でキーを確認できます。
+// ────────────────────────────────────────────────────────────
+define( 'HACHI_SUPABASE_URL',         getenv( 'SUPABASE_URL' )         ?: 'https://pprmtzvzztmdatqdwwqs.supabase.co' );
+define( 'HACHI_SUPABASE_SERVICE_KEY', getenv( 'SUPABASE_SERVICE_KEY' ) ?: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwcm10enZ6enRtZGF0cWR3d3FzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDM2MTkzMCwiZXhwIjoyMDg5OTM3OTMwfQ.D4C4BP6NrIGxiRs-lwIeQ76V9oLj4TPmo6D3X5_7cbc' );
+
+// ────────────────────────────────────────────────────────────
 // 20. セッションセキュリティ強化
 //     PHP セッション Cookie を Secure + HttpOnly + SameSite=Strict に設定
 // ────────────────────────────────────────────────────────────

@@ -149,6 +149,16 @@ add_filter( 'rest_authentication_errors', function ( $result ) {
     if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
         return $result;
     }
+    // /hachi/v1/ 配下の公開 GET エンドポイントは認証不要
+    // (GET /wp-json/hachi/v1/news は permission_callback = __return_true で公開設定)
+    $rest_prefix = rest_get_url_prefix(); // 通常 'wp-json'
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ( strpos( $request_uri, "/{$rest_prefix}/hachi/v1/" ) !== false ) {
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        if ( strtoupper( $method ) === 'GET' ) {
+            return $result; // GET は認証不要 (公開エンドポイント)
+        }
+    }
     if ( ! is_user_logged_in() ) {
         return new WP_Error(
             'rest_not_logged_in',

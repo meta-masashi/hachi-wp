@@ -1929,9 +1929,24 @@ input, textarea, select {
   line-height: 1.6;
 }
 
+/* Feature cards — 3 columns variant */
+.feature-cards--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 /* Feature cards — 6 columns variant */
 .feature-cards--6 {
   grid-template-columns: repeat(3, 1fr);
+}
+
+/* Feature card muted variant (secondary cards) */
+.feature-card--muted {
+  background: rgba(255,255,255,.03);
+  border-color: rgba(255,255,255,.06);
+}
+.feature-card--muted .feature-card__badge {
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.5);
 }
 
 /* Feature card num (replaces icon) */
@@ -1988,6 +2003,125 @@ input, textarea, select {
 }
 
 /* ============================================================
+   PACE PRICING
+   ============================================================ */
+.pace-pricing__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pace-pricing__grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 100%;
+}
+
+.pace-plan {
+  position: relative;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 4px;
+  padding: 40px 36px;
+  transition: background var(--t-med);
+}
+.pace-plan:hover { background: rgba(255,255,255,.08); }
+
+.pace-plan--featured {
+  border-color: var(--teal2);
+  background: rgba(0,137,123,.1);
+}
+
+.pace-plan__badge {
+  position: absolute;
+  top: -13px;
+  left: 28px;
+  background: var(--teal);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .15em;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.pace-plan__name {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .2em;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 20px;
+}
+
+.pace-plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.pace-plan__amount {
+  font-family: var(--mono);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -.02em;
+}
+
+.pace-plan__amount--sm {
+  font-size: clamp(16px, 2vw, 22px);
+  letter-spacing: 0;
+}
+
+.pace-plan__unit {
+  font-size: 13px;
+  color: rgba(255,255,255,.4);
+}
+
+.pace-plan__desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.pace-plan__list {
+  list-style: none;
+  margin: 0 0 36px;
+  padding: 0;
+}
+
+.pace-plan__list li {
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+  line-height: 1.7;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  padding-left: 18px;
+  position: relative;
+}
+
+.pace-plan__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--teal2);
+}
+
+.pace-plan__btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ============================================================
    WORDPRESS SPECIFIC OVERRIDES
    ============================================================ */
 .wp-caption { max-width: 100%; }
@@ -2032,7 +2166,11 @@ input, textarea, select {
   .values-grid,
   .security-grid,
   .feature-cards,
+  .feature-cards--3,
   .feature-cards--6 { grid-template-columns: 1fr; }
+
+  .pace-pricing__grid,
+  .pace-pricing__grid--4 { grid-template-columns: 1fr 1fr; }
 
   .pace-header__inner { grid-template-columns: 1fr; gap: 24px; }
   .pace-stats { grid-template-columns: 1fr 1fr; }
@@ -2083,7 +2221,9 @@ input, textarea, select {
   .flow-grid { grid-template-columns: 1fr; }
 
   .pace-stats,
-  .pace-roles__grid { grid-template-columns: 1fr; }
+  .pace-roles__grid,
+  .pace-pricing__grid,
+  .pace-pricing__grid--4 { grid-template-columns: 1fr; }
 
   .post-row { grid-template-columns: 1fr; }
 

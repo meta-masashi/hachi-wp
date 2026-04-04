@@ -143,7 +143,7 @@ if ( $ticker ) :
 					<p class="service-item__tag">SPORTS MEDICAL SaaS</p>
 					<h3 class="service-item__title">PACE v3.0</h3>
 					<p class="service-item__desc">
-						<?php _e( '動的ベイズ推論とAIが、アスリートの傷害評価からリハビリ計画までを一元化するプラットフォーム。', 'hachi' ); ?>
+						<?php _e( '因果推論AIとデジタルツインで、スポーツ医療チームの意思決定を革新するプラットフォーム。', 'hachi' ); ?>
 					</p>
 				</div>
 				<span class="service-item__arrow" aria-hidden="true">↗</span>

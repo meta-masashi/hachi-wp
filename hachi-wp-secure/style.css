@@ -2013,6 +2013,11 @@ input, textarea, select {
   margin: 0 auto;
 }
 
+.pace-pricing__grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 100%;
+}
+
 .pace-plan {
   position: relative;
   background: rgba(255,255,255,.05);
@@ -2058,10 +2063,15 @@ input, textarea, select {
 
 .pace-plan__amount {
   font-family: var(--mono);
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(24px, 3vw, 36px);
   font-weight: 300;
   color: #fff;
   letter-spacing: -.02em;
+}
+
+.pace-plan__amount--sm {
+  font-size: clamp(16px, 2vw, 22px);
+  letter-spacing: 0;
 }
 
 .pace-plan__unit {
@@ -2159,7 +2169,8 @@ input, textarea, select {
   .feature-cards--3,
   .feature-cards--6 { grid-template-columns: 1fr; }
 
-  .pace-pricing__grid { grid-template-columns: 1fr; }
+  .pace-pricing__grid,
+  .pace-pricing__grid--4 { grid-template-columns: 1fr 1fr; }
 
   .pace-header__inner { grid-template-columns: 1fr; gap: 24px; }
   .pace-stats { grid-template-columns: 1fr 1fr; }
@@ -2211,7 +2222,8 @@ input, textarea, select {
 
   .pace-stats,
   .pace-roles__grid,
-  .pace-pricing__grid { grid-template-columns: 1fr; }
+  .pace-pricing__grid,
+  .pace-pricing__grid--4 { grid-template-columns: 1fr; }
 
   .post-row { grid-template-columns: 1fr; }
 

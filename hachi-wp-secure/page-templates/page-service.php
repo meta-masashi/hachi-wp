@@ -239,53 +239,56 @@ get_header();
 			<p class="pace-roles__label" style="font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:rgba(255,255,255,.4);margin-bottom:40px;text-align:center">
 				<?php _e( 'PLANS &amp; PRICING', 'hachi' ); ?>
 			</p>
-			<div class="pace-pricing__grid">
+			<div class="pace-pricing__grid pace-pricing__grid--4">
 
+				<!-- Standard -->
 				<div class="pace-plan">
-					<h3 class="pace-plan__name">Starter</h3>
+					<h3 class="pace-plan__name">Standard</h3>
 					<div class="pace-plan__price">
-						<span class="pace-plan__amount">¥29,800</span>
+						<span class="pace-plan__amount">¥100,000</span>
 						<span class="pace-plan__unit">/月</span>
 					</div>
-					<p class="pace-plan__desc"><?php _e( '小規模チーム向け。基本機能をすべて利用可能。', 'hachi' ); ?></p>
+					<p class="pace-plan__desc"><?php _e( '基本アセスメント・日次チェックイン・SOAP。スタッフ5名・選手50名まで。', 'hachi' ); ?></p>
 					<ul class="pace-plan__list">
 						<?php
-						$starter_items = [
-							'1チーム',
-							'コンディショニングスコア',
-							'7 AM Monopoly（朝のアジェンダ）',
-							'メール通知',
-							'基本レポート',
+						$standard_items = [
+							'基本 / 高度アセスメント',
+							'日次チェックイン（トリアージ）',
+							'コンディションスコア表示',
+							'コンディショニングシミュレータ（2シナリオ）',
+							'リハビリシミュレータ（基本版）',
+							'スタッフ5名・選手50名',
 						];
-						foreach ( $starter_items as $item ) :
+						foreach ( $standard_items as $item ) :
 						?>
 							<li><?php echo esc_html( $item ); ?></li>
 						<?php endforeach; ?>
 					</ul>
 					<a href="<?php echo esc_url( 'https://hachi-riskon.com/login' ); ?>" class="btn pace-plan__btn" target="_blank" rel="noopener noreferrer">
-						<?php _e( '無料トライアルを開始', 'hachi' ); ?>
+						<?php _e( 'トライアルを開始', 'hachi' ); ?>
 						<?php hachi_arrow_icon(); ?>
 					</a>
 				</div>
 
+				<!-- Pro -->
 				<div class="pace-plan pace-plan--featured">
 					<span class="pace-plan__badge"><?php _e( 'おすすめ', 'hachi' ); ?></span>
 					<h3 class="pace-plan__name">Pro</h3>
 					<div class="pace-plan__price">
-						<span class="pace-plan__amount">¥79,800</span>
+						<span class="pace-plan__amount">¥300,000</span>
 						<span class="pace-plan__unit">/月</span>
 					</div>
-					<p class="pace-plan__desc"><?php _e( 'プロフェッショナルチーム向け。全機能をフル活用。', 'hachi' ); ?></p>
+					<p class="pace-plan__desc"><?php _e( 'Standard全機能 + AI機能フル。スタッフ20名・選手200名まで。', 'hachi' ); ?></p>
 					<ul class="pace-plan__list">
 						<?php
 						$pro_items = [
-							'無制限チーム',
-							'因果推論AIエンジン（フル）',
-							'デジタルツインシミュレーション',
-							'デバイス連携（S2S）',
-							'Slack / Web Push通知',
-							'高度なレポート・分析',
-							'優先サポート',
+							'Standard 全機能',
+							'AI SOAP補助（Gemini）',
+							'AI週間プラン自動生成',
+							'7 AM Monopoly（朝のアジェンダ）',
+							'リスク回避レポート',
+							'カレンダー同期',
+							'スタッフ20名・選手200名',
 						];
 						foreach ( $pro_items as $item ) :
 						?>
@@ -293,7 +296,63 @@ get_header();
 						<?php endforeach; ?>
 					</ul>
 					<a href="<?php echo esc_url( 'https://hachi-riskon.com/login' ); ?>" class="btn btn--white pace-plan__btn" target="_blank" rel="noopener noreferrer">
-						<?php _e( '無料トライアルを開始', 'hachi' ); ?>
+						<?php _e( 'トライアルを開始', 'hachi' ); ?>
+						<?php hachi_arrow_icon(); ?>
+					</a>
+				</div>
+
+				<!-- Pro + CV -->
+				<div class="pace-plan">
+					<h3 class="pace-plan__name">Pro + CV</h3>
+					<div class="pace-plan__price">
+						<span class="pace-plan__amount">¥500,000</span>
+						<span class="pace-plan__unit">/月</span>
+					</div>
+					<p class="pace-plan__desc"><?php _e( 'Pro全機能 + コンピュータビジョン解析。動画から生体力学データを自動取得。', 'hachi' ); ?></p>
+					<ul class="pace-plan__list">
+						<?php
+						$cv_items = [
+							'Pro 全機能',
+							'CV解析API（50本/月）',
+							'動画アップロード → 生体力学評価',
+							'介入効果ビフォーアフター比較',
+							'スタッフ20名・選手200名',
+						];
+						foreach ( $cv_items as $item ) :
+						?>
+							<li><?php echo esc_html( $item ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn pace-plan__btn">
+						<?php _e( 'お問い合わせ', 'hachi' ); ?>
+						<?php hachi_arrow_icon(); ?>
+					</a>
+				</div>
+
+				<!-- Enterprise -->
+				<div class="pace-plan">
+					<h3 class="pace-plan__name">Enterprise</h3>
+					<div class="pace-plan__price">
+						<span class="pace-plan__amount pace-plan__amount--sm"><?php _e( '要お問合せ', 'hachi' ); ?></span>
+					</div>
+					<p class="pace-plan__desc"><?php _e( 'Pro+CV全機能 + 複数チーム管理・カスタムベイズノード。スタッフ・選手無制限。', 'hachi' ); ?></p>
+					<ul class="pace-plan__list">
+						<?php
+						$enterprise_items = [
+							'Pro + CV 全機能',
+							'複数チーム管理',
+							'カスタムベイズノード',
+							'エンタープライズ専用機能',
+							'スタッフ・選手 無制限',
+							'専任サポート',
+						];
+						foreach ( $enterprise_items as $item ) :
+						?>
+							<li><?php echo esc_html( $item ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn pace-plan__btn">
+						<?php _e( 'お問い合わせ', 'hachi' ); ?>
 						<?php hachi_arrow_icon(); ?>
 					</a>
 				</div>

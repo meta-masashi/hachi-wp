@@ -114,7 +114,7 @@ get_header();
 					</p>
 				</div>
 				<p class="body-copy body-copy--white pace-lead">
-					<?php _e( '動的ベイズ推論（131ノード）×Computer Vision×Gemini AIが、スポーツ医療チームの傷害評価・リハビリ計画・コンディショニング管理を一元化。チームの「健康」をデータで可視化・最適化するプラットフォームです。', 'hachi' ); ?>
+					<?php _e( '因果推論AIとデジタルツインを活用し、アスレティックトレーナー・理学療法士の意思決定を支援するスポーツ医療プラットフォーム。ブラックボックスではない、論文エビデンスに基づく推論でチームの健康を守ります。', 'hachi' ); ?>
 				</p>
 			</div>
 		</div>
@@ -123,10 +123,10 @@ get_header();
 		<div class="pace-stats js-fade js-fade--delay-1">
 			<?php
 			$pace_stats = [
-				[ '131', 'ノード', '動的ベイズネットワーク' ],
-				[ '75%+', '信頼度閾値', '診断確定の精度基準' ],
-				[ '< 200ms', 'ベイズ更新', 'リアルタイム推論速度' ],
-				[ '3min', 'CV解析', '動画アップ〜結果出力' ],
+				[ '¥29,800', '/月〜', 'Starterプラン' ],
+				[ '6ノード', 'パイプライン', '因果推論エンジン' ],
+				[ '< 200ms', '推論速度', 'リアルタイム処理' ],
+				[ '14日間', '無料トライアル', '全機能お試し可能' ],
 			];
 			foreach ( $pace_stats as $stat ) :
 			?>
@@ -138,50 +138,68 @@ get_header();
 			<?php endforeach; ?>
 		</div>
 
-		<!-- PACE Features -->
-		<div class="feature-cards feature-cards--6 js-fade js-fade--delay-1" style="margin-top:80px">
+		<!-- PACE Core Technologies -->
+		<div class="feature-cards feature-cards--3 js-fade js-fade--delay-1" style="margin-top:80px">
+			<?php
+			$pace_core = [
+				[
+					'badge' => '因果推論 AI',
+					'num'   => '01',
+					'title' => "エビデンスベースの\n意思決定支援",
+					'desc'  => 'ブラックボックスではない、Oxford CEBM Level 2以上の論文エビデンスに基づくリスク推論。各予測の根拠を論文レベルで追跡可能。',
+				],
+				[
+					'badge' => '7 AM Monopoly',
+					'num'   => '02',
+					'title' => "毎朝、介入すべき選手を\n自動特定",
+					'desc'  => 'コンディションスコア・フィットネス・疲労を統合解析し、朝のミーティングまでに介入優先順位と修正済みメニューを自動生成します。',
+				],
+				[
+					'badge' => 'Digital Twin',
+					'num'   => '03',
+					'title' => "「もし〇〇したら？」を\n事前シミュレーション",
+					'desc'  => 'デジタルツインで介入の効果を事前に可視化。トレーニング負荷変更・リハビリ計画修正のリスクを数値で評価し、最善の判断を導きます。',
+				],
+			];
+			foreach ( $pace_core as $feat ) :
+			?>
+				<div class="feature-card">
+					<span class="feature-card__badge"><?php echo esc_html( $feat['badge'] ); ?></span>
+					<div class="feature-card__num" aria-hidden="true"><?php echo esc_html( $feat['num'] ); ?></div>
+					<h3 class="feature-card__title">
+						<?php echo nl2br( esc_html( $feat['title'] ) ); ?>
+					</h3>
+					<p class="feature-card__desc"><?php echo esc_html( $feat['desc'] ); ?></p>
+				</div>
+			<?php endforeach; ?>
+		</div>
+
+		<!-- PACE Features (secondary) -->
+		<div class="feature-cards feature-cards--3 js-fade js-fade--delay-2" style="margin-top:32px">
 			<?php
 			$pace_features = [
 				[
-					'badge' => 'Adaptive CAT',
-					'num'   => '01',
-					'title' => "動的ベイズ推論による\n傷害アセスメント",
-					'desc'  => '131ノードのCAT（コンピュータ適応型テスト）が、回答ごとに確率を更新。Red Flagゲートから診断確定まで最短8問で完結します。',
-				],
-				[
-					'badge' => 'Computer Vision',
-					'num'   => '02',
-					'title' => "動画解析による\n生体力学評価",
-					'desc'  => 'SMPL 3Dメッシュ解析で選手の姿勢・キネマティクスを定量化。ビフォーアフター比較で介入効果を可視化します。',
-				],
-				[
-					'badge' => 'Gemini AI',
-					'num'   => '03',
-					'title' => "AI自律生成\nリハビリ&チームメニュー",
-					'desc'  => 'ベイズ推論出力＋CV動作データをGemini APIに注入し、選手個別のリハビリ計画とチームトレーニングメニューを自動生成します。',
-				],
-				[
-					'badge' => 'Mobile App',
+					'badge' => 'Mobile PWA',
 					'num'   => '04',
 					'title' => "選手向け\nモバイルアプリ",
-					'desc'  => 'NRS・HRV・ACWRの日次チェックイン、マイメニュー確認、動画アップロードをiOS/Androidで。HealthKit/Health Connect連携対応。',
+					'desc'  => '日次コンディションチェックイン、マイメニュー確認、動画アップロードをiOS/Androidで。オフライン対応PWA。',
 				],
 				[
-					'badge' => 'RTP Management',
+					'badge' => 'RTP Gate',
 					'num'   => '05',
-					'title' => "復帰管理\nRTPゲート制御",
-					'desc'  => '傷害別のフェーズ管理（Phase 1-4）とゲート基準を自動判定。医師・ATによるHard Lock/Soft Lock制御で安全な競技復帰を実現します。',
+					'title' => "段階的な\n競技復帰管理",
+					'desc'  => 'Phase 1-4の復帰プロトコルを自動判定。医師・ATによるHard Lock/Soft Lock制御で安全な競技復帰を実現します。',
 				],
 				[
 					'badge' => 'Multi-tenant',
 					'num'   => '06',
-					'title' => "マルチテナント\nチーム管理基盤",
-					'desc'  => 'クラブ単位でデータを完全分離。Master/AT/PT/S&Cのロール別権限管理、リアルタイムダッシュボード、SOAPノートをワンプラットフォームで提供。',
+					'title' => "チーム管理\nマルチテナント基盤",
+					'desc'  => 'クラブ単位でデータを完全分離。Master/AT/PT/S&Cのロール別権限管理とSOAPノートをワンプラットフォームで。',
 				],
 			];
 			foreach ( $pace_features as $feat ) :
 			?>
-				<div class="feature-card">
+				<div class="feature-card feature-card--muted">
 					<span class="feature-card__badge"><?php echo esc_html( $feat['badge'] ); ?></span>
 					<div class="feature-card__num" aria-hidden="true"><?php echo esc_html( $feat['num'] ); ?></div>
 					<h3 class="feature-card__title">
@@ -201,7 +219,7 @@ get_header();
 				<?php
 				$roles = [
 					[ 'Master', '医師・医療責任者', '全機能アクセス・Hard Lock制御' ],
-					[ 'AT / PT', 'アスレティックトレーナー\n理学療法士', 'アセスメント・リハビリ管理' ],
+					[ 'AT / PT', 'アスレティックトレーナー / 理学療法士', 'アセスメント・リハビリ管理' ],
 					[ 'S&C', 'S&Cコーチ', 'チームメニュー生成・配信' ],
 					[ 'Athlete', '選手', 'モバイルアプリでチェックイン' ],
 				];
@@ -209,25 +227,92 @@ get_header();
 				?>
 					<div class="pace-role">
 						<div class="pace-role__tag"><?php echo esc_html( $role[0] ); ?></div>
-						<div class="pace-role__name"><?php echo nl2br( esc_html( $role[1] ) ); ?></div>
+						<div class="pace-role__name"><?php echo esc_html( $role[1] ); ?></div>
 						<div class="pace-role__desc"><?php echo esc_html( $role[2] ); ?></div>
 					</div>
 				<?php endforeach; ?>
 			</div>
 		</div>
 
+		<!-- PACE Pricing -->
+		<div class="pace-pricing js-fade js-fade--delay-2" style="margin-top:80px">
+			<p class="pace-roles__label" style="font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:rgba(255,255,255,.4);margin-bottom:40px;text-align:center">
+				<?php _e( 'PLANS &amp; PRICING', 'hachi' ); ?>
+			</p>
+			<div class="pace-pricing__grid">
+
+				<div class="pace-plan">
+					<h3 class="pace-plan__name">Starter</h3>
+					<div class="pace-plan__price">
+						<span class="pace-plan__amount">¥29,800</span>
+						<span class="pace-plan__unit">/月</span>
+					</div>
+					<p class="pace-plan__desc"><?php _e( '小規模チーム向け。基本機能をすべて利用可能。', 'hachi' ); ?></p>
+					<ul class="pace-plan__list">
+						<?php
+						$starter_items = [
+							'1チーム',
+							'コンディショニングスコア',
+							'7 AM Monopoly（朝のアジェンダ）',
+							'メール通知',
+							'基本レポート',
+						];
+						foreach ( $starter_items as $item ) :
+						?>
+							<li><?php echo esc_html( $item ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<a href="<?php echo esc_url( 'https://hachi-riskon.com/login' ); ?>" class="btn pace-plan__btn" target="_blank" rel="noopener noreferrer">
+						<?php _e( '無料トライアルを開始', 'hachi' ); ?>
+						<?php hachi_arrow_icon(); ?>
+					</a>
+				</div>
+
+				<div class="pace-plan pace-plan--featured">
+					<span class="pace-plan__badge"><?php _e( 'おすすめ', 'hachi' ); ?></span>
+					<h3 class="pace-plan__name">Pro</h3>
+					<div class="pace-plan__price">
+						<span class="pace-plan__amount">¥79,800</span>
+						<span class="pace-plan__unit">/月</span>
+					</div>
+					<p class="pace-plan__desc"><?php _e( 'プロフェッショナルチーム向け。全機能をフル活用。', 'hachi' ); ?></p>
+					<ul class="pace-plan__list">
+						<?php
+						$pro_items = [
+							'無制限チーム',
+							'因果推論AIエンジン（フル）',
+							'デジタルツインシミュレーション',
+							'デバイス連携（S2S）',
+							'Slack / Web Push通知',
+							'高度なレポート・分析',
+							'優先サポート',
+						];
+						foreach ( $pro_items as $item ) :
+						?>
+							<li><?php echo esc_html( $item ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<a href="<?php echo esc_url( 'https://hachi-riskon.com/login' ); ?>" class="btn btn--white pace-plan__btn" target="_blank" rel="noopener noreferrer">
+						<?php _e( '無料トライアルを開始', 'hachi' ); ?>
+						<?php hachi_arrow_icon(); ?>
+					</a>
+				</div>
+
+			</div>
+		</div>
+
 		<!-- CTA -->
 		<div class="js-fade js-fade--delay-2" style="text-align:center;margin-top:80px;padding-top:60px;border-top:1px solid rgba(255,255,255,.1)">
 			<p style="font-family:var(--serif);font-size:clamp(18px,2.5vw,26px);color:rgba(255,255,255,.85);margin-bottom:36px">
-				<?php _e( 'スポーツ医療の現場を、データで革新する。', 'hachi' ); ?>
+				<?php _e( 'スポーツ医療の新しいスタンダードを、あなたのチームに。', 'hachi' ); ?>
 			</p>
 			<div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--white">
-					<?php _e( 'デモを申し込む', 'hachi' ); ?>
+				<a href="<?php echo esc_url( 'https://hachi-riskon.com/login' ); ?>" class="btn btn--white" target="_blank" rel="noopener noreferrer">
+					<?php _e( '無料トライアルを開始', 'hachi' ); ?>
 					<?php hachi_arrow_icon(); ?>
 				</a>
 				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)">
-					<?php _e( '資料請求', 'hachi' ); ?>
+					<?php _e( '資料請求・デモ申込', 'hachi' ); ?>
 					<?php hachi_arrow_icon(); ?>
 				</a>
 			</div>

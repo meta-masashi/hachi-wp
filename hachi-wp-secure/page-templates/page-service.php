@@ -143,22 +143,22 @@ get_header();
 			<?php
 			$pace_core = [
 				[
-					'badge' => '因果推論 AI',
+					'badge' => '根拠ある AI 判断',
 					'num'   => '01',
-					'title' => "エビデンスベースの\n意思決定支援",
-					'desc'  => 'ブラックボックスではない、Oxford CEBM Level 2以上の論文エビデンスに基づくリスク推論。各予測の根拠を論文レベルで追跡可能。',
+					'title' => "「なぜそう判断したか」が\nわかるAI",
+					'desc'  => '医学論文のエビデンスをもとに計算するAIなので、なぜそのリスク判定になったかをスタッフが確認・説明できます。ブラックボックスな機械学習とは異なります。',
 				],
 				[
-					'badge' => '7 AM Monopoly',
+					'badge' => '朝の自動通知',
 					'num'   => '02',
-					'title' => "毎朝、介入すべき選手を\n自動特定",
-					'desc'  => 'コンディションスコア・フィットネス・疲労を統合解析し、朝のミーティングまでに介入優先順位と修正済みメニューを自動生成します。',
+					'title' => "毎朝7時に「今日対応が\n必要な選手」を自動通知",
+					'desc'  => '前日までのデータをもとに、コンディションが下がっている選手・今日のメニューを調整すべき選手を自動でリストアップ。朝のミーティング前に準備が整います。',
 				],
 				[
-					'badge' => 'Digital Twin',
+					'badge' => 'シミュレーション',
 					'num'   => '03',
-					'title' => "「もし〇〇したら？」を\n事前シミュレーション",
-					'desc'  => 'デジタルツインで介入の効果を事前に可視化。トレーニング負荷変更・リハビリ計画修正のリスクを数値で評価し、最善の判断を導きます。',
+					'title' => "「もし〇〇したら？」を\n試してから決断",
+					'desc'  => '「今日、練習強度を下げたら来週の試合に間に合うか？」などの仮定シナリオをシステム上で試せます。リスクを数値で確認してから判断できます。',
 				],
 			];
 			foreach ( $pace_core as $feat ) :
@@ -179,22 +179,22 @@ get_header();
 			<?php
 			$pace_features = [
 				[
-					'badge' => 'Mobile PWA',
+					'badge' => '選手アプリ',
 					'num'   => '04',
-					'title' => "選手向け\nモバイルアプリ",
-					'desc'  => '日次コンディションチェックイン、マイメニュー確認、動画アップロードをiOS/Androidで。オフライン対応PWA。',
+					'title' => "選手がスマホで\n毎日体調を報告",
+					'desc'  => '選手はスマホアプリから痛みや疲労度を入力するだけ。スタッフにリアルタイムで届き、今日のメニュー確認もアプリ上で完結します。',
 				],
 				[
-					'badge' => 'RTP Gate',
+					'badge' => '復帰管理',
 					'num'   => '05',
-					'title' => "段階的な\n競技復帰管理",
-					'desc'  => 'Phase 1-4の復帰プロトコルを自動判定。医師・ATによるHard Lock/Soft Lock制御で安全な競技復帰を実現します。',
+					'title' => "「いつ復帰できるか」を\nステップで管理",
+					'desc'  => '怪我の回復段階をステップで管理し、各段階の基準をクリアしたかをシステムが自動チェック。担当スタッフが安全に復帰判断を下せます。',
 				],
 				[
-					'badge' => 'Multi-tenant',
+					'badge' => 'チーム管理',
 					'num'   => '06',
-					'title' => "チーム管理\nマルチテナント基盤",
-					'desc'  => 'クラブ単位でデータを完全分離。Master/AT/PT/S&Cのロール別権限管理とSOAPノートをワンプラットフォームで。',
+					'title' => "役割ごとの\n情報アクセス管理",
+					'desc'  => '医師・トレーナー・S&Cコーチ・選手それぞれが必要な情報だけを見られる権限設定。チームのデータは他のクラブと完全に分離されています。',
 				],
 			];
 			foreach ( $pace_features as $feat ) :
@@ -248,16 +248,16 @@ get_header();
 						<span class="pace-plan__amount">¥100,000</span>
 						<span class="pace-plan__unit">/月</span>
 					</div>
-					<p class="pace-plan__desc"><?php _e( '基本アセスメント・日次チェックイン・SOAP。スタッフ5名・選手50名まで。', 'hachi' ); ?></p>
+					<p class="pace-plan__desc"><?php _e( '傷害リスクの評価・毎日の状態確認・ケア記録をデジタル化。小規模チームに最適。', 'hachi' ); ?></p>
 					<ul class="pace-plan__list">
 						<?php
 						$standard_items = [
-							'基本 / 高度アセスメント',
-							'日次チェックイン（トリアージ）',
-							'コンディションスコア表示',
-							'コンディショニングシミュレータ（2シナリオ）',
-							'リハビリシミュレータ（基本版）',
-							'スタッフ5名・選手50名',
+							'傷害リスク評価（AIアセスメント）',
+							'選手の毎日の体調チェック',
+							'コンディションスコアの可視化',
+							'復帰シミュレーション（2パターン）',
+							'リハビリ進捗管理',
+							'スタッフ5名・選手50名まで',
 						];
 						foreach ( $standard_items as $item ) :
 						?>
@@ -278,17 +278,17 @@ get_header();
 						<span class="pace-plan__amount">¥300,000</span>
 						<span class="pace-plan__unit">/月</span>
 					</div>
-					<p class="pace-plan__desc"><?php _e( 'Standard全機能 + AI機能フル。スタッフ20名・選手200名まで。', 'hachi' ); ?></p>
+					<p class="pace-plan__desc"><?php _e( 'AIが毎朝「今日対応すべき選手」を自動特定。記録・計画・報告をまるごと自動化。', 'hachi' ); ?></p>
 					<ul class="pace-plan__list">
 						<?php
 						$pro_items = [
 							'Standard 全機能',
-							'AI SOAP補助（Gemini）',
-							'AI週間プラン自動生成',
-							'7 AM Monopoly（朝のアジェンダ）',
-							'リスク回避レポート',
-							'カレンダー同期',
-							'スタッフ20名・選手200名',
+							'AIによる診療記録の自動下書き',
+							'今週のトレーニングメニューをAIが自動作成',
+							'毎朝7時に優先対応選手リストを自動通知',
+							'怪我リスクの増加傾向レポート',
+							'スケジュール・カレンダー連携',
+							'スタッフ20名・選手200名まで',
 						];
 						foreach ( $pro_items as $item ) :
 						?>
@@ -301,22 +301,23 @@ get_header();
 					</a>
 				</div>
 
-				<!-- Pro + CV -->
+				<!-- Pro + 動画解析 -->
 				<div class="pace-plan">
-					<h3 class="pace-plan__name">Pro + CV</h3>
+					<h3 class="pace-plan__name">Pro + 動画解析</h3>
 					<div class="pace-plan__price">
 						<span class="pace-plan__amount">¥500,000</span>
 						<span class="pace-plan__unit">/月</span>
 					</div>
-					<p class="pace-plan__desc"><?php _e( 'Pro全機能 + コンピュータビジョン解析。動画から生体力学データを自動取得。', 'hachi' ); ?></p>
+					<p class="pace-plan__desc"><?php _e( 'Proの全機能に加え、選手の動作を動画で撮影するだけで姿勢・動きの問題点をAIが自動分析。', 'hachi' ); ?></p>
 					<ul class="pace-plan__list">
 						<?php
 						$cv_items = [
 							'Pro 全機能',
-							'CV解析API（50本/月）',
-							'動画アップロード → 生体力学評価',
-							'介入効果ビフォーアフター比較',
-							'スタッフ20名・選手200名',
+							'動画をアップロードするだけで動作を自動分析',
+							'姿勢・関節の問題点をスコアで表示',
+							'介入前後の動作変化を数値で比較',
+							'月50回まで動画解析可能',
+							'スタッフ20名・選手200名まで',
 						];
 						foreach ( $cv_items as $item ) :
 						?>
@@ -335,16 +336,16 @@ get_header();
 					<div class="pace-plan__price">
 						<span class="pace-plan__amount pace-plan__amount--sm"><?php _e( '要お問合せ', 'hachi' ); ?></span>
 					</div>
-					<p class="pace-plan__desc"><?php _e( 'Pro+CV全機能 + 複数チーム管理・カスタムベイズノード。スタッフ・選手無制限。', 'hachi' ); ?></p>
+					<p class="pace-plan__desc"><?php _e( '複数のチーム・クラブをひとつのシステムで一括管理。規模・運用に合わせた専用構成が可能。', 'hachi' ); ?></p>
 					<ul class="pace-plan__list">
 						<?php
 						$enterprise_items = [
-							'Pro + CV 全機能',
-							'複数チーム管理',
-							'カスタムベイズノード',
-							'エンタープライズ専用機能',
-							'スタッフ・選手 無制限',
-							'専任サポート',
+							'Pro + 動画解析 全機能',
+							'複数チーム・クラブの一括管理',
+							'推論ロジックのカスタマイズ対応',
+							'スタッフ・選手 人数無制限',
+							'専任サポート・導入支援',
+							'セキュリティ・契約条件のカスタマイズ',
 						];
 						foreach ( $enterprise_items as $item ) :
 						?>

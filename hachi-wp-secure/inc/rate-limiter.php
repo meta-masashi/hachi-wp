@@ -29,6 +29,13 @@ const HACHI_RATE_LIMITS = [
         'window' => MINUTE_IN_SECONDS,
         'lockout'=> 5 * MINUTE_IN_SECONDS,
     ],
+    // /hachi/v1/ REST API 専用設定
+    // GET /wp-json/hachi/v1/news に適用 (search の流用を廃止)
+    'rest_api' => [
+        'max'    => 60,                     // 60req/分 (通常の API クライアント想定)
+        'window' => MINUTE_IN_SECONDS,
+        'lockout'=> 10 * MINUTE_IN_SECONDS, // 超過後 10分ロック
+    ],
 ];
 
 /**

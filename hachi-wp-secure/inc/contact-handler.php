@@ -407,11 +407,18 @@ function hachi_transform_contact_json_response( string $buffer ): string {
             hachi_notify_slack( $post_data );
         }
 
+        // Supabase に問い合わせデータを保存
+        if ( ! empty( $post_data ) && function_exists( 'hachi_supabase_save_contact' ) ) {
+            $recaptcha_score = (float) ( $GLOBALS['hachi_recaptcha_score'] ?? 0.0 );
+            hachi_supabase_save_contact( $post_data, $cat_info['ga4_event'], $recaptcha_score );
+        }
+
         hachi_security_log( 'contact_with_ga4', [
             'ip'        => $post_data['ip']  ?? '',
             'cat'       => $post_data['cat'] ?? '',
             'ga4_event' => $cat_info['ga4_event'],
             'score'     => $GLOBALS['hachi_recaptcha_score'] ?? null,
+            'supabase'  => function_exists( 'hachi_supabase_is_enabled' ) && hachi_supabase_is_enabled() ? 'enabled' : 'disabled',
         ] );
     }
 
@@ -502,6 +509,29 @@ function hachi_render_contact_settings_page(): void {
                 <tr>
                     <td>CONTACT_FORM_TO_EMAIL</td>
                     <td><?php echo esc_html( HACHI_CONTACT_TO_EMAIL ); ?></td>
+                </tr>
+                <tr>
+                    <td>SUPABASE_URL</td>
+                    <td><?php echo ! empty( HACHI_SUPABASE_URL ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:orange">△ 未設定（任意）</span>'; ?></td>
+                </tr>
+                <tr>
+                    <td>SUPABASE_SERVICE_KEY</td>
+                    <td>
+                        <?php if ( ! empty( HACHI_SUPABASE_SERVICE_KEY ) ) : ?>
+                            <span style="color:green">✓ 設定済み</span>
+                            <?php if ( function_exists( 'hachi_supabase_health_check' ) ) :
+                                $health = hachi_supabase_health_check(); ?>
+                                &nbsp;|&nbsp;
+                                <?php if ( $health['connected'] ) : ?>
+                                    <span style="color:green">接続OK <?php echo isset( $health['latency_ms'] ) ? "({$health['latency_ms']}ms)" : ''; ?></span>
+                                <?php else : ?>
+                                    <span style="color:red">接続エラー: <?php echo esc_html( $health['error'] ?? '不明' ); ?></span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <span style="color:orange">△ 未設定（任意）</span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             </tbody>
         </table>

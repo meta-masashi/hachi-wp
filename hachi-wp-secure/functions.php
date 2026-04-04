@@ -15,6 +15,10 @@ foreach (['/inc/security.php', '/inc/rate-limiter.php', '/inc/two-factor.php'] a
     if (file_exists($p)) require_once $p;
 }
 
+// Supabase クライアント (バックエンド拡張より先に読み込む)
+$supabase_mod = HACHI_THEME_DIR . '/inc/supabase.php';
+if (file_exists($supabase_mod)) require_once $supabase_mod;
+
 // バックエンド拡張モジュール読み込み
 foreach (['/inc/contact-handler.php', '/inc/rest-api.php'] as $mod) {
     $p = HACHI_THEME_DIR . $mod;

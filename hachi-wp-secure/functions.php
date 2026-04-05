@@ -232,6 +232,208 @@ function hachi_get_note_posts(int $limit = 10): array {
     return $out;
 }
 
+/* ============================================================
+   AUTO CLASSIFIER — News / Work / Blog の自動カテゴリ判定
+   ============================================================ */
+
+/**
+ * カテゴリ判定辞書
+ * 各語に強度スコア（3=強, 2=中, 1=弱）を紐付け。
+ * タイトルマッチは本文の 2 倍に重み付けされる。
+ */
+function hachi_classifier_dict(): array {
+    return [
+        'work' => [
+            3 => [
+                '導入事例', 'ケーススタディ', 'case study', 'casestudy', '事例紹介',
+                '導入事例集', '活用事例', '利用事例', '事例レポート', 'お客様の声',
+                'ユーザーストーリー', '導入企業', '導入クラブ', '導入チーム',
+                '導入実績', '採用事例', 'ビフォーアフター', 'before/after',
+            ],
+            2 => [
+                '導入', '導入後', '導入前', '導入検討', '導入支援',
+                '実績', '成果', '効果', '改善', '削減', '向上', '達成', '短縮', '増加',
+                'クライアント', '顧客事例', 'お客様', 'パートナー事例',
+                '共創', '協業', '伴走', 'プロジェクト実績',
+                '社様', 'チーム様', 'クラブ様',
+            ],
+            1 => [
+                'プロクラブ', 'プロチーム', '協会', '選手', 'アスリート',
+                '対談', 'インタビュー',
+            ],
+        ],
+        'news' => [
+            3 => [
+                'プレスリリース', 'press release', 'プレスリ', '報道発表',
+                'お知らせ', 'ご案内', 'リリース情報',
+                '受賞', '採択', '選出', '認定', '認証取得', '許認可',
+                '資金調達', 'シード調達', 'シリーズa', '出資', '第三者割当',
+                '業務提携', '資本提携', 'アライアンス', 'mou', '締結', '調印',
+                'メディア掲載', '取材記事', '報道', '特集', 'インタビュー掲載',
+                'イベント開催', '登壇', '出展', '出演', 'カンファレンス',
+                '補助金採択', '助成金採択', 'ものづくり補助金', 'it導入補助金',
+            ],
+            2 => [
+                '発表', '公開', '開始', 'ローンチ', 'launch', 'リニューアル',
+                '開催', 'セミナー', 'ウェビナー', '説明会',
+                '新機能', '新サービス', '新プラン',
+                '提携', '連携', '参画',
+                '設立', '創業', '周年', '移転', '開設',
+                '記者発表', '記者会見',
+            ],
+            1 => [
+                '日時', '会場', '主催', '後援', '協賛',
+                'このたび', '本日', '本年度',
+            ],
+        ],
+        'blog' => [
+            3 => [
+                'とは', 'について解説', '完全ガイド', '徹底解説', '入門',
+                '選び方', '使い方', 'やり方', 'ステップ', 'チェックリスト',
+                'ロードマップ', '比較', '違い', 'メリット・デメリット',
+                '初心者', '基礎知識', '押さえておきたい',
+                'まとめ', '振り返り', '知見', '学び', '気づき', 'tips',
+                'how to', 'howto',
+            ],
+            2 => [
+                '考察', '解説', '説明', 'レポート', '書評', 'レビュー',
+                'トレンド', '動向', '展望', '予測', '課題', '可能性',
+                '論文', '研究', 'エビデンス', 'データ分析', 'インサイト',
+                'コラム', 'エッセイ', 'ノート', '覚書',
+                'ポイント', 'コツ', '秘訣', '原則', 'フレームワーク',
+                'アーキテクチャ', '設計思想',
+            ],
+            1 => [
+                'vol.', '第', '連載', 'シリーズ',
+                '所感', '感想', '雑感', '私見',
+                '最近', 'このごろ',
+            ],
+        ],
+    ];
+}
+
+/**
+ * タイトル + 本文からコンテンツをカテゴリ分類する。
+ * 返値: 'work' | 'news' | 'blog'
+ */
+function hachi_classify_content( string $title, string $body = '' ): string {
+    $title_l = mb_strtolower( wp_strip_all_tags( $title ) );
+    $body_l  = mb_strtolower( wp_strip_all_tags( $body ) );
+
+    $scores = [ 'work' => 0, 'news' => 0, 'blog' => 0 ];
+    foreach ( hachi_classifier_dict() as $cat => $tiers ) {
+        foreach ( $tiers as $weight => $words ) {
+            foreach ( $words as $word ) {
+                $w = mb_strtolower( $word );
+                if ( $w === '' ) continue;
+                // Title hit: weight × 2
+                if ( mb_strpos( $title_l, $w ) !== false ) {
+                    $scores[ $cat ] += $weight * 2;
+                }
+                // Body hit: weight × 1
+                if ( $body_l !== '' && mb_strpos( $body_l, $w ) !== false ) {
+                    $scores[ $cat ] += $weight;
+                }
+            }
+        }
+    }
+
+    // 判定閾値
+    if ( $scores['work'] >= 3 ) return 'work';
+    if ( $scores['news'] >= 3 ) return 'news';
+    if ( $scores['blog'] >= 2 ) return 'blog';
+
+    // 同点時の優先順位 Work > News > Blog
+    $max = max( $scores );
+    if ( $max === 0 ) return 'blog';
+    if ( $scores['work'] === $max ) return 'work';
+    if ( $scores['news'] === $max ) return 'news';
+    return 'blog';
+}
+
+/**
+ * 統合アイテム取得：WP hachi_news + note.com を正規化し、自動分類済みで返す。
+ * @param array $args [ 'category' => 'all|work|news|blog|note', 'limit' => int ]
+ * @return array 正規化された items 配列（date 降順）
+ */
+function hachi_get_classified_items( array $args = [] ): array {
+    $args = wp_parse_args( $args, [
+        'category' => 'all',
+        'limit'    => 30,
+    ] );
+    $cat_filter = $args['category'];
+
+    $items = [];
+
+    // ---- WP hachi_news ----
+    if ( $cat_filter !== 'note' ) {
+        $q = new WP_Query( [
+            'post_type'      => 'hachi_news',
+            'posts_per_page' => 60,
+            'post_status'    => 'publish',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+            'no_found_rows'  => true,
+        ] );
+        while ( $q->have_posts() ) { $q->the_post();
+            $id    = get_the_ID();
+            // 1 時間キャッシュ（記事編集でクリア）
+            $cache_key = 'hachi_cls_' . $id . '_' . get_post_modified_time( 'U', false, $id );
+            $cat = get_transient( $cache_key );
+            if ( ! $cat ) {
+                $cat = hachi_classify_content( get_the_title(), (string) get_the_content() );
+                set_transient( $cache_key, $cat, DAY_IN_SECONDS );
+            }
+            $items[] = [
+                'source'    => 'wp',
+                'category'  => $cat,
+                'date_ts'   => (int) get_the_date( 'U' ),
+                'date_str'  => hachi_get_date(),
+                'title'     => get_the_title(),
+                'url'       => get_permalink(),
+                'excerpt'   => wp_trim_words( get_the_excerpt(), 36, '…' ),
+                'thumbnail' => has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'medium' ) : '',
+            ];
+        }
+        wp_reset_postdata();
+    }
+
+    // ---- note.com RSS ----
+    if ( $cat_filter === 'all' || $cat_filter === 'note' || $cat_filter === 'work' || $cat_filter === 'news' || $cat_filter === 'blog' ) {
+        foreach ( hachi_get_note_posts( 30 ) as $n ) {
+            $cat = hachi_classify_content( $n['title'], $n['excerpt'] );
+            $items[] = [
+                'source'    => 'note',
+                'category'  => $cat,
+                'date_ts'   => (int) $n['date'],
+                'date_str'  => $n['date'] ? date_i18n( 'Y.m.d', (int) $n['date'] ) : '',
+                'title'     => $n['title'],
+                'url'       => $n['url'],
+                'excerpt'   => $n['excerpt'],
+                'thumbnail' => $n['thumbnail'],
+            ];
+        }
+    }
+
+    // カテゴリフィルタ
+    if ( $cat_filter !== 'all' ) {
+        if ( $cat_filter === 'note' ) {
+            $items = array_values( array_filter( $items, fn( $i ) => $i['source'] === 'note' ) );
+        } else {
+            $items = array_values( array_filter( $items, fn( $i ) => $i['category'] === $cat_filter ) );
+        }
+    }
+
+    // 日付降順
+    usort( $items, fn( $a, $b ) => $b['date_ts'] <=> $a['date_ts'] );
+
+    return array_slice( $items, 0, (int) $args['limit'] );
+}
+
+/* ============================================================
+   END AUTO CLASSIFIER
+   ============================================================ */
+
 /**
  * Customizer: note.com username setting
  */

@@ -96,7 +96,6 @@ if ( $ticker ) :
 
 			<!-- Text -->
 			<div class="js-fade js-fade--delay-1">
-				<div style="font-family:var(--mono);font-size:clamp(60px,11vw,130px);font-weight:300;color:rgba(0,0,0,0.04);line-height:1;margin-bottom:-24px" aria-hidden="true">A</div>
 				<?php hachi_section_label( 'A b o u t' ); ?>
 				<h2 class="heading-en heading-en--sm">ABOUT</h2>
 				<p class="heading-jp">

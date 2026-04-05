@@ -1608,6 +1608,195 @@ input, textarea, select {
 .form-success.is-visible { display: block; }
 
 /* ============================================================
+   CONTACT PAGE — Category Cards / Steps / Chips (v2)
+   ============================================================ */
+.contact-intro {
+  max-width: 680px;
+  margin: 0 auto 56px;
+}
+
+/* Step blocks */
+.contact-step {
+  margin-bottom: 64px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--line, #e8e8ed);
+}
+.contact-step:last-of-type { border-bottom: none; }
+
+.contact-step__num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent, #2D4295);
+  margin-bottom: 6px;
+}
+.contact-step__label {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text, #1d1d1f);
+  margin-bottom: 28px;
+  font-family: var(--serif-jp, 'Noto Serif JP', serif);
+}
+.contact-step__label sup {
+  color: var(--accent, #2D4295);
+  font-size: 10px;
+  margin-left: 6px;
+  vertical-align: super;
+}
+.contact-step__optional {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray, #86868b);
+  letter-spacing: 0.05em;
+  font-family: var(--sans);
+}
+
+/* Category cards */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.contact-card {
+  position: relative;
+  cursor: pointer;
+  display: block;
+}
+.contact-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.contact-card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 20px;
+  background: #fff;
+  border: 1px solid var(--line, #e8e8ed);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-height: 130px;
+}
+.contact-card:hover .contact-card__inner {
+  border-color: var(--accent, #2D4295);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(45, 66, 149, 0.08);
+}
+.contact-card.is-selected .contact-card__inner,
+.contact-card input:checked + .contact-card__inner {
+  border-color: var(--accent, #2D4295);
+  background: #f5f7ff;
+  box-shadow: 0 0 0 1px var(--accent, #2D4295) inset;
+}
+.contact-card__icon {
+  font-size: 18px;
+  color: var(--accent, #2D4295);
+  line-height: 1;
+}
+.contact-card__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text, #1d1d1f);
+  line-height: 1.5;
+}
+.contact-card__sub {
+  font-size: 12px;
+  color: var(--gray, #86868b);
+  line-height: 1.65;
+}
+
+/* Chip fields */
+.form-chip-field {
+  margin-bottom: 32px;
+}
+.form-chip-field__label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gray, #86868b);
+  margin-bottom: 12px;
+}
+.form-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.form-chip {
+  appearance: none;
+  background: #fff;
+  border: 1px solid var(--line, #e8e8ed);
+  color: var(--text, #1d1d1f);
+  padding: 10px 18px;
+  font-size: 13px;
+  font-family: var(--sans);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.form-chip:hover {
+  border-color: var(--accent, #2D4295);
+  color: var(--accent, #2D4295);
+}
+.form-chip.is-active {
+  background: var(--accent, #2D4295);
+  border-color: var(--accent, #2D4295);
+  color: #fff;
+}
+
+/* Contact direct info block */
+.contact-direct {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+  max-width: 660px;
+  margin: 96px auto 0;
+  padding-top: 56px;
+  border-top: 1px solid var(--line, #e8e8ed);
+}
+.contact-direct__label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent, #2D4295);
+  margin-bottom: 14px;
+}
+.contact-direct__text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text, #1d1d1f);
+}
+
+/* Contact form field overrides for light mono page */
+.contact-form-wrap .form-field__input,
+.contact-form-wrap .form-field__textarea,
+.contact-form-wrap .form-field__select {
+  color: var(--text, #1d1d1f);
+  border-bottom-color: var(--line, #e8e8ed);
+}
+.contact-form-wrap .form-field__input:focus,
+.contact-form-wrap .form-field__textarea:focus,
+.contact-form-wrap .form-field__select:focus {
+  border-bottom-color: var(--accent, #2D4295);
+}
+.contact-form-wrap .form-success {
+  border-left-color: var(--accent, #2D4295);
+  background: #f5f5f7;
+  color: var(--text, #1d1d1f);
+}
+
+@media (max-width: 720px) {
+  .contact-cards { grid-template-columns: 1fr; }
+  .contact-step { margin-bottom: 48px; padding-bottom: 40px; }
+  .contact-direct { grid-template-columns: 1fr; gap: 32px; margin-top: 72px; }
+  .contact-step__label { font-size: 16px; }
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .site-footer {

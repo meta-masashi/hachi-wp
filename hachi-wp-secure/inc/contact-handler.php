@@ -29,14 +29,24 @@ defined( 'ABSPATH' ) || exit;
 function hachi_get_contact_categories(): array {
     $defaults = [
         'pace_demo'    => [
-            'label'     => 'PACE v3.0 デモ申込み',
-            'ga4_event' => 'demo_request',
+            'label'     => 'PACE 先行案内',
+            'ga4_event' => 'pace_waitlist',
             'emoji'     => ':rocket:',
         ],
         'reboot_docs'  => [
-            'label'     => 'REBOOT-WORK 資料請求',
-            'ga4_event' => 'resource_request',
+            'label'     => 'REBOOT-WORK 導入相談',
+            'ga4_event' => 'reboot_inquiry',
             'emoji'     => ':page_facing_up:',
+        ],
+        'media'        => [
+            'label'     => '取材・メディア',
+            'ga4_event' => 'media_inquiry',
+            'emoji'     => ':newspaper:',
+        ],
+        'recruit'      => [
+            'label'     => '採用・パートナー',
+            'ga4_event' => 'recruit_inquiry',
+            'emoji'     => ':handshake:',
         ],
         'general'      => [
             'label'     => '一般お問い合わせ',
@@ -206,6 +216,14 @@ function hachi_notify_slack( array $data ): bool {
                         'type' => 'mrkdwn',
                         'text' => "*メールアドレス*\n`" . esc_html( $data['email'] ) . '`',
                     ],
+                    [
+                        'type' => 'mrkdwn',
+                        'text' => "*役割 / 規模*\n" . esc_html( ( $data['role'] ?? '' ) ?: '—' ) . ' / ' . esc_html( ( $data['size'] ?? '' ) ?: '—' ),
+                    ],
+                    [
+                        'type' => 'mrkdwn',
+                        'text' => "*検討時期 / 電話*\n" . esc_html( ( $data['timeline'] ?? '' ) ?: '—' ) . ' / ' . esc_html( ( $data['phone'] ?? '' ) ?: '—' ),
+                    ],
                 ],
             ],
             [
@@ -361,12 +379,16 @@ add_action( 'wp_ajax_hachi_contact',        'hachi_intercept_contact_response', 
 function hachi_intercept_contact_response(): void {
     // POST データをここで保持（priority=10 の実行前）
     $GLOBALS['hachi_contact_post_data'] = [
-        'name'    => sanitize_text_field( $_POST['contact_name']    ?? '' ),
-        'company' => sanitize_text_field( $_POST['contact_company'] ?? '' ),
-        'email'   => sanitize_email( $_POST['contact_email']         ?? '' ),
-        'cat'     => sanitize_text_field( $_POST['contact_cat']      ?? '' ),
-        'message' => sanitize_textarea_field( $_POST['contact_message'] ?? '' ),
-        'ip'      => hachi_get_client_ip(),
+        'name'     => sanitize_text_field( $_POST['contact_name']    ?? '' ),
+        'company'  => sanitize_text_field( $_POST['contact_company'] ?? '' ),
+        'email'    => sanitize_email( $_POST['contact_email']         ?? '' ),
+        'cat'      => sanitize_text_field( $_POST['contact_cat']      ?? '' ),
+        'message'  => sanitize_textarea_field( $_POST['contact_message'] ?? '' ),
+        'role'     => sanitize_text_field( $_POST['contact_role']     ?? '' ),
+        'size'     => sanitize_text_field( $_POST['contact_size']     ?? '' ),
+        'timeline' => sanitize_text_field( $_POST['contact_timeline'] ?? '' ),
+        'phone'    => sanitize_text_field( $_POST['contact_phone']    ?? '' ),
+        'ip'       => hachi_get_client_ip(),
     ];
 
     // output buffering 開始: priority=10 の wp_send_json_success をキャプチャ

@@ -106,11 +106,16 @@ function hachi_handle_contact(): void {
         hachi_security_log('honeypot_triggered',['ip'=>hachi_get_client_ip()]);
         wp_send_json_success(['message'=>'ok']);
     }
-    $name    = sanitize_text_field($_POST['contact_name']??'');
-    $company = sanitize_text_field($_POST['contact_company']??'');
-    $email   = sanitize_email($_POST['contact_email']??'');
-    $cat     = sanitize_text_field($_POST['contact_cat']??'');
-    $message = sanitize_textarea_field($_POST['contact_message']??'');
+    $name     = sanitize_text_field($_POST['contact_name']??'');
+    $company  = sanitize_text_field($_POST['contact_company']??'');
+    $email    = sanitize_email($_POST['contact_email']??'');
+    $cat      = sanitize_text_field($_POST['contact_cat']??'');
+    $message  = sanitize_textarea_field($_POST['contact_message']??'');
+    // 追加フィールド（任意）
+    $role     = sanitize_text_field($_POST['contact_role']??'');
+    $size     = sanitize_text_field($_POST['contact_size']??'');
+    $timeline = sanitize_text_field($_POST['contact_timeline']??'');
+    $phone    = sanitize_text_field($_POST['contact_phone']??'');
     $errors  = [];
     if (empty($name)||mb_strlen($name)>100) $errors['name'] = __('お名前をご入力ください。','hachi');
     if (empty($email)||!is_email($email))    $errors['email'] = __('正しいメールアドレスを入力してください。','hachi');
@@ -120,33 +125,59 @@ function hachi_handle_contact(): void {
     if (function_exists('hachi_get_contact_categories')) {
         $allowed_cats = array_merge([''], array_column(hachi_get_contact_categories(), 'label'));
     } else {
-        $allowed_cats = ['','PACE v3.0 デモ申込み','REBOOT-WORK 資料請求','一般お問い合わせ'];
+        $allowed_cats = ['','PACE 先行案内','REBOOT-WORK 導入相談','一般お問い合わせ'];
     }
     if (!in_array($cat,$allowed_cats,true)) $cat='一般お問い合わせ';
     if (!empty($errors)) { wp_send_json_error(['errors'=>$errors],422); }
     $name  = str_replace(["\r","\n"],'',$name);
     $email = str_replace(["\r","\n"],'',$email);
+    // 追加情報配列（メール本文・Slack・Supabase で共有）
+    $extras = [
+        'role'     => $role,
+        'size'     => $size,
+        'timeline' => $timeline,
+        'phone'    => $phone,
+    ];
+    // カテゴリーキー解決（auto-reply テンプレート選択に使用）
+    $cat_key = 'general';
+    if (function_exists('hachi_resolve_contact_category')) {
+        $resolved = hachi_resolve_contact_category($cat);
+        $cat_key  = $resolved['key'] ?? 'general';
+    }
     $sent  = wp_mail(get_option('admin_email'),
-        sprintf('[HACHI お問い合わせ] %s 様より',$name),
-        hachi_build_email_body($name,$company,$email,$cat,$message),
+        sprintf('[HACHI お問い合わせ] %s｜%s 様',$cat,$name),
+        hachi_build_email_body($name,$company,$email,$cat,$message,$extras),
         ['Content-Type: text/html; charset=UTF-8',sprintf('Reply-To: %s <%s>',$name,$email)]
     );
     if (!$sent) { wp_send_json_error(['message'=>__('メール送信に失敗しました。','hachi')],500); }
-    wp_mail($email,'お問い合わせを受け付けました / 株式会社HACHI',
-        hachi_build_autoreply_body($name),['Content-Type: text/html; charset=UTF-8']);
+    wp_mail($email,
+        sprintf('【株式会社HACHI】お問い合わせを受け付けました（%s）',$cat),
+        hachi_build_autoreply_body($name,$cat_key,$cat),
+        ['Content-Type: text/html; charset=UTF-8']);
     hachi_security_log('contact_success',['ip'=>hachi_get_client_ip(),'cat'=>$cat]);
     wp_send_json_success(['message'=>__('お問い合わせを受け付けました。','hachi')]);
 }
 add_action('wp_ajax_hachi_contact','hachi_handle_contact');
 add_action('wp_ajax_nopriv_hachi_contact','hachi_handle_contact');
 
-function hachi_build_email_body(string $n,string $co,string $em,string $cat,string $msg): string {
+function hachi_build_email_body(string $n,string $co,string $em,string $cat,string $msg,array $extras = []): string {
+    $rows = [
+        '種別'   => $cat,
+        '名前'   => $n,
+        '会社名' => $co,
+        'メール' => $em,
+        '電話'   => $extras['phone'] ?? '',
+        '役割'   => $extras['role'] ?? '',
+        '規模'   => $extras['size'] ?? '',
+        '検討時期' => $extras['timeline'] ?? '',
+        '内容'   => $msg,
+    ];
     ob_start(); ?>
     <!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"></head>
-    <body style="font-family:sans-serif;line-height:1.8;color:#333;max-width:600px;margin:0 auto;padding:40px 20px">
-    <h1 style="font-size:20px;border-bottom:2px solid #E8622A;padding-bottom:12px">新しいお問い合わせ</h1>
+    <body style="font-family:sans-serif;line-height:1.8;color:#333;max-width:640px;margin:0 auto;padding:40px 20px">
+    <h1 style="font-size:20px;border-bottom:2px solid #2D4295;padding-bottom:12px">新しいお問い合わせ</h1>
     <table style="width:100%;border-collapse:collapse;margin-top:24px">
-        <?php foreach(['名前'=>$n,'会社名'=>$co,'メール'=>$em,'種別'=>$cat,'内容'=>$msg] as $l=>$v): ?>
+        <?php foreach($rows as $l=>$v): if($v==='') continue; ?>
         <tr><th style="width:100px;padding:12px 0;text-align:left;font-size:12px;color:#888;font-weight:400;vertical-align:top"><?=esc_html($l)?></th>
             <td style="padding:12px 0;border-bottom:1px solid #eee"><?=('内容'===$l)?nl2br(esc_html($v)):esc_html($v)?></td></tr>
         <?php endforeach; ?>
@@ -154,16 +185,85 @@ function hachi_build_email_body(string $n,string $co,string $em,string $cat,stri
     <?php return ob_get_clean();
 }
 
-function hachi_build_autoreply_body(string $name): string {
+/**
+ * カテゴリー別 自動返信メール本文
+ * @param string $name     お客様名
+ * @param string $cat_key  カテゴリーキー (pace_demo / reboot_docs / media / recruit / general)
+ * @param string $cat_label 表示用ラベル
+ */
+function hachi_build_autoreply_body(string $name, string $cat_key = 'general', string $cat_label = ''): string {
+    // カテゴリー別のメインメッセージ
+    $templates = [
+        'pace_demo' => [
+            'heading' => 'PACE 先行案内リストにご登録いただき、ありがとうございます',
+            'lead'    => '<strong>PACE</strong>（スポーツ医療チーム向け Sports AI-SaaS）への関心をお寄せいただき誠にありがとうございます。',
+            'body'    => 'PACE は現在ローンチ準備中のプロダクトです。正式リリース前の先行案内・ベータアクセス枠のご案内、開発ロードマップのアップデートを、ご登録のメールアドレス宛てに随時お送りいたします。<br><br>また、個別のユースケース相談・デモご希望の場合は、担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。',
+            'next'    => '<li>先行案内リストへの登録完了</li><li>担当より 2 営業日以内にご連絡</li><li>デモ・ヒアリングのお打ち合わせ日程調整</li>',
+        ],
+        'reboot_docs' => [
+            'heading' => 'REBOOT-WORK 導入相談を承りました',
+            'lead'    => '<strong>REBOOT-WORK</strong>（オフィスワーカー向け On-site Wellness Service）へのご関心をお寄せいただきありがとうございます。',
+            'body'    => 'いただいた情報をもとに、貴社の課題に合わせた導入プランと資料を、担当より <strong>2 営業日以内</strong>にお送りいたします。あわせて、無料トライアル・オンサイト体験会のご案内もご希望に応じて調整可能です。',
+            'next'    => '<li>担当より詳細資料の送付（2 営業日以内）</li><li>オンラインヒアリングの日程調整</li><li>導入プラン・お見積りのご提案</li>',
+        ],
+        'media' => [
+            'heading' => '取材・メディアのお問い合わせを承りました',
+            'lead'    => 'HACHI への取材・メディア掲載のお問い合わせを頂き、誠にありがとうございます。',
+            'body'    => '広報担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。取材ご希望日・媒体情報・お問い合わせ内容を踏まえ、最適な対応者をアサインしてご回答いたします。',
+            'next'    => '<li>広報担当より返信（2 営業日以内）</li><li>取材詳細・日程のすり合わせ</li>',
+        ],
+        'recruit' => [
+            'heading' => '採用・パートナーシップのお問い合わせを承りました',
+            'lead'    => 'HACHI への採用・業務委託・協業のご興味をお寄せいただき、ありがとうございます。',
+            'body'    => '担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。HACHI は少数精鋭のチームで、スポーツ医療 × テクノロジーという大きな挑戦に向き合う仲間を歓迎しています。',
+            'next'    => '<li>採用/アライアンス担当より返信（2 営業日以内）</li><li>カジュアル面談・詳細ヒアリング</li>',
+        ],
+        'general' => [
+            'heading' => 'お問い合わせありがとうございます',
+            'lead'    => 'HACHI へのお問い合わせをいただき、誠にありがとうございます。',
+            'body'    => 'いただいた内容を確認のうえ、担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。',
+            'next'    => '<li>担当より返信（2 営業日以内）</li>',
+        ],
+    ];
+    $tpl = $templates[$cat_key] ?? $templates['general'];
+
     ob_start(); ?>
     <!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"></head>
-    <body style="font-family:sans-serif;line-height:1.8;color:#333;max-width:600px;margin:0 auto;padding:40px 20px">
-    <h1 style="font-size:20px;font-weight:300">お問い合わせありがとうございます</h1>
-    <p style="margin-top:24px"><?=esc_html($name)?> 様</p>
-    <p>HACHIへのお問い合わせありがとうございます。<strong>2営業日以内</strong>にご連絡いたします。</p>
-    <hr style="border:none;border-top:1px solid #eee;margin:32px 0">
-    <p style="font-size:12px;color:#888">株式会社HACHI<br>東京都武蔵野市吉祥寺本町1-13-2 5F<br>
-    <a href="https://hachi.co.jp" style="color:#E8622A">https://hachi.co.jp</a></p>
+    <body style="font-family:'Hiragino Sans','Noto Sans JP',sans-serif;line-height:1.85;color:#1d1d1f;max-width:600px;margin:0 auto;padding:40px 24px;background:#fff">
+
+        <div style="border-top:3px solid #2D4295;padding-top:28px">
+            <div style="font-size:11px;letter-spacing:0.22em;color:#86868b;font-family:'Helvetica Neue',sans-serif;margin-bottom:16px">HACHI INC.</div>
+            <h1 style="font-size:22px;font-weight:400;margin:0 0 8px;color:#1d1d1f"><?= esc_html($tpl['heading']) ?></h1>
+            <?php if ($cat_label): ?>
+            <div style="display:inline-block;font-size:11px;letter-spacing:0.12em;color:#2D4295;border:1px solid #2D4295;padding:4px 10px;border-radius:2px;margin-top:4px"><?= esc_html($cat_label) ?></div>
+            <?php endif; ?>
+        </div>
+
+        <p style="margin:32px 0 8px;font-size:15px"><?= esc_html($name) ?> 様</p>
+
+        <p style="margin:16px 0;font-size:14px"><?= $tpl['lead'] ?></p>
+
+        <p style="margin:16px 0;font-size:14px"><?= $tpl['body'] ?></p>
+
+        <div style="background:#f5f5f7;padding:20px 24px;margin:28px 0;border-radius:4px">
+            <div style="font-size:11px;letter-spacing:0.2em;color:#86868b;margin-bottom:10px;font-family:'Helvetica Neue',sans-serif">NEXT STEPS</div>
+            <ul style="margin:0;padding-left:18px;font-size:13px;line-height:2"><?= $tpl['next'] ?></ul>
+        </div>
+
+        <p style="font-size:12px;color:#86868b;margin:24px 0 8px">
+            ※このメールは自動送信されています。<br>
+            ※返信はこのメールへの返信で担当に届きます。お急ぎの場合はその旨ご記載ください。
+        </p>
+
+        <hr style="border:none;border-top:1px solid #eee;margin:32px 0">
+
+        <div style="font-size:11px;color:#86868b;line-height:1.9">
+            <div style="font-size:12px;color:#1d1d1f;font-weight:500;margin-bottom:8px">株式会社HACHI / HACHI Inc.</div>
+            beyond the Body.<br>
+            〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F<br>
+            <a href="<?= esc_url(home_url('/')) ?>" style="color:#2D4295;text-decoration:none"><?= esc_html(home_url('/')) ?></a>
+        </div>
+
     </body></html>
     <?php return ob_get_clean();
 }

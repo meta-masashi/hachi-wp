@@ -129,36 +129,6 @@ get_header();
 	</div>
 </section>
 
-<!-- ===== NUMBERS ===== -->
-<section class="section" id="numbers">
-	<div class="container">
-
-		<div class="js-fade" style="max-width:680px;margin-bottom:72px">
-			<?php hachi_section_label( 'N u m b e r s' ); ?>
-			<h2 class="heading-en heading-en--sm">BY THE NUMBERS</h2>
-			<p class="heading-jp"><?php _e( '現場で積み上げた、確かな実績。', 'hachi' ); ?></p>
-		</div>
-
-		<div class="about-numbers js-fade js-fade--delay-1">
-			<?php
-			$numbers = [
-				[ '5,000+', 'CARED',        'ケアしたワーカー数' ],
-				[ '30+',    'TEAMS',        '導入チーム数' ],
-				[ '< 200ms','INFERENCE',    '推論レスポンス' ],
-				[ '99.9%',  'UPTIME',       'システム稼働率' ],
-			];
-			foreach ( $numbers as $n ) :
-			?>
-				<div class="about-number">
-					<div class="about-number__value"><?php echo esc_html( $n[0] ); ?></div>
-					<div class="about-number__label"><?php echo esc_html( $n[1] ); ?></div>
-					<div class="about-number__desc"><?php echo esc_html( $n[2] ); ?></div>
-				</div>
-			<?php endforeach; ?>
-		</div>
-
-	</div>
-</section>
 
 <!-- ===== CEO MESSAGE (strategic dark block) ===== -->
 <section id="message">

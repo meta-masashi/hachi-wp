@@ -1,46 +1,46 @@
 <?php
 /**
- * HACHI Theme — archive-hachi_news.php
- * News archive with filter tabs
+ * HACHI Theme — archive-hachi_news.php (Light Monochrome v2)
+ * News archive with WP posts + note.com RSS integration
  */
 get_header();
+
+$filter_tabs = [
+	'all'   => 'ALL',
+	'news'  => 'NEWS',
+	'press' => 'PRESS',
+	'media' => 'MEDIA',
+	'blog'  => 'BLOG',
+	'note'  => 'NOTE',
+];
+$active_filter = sanitize_key( $_GET['type'] ?? 'all' );
+if ( ! array_key_exists( $active_filter, $filter_tabs ) ) {
+	$active_filter = 'all';
+}
 ?>
 
+<!-- ===== PAGE HERO ===== -->
 <div class="page-hero">
-	<div class="page-hero__ghost ghost-text" aria-hidden="true">NEWS</div>
 	<div class="container">
 		<div class="js-fade"><?php hachi_section_label( 'N e w s' ); ?></div>
-		<h1 class="heading-en js-fade js-fade--delay-1" style="font-size:clamp(52px,9vw,112px)">NEWS</h1>
-		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( 'お知らせ・ブログ', 'hachi' ); ?></p>
+		<h1 class="heading-en js-fade js-fade--delay-1">NEWS</h1>
+		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( 'お知らせ・メディア掲載・ブログ', 'hachi' ); ?></p>
 	</div>
 </div>
 
-<section class="section">
-	<div class="container js-fade">
+<!-- ===== NEWS LIST ===== -->
+<section class="section news-archive">
+	<div class="container">
 
 		<!-- Filter tabs -->
-		<div class="post-filter-bar" role="tablist" aria-label="<?php esc_attr_e( 'ニュースフィルター', 'hachi' ); ?>">
-			<?php
-			$filter_tabs = [
-				'all'   => 'ALL',
-				'news'  => 'NEWS',
-				'press' => 'PRESS RELEASE',
-				'media' => 'MEDIA',
-				'blog'  => 'BLOG',
-			];
-
-			$active_filter = sanitize_key( $_GET['type'] ?? 'all' );
-			if ( ! array_key_exists( $active_filter, $filter_tabs ) ) {
-				$active_filter = 'all';
-			}
-
-			foreach ( $filter_tabs as $key => $label ) :
+		<div class="news-filter js-fade" role="tablist" aria-label="<?php esc_attr_e( 'ニュースフィルター', 'hachi' ); ?>">
+			<?php foreach ( $filter_tabs as $key => $label ) :
 				$is_active = $key === $active_filter;
-				$url = add_query_arg( 'type', $key, get_post_type_archive_link( 'hachi_news' ) );
+				$url       = add_query_arg( 'type', $key, get_post_type_archive_link( 'hachi_news' ) );
 			?>
 				<a
 					href="<?php echo esc_url( $url ); ?>"
-					class="post-filter-btn<?php echo $is_active ? ' is-active' : ''; ?>"
+					class="news-filter__btn<?php echo $is_active ? ' is-active' : ''; ?>"
 					role="tab"
 					aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
 				>
@@ -49,55 +49,98 @@ get_header();
 			<?php endforeach; ?>
 		</div>
 
-		<!-- News list -->
-		<div style="border-top:1px solid var(--gray2)" role="tabpanel">
-			<?php
-			// Build query filtered by type if selected
-			$args = [
+		<?php
+		// ====== Build unified list: WP hachi_news + note.com RSS ======
+		$items = [];
+
+		// 1) WordPress hachi_news
+		if ( $active_filter !== 'note' ) {
+			$wp_args = [
 				'post_type'      => 'hachi_news',
-				'posts_per_page' => 20,
+				'posts_per_page' => 30,
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
 				'order'          => 'DESC',
-				'paged'          => max( 1, get_query_var( 'paged' ) ),
+				'no_found_rows'  => true,
 			];
-
 			if ( $active_filter !== 'all' ) {
-				$args['meta_key']   = '_hachi_news_type';
-				$args['meta_value'] = sanitize_key( $active_filter );
+				$wp_args['meta_key']   = '_hachi_news_type';
+				$wp_args['meta_value'] = sanitize_key( $active_filter );
 			}
+			$wp_q = new WP_Query( $wp_args );
+			while ( $wp_q->have_posts() ) { $wp_q->the_post();
+				$type = get_post_meta( get_the_ID(), '_hachi_news_type', true ) ?: 'news';
+				$items[] = [
+					'source'    => 'wp',
+					'type'      => $type,
+					'date_ts'   => (int) get_the_date( 'U' ),
+					'date_str'  => hachi_get_date(),
+					'title'     => get_the_title(),
+					'url'       => get_permalink(),
+					'excerpt'   => wp_trim_words( get_the_excerpt(), 30, '…' ),
+					'thumbnail' => has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'medium' ) : '',
+				];
+			}
+			wp_reset_postdata();
+		}
 
-			$news_q = new WP_Query( $args );
+		// 2) note.com RSS
+		if ( $active_filter === 'all' || $active_filter === 'note' ) {
+			$note_items = hachi_get_note_posts( 20 );
+			foreach ( $note_items as $n ) {
+				$items[] = [
+					'source'    => 'note',
+					'type'      => 'note',
+					'date_ts'   => (int) $n['date'],
+					'date_str'  => $n['date'] ? date_i18n( 'Y.m.d', (int) $n['date'] ) : '',
+					'title'     => $n['title'],
+					'url'       => $n['url'],
+					'excerpt'   => $n['excerpt'],
+					'thumbnail' => $n['thumbnail'],
+				];
+			}
+		}
 
-			if ( $news_q->have_posts() ) :
-				while ( $news_q->have_posts() ) : $news_q->the_post();
-					$type    = get_post_meta( get_the_ID(), '_hachi_news_type', true ) ?: 'news';
-					$is_blog = $type === 'blog';
+		// Sort combined by date desc
+		usort( $items, fn( $a, $b ) => $b['date_ts'] <=> $a['date_ts'] );
+		?>
+
+		<div class="news-list js-fade js-fade--delay-1" role="tabpanel">
+			<?php if ( ! empty( $items ) ) : ?>
+				<?php foreach ( $items as $it ) :
+					$is_external = $it['source'] === 'note';
 				?>
-					<a href="<?php the_permalink(); ?>" class="post-row<?php echo $is_blog ? ' post-row--blog' : ''; ?>">
-						<span class="post-row__date"><?php echo esc_html( hachi_get_date() ); ?></span>
-						<span class="post-row__cat"><?php echo esc_html( strtoupper( $type ) ); ?></span>
-						<span class="post-row__title"><?php the_title(); ?></span>
-						<span class="post-row__arrow" aria-hidden="true">→</span>
+					<a
+						href="<?php echo esc_url( $it['url'] ); ?>"
+						class="news-card news-card--<?php echo esc_attr( $it['type'] ); ?>"
+						<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
+					>
+						<div class="news-card__media">
+							<?php if ( $it['thumbnail'] ) : ?>
+								<img src="<?php echo esc_url( $it['thumbnail'] ); ?>" alt="" loading="lazy">
+							<?php else : ?>
+								<span class="news-card__media-placeholder"><?php echo esc_html( strtoupper( $it['type'] ) ); ?></span>
+							<?php endif; ?>
+						</div>
+						<div class="news-card__body">
+							<div class="news-card__meta">
+								<span class="news-card__cat news-card__cat--<?php echo esc_attr( $it['type'] ); ?>">
+									<?php echo esc_html( strtoupper( $it['type'] ) ); ?>
+								</span>
+								<span class="news-card__date"><?php echo esc_html( $it['date_str'] ); ?></span>
+								<?php if ( $is_external ) : ?>
+									<span class="news-card__external" aria-hidden="true">↗ note</span>
+								<?php endif; ?>
+							</div>
+							<h3 class="news-card__title"><?php echo esc_html( $it['title'] ); ?></h3>
+							<?php if ( $it['excerpt'] ) : ?>
+								<p class="news-card__excerpt"><?php echo esc_html( $it['excerpt'] ); ?></p>
+							<?php endif; ?>
+						</div>
 					</a>
-				<?php endwhile;
-
-				// Pagination
-				echo '<div style="margin-top:60px;text-align:center">';
-				echo paginate_links( [
-					'total'     => $news_q->max_num_pages,
-					'current'   => max( 1, get_query_var( 'paged' ) ),
-					'prev_text' => '← Prev',
-					'next_text' => 'Next →',
-				] );
-				echo '</div>';
-
-				wp_reset_postdata();
-			else :
-			?>
-				<p style="padding:64px 0;text-align:center;color:var(--gray);font-size:14px">
-					<?php _e( '該当する記事がありません。', 'hachi' ); ?>
-				</p>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<p class="news-empty"><?php _e( '該当する記事がありません。', 'hachi' ); ?></p>
 			<?php endif; ?>
 		</div>
 

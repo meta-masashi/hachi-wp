@@ -183,6 +183,72 @@ function hachi_get_ticker_news(): ?WP_Post {
     return $q->have_posts()?$q->posts[0]:null;
 }
 
+/**
+ * Fetch note.com RSS feed for a given username.
+ * Returns array of normalized items: [ ['date','title','url','excerpt','thumbnail'], ... ]
+ * Results are cached for 1 hour via transient.
+ */
+function hachi_get_note_posts(int $limit = 10): array {
+    $username = trim( (string) get_theme_mod( 'hachi_note_username', '' ) );
+    if ( $username === '' ) return [];
+
+    $cache_key = 'hachi_note_feed_' . md5( $username . '_' . $limit );
+    $cached    = get_transient( $cache_key );
+    if ( is_array( $cached ) ) return $cached;
+
+    if ( ! function_exists( 'fetch_feed' ) ) {
+        include_once ABSPATH . WPINC . '/feed.php';
+    }
+    $feed_url = 'https://note.com/' . rawurlencode( $username ) . '/rss';
+    $feed     = fetch_feed( $feed_url );
+    if ( is_wp_error( $feed ) ) {
+        set_transient( $cache_key, [], 15 * MINUTE_IN_SECONDS );
+        return [];
+    }
+
+    $max   = $feed->get_item_quantity( $limit );
+    $items = $feed->get_items( 0, $max );
+    $out   = [];
+    foreach ( $items as $item ) {
+        $thumb = '';
+        $enc   = $item->get_enclosure();
+        if ( $enc && $enc->get_link() ) {
+            $thumb = esc_url_raw( $enc->get_link() );
+        } else {
+            // fallback: try media:thumbnail or first <img> in content
+            if ( preg_match( '/<img[^>]+src=["\']([^"\']+)["\']/i', (string) $item->get_content(), $m ) ) {
+                $thumb = esc_url_raw( $m[1] );
+            }
+        }
+        $out[] = [
+            'date'      => $item->get_date( 'U' ) ?: 0,
+            'title'     => (string) $item->get_title(),
+            'url'       => esc_url_raw( (string) $item->get_permalink() ),
+            'excerpt'   => wp_trim_words( wp_strip_all_tags( (string) $item->get_description() ), 36, '…' ),
+            'thumbnail' => $thumb,
+        ];
+    }
+    set_transient( $cache_key, $out, HOUR_IN_SECONDS );
+    return $out;
+}
+
+/**
+ * Customizer: note.com username setting
+ */
+add_action( 'customize_register', function ( $wp_customize ) {
+    $wp_customize->add_setting( 'hachi_note_username', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'edit_theme_options',
+    ] );
+    $wp_customize->add_control( 'hachi_note_username', [
+        'label'       => __( 'note.com ユーザー名', 'hachi' ),
+        'description' => __( 'https://note.com/{username} の {username} 部分。RSS で記事を取得します。', 'hachi' ),
+        'section'     => 'title_tagline',
+        'type'        => 'text',
+    ] );
+} );
+
 add_action('add_meta_boxes',function():void{
     add_meta_box('hachi_news_meta',__('News Details','hachi'),'hachi_news_meta_callback','hachi_news','side','high');
 });

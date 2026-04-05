@@ -16,21 +16,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy theme via SFTP
-        uses: easingthemes/ssh-deploy@main
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          ARGS: "-avzr --delete"
-          SOURCE: "hachi-wp-secure/"
-          REMOTE_HOST: ${{ secrets.SFTP_HOST }}
-          REMOTE_USER: ${{ secrets.SFTP_USER }}
-          TARGET: ${{ secrets.SFTP_REMOTE_PATH }}
-          EXCLUDE: |
-            wp-config.php
-            wp-config-security.php
-            .git/
-            .github/
-            node_modules/
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # Try to get host key (ignore failure)
+          ssh-keyscan -v -H "${{ secrets.SFTP_HOST }}" >> ~/.ssh/known_hosts 2>&1 || true
+          cat ~/.ssh/known_hosts | wc -l
+          echo "SSH_HOST=${{ secrets.SFTP_HOST }}"
+
+      - name: Test SSH connection
+        run: |
+          ssh -v \
+            -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=10 \
+            "${{ secrets.SFTP_USER }}@${{ secrets.SFTP_HOST }}" \
+            "echo SSH_OK && pwd" 2>&1 || true
+
+      - name: Deploy theme via rsync
+        run: |
+          rsync -avzr --delete \
+            --exclude='wp-config.php' \
+            --exclude='wp-config-security.php' \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=15" \
+            hachi-wp-secure/ \
+            "${{ secrets.SFTP_USER }}@${{ secrets.SFTP_HOST }}:${{ secrets.SFTP_REMOTE_PATH }}"
 
       - name: Notify Slack — Deploy success
         if: success()
@@ -43,8 +58,7 @@ jobs:
                 "color": "#36a64f",
                 "fields": [
                   {"title": "Commit", "value": "`${{ github.sha }}`", "short": true},
-                  {"title": "Branch", "value": "`${{ github.ref_name }}`", "short": true},
-                  {"title": "Deployed by", "value": "${{ github.actor }}", "short": true}
+                  {"title": "Branch", "value": "`${{ github.ref_name }}`", "short": true}
                 ]
               }]
             }'

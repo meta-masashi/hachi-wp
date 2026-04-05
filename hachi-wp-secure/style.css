@@ -2473,10 +2473,29 @@ body {
 
 /* ---------- NEWS TICKER ---------- */
 .news-ticker {
-  background: #f5f5f7;
+  background: #f5f5f7 !important;
   border-top: 1px solid #e8e8ed;
   border-bottom: 1px solid #e8e8ed;
-  color: #1d1d1f;
+  color: #1d1d1f !important;
+  transition: background 0.3s ease;
+}
+.news-ticker:hover {
+  background: #eeeef1 !important;
+}
+.news-ticker:hover .news-ticker__inner,
+.news-ticker:hover .news-ticker__text,
+.news-ticker:hover .news-ticker__date,
+.news-ticker:hover .news-ticker__arrow { color: #1d1d1f !important; }
+.news-ticker:hover .news-ticker__tag {
+  color: #2D4295 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+}
+.news-ticker:hover .news-ticker__arrow { transform: translateX(4px); transition: transform 0.3s ease; }
+.news-ticker__tag {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
 }
 .news-ticker__inner {
   max-width: 1200px;
@@ -2635,12 +2654,20 @@ body {
 }
 .work-card {
   display: block;
-  background: #ffffff;
-  color: #1d1d1f;
+  background: #ffffff !important;
+  color: #1d1d1f !important;
   position: relative;
-  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease;
+  padding: 0;
+  border: none;
 }
-.work-card:hover { transform: translateY(-6px); }
+.work-card:hover {
+  background: #ffffff !important;
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(29,29,31,0.08);
+}
+.work-card:hover .work-card__title { color: #2D4295 !important; }
+.work-card:hover .work-card__client { color: #6e6e73 !important; }
 .work-card__image,
 .work-card::before {
   display: block;
@@ -2649,6 +2676,10 @@ body {
   background: #f5f5f7;
   object-fit: cover;
   margin-bottom: 24px;
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
 }
 .work-card:not(:has(.work-card__image))::before {
   content: "PHOTO — Case Study";
@@ -2664,7 +2695,7 @@ body {
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.25em;
-  color: #2D4295;
+  color: #2D4295 !important;
   margin-bottom: 10px;
 }
 .work-card__title {
@@ -2672,25 +2703,43 @@ body {
   font-size: 18px;
   font-weight: 500;
   line-height: 1.6;
-  color: #1d1d1f;
+  color: #1d1d1f !important;
   margin-bottom: 12px;
+  transition: color 0.3s ease;
 }
 .work-card__client {
   font-size: 12px;
-  color: #6e6e73;
+  color: #6e6e73 !important;
 }
+/* Number: small circular badge, top-right of image, accent blue */
 .work-card__num {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
+  bottom: auto;
+  left: auto;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Montserrat',sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.15em;
-  color: #ffffff;
-  background: rgba(29,29,31,0.82);
-  padding: 6px 12px;
-  border-radius: 999px;
+  letter-spacing: 0.05em;
+  color: #2D4295 !important;
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(29,29,31,0.06);
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+}
+.work-card:hover .work-card__num {
+  background: #2D4295;
+  color: #ffffff !important;
+  border-color: #2D4295;
 }
 
 /* ---------- NEWS LIST ---------- */
@@ -2705,9 +2754,24 @@ body {
   transition: background 0.25s ease, padding 0.25s ease;
 }
 .post-row:hover {
-  background: #f5f5f7;
+  background: #f5f5f7 !important;
   padding-left: 16px;
   padding-right: 16px;
+  color: #1d1d1f !important;
+}
+.post-row:hover .post-row__date { color: #6e6e73 !important; }
+.post-row:hover .post-row__cat {
+  color: #2D4295 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.post-row:hover .post-row__title { color: #1d1d1f !important; }
+.post-row:hover .post-row__arrow { color: #2D4295 !important; }
+.post-row__cat {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
 }
 .post-row__date {
   font-family: 'Montserrat',sans-serif;

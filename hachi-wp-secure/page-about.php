@@ -8,7 +8,6 @@ get_header();
 
 <!-- ===== PAGE HERO ===== -->
 <div class="page-hero">
-	<div class="page-hero__ghost ghost-text" aria-hidden="true">ABOUT</div>
 	<div class="container">
 		<div class="js-fade"><?php hachi_section_label( 'A b o u t' ); ?></div>
 		<h1 class="heading-en js-fade js-fade--delay-1">ABOUT</h1>

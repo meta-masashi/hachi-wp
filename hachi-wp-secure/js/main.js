@@ -13,6 +13,26 @@
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
+// hachiData が wp_localize_script で未定義の場合のフォールバック
+// （キャッシュ・拡張機能・CSP 等で inline script が実行されないケース対策）
+if (typeof window.hachiData === 'undefined') {
+  window.hachiData = {
+    ajaxUrl: '/wp-admin/admin-ajax.php',
+    nonce:   '',
+    homeUrl: '/',
+    recaptchaSiteKey: '',
+  };
+  // inline script が DOM にあれば再パース
+  const extraEl = document.getElementById('hachi-main-js-extra');
+  if (extraEl) {
+    try {
+      const m = extraEl.textContent.match(/var\s+hachiData\s*=\s*(\{[\s\S]*?\})\s*;/);
+      if (m) window.hachiData = JSON.parse(m[1]);
+    } catch (_) { /* JSON パース失敗時はフォールバック値を使用 */ }
+  }
+}
+const hachiData = window.hachiData;
+
 /* ============================================================
    DOM READY
    ============================================================ */
@@ -345,7 +365,11 @@ function initContactForm() {
     // パスワードフィールドが含まれないことを確認（セキュリティ）
     data.delete('password'); // autocomplete="new-password" フィールドの保護
     data.append('action', 'hachi_contact');
-    data.append('nonce',  hachiData?.nonce || '');
+    // nonce: hachiData → フォーム内 contact_nonce hidden field のフォールバック
+    const nonce = hachiData?.nonce
+      || form.querySelector('[name="contact_nonce"]')?.value
+      || '';
+    data.append('nonce', nonce);
 
     // 20 秒で自動キャンセル（wp_mail 遅延時の無限待機防止）
     const controller = new AbortController();

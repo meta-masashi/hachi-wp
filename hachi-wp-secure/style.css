@@ -2651,6 +2651,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 56px 48px;  /* row / column */
+  background: transparent !important;  /* clear inherited gray2 divider bg */
 }
 .work-card {
   display: block;

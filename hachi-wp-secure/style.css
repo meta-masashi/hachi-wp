@@ -16,18 +16,18 @@ Text Domain: hachi
    DESIGN TOKENS
    ============================================================ */
 :root {
-  /* Colors */
-  --bg:         #F5F4F0;
-  --bg2:        #EBEBEB;
-  --bg3:        #E0DFDA;
+  /* Colors — ISC-style dark palette */
+  --bg:         #0f0f0f;
+  --bg2:        #181818;
+  --bg3:        #242424;
   --black:      #1A1A1A;
   --black2:     #0D0D0D;
-  --gray:       #888888;
-  --gray2:      #C8C8C8;
-  --gray3:      #DEDEDE;
-  --teal:       #00897b;
-  --teal2:      #26a69a;
-  --teal-dk:    #00695c;
+  --gray:       rgba(255,255,255,0.38);
+  --gray2:      rgba(255,255,255,0.10);
+  --gray3:      rgba(255,255,255,0.05);
+  --teal:       #2D4295;
+  --teal2:      #4a5fc4;
+  --teal-dk:    #1e2f6e;
   --white:      #FFFFFF;
 
   /* Typography */
@@ -76,7 +76,7 @@ html {
 
 body {
   background-color: var(--bg);
-  color: var(--black);
+  color: var(--white);
   font-family: var(--sans);
   font-weight: 300;
   line-height: 1.8;
@@ -251,10 +251,10 @@ input, textarea, select {
 
 .site-header.is-scrolled {
   height: 64px;
-  background: rgba(245, 244, 240, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--gray3);
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
 .site-header__inner {
@@ -273,7 +273,7 @@ input, textarea, select {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--black);
+  color: var(--white);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -305,7 +305,7 @@ input, textarea, select {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.22em;
-  color: var(--black);
+  color: rgba(255,255,255,0.75);
   position: relative;
   padding-bottom: 2px;
   transition: color var(--t-med) var(--ease);
@@ -326,7 +326,7 @@ input, textarea, select {
 
 .primary-nav__item:hover,
 .primary-nav__item.is-current {
-  color: var(--teal);
+  color: var(--white);
 }
 
 .primary-nav__item:hover::after,
@@ -340,8 +340,8 @@ input, textarea, select {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.25em;
-  border: 1px solid var(--black);
-  color: var(--black);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: var(--white);
   padding: 11px 26px;
   background: transparent;
   transition:
@@ -352,8 +352,8 @@ input, textarea, select {
 }
 
 .nav-cta:hover {
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
 }
 
 /* Hamburger */
@@ -372,7 +372,7 @@ input, textarea, select {
   display: block;
   width: 24px;
   height: 1.5px;
-  background: var(--black);
+  background: var(--white);
   transition:
     transform var(--t-med) var(--ease),
     opacity var(--t-med);
@@ -537,23 +537,23 @@ input, textarea, select {
 
 .heading-en {
   font-family: var(--mono);
-  font-size: clamp(44px, 7vw, 96px);
-  font-weight: 300;
+  font-size: clamp(52px, 7vw, 104px);
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.05em;
-  color: var(--black);
+  letter-spacing: -0.01em;
+  color: var(--white);
 }
 
 .heading-en--white { color: var(--white); }
-.heading-en--sm { font-size: clamp(28px, 4.5vw, 60px); }
-.heading-en--xs { font-size: clamp(22px, 3vw, 38px); }
+.heading-en--sm { font-size: clamp(36px, 4.5vw, 72px); }
+.heading-en--xs { font-size: clamp(24px, 3vw, 44px); }
 
 .heading-jp {
   font-family: var(--serif);
   font-size: clamp(18px, 2.5vw, 28px);
   font-weight: 300;
   line-height: 1.75;
-  color: var(--black);
+  color: rgba(255,255,255,0.75);
   margin-top: 20px;
 }
 
@@ -562,7 +562,7 @@ input, textarea, select {
 .body-copy {
   font-size: 15px;
   line-height: 2.2;
-  color: #555;
+  color: rgba(255,255,255,0.48);
   font-weight: 300;
 }
 
@@ -572,7 +572,7 @@ input, textarea, select {
 .ghost-text {
   font-family: var(--mono);
   font-weight: 700;
-  color: rgba(0,0,0,0.035);
+  color: rgba(255,255,255,0.04);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -591,8 +591,8 @@ input, textarea, select {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.26em;
-  border: 1px solid var(--black);
-  color: var(--black);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: var(--white);
   background: transparent;
   transition:
     background var(--t-med) var(--ease),
@@ -605,8 +605,8 @@ input, textarea, select {
 }
 
 .btn:hover {
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
 }
 
 .btn:active { transform: scale(0.98); }
@@ -707,6 +707,7 @@ input, textarea, select {
   align-items: flex-end;
   padding-bottom: var(--sp-xl);
   background: var(--bg);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .hero__bg-ghost {
@@ -757,12 +758,12 @@ input, textarea, select {
 
 .hero__headline-line {
   font-family: var(--mono);
-  font-size: clamp(52px, 10vw, 128px);
-  font-weight: 300;
+  font-size: clamp(60px, 10vw, 136px);
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.01em;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .hero__headline-line span {
@@ -771,14 +772,14 @@ input, textarea, select {
 }
 
 .hero__headline-line:nth-child(2) span { animation-delay: 0.12s; }
-.hero__headline-line:nth-child(3) span { animation-delay: 0.22s; color: var(--teal); }
+.hero__headline-line:nth-child(3) span { animation-delay: 0.22s; }
 
 .hero__subheading {
   font-family: var(--serif);
   font-size: clamp(15px, 2vw, 22px);
   font-weight: 300;
   letter-spacing: 0.08em;
-  color: #666;
+  color: rgba(255,255,255,0.5);
   margin-bottom: 52px;
   overflow: hidden;
 }
@@ -885,7 +886,7 @@ input, textarea, select {
   font-size: 10px;
   letter-spacing: 0.22em;
   font-weight: 500;
-  border: 1px solid var(--black);
+  border: 1px solid rgba(255,255,255,0.35);
   padding: 3px 14px;
   transition: border-color var(--t-med), color var(--t-med);
 }
@@ -1054,7 +1055,7 @@ input, textarea, select {
 .service-item__desc {
   font-size: 14px;
   line-height: 2;
-  color: #666;
+  color: rgba(255,255,255,0.45);
   max-width: 520px;
 }
 
@@ -1105,7 +1106,7 @@ input, textarea, select {
   font-size: 56px;
   font-weight: 700;
   line-height: 1;
-  color: rgba(0,0,0,0.04);
+  color: rgba(255,255,255,0.04);
   transition: color var(--t-slow);
   pointer-events: none;
 }
@@ -1163,7 +1164,7 @@ input, textarea, select {
   position: absolute;
   inset: -30%;
   will-change: transform;
-  background: var(--black2);
+  background: #2D4295;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1364,7 +1365,7 @@ input, textarea, select {
 
 .post-filter-btn.is-active,
 .post-filter-btn:hover {
-  color: var(--black);
+  color: var(--white);
   border-bottom-color: var(--teal);
 }
 
@@ -1374,7 +1375,7 @@ input, textarea, select {
   align-items: center;
   gap: 36px;
   padding: 30px 0;
-  border-bottom: 1px solid rgba(200,200,200,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   cursor: pointer;
   transition: color var(--t-med);
   color: inherit;
@@ -1391,7 +1392,7 @@ input, textarea, select {
   transition: color var(--t-med);
 }
 
-.post-row:hover .post-row__date { color: rgba(232,98,42,0.6); }
+.post-row:hover .post-row__date { color: rgba(255,255,255,0.7); }
 
 .post-row__cat {
   font-family: var(--mono);
@@ -1452,11 +1453,11 @@ input, textarea, select {
 }
 
 .company-table tr {
-  border-bottom: 1px solid rgba(200,200,200,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .company-table tr:first-child {
-  border-top: 1px solid rgba(200,200,200,0.4);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .company-table th {
@@ -1552,7 +1553,7 @@ input, textarea, select {
   border-bottom: 1px solid var(--gray2);
   padding: 14px 0;
   font-size: 15px;
-  color: var(--black);
+  color: var(--white);
   font-family: var(--sans);
   font-weight: 300;
   outline: none;
@@ -1644,10 +1645,10 @@ input, textarea, select {
 
 .footer-cta__heading {
   font-family: var(--mono);
-  font-size: clamp(32px, 5vw, 64px);
-  font-weight: 300;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 700;
   color: var(--white);
-  letter-spacing: 0.08em;
+  letter-spacing: -0.01em;
   margin-bottom: 16px;
 }
 

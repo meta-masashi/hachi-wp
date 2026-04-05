@@ -4266,5 +4266,223 @@ footer.site-footer {
 }
 
 /* ============================================================
+   COMPANY PAGE — v2 (Light Monochrome)
+   ============================================================ */
+
+/* Profile */
+.company-profile { padding: 100px 0 120px; }
+.company-profile__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  align-items: start;
+}
+.company-profile__name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: clamp(40px, 5.5vw, 68px);
+  line-height: 1.25;
+  color: #1d1d1f;
+  margin: 20px 0 16px;
+  letter-spacing: 0.02em;
+}
+.company-profile__en {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  color: #2D4295;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.company-profile__tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 2;
+  color: #6e6e73;
+  max-width: 360px;
+  padding-top: 32px;
+  border-top: 1px solid #e8e8ed;
+}
+
+/* Definition list */
+.company-dl { margin: 0; }
+.company-dl__row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid #e8e8ed;
+}
+.company-dl__row:first-child { border-top: 1px solid #1d1d1f; padding-top: 28px; }
+.company-dl__row dt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #8a8a90;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+.company-dl__row dd {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+/* Access */
+.access-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.3fr;
+  gap: 40px;
+  align-items: stretch;
+}
+.access-info {
+  padding: 48px;
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 4px;
+}
+.access-info__label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: #2D4295;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.access-info__address {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #1d1d1f;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 36px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid #e8e8ed;
+}
+.access-info__dl { margin: 0; display: grid; gap: 24px; }
+.access-info__dl dt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #8a8a90;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.access-info__dl dd {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  line-height: 1.85;
+  color: #1d1d1f;
+  margin: 0;
+}
+.access-map {
+  min-height: 440px;
+  background: #eeeef1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Security (strategic dark block) */
+.company-security {
+  background: #0c0c0e;
+  color: #ffffff;
+  padding: 140px 0;
+  position: relative;
+}
+.company-security::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 100%, rgba(45,66,149,0.18), transparent 60%);
+  pointer-events: none;
+}
+.company-security > .container { position: relative; }
+.company-security__header { max-width: 720px; margin-bottom: 80px; }
+.company-security__title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  margin: 16px 0 20px;
+}
+.company-security__subtitle {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 1.7;
+  color: #ffffff;
+  margin: 0 0 28px;
+}
+.company-security__lead {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  line-height: 2.1;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+}
+.company-security__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.company-security__card {
+  padding: 48px 32px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.3s ease;
+}
+.company-security__card:hover { background: rgba(255,255,255,0.02); }
+.company-security__num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  color: #7090F0;
+  margin-bottom: 28px;
+}
+.company-security__card-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+.company-security__card-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+/* Company responsive */
+@media (max-width: 960px) {
+  .company-profile__grid { grid-template-columns: 1fr; gap: 48px; }
+  .access-grid { grid-template-columns: 1fr; }
+  .access-map { min-height: 320px; }
+  .company-security__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .company-profile { padding: 72px 0 80px; }
+  .company-dl__row { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+  .access-info { padding: 32px 24px; }
+  .company-security { padding: 90px 0; }
+  .company-security__grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    END LIGHT MONOCHROME v2
    ============================================================ */

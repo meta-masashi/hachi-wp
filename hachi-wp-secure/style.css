@@ -4468,6 +4468,27 @@ footer.site-footer {
   margin: 0;
 }
 
+/* Location block */
+.company-location { padding: 120px 0; }
+.company-location__address {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(20px, 2.5vw, 26px);
+  line-height: 1.9;
+  color: #1d1d1f;
+  margin: 32px 0 20px;
+}
+.company-location__en {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: #8a8a90;
+  line-height: 1.9;
+  margin: 0;
+}
+
 /* Company responsive */
 @media (max-width: 960px) {
   .company-profile__grid { grid-template-columns: 1fr; gap: 48px; }

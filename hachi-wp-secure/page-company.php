@@ -43,7 +43,6 @@ get_header();
 						[ '資本金',         '金100万円' ],
 						[ '所在地',         "〒180-0004\n東京都武蔵野市吉祥寺本町 1-13-2 5F" ],
 						[ '事業内容',       "On-site Service「REBOOT-WORK」の提供\nスポーツ医療AI-SaaS「PACE」の開発（準備中）" ],
-						[ 'お問い合わせ',   'info@hachi-wellnesshack.com' ],
 					];
 					foreach ( $rows as $row ) :
 					?>
@@ -53,51 +52,6 @@ get_header();
 						</div>
 					<?php endforeach; ?>
 				</dl>
-			</div>
-
-		</div>
-	</div>
-</section>
-
-<!-- ===== ACCESS / LOCATION ===== -->
-<section class="section--light" id="access">
-	<div class="container">
-
-		<div class="js-fade" style="max-width:680px;margin-bottom:64px">
-			<?php hachi_section_label( 'A c c e s s' ); ?>
-			<h2 class="heading-en heading-en--sm">ACCESS</h2>
-			<p class="heading-jp"><?php _e( '吉祥寺、井の頭の森に近いオフィスから。', 'hachi' ); ?></p>
-		</div>
-
-		<div class="access-grid js-fade js-fade--delay-1">
-
-			<div class="access-info">
-				<p class="access-info__label">HEAD OFFICE</p>
-				<address class="access-info__address">
-					〒180-0004<br>
-					東京都武蔵野市吉祥寺本町<br>
-					1-13-2 5F
-				</address>
-				<dl class="access-info__dl">
-					<div>
-						<dt>最寄り駅</dt>
-						<dd>JR中央線・総武線<br>京王井の頭線「吉祥寺」駅 徒歩5分</dd>
-					</div>
-					<div>
-						<dt>営業時間</dt>
-						<dd>平日 10:00 – 19:00<br>（土日祝休業）</dd>
-					</div>
-				</dl>
-			</div>
-
-			<div class="access-map">
-				<iframe
-					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1618.6!2d139.5785!3d35.7053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5ZCJ56Wl5a-65pys55S6!5e0!3m2!1sja!2sjp!4v1700000000000"
-					loading="lazy"
-					referrerpolicy="no-referrer-when-downgrade"
-					allowfullscreen
-					title="HACHI本社 アクセスマップ"
-					style="border:0;width:100%;height:100%"></iframe>
 			</div>
 
 		</div>
@@ -140,22 +94,20 @@ get_header();
 	</div>
 </section>
 
-<!-- ===== CTA ===== -->
-<section class="section about-cta">
+<!-- ===== LOCATION ===== -->
+<section class="section company-location">
 	<div class="container">
 		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
-			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
-			<p class="heading-jp" style="margin-top:20px"><?php _e( 'お気軽にお問い合わせください。', 'hachi' ); ?></p>
-			<div class="about-cta__buttons">
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
-					<?php _e( 'Contact Us', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn">
-					<?php _e( 'About HACHI', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-			</div>
+			<?php hachi_section_label( 'L o c a t i o n' ); ?>
+			<h2 class="heading-en heading-en--sm"><?php _e( 'HEAD OFFICE', 'hachi' ); ?></h2>
+			<address class="company-location__address">
+				〒180-0004<br>
+				東京都武蔵野市吉祥寺本町 1-13-2 5F
+			</address>
+			<p class="company-location__en">
+				1-13-2 5F, Kichijoji-Honcho,<br>
+				Musashino-shi, Tokyo 180-0004, Japan
+			</p>
 		</div>
 	</div>
 </section>

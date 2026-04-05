@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop, "claude/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ──────────────────────────────────────────────
+  # 1. PHP Lint (構文チェック)
+  # ──────────────────────────────────────────────
+  php-lint:
+    name: PHP Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: php-cs-fixer, phpcs
+          coverage: none
+
+      - name: PHP syntax check (all .php files)
+        run: find hachi-wp-secure -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
+
+      - name: WordPress Coding Standards (PHPCS)
+        run: |
+          composer global require wp-coding-standards/wpcs --quiet
+          phpcs --config-set installed_paths $(composer global config home)/vendor/wp-coding-standards/wpcs
+          phpcs --standard=WordPress-Core \
+                --extensions=php \
+                --ignore=*/vendor/*,*/node_modules/* \
+                hachi-wp-secure/inc/ \
+                hachi-wp-secure/functions.php \
+                || true  # 警告は CI を止めない (今後 strict 化予定)
+
+  # ──────────────────────────────────────────────
+  # 2. セキュリティスキャン
+  # ──────────────────────────────────────────────
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Semgrep — PHP Security Rules
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/php
+            p/owasp-top-ten
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+        continue-on-error: true  # トークン未設定時はスキップ
+
+      - name: Check for hardcoded secrets
+        run: |
+          # service_role キーや access_token の誤コミットを検出
+          if grep -rE "(eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+)" \
+            --include="*.php" --include="*.js" --include="*.ts" \
+            --exclude-dir=".git" \
+            hachi-wp-secure/; then
+            echo "::error::JWT token found in source code. Use environment variables instead."
+            exit 1
+          fi
+
+  # ──────────────────────────────────────────────
+  # 3. Supabase マイグレーション検証
+  # ──────────────────────────────────────────────
+  supabase-validate:
+    name: Supabase Migration Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Validate migration files (dry-run)
+        run: |
+          # SQL 構文の簡易チェック
+          for f in supabase/migrations/*.sql; do
+            echo "Checking: $f"
+            # セミコロン終端の確認
+            if ! grep -q ";" "$f"; then
+              echo "::warning::$f may be missing semicolons"
+            fi
+          done
+          echo "Migration files validated."

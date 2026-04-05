@@ -1,21 +1,46 @@
 # 環境変数（実際の値）
+.env
 .env.local
 .env.*.local
+.env.production
+.env.staging
+
+# WordPress コア設定（DB接続・認証キー・Supabaseキーを含む）
 wp-config.php
+hachi-wp-secure/wp-config.php
+
+# wp-config-security.php は service_role キーを含むため除外
+# ※ 環境変数（SUPABASE_SERVICE_KEY）で管理する場合はこの行を有効化
+# hachi-wp-secure/wp-config-security.php
 
 # WordPress
 wp-content/uploads/
 wp-content/cache/
 wp-content/upgrade/
+wp-content/hachi-logs/
 *.log
+
+# Supabase CLI 一時ファイル
+supabase/.temp/
+supabase/.branches/
 
 # macOS
 .DS_Store
 .DS_Store?
 ._*
+.Spotlight-V100
+.Trashes
 
 # エディタ
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# Node.js
+node_modules/
+dist/
+.cache/
+
+# PHP / Composer
+vendor/

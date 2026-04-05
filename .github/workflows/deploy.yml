@@ -1,0 +1,89 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  # ──────────────────────────────────────────────
+  # 1. Supabase マイグレーション適用
+  # ──────────────────────────────────────────────
+  migrate:
+    name: Supabase Migration
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Apply migrations
+        run: |
+          supabase db push \
+            --linked \
+            --password "${{ secrets.SUPABASE_DB_PASSWORD }}"
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        working-directory: .
+
+      - name: Notify Slack — Migration success
+        if: success()
+        run: |
+          curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{"text":"✅ *HACHI-web* Supabase migration applied successfully (`${{ github.sha }}`)"}'
+
+  # ──────────────────────────────────────────────
+  # 2. WordPress テーマ SFTP デプロイ
+  # ──────────────────────────────────────────────
+  deploy-theme:
+    name: Deploy WordPress Theme
+    runs-on: ubuntu-latest
+    needs: migrate  # マイグレーション成功後にデプロイ
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy theme via SFTP
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+          ARGS: "-avzr --delete"
+          SOURCE: "hachi-wp-secure/"
+          REMOTE_HOST: ${{ secrets.SFTP_HOST }}
+          REMOTE_USER: ${{ secrets.SFTP_USER }}
+          TARGET: ${{ secrets.SFTP_REMOTE_PATH }}
+          EXCLUDE: |
+            wp-config.php
+            wp-config-security.php
+            .git/
+            .github/
+            node_modules/
+
+      - name: Notify Slack — Deploy success
+        if: success()
+        run: |
+          curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "text": "🚀 *HACHI-web* theme deployed successfully",
+              "attachments": [{
+                "color": "#36a64f",
+                "fields": [
+                  {"title": "Commit", "value": "`${{ github.sha }}`", "short": true},
+                  {"title": "Branch", "value": "`${{ github.ref_name }}`", "short": true},
+                  {"title": "Deployed by", "value": "${{ github.actor }}", "short": true}
+                ]
+              }]
+            }'
+
+      - name: Notify Slack — Deploy failure
+        if: failure()
+        run: |
+          curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{"text":"❌ *HACHI-web* deploy FAILED — <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>"}'

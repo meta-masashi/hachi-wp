@@ -98,62 +98,101 @@ function hachi_register_taxonomies(): void {
 add_action('init','hachi_register_taxonomies');
 
 function hachi_handle_contact(): void {
+    // --- 1. CSRF nonce 検証 ---
     if (!wp_verify_nonce(sanitize_text_field($_POST['nonce']??''),'hachi_nonce')) {
         hachi_security_log('contact_csrf_fail',['ip'=>hachi_get_client_ip()]);
         wp_send_json_error(['message'=>__('不正なリクエストです。','hachi')],403);
     }
+
+    // --- 2. Honeypot（発動時は後段処理をスキップするフラグを立てる） ---
     if (!empty($_POST['website'])) {
+        $GLOBALS['hachi_honeypot_triggered'] = true;
         hachi_security_log('honeypot_triggered',['ip'=>hachi_get_client_ip()]);
         wp_send_json_success(['message'=>'ok']);
     }
+
+    // --- 3. 入力取得 ---
     $name     = sanitize_text_field($_POST['contact_name']??'');
     $company  = sanitize_text_field($_POST['contact_company']??'');
     $email    = sanitize_email($_POST['contact_email']??'');
     $cat      = sanitize_text_field($_POST['contact_cat']??'');
     $message  = sanitize_textarea_field($_POST['contact_message']??'');
-    // 追加フィールド（任意）
     $role     = sanitize_text_field($_POST['contact_role']??'');
     $size     = sanitize_text_field($_POST['contact_size']??'');
     $timeline = sanitize_text_field($_POST['contact_timeline']??'');
     $phone    = sanitize_text_field($_POST['contact_phone']??'');
-    $errors  = [];
-    if (empty($name)||mb_strlen($name)>100) $errors['name'] = __('お名前をご入力ください。','hachi');
-    if (empty($email)||!is_email($email))    $errors['email'] = __('正しいメールアドレスを入力してください。','hachi');
-    if (empty($message))                     $errors['message'] = __('お問い合わせ内容をご入力ください。','hachi');
-    elseif (mb_strlen($message)>2000)        $errors['message'] = __('2000文字以内でご入力ください。','hachi');
-    // 問い合わせ種別: contact-handler.php の hachi_get_contact_categories() が利用可能な場合は動的に取得
+
+    // --- 4. CRLF 除去（メールヘッダーインジェクション対策） ---
+    $name    = str_replace(["\r","\n"],'',$name);
+    $email   = str_replace(["\r","\n"],'',$email);
+    $cat     = str_replace(["\r","\n"],'',$cat);
+    $company = str_replace(["\r","\n"],'',$company);
+
+    // --- 5. 長さ制限（DoS / payload 肥大化防止） ---
+    if (mb_strlen($company) > 200) $company = mb_substr($company,0,200);
+    if (mb_strlen($phone)   > 30)  $phone   = mb_substr($phone,0,30);
+    // 電話番号: 数字/ハイフン/プラス/空白/括弧のみ許容
+    $phone = preg_replace('/[^0-9+\-\s()]/','',$phone);
+
+    // --- 6. chip フィールド allowlist 検証（不正値は空にフォールバック） ---
+    $allowed_roles     = ['','経営層','部門責任者','マネージャー','担当者','その他'];
+    $allowed_sizes     = ['','〜50名','51〜300名','301〜1,000名','1,001名〜','個人・その他'];
+    $allowed_timelines = ['','すぐに','1〜3ヶ月以内','半年以内','情報収集段階','未定'];
+    if (!in_array($role,$allowed_roles,true))         $role='';
+    if (!in_array($size,$allowed_sizes,true))         $size='';
+    if (!in_array($timeline,$allowed_timelines,true)) $timeline='';
+
+    // --- 7. カテゴリー allowlist 検証（必須化） ---
     if (function_exists('hachi_get_contact_categories')) {
-        $allowed_cats = array_merge([''], array_column(hachi_get_contact_categories(), 'label'));
+        $allowed_cats = array_column(hachi_get_contact_categories(), 'label');
     } else {
-        $allowed_cats = ['','PACE 先行案内','REBOOT-WORK 導入相談','一般お問い合わせ'];
+        $allowed_cats = ['PACE 先行案内','REBOOT-WORK 導入相談','取材・メディア','採用・パートナー','一般お問い合わせ'];
     }
-    if (!in_array($cat,$allowed_cats,true)) $cat='一般お問い合わせ';
+
+    // --- 8. バリデーション ---
+    $errors = [];
+    if (empty($name)||mb_strlen($name)>100)      $errors['name']    = __('お名前をご入力ください。','hachi');
+    if (empty($email)||!is_email($email))        $errors['email']   = __('正しいメールアドレスを入力してください。','hachi');
+    if (empty($message))                         $errors['message'] = __('お問い合わせ内容をご入力ください。','hachi');
+    elseif (mb_strlen($message)>2000)            $errors['message'] = __('2000文字以内でご入力ください。','hachi');
+    if (empty($cat)||!in_array($cat,$allowed_cats,true)) $errors['cat'] = __('ご用件をお選びください。','hachi');
     if (!empty($errors)) { wp_send_json_error(['errors'=>$errors],422); }
-    $name  = str_replace(["\r","\n"],'',$name);
-    $email = str_replace(["\r","\n"],'',$email);
-    // 追加情報配列（メール本文・Slack・Supabase で共有）
+
+    // --- 9. 追加情報配列（メール本文・Slack・Supabase で共有） ---
     $extras = [
         'role'     => $role,
         'size'     => $size,
         'timeline' => $timeline,
         'phone'    => $phone,
     ];
-    // カテゴリーキー解決（auto-reply テンプレート選択に使用）
+
+    // --- 10. カテゴリーキー解決（auto-reply テンプレート選択に使用） ---
     $cat_key = 'general';
     if (function_exists('hachi_resolve_contact_category')) {
         $resolved = hachi_resolve_contact_category($cat);
         $cat_key  = $resolved['key'] ?? 'general';
     }
-    $sent  = wp_mail(get_option('admin_email'),
+
+    // --- 11. Reply-To 用に $name から特殊文字を除去（RFC5322 対応） ---
+    //     <, >, ", ,, ; はメールヘッダーを破壊し得るので除去
+    $reply_name = preg_replace('/[<>",;]/','',$name);
+    $reply_name = trim(mb_substr($reply_name, 0, 80));
+    if (empty($reply_name)) $reply_name = 'Contact';
+
+    // --- 12. 管理者宛メール送信 ---
+    $sent = wp_mail(get_option('admin_email'),
         sprintf('[HACHI お問い合わせ] %s｜%s 様',$cat,$name),
         hachi_build_email_body($name,$company,$email,$cat,$message,$extras),
-        ['Content-Type: text/html; charset=UTF-8',sprintf('Reply-To: %s <%s>',$name,$email)]
+        ['Content-Type: text/html; charset=UTF-8',sprintf('Reply-To: %s <%s>',$reply_name,$email)]
     );
     if (!$sent) { wp_send_json_error(['message'=>__('メール送信に失敗しました。','hachi')],500); }
+
+    // --- 13. カテゴリー別 自動返信メール送信 ---
     wp_mail($email,
         sprintf('【株式会社HACHI】お問い合わせを受け付けました（%s）',$cat),
         hachi_build_autoreply_body($name,$cat_key,$cat),
         ['Content-Type: text/html; charset=UTF-8']);
+
     hachi_security_log('contact_success',['ip'=>hachi_get_client_ip(),'cat'=>$cat]);
     wp_send_json_success(['message'=>__('お問い合わせを受け付けました。','hachi')]);
 }

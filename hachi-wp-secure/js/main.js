@@ -347,12 +347,18 @@ function initContactForm() {
     data.append('action', 'hachi_contact');
     data.append('nonce',  hachiData?.nonce || '');
 
+    // 20 秒で自動キャンセル（wp_mail 遅延時の無限待機防止）
+    const controller = new AbortController();
+    const timeoutId  = setTimeout(() => controller.abort(), 20000);
+
     try {
       const res  = await fetch(hachiData?.ajaxUrl || '/wp-admin/admin-ajax.php', {
         method:      'POST',
         credentials: 'same-origin',
         body:        data,
+        signal:      controller.signal,
       });
+      clearTimeout(timeoutId);
 
       const json = await res.json();
 
@@ -368,6 +374,12 @@ function initContactForm() {
             if (fields[key]) {
               fields[key].wrapper.classList.add('has-error');
               fields[key].errEl.textContent = msg;
+            } else if (key === 'cat') {
+              // カテゴリーカードエラーは専用表示
+              const errCat = document.getElementById('err-cat');
+              if (errCat) { errCat.textContent = msg; errCat.style.display = 'block'; }
+              const cards = document.querySelector('.contact-cards');
+              if (cards) cards.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
           });
         } else if (json.data?.message) {
@@ -380,8 +392,13 @@ function initContactForm() {
         if (submitText) submitText.textContent = '送信する';
       }
     } catch (err) {
+      clearTimeout(timeoutId);
       console.error('[HACHI] Contact form error:', err);
-      genError.textContent = 'ネットワークエラーが発生しました。しばらく経ってから再試行してください。';
+      if (err.name === 'AbortError') {
+        genError.textContent = '送信がタイムアウトしました。しばらく経ってから再試行してください。';
+      } else {
+        genError.textContent = 'ネットワークエラーが発生しました。しばらく経ってから再試行してください。';
+      }
       genError.style.display = 'block';
       submitBtn.disabled = false;
       if (submitText) submitText.textContent = '送信する';

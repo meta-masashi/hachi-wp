@@ -56,7 +56,24 @@ function hachi_get_contact_categories(): array {
     ];
 
     $stored = get_option( 'hachi_contact_categories', [] );
-    return ! empty( $stored ) ? $stored : $defaults;
+    if ( empty( $stored ) ) {
+        return $defaults;
+    }
+
+    // v2 マイグレーション: media / recruit が未登録の古いデータに自動追加
+    // （旧バージョンで保存された 3カテゴリー設定の自動移行）
+    $migrated = false;
+    foreach ( [ 'media', 'recruit', 'pace_demo', 'reboot_docs', 'general' ] as $required_key ) {
+        if ( ! isset( $stored[ $required_key ] ) && isset( $defaults[ $required_key ] ) ) {
+            $stored[ $required_key ] = $defaults[ $required_key ];
+            $migrated = true;
+        }
+    }
+    if ( $migrated ) {
+        update_option( 'hachi_contact_categories', $stored );
+    }
+
+    return $stored;
 }
 
 /**
@@ -412,6 +429,10 @@ function hachi_transform_contact_json_response( string $buffer ): string {
 
     // 成功レスポンスのみ拡張
     if ( ! empty( $data['success'] ) && $data['success'] === true ) {
+        // Honeypot 発動時は Slack / Supabase / GA4 拡張をスキップ（ボット送信のゴミデータ排除）
+        if ( ! empty( $GLOBALS['hachi_honeypot_triggered'] ) ) {
+            return $buffer;
+        }
         $post_data = $GLOBALS['hachi_contact_post_data'] ?? [];
         $cat_info  = hachi_resolve_contact_category( $post_data['cat'] ?? '' );
 

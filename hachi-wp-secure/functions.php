@@ -179,19 +179,37 @@ function hachi_handle_contact(): void {
     $reply_name = trim(mb_substr($reply_name, 0, 80));
     if (empty($reply_name)) $reply_name = 'Contact';
 
-    // --- 12. 管理者宛メール送信 ---
-    $sent = wp_mail(get_option('admin_email'),
+    // --- 12. 送信先メールアドレス解決 ---
+    //     優先順位: HACHI_CONTACT_TO_EMAIL → admin_email → ハードコードフォールバック
+    $to_email = ( defined('HACHI_CONTACT_TO_EMAIL') && !empty(HACHI_CONTACT_TO_EMAIL) )
+        ? HACHI_CONTACT_TO_EMAIL
+        : get_option('admin_email', 'info@hachi-wellnesshack.com');
+
+    // --- 13. From ヘッダー設定（自動返信・管理者通知共通） ---
+    $from_email = 'info@hachi-wellnesshack.com';
+    $from_name  = '株式会社HACHI';
+
+    // --- 14. 管理者宛メール送信 ---
+    $sent = wp_mail($to_email,
         sprintf('[HACHI お問い合わせ] %s｜%s 様',$cat,$name),
         hachi_build_email_body($name,$company,$email,$cat,$message,$extras),
-        ['Content-Type: text/html; charset=UTF-8',sprintf('Reply-To: %s <%s>',$reply_name,$email)]
+        [
+            'Content-Type: text/html; charset=UTF-8',
+            sprintf('Reply-To: %s <%s>',$reply_name,$email),
+            sprintf('From: %s <%s>',$from_name,$from_email),
+        ]
     );
     if (!$sent) { wp_send_json_error(['message'=>__('メール送信に失敗しました。','hachi')],500); }
 
-    // --- 13. カテゴリー別 自動返信メール送信 ---
+    // --- 15. カテゴリー別 自動返信メール送信 ---
     wp_mail($email,
         sprintf('【株式会社HACHI】お問い合わせを受け付けました（%s）',$cat),
         hachi_build_autoreply_body($name,$cat_key,$cat),
-        ['Content-Type: text/html; charset=UTF-8']);
+        [
+            'Content-Type: text/html; charset=UTF-8',
+            sprintf('From: %s <%s>',$from_name,$from_email),
+            sprintf('Reply-To: %s <%s>',$from_name,$from_email),
+        ]);
 
     hachi_security_log('contact_success',['ip'=>hachi_get_client_ip(),'cat'=>$cat]);
     wp_send_json_success(['message'=>__('お問い合わせを受け付けました。','hachi')]);

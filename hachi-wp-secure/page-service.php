@@ -41,7 +41,7 @@ get_header();
 			<a href="#pace" class="service-index__item">
 				<div class="service-index__num">02</div>
 				<div class="service-index__body">
-					<p class="service-index__tag">SPORTS MEDICAL SaaS</p>
+					<p class="service-index__tag">SPORTS AI-SaaS</p>
 					<h3 class="service-index__title">PACE</h3>
 					<p class="service-index__desc service-index__desc--accent"><?php _e( 'スポーツ医療チーム向け / 準備中', 'hachi' ); ?></p>
 				</div>
@@ -136,7 +136,7 @@ get_header();
 
 		<div class="pace-coming js-fade">
 			<span class="pace-coming__tag">COMING SOON</span>
-			<?php hachi_section_label( '0 2   S p o r t s   M e d i c a l   S a a S', 'label--white' ); ?>
+			<?php hachi_section_label( '0 2   S p o r t s   A I - S a a S', 'label--white' ); ?>
 			<h2 class="pace-coming__title">PACE<span class="pace-coming__version">by HACHI</span></h2>
 			<p class="pace-coming__subtitle"><?php _e( 'Progressive Assessment &amp; Conditioning Engine', 'hachi' ); ?></p>
 			<p class="pace-coming__lead">

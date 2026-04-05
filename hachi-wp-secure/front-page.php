@@ -142,7 +142,7 @@ if ( $ticker ) :
 			<a href="<?php echo esc_url( home_url( '/service/#pace' ) ); ?>" class="service-item">
 				<span class="service-item__num">02</span>
 				<div class="service-item__body">
-					<p class="service-item__tag">SPORTS MEDICAL SaaS</p>
+					<p class="service-item__tag">SPORTS AI-SaaS</p>
 					<h3 class="service-item__title">PACE v3.0</h3>
 					<p class="service-item__desc">
 						<?php _e( '因果推論AIとデジタルツインで、スポーツ医療チームの意思決定を革新するプラットフォーム。', 'hachi' ); ?>

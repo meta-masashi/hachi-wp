@@ -3854,5 +3854,417 @@ footer.site-footer {
 }
 
 /* ============================================================
+   SERVICE PAGE — v2 (Light Monochrome)
+   ============================================================ */
+
+/* Intro */
+.service-intro { padding: 100px 0 80px; }
+.service-intro__lead {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(24px, 3.2vw, 38px);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: #1d1d1f;
+  margin: 16px 0 0;
+}
+
+/* Service Index (2 card nav) */
+.service-index {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 80px;
+}
+.service-index__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 36px 40px;
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.service-index__item:hover {
+  border-color: #2D4295;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(29,29,31,0.06);
+}
+.service-index__num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: #8a8a90;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+.service-index__body { min-width: 0; }
+.service-index__tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: #2D4295;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.service-index__title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  color: #1d1d1f;
+  margin: 0 0 6px;
+}
+.service-index__desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  color: #6e6e73;
+  margin: 0;
+}
+.service-index__desc--accent { color: #2D4295; font-weight: 500; }
+.service-index__arrow {
+  font-size: 20px;
+  color: #8a8a90;
+  transition: transform 0.3s ease;
+}
+.service-index__item:hover .service-index__arrow {
+  transform: translateY(4px);
+  color: #2D4295;
+}
+
+/* Service Detail Header */
+.service-detail-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+.service-detail-header__num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  font-size: clamp(80px, 11vw, 140px);
+  line-height: 1;
+  color: rgba(45,66,149,0.12);
+  letter-spacing: 0.02em;
+}
+
+/* Service photo placeholder */
+.service-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(135deg, #eeeef1 0%, #f5f5f7 100%);
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0 20px, rgba(45,66,149,0.03) 20px 21px);
+}
+.service-photo__label {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: #8a8a90;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 24px;
+}
+
+/* Feature list */
+.service-feature-list { list-style: none; padding: 0; margin: 0; }
+.service-feature-list li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 0;
+  border-bottom: 1px solid #e8e8ed;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #1d1d1f;
+}
+.service-feature-list__dot {
+  flex-shrink: 0;
+  margin-top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2D4295;
+}
+
+/* Service Flow */
+.service-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  counter-reset: flow;
+}
+.service-flow__step {
+  position: relative;
+  padding: 36px 28px;
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.service-flow__step:hover {
+  border-color: #2D4295;
+  transform: translateY(-2px);
+}
+.service-flow__num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  color: #2D4295;
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+.service-flow__title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+}
+.service-flow__desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6e6e73;
+  margin: 0;
+}
+
+/* ===== PACE Section (strategic dark block) ===== */
+.pace-section {
+  background: #0c0c0e;
+  color: #ffffff;
+  padding: 140px 0 140px;
+  position: relative;
+}
+.pace-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 0%, rgba(45,66,149,0.22), transparent 60%);
+  pointer-events: none;
+}
+.pace-section > .container { position: relative; }
+
+.pace-coming { max-width: 820px; }
+.pace-coming__tag {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.pace-coming__title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  font-size: clamp(64px, 10vw, 128px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #ffffff;
+  margin: 16px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pace-coming__version {
+  font-size: clamp(14px, 1.6vw, 20px);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.5);
+}
+.pace-coming__subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.6);
+  margin-top: 16px;
+  text-transform: uppercase;
+}
+.pace-coming__lead {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  line-height: 2.1;
+  color: rgba(255,255,255,0.75);
+  margin-top: 36px;
+  max-width: 720px;
+}
+
+/* PACE Features grid */
+.pace-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 100px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.pace-feature {
+  padding: 48px 36px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.3s ease;
+}
+.pace-feature:hover { background: rgba(255,255,255,0.02); }
+.pace-feature__num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  color: #7090F0;
+  margin-bottom: 24px;
+}
+.pace-feature__title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.65;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+.pace-feature__desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+/* PACE Target Users */
+.pace-users { margin-top: 100px; }
+.pace-users__label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.pace-users__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pace-user {
+  padding: 32px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+}
+.pace-user__tag {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #7090F0;
+  padding: 5px 12px;
+  border: 1px solid rgba(112,144,240,0.4);
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.pace-user__name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.pace-user__desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.55);
+}
+
+/* PACE Waitlist CTA */
+.pace-waitlist {
+  margin-top: 120px;
+  padding: 72px 48px;
+  background: linear-gradient(135deg, rgba(45,66,149,0.2) 0%, rgba(45,66,149,0.05) 100%);
+  border: 1px solid rgba(112,144,240,0.25);
+  border-radius: 4px;
+  text-align: center;
+}
+.pace-waitlist__label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: #7090F0;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.pace-waitlist__title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(26px, 3.5vw, 40px);
+  color: #ffffff;
+  margin: 0 0 24px;
+  letter-spacing: 0.02em;
+}
+.pace-waitlist__desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 2;
+  color: rgba(255,255,255,0.7);
+  max-width: 620px;
+  margin: 0 auto 40px;
+}
+.pace-waitlist__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Service responsive */
+@media (max-width: 960px) {
+  .service-index { grid-template-columns: 1fr; }
+  .service-detail-header { grid-template-columns: 1fr; gap: 24px; }
+  .service-detail-header__num { font-size: 80px; }
+  .service-flow { grid-template-columns: repeat(2, 1fr); }
+  .pace-features { grid-template-columns: repeat(2, 1fr); }
+  .pace-users__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .service-intro { padding: 72px 0 56px; }
+  .service-index__item { padding: 28px 24px; gap: 20px; }
+  .service-index__num { font-size: 28px; }
+  .service-flow { grid-template-columns: 1fr; }
+  .pace-section { padding: 90px 0; }
+  .pace-features { grid-template-columns: 1fr; }
+  .pace-users__grid { grid-template-columns: 1fr; }
+  .pace-waitlist { padding: 56px 28px; }
+}
+
+/* ============================================================
    END LIGHT MONOCHROME v2
    ============================================================ */

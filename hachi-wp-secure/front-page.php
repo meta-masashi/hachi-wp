@@ -19,14 +19,17 @@ get_header();
 			<p class="hero__eyebrow">beyond Wellness</p>
 
 			<div class="hero__headline-line">
-				<span>HEALTH</span>
+				<span>BEYOND</span>
 			</div>
 			<div class="hero__headline-line">
-				<span>BEYOND.</span>
+				<span>THE BODY.</span>
 			</div>
 
 			<p class="hero__subheading">
-				<span><?php _e( '健康を超えて、人をつなぐ。', 'hachi' ); ?></span>
+				<span><?php _e( '身体の、その先へ。', 'hachi' ); ?></span>
+			</p>
+			<p class="hero__lede" style="font-size:15px;line-height:2;color:#6e6e73;max-width:460px;margin-top:24px">
+				<?php _e( 'スポーツ医療とウェルネスの現場に、<br>テクノロジーで革新をもたらす。', 'hachi' ); ?>
 			</p>
 
 			<div class="hero__cta">

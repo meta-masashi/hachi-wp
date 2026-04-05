@@ -5,7 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
-define('HACHI_VERSION',   '2.0.0');
+define('HACHI_VERSION',   '2.1.0');
 define('HACHI_THEME_DIR', get_template_directory());
 define('HACHI_THEME_URI', get_template_directory_uri());
 

@@ -189,7 +189,12 @@ function hachi_remove_query_strings( string $src ): string {
         return $src;
     }
 
-    // ?ver= のみのクエリを除去
+    // テーマ独自アセットはバージョンバスターを維持（キャッシュ破棄に必要）
+    if ( strpos( $src, '/themes/hachi-wp-secure/' ) !== false ) {
+        return $src;
+    }
+
+    // ?ver= のみのクエリを除去（WP コア / プラグインのデフォルト ver）
     if ( strpos( $src, '?ver=' ) !== false ) {
         $src = remove_query_arg( 'ver', $src );
     }

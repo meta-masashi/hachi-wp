@@ -135,8 +135,10 @@ get_header();
 	<div class="container">
 
 		<div class="pace-coming js-fade">
-			<span class="pace-coming__tag">COMING SOON</span>
 			<?php hachi_section_label( '0 2   S p o r t s   A I - S a a S', 'label--white' ); ?>
+			<div class="pace-coming__tag-wrap">
+				<span class="pace-coming__tag">COMING SOON</span>
+			</div>
 			<h2 class="pace-coming__title">PACE<span class="pace-coming__version">by HACHI</span></h2>
 			<p class="pace-coming__subtitle"><?php _e( 'Progressive Assessment &amp; Conditioning Engine', 'hachi' ); ?></p>
 			<p class="pace-coming__lead">

@@ -3,12 +3,9 @@ name: Deploy
 on:
   push:
     branches: [main]
-  workflow_dispatch:  # 手動実行も可能
+  workflow_dispatch:
 
 jobs:
-  # ──────────────────────────────────────────────
-  # WordPress テーマ SFTP デプロイ
-  # ──────────────────────────────────────────────
   deploy-theme:
     name: Deploy WordPress Theme
     runs-on: ubuntu-latest
@@ -19,55 +16,46 @@ jobs:
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          echo "=== Key fingerprint ==="
-          ssh-keygen -l -f ~/.ssh/deploy_key || true
-          echo "=== ssh-keyscan wellnesshack.sakura.ne.jp ==="
-          ssh-keyscan -v -p 22 -H wellnesshack.sakura.ne.jp >> ~/.ssh/known_hosts 2>&1 || true
-          echo "=== known_hosts lines: $(wc -l < ~/.ssh/known_hosts) ==="
+          echo "Key lines: $(wc -l < ~/.ssh/deploy_key)"
+          echo "Key head: $(head -1 ~/.ssh/deploy_key)"
+          ssh-keyscan -H wellnesshack.sakura.ne.jp >> ~/.ssh/known_hosts 2>/dev/null
+          echo "known_hosts lines: $(wc -l < ~/.ssh/known_hosts)"
 
       - name: Test SSH connection
         run: |
-          echo "=== Testing wellnesshack.sakura.ne.jp ==="
-          ssh -v \
+          ssh \
             -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=no \
             -o ConnectTimeout=15 \
+            -o BatchMode=yes \
             "${{ secrets.SFTP_USER }}@wellnesshack.sakura.ne.jp" \
-            "echo SSH_OK && pwd" 2>&1 || echo "SSH failed with code $?"
+            "echo SSH_OK && uname -a && which rsync || echo 'no rsync'" 2>&1
+          echo "SSH exit code: $?"
 
-      - name: Deploy theme via rsync
-        run: |
-          rsync -avzr --delete \
-            --exclude='wp-config.php' \
-            --exclude='wp-config-security.php' \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='node_modules/' \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=15" \
-            hachi-wp-secure/ \
-            "${{ secrets.SFTP_USER }}@wellnesshack.sakura.ne.jp:${{ secrets.SFTP_REMOTE_PATH }}"
+      - name: Deploy theme via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: wellnesshack.sakura.ne.jp
+          username: ${{ secrets.SFTP_USER }}
+          key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          source: "hachi-wp-secure/"
+          target: ${{ secrets.SFTP_REMOTE_PATH }}
+          strip_components: 1
 
       - name: Notify Slack — Deploy success
         if: success()
         run: |
+          [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ] && \
           curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
-            -d '{
-              "text": "🚀 *HACHI-web* theme deployed successfully",
-              "attachments": [{
-                "color": "#36a64f",
-                "fields": [
-                  {"title": "Commit", "value": "`${{ github.sha }}`", "short": true},
-                  {"title": "Branch", "value": "`${{ github.ref_name }}`", "short": true}
-                ]
-              }]
-            }'
+            -d '{"text":"🚀 *HACHI-web* theme deployed (`${{ github.sha }}`)"}'  || true
 
       - name: Notify Slack — Deploy failure
         if: failure()
         run: |
+          [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ] && \
           curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
-            -d '{"text":"❌ *HACHI-web* deploy FAILED — <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>"}'
+            -d '{"text":"❌ *HACHI-web* deploy FAILED — <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>"}' || true

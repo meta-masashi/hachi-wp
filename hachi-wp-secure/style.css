@@ -2376,6 +2376,7 @@ body {
   align-items: center;
   position: relative;
   overflow: hidden;
+  padding-top: 138px;  /* site-header (88px) + 50px breathing room */
 }
 .hero::after {
   content: "";

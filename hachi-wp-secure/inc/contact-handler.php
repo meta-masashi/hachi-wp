@@ -115,7 +115,7 @@ function hachi_resolve_contact_category( string $cat_label ): array {
  * @return array{success: bool, score: float, error?: string}
  */
 function hachi_verify_recaptcha( string $token, string $action = 'contact' ): array {
-    $secret = HACHI_RECAPTCHA_SECRET_KEY;
+    $secret = defined( 'HACHI_RECAPTCHA_SECRET_KEY' ) ? HACHI_RECAPTCHA_SECRET_KEY : '';
 
     // シークレットキー未設定の場合は検証をスキップ（開発環境対応）
     if ( empty( $secret ) ) {
@@ -187,7 +187,7 @@ function hachi_verify_recaptcha( string $token, string $action = 'contact' ): ar
  * @return bool 送信成功したか
  */
 function hachi_notify_slack( array $data ): bool {
-    $webhook_url = HACHI_SLACK_WEBHOOK_URL;
+    $webhook_url = defined( 'HACHI_SLACK_WEBHOOK_URL' ) ? HACHI_SLACK_WEBHOOK_URL : '';
 
     if ( empty( $webhook_url ) ) {
         return false;
@@ -543,24 +543,24 @@ function hachi_render_contact_settings_page(): void {
             <tbody>
                 <tr>
                     <td>RECAPTCHA_SECRET_KEY</td>
-                    <td><?php echo ! empty( HACHI_RECAPTCHA_SECRET_KEY ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:red">✗ 未設定</span>'; ?></td>
+                    <td><?php echo ( defined('HACHI_RECAPTCHA_SECRET_KEY') && ! empty( HACHI_RECAPTCHA_SECRET_KEY ) ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:red">✗ 未設定</span>'; ?></td>
                 </tr>
                 <tr>
                     <td>SLACK_WEBHOOK_URL</td>
-                    <td><?php echo ! empty( HACHI_SLACK_WEBHOOK_URL ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:red">✗ 未設定</span>'; ?></td>
+                    <td><?php echo ( defined('HACHI_SLACK_WEBHOOK_URL') && ! empty( HACHI_SLACK_WEBHOOK_URL ) ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:red">✗ 未設定</span>'; ?></td>
                 </tr>
                 <tr>
                     <td>CONTACT_FORM_TO_EMAIL</td>
-                    <td><?php echo esc_html( HACHI_CONTACT_TO_EMAIL ); ?></td>
+                    <td><?php echo defined('HACHI_CONTACT_TO_EMAIL') ? esc_html( HACHI_CONTACT_TO_EMAIL ) : '<span style="color:orange">△ 未設定</span>'; ?></td>
                 </tr>
                 <tr>
                     <td>SUPABASE_URL</td>
-                    <td><?php echo ! empty( HACHI_SUPABASE_URL ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:orange">△ 未設定（任意）</span>'; ?></td>
+                    <td><?php echo ( defined('HACHI_SUPABASE_URL') && ! empty( HACHI_SUPABASE_URL ) ) ? '<span style="color:green">✓ 設定済み</span>' : '<span style="color:orange">△ 未設定（任意）</span>'; ?></td>
                 </tr>
                 <tr>
                     <td>SUPABASE_SERVICE_KEY</td>
                     <td>
-                        <?php if ( ! empty( HACHI_SUPABASE_SERVICE_KEY ) ) : ?>
+                        <?php if ( defined('HACHI_SUPABASE_SERVICE_KEY') && ! empty( HACHI_SUPABASE_SERVICE_KEY ) ) : ?>
                             <span style="color:green">✓ 設定済み</span>
                             <?php if ( function_exists( 'hachi_supabase_health_check' ) ) :
                                 $health = hachi_supabase_health_check(); ?>

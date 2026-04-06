@@ -15,6 +15,10 @@ foreach (['/inc/security.php', '/inc/rate-limiter.php', '/inc/two-factor.php'] a
     if (file_exists($p)) require_once $p;
 }
 
+// SMTP 設定 (wp-config.php に HACHI_SMTP_* 定数があれば自動有効化)
+$smtp_mod = HACHI_THEME_DIR . '/inc/smtp.php';
+if (file_exists($smtp_mod)) require_once $smtp_mod;
+
 // Supabase クライアント (バックエンド拡張より先に読み込む)
 $supabase_mod = HACHI_THEME_DIR . '/inc/supabase.php';
 if (file_exists($supabase_mod)) require_once $supabase_mod;

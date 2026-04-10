@@ -19,7 +19,6 @@ jobs:
           echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           echo "Key lines: $(wc -l < ~/.ssh/deploy_key)"
-          echo "Key head: $(head -1 ~/.ssh/deploy_key)"
           ssh-keyscan -H wellnesshack.sakura.ne.jp >> ~/.ssh/known_hosts 2>/dev/null
           echo "known_hosts lines: $(wc -l < ~/.ssh/known_hosts)"
 
@@ -31,18 +30,22 @@ jobs:
             -o ConnectTimeout=15 \
             -o BatchMode=yes \
             "${{ secrets.SFTP_USER }}@wellnesshack.sakura.ne.jp" \
-            "echo SSH_OK && uname -a && which rsync || echo 'no rsync'" 2>&1
+            "echo SSH_OK && uname -a" 2>&1
           echo "SSH exit code: $?"
 
-      - name: Deploy theme via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: wellnesshack.sakura.ne.jp
-          username: ${{ secrets.SFTP_USER }}
-          key: ${{ secrets.SFTP_PRIVATE_KEY }}
-          source: "hachi-wp-secure/"
-          target: ${{ secrets.SFTP_REMOTE_PATH }}
-          strip_components: 1
+      - name: Deploy theme via SSH tar stream
+        run: |
+          cd hachi-wp-secure
+          echo "=== Files to deploy ==="
+          find . -type f | sort
+          echo "=== Starting deploy ==="
+          tar czf - . | ssh \
+            -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=60 \
+            -o BatchMode=yes \
+            "${{ secrets.SFTP_USER }}@wellnesshack.sakura.ne.jp" \
+            "mkdir -p '${{ secrets.SFTP_REMOTE_PATH }}' && cd '${{ secrets.SFTP_REMOTE_PATH }}' && tar xzf - && echo '=== Deploy complete ===' && ls -la"
 
       - name: Notify Slack — Deploy success
         if: success()
@@ -50,7 +53,7 @@ jobs:
           [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ] && \
           curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
-            -d '{"text":"🚀 *HACHI-web* theme deployed (`${{ github.sha }}`)"}'  || true
+            -d "{\"text\":\"🚀 *HACHI-web* theme deployed (\`${{ github.sha }}\`)\"}" || true
 
       - name: Notify Slack — Deploy failure
         if: failure()
@@ -58,4 +61,4 @@ jobs:
           [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ] && \
           curl -s -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
-            -d '{"text":"❌ *HACHI-web* deploy FAILED — <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>"}' || true
+            -d "{\"text\":\"❌ *HACHI-web* deploy FAILED — <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>\"}" || true

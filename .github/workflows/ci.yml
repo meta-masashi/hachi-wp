@@ -24,7 +24,11 @@ jobs:
           coverage: none
 
       - name: PHP syntax check (all .php files)
-        run: find hachi-wp-secure -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
+        # NOTE: grep -v で OK 行を消すと、全ファイル正常時に grep が exit 1 を返し
+        #       step が失敗する classic bash bug を回避するため `!` で反転する。
+        #       - 全ファイル OK: grep 何もマッチせず exit 1 → `!` で exit 0 → step 成功
+        #       - 1件でもエラー: grep がエラー行をマッチ出力して exit 0 → `!` で exit 1 → step 失敗
+        run: ! find hachi-wp-secure -name "*.php" -exec php -l {} \; 2>&1 | grep -v "No syntax errors"
 
       - name: WordPress Coding Standards (PHPCS)
         run: |

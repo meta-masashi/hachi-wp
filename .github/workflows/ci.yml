@@ -28,7 +28,9 @@ jobs:
         #       step が失敗する classic bash bug を回避するため `!` で反転する。
         #       - 全ファイル OK: grep 何もマッチせず exit 1 → `!` で exit 0 → step 成功
         #       - 1件でもエラー: grep がエラー行をマッチ出力して exit 0 → `!` で exit 1 → step 失敗
-        run: ! find hachi-wp-secure -name "*.php" -exec php -l {} \; 2>&1 | grep -v "No syntax errors"
+        # YAML の先頭 `!` はタグ指示子として解釈されるため block scalar (|) を使う。
+        run: |
+          ! find hachi-wp-secure -name "*.php" -exec php -l {} \; 2>&1 | grep -v "No syntax errors"
 
       - name: WordPress Coding Standards (PHPCS)
         run: |

@@ -4,23 +4,34 @@
  */
 ?>
 
+<!-- ===== FOOTER CTA (白背景・ページ側にCTAがある場合は非表示) ===== -->
+<?php if ( ! is_page( array( 'about', 'service', 'contact', 'company' ) ) ) : ?>
+<section class="section about-cta">
+	<div class="container">
+		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
+			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
+			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
+			<p class="body-copy" style="margin:28px auto 0">
+				<?php _e( 'サービス導入、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
+			</p>
+			<div class="about-cta__buttons">
+				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
+					<?php _e( 'Contact Us', 'hachi' ); ?>
+					<?php hachi_arrow_icon(); ?>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn">
+					<?php _e( 'About HACHI', 'hachi' ); ?>
+					<?php hachi_arrow_icon(); ?>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
+
 <!-- ===== SITE FOOTER ===== -->
 <footer class="site-footer" role="contentinfo">
 	<div class="container">
-
-		<!-- Footer CTA -->
-		<div class="footer-cta js-fade">
-			<p class="footer-cta__label">Contact</p>
-			<h2 class="footer-cta__heading">GET IN TOUCH</h2>
-			<p class="footer-cta__sub">お問い合わせ・資料請求</p>
-			<p style="font-size:15px;color:rgba(255,255,255,0.32);margin-bottom:48px">
-				<?php _e( 'お気軽にお問い合わせください。', 'hachi' ); ?>
-			</p>
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--white">
-				<?php _e( 'お問い合わせはこちら', 'hachi' ); ?>
-				<?php hachi_arrow_icon(); ?>
-			</a>
-		</div>
 
 		<!-- Footer Navigation -->
 		<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Footer Navigation', 'hachi' ); ?>">

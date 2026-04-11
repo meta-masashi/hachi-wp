@@ -1804,51 +1804,6 @@ input, textarea, select {
   padding: 100px 0 56px;
 }
 
-.footer-cta {
-  text-align: center;
-  padding-bottom: 88px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  margin-bottom: 64px;
-}
-
-.footer-cta__label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.36em;
-  color: var(--teal);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.footer-cta__label::before,
-.footer-cta__label::after {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: var(--teal);
-}
-
-.footer-cta__heading {
-  font-family: var(--mono);
-  font-size: clamp(40px, 6vw, 80px);
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
-}
-
-.footer-cta__sub {
-  font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 300;
-  color: rgba(255,255,255,0.32);
-  margin-bottom: 48px;
-}
-
 .footer-nav {
   display: flex;
   flex-wrap: wrap;
@@ -2556,6 +2511,17 @@ body {
 
 .hamburger__line { background: #1d1d1f; }
 
+/* スクロール時（黒背景）→ 白文字に切り替え */
+.site-header.is-scrolled { background: rgba(10, 10, 10, 0.92); border-bottom-color: rgba(255,255,255,0.08); }
+.site-header.is-scrolled .site-header__inner { color: #ffffff; }
+.site-header.is-scrolled .site-logo { color: #ffffff !important; }
+.site-header.is-scrolled .primary-nav__item { color: rgba(255,255,255,0.7); }
+.site-header.is-scrolled .primary-nav__item:hover,
+.site-header.is-scrolled .primary-nav__item.is-current { color: #ffffff; }
+.site-header.is-scrolled .nav-cta { background: #ffffff; color: #1d1d1f !important; }
+.site-header.is-scrolled .nav-cta:hover { background: #2D4295; color: #ffffff !important; }
+.site-header.is-scrolled .hamburger__line { background: #ffffff; }
+
 /* ---------- HERO ---------- */
 .hero {
   background: #ffffff;
@@ -3000,27 +2966,6 @@ footer.site-footer {
 .site-footer a:hover { color: #ffffff; }
 .footer-nav,
 .footer-bottom { color: rgba(255,255,255,0.5); }
-.footer-cta__label {
-  font-family: 'Montserrat',sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  color: #2D4295;
-  margin-bottom: 16px;
-}
-.footer-cta__heading {
-  font-family: 'Montserrat',sans-serif;
-  font-size: clamp(48px, 7vw, 88px);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  line-height: 1;
-}
-.footer-cta__sub {
-  font-family: 'Noto Sans JP',sans-serif;
-  font-size: 16px;
-  color: rgba(255,255,255,0.78);
-  margin-top: 16px;
-}
 .footer-nav__heading {
   font-family: 'Montserrat',sans-serif;
   font-size: 11px;
@@ -3216,6 +3161,10 @@ footer.site-footer {
   transition: background 0.3s ease;
 }
 .value-card:hover { background: #f5f5f7; }
+.value-card:hover .value-card__kanji { color: #2D4295; }
+.value-card:hover .value-card__name { color: #1d1d1f; }
+.value-card:hover .value-card__en { color: #6e6e73; }
+.value-card:hover .value-card__desc { color: #6e6e73; }
 .value-card__kanji {
   font-family: 'Noto Serif JP','Yu Mincho',serif;
   font-size: 88px;

@@ -177,12 +177,12 @@ get_header();
 				<?php _e( '会社情報、サービス導入、取材など、お気軽にお問い合わせください。', 'hachi' ); ?>
 			</p>
 			<div class="about-cta__buttons">
-				<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="btn btn--teal">
-					<?php _e( 'View Company', 'hachi' ); ?>
+				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
+					<?php _e( 'Contact Us', 'hachi' ); ?>
 					<?php hachi_arrow_icon(); ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn">
-					<?php _e( 'Contact Us', 'hachi' ); ?>
+				<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="btn">
+					<?php _e( 'View Company', 'hachi' ); ?>
 					<?php hachi_arrow_icon(); ?>
 				</a>
 			</div>

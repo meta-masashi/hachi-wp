@@ -94,20 +94,25 @@ get_header();
 	</div>
 </section>
 
-<!-- ===== LOCATION ===== -->
-<section class="section company-location">
+<!-- ===== CTA ===== -->
+<section class="section about-cta">
 	<div class="container">
 		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
-			<?php hachi_section_label( 'L o c a t i o n' ); ?>
-			<h2 class="heading-en heading-en--sm"><?php _e( 'HEAD OFFICE', 'hachi' ); ?></h2>
-			<address class="company-location__address">
-				〒180-0004<br>
-				東京都武蔵野市吉祥寺本町 1-13-2 5F
-			</address>
-			<p class="company-location__en">
-				1-13-2 5F, Kichijoji-Honcho,<br>
-				Musashino-shi, Tokyo 180-0004, Japan
+			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
+			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
+			<p class="body-copy" style="margin:28px auto 0">
+				<?php _e( 'サービス導入、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
 			</p>
+			<div class="about-cta__buttons">
+				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
+					<?php _e( 'Contact Us', 'hachi' ); ?>
+					<?php hachi_arrow_icon(); ?>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="btn">
+					<?php _e( 'Service', 'hachi' ); ?>
+					<?php hachi_arrow_icon(); ?>
+				</a>
+			</div>
 		</div>
 	</div>
 </section>

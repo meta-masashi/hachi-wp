@@ -5,7 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
-define('HACHI_VERSION',   '2.1.0');
+define('HACHI_VERSION',   '2.3.0');
 define('HACHI_THEME_DIR', get_template_directory());
 define('HACHI_THEME_URI', get_template_directory_uri());
 
@@ -48,6 +48,18 @@ function hachi_setup(): void {
 }
 add_action('after_setup_theme', 'hachi_setup');
 
+/**
+ * フロント側の管理バー（admin bar）を非表示化
+ *
+ * 目的:
+ *  - WP Fastest Cache の toolbar.js がフロントで enqueue されると
+ *    `alert("AjaxURL has NOT been defined")` が発火する既知バグを解消
+ *    （プラグイン側で `wpfc_ajaxurl` の wp_localize_script が出力されないため）
+ *  - フロントの余計な inline JS を減らして CSP/パフォーマンスを向上
+ *  - キャッシュクリア等の管理操作は `/wp-admin/` 側で可能なため機能損失ゼロ
+ */
+add_filter('show_admin_bar', '__return_false');
+
 function hachi_enqueue_assets(): void {
     wp_enqueue_style('hachi-fonts',
         'https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&family=Montserrat:wght@300;400;500;700&display=swap',
@@ -77,7 +89,7 @@ add_action('wp_enqueue_scripts', 'hachi_enqueue_assets');
 function hachi_register_post_types(): void {
     register_post_type('hachi_news',[
         'labels'       => ['name'=>__('News','hachi'),'singular_name'=>__('News','hachi'),'not_found'=>__('No News found','hachi')],
-        'public'       => true,'show_in_menu'=>true,'show_in_rest'=>false,
+        'public'       => true,'show_in_menu'=>true,'show_in_rest'=>true,'rest_base'=>'hachi-news',
         'menu_icon'    => 'dashicons-megaphone',
         'supports'     => ['title','editor','thumbnail','excerpt','custom-fields'],
         'has_archive'  => true,'rewrite'=>['slug'=>'news','with_front'=>false],'menu_position'=>5,
@@ -559,13 +571,12 @@ function hachi_get_classified_items( array $args = [] ): array {
         wp_reset_postdata();
     }
 
-    // ---- note.com RSS ----
-    if ( $cat_filter === 'all' || $cat_filter === 'note' || $cat_filter === 'work' || $cat_filter === 'news' || $cat_filter === 'blog' ) {
+    // ---- note.com RSS（blog に統合）----
+    if ( $cat_filter === 'all' || $cat_filter === 'blog' ) {
         foreach ( hachi_get_note_posts( 30 ) as $n ) {
-            $cat = hachi_classify_content( $n['title'], $n['excerpt'] );
             $items[] = [
                 'source'    => 'note',
-                'category'  => $cat,
+                'category'  => 'blog',  // note → blog に統合
                 'date_ts'   => (int) $n['date'],
                 'date_str'  => $n['date'] ? date_i18n( 'Y.m.d', (int) $n['date'] ) : '',
                 'title'     => $n['title'],
@@ -578,11 +589,7 @@ function hachi_get_classified_items( array $args = [] ): array {
 
     // カテゴリフィルタ
     if ( $cat_filter !== 'all' ) {
-        if ( $cat_filter === 'note' ) {
-            $items = array_values( array_filter( $items, fn( $i ) => $i['source'] === 'note' ) );
-        } else {
-            $items = array_values( array_filter( $items, fn( $i ) => $i['category'] === $cat_filter ) );
-        }
+        $items = array_values( array_filter( $items, fn( $i ) => $i['category'] === $cat_filter ) );
     }
 
     // 日付降順
@@ -600,7 +607,7 @@ function hachi_get_classified_items( array $args = [] ): array {
  */
 add_action( 'customize_register', function ( $wp_customize ) {
     $wp_customize->add_setting( 'hachi_note_username', [
-        'default'           => '',
+        'default'           => 'masashi_sasaki',
         'sanitize_callback' => 'sanitize_text_field',
         'capability'        => 'edit_theme_options',
     ] );
@@ -619,7 +626,7 @@ function hachi_news_meta_callback(WP_Post $post): void {
     wp_nonce_field('hachi_news_meta_save','hachi_news_meta_nonce');
     $type=get_post_meta($post->ID,'_hachi_news_type',true)?:'news';
     echo '<p><label><strong>Type</strong></label><br><select name="hachi_news_type" style="width:100%;margin-top:6px">';
-    foreach(['news'=>'NEWS','press'=>'PRESS RELEASE','media'=>'MEDIA','blog'=>'BLOG'] as $v=>$l)
+    foreach(['news'=>'NEWS','press'=>'PRESS RELEASE','media'=>'MEDIA','blog'=>'BLOG','work'=>'WORK'] as $v=>$l)
         echo '<option value="'.esc_attr($v).'"'.selected($type,$v,false).'>'.esc_html($l).'</option>';
     echo '</select></p>';
 }
@@ -627,8 +634,19 @@ add_action('save_post_hachi_news',function(int $id):void{
     if(!isset($_POST['hachi_news_meta_nonce'])||!wp_verify_nonce($_POST['hachi_news_meta_nonce'],'hachi_news_meta_save')
        ||(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)||!current_user_can('edit_post',$id)) return;
     $t=sanitize_key($_POST['hachi_news_type']??'news');
-    update_post_meta($id,'_hachi_news_type',in_array($t,['news','press','media','blog'],true)?$t:'news');
+    update_post_meta($id,'_hachi_news_type',in_array($t,['news','press','media','blog','work'],true)?$t:'news');
 });
+// REST API でメタフィールドを読み書き可能にする
+add_action('init',function(){
+    register_meta('post','_hachi_news_type',[
+        'object_subtype' => 'hachi_news',
+        'type'           => 'string',
+        'single'         => true,
+        'show_in_rest'   => true,
+        'auth_callback'  => fn()=>current_user_can('edit_posts'),
+        'sanitize_callback' => function($v){ return in_array($v,['news','press','media','blog','work'],true)?$v:'news'; },
+    ]);
+},20);
 
 add_filter('excerpt_length',fn()=>80);
 add_filter('excerpt_more',fn()=>'…');

@@ -44,3 +44,15 @@ dist/
 
 # PHP / Composer
 vendor/
+
+# Claude Code ワーキングディレクトリ（worktree メタデータ等）
+.claude/
+
+# コンテンツドラフト（本番テーマには含めない）
+content-drafts/
+
+# プレビュー / モックアップ HTML（本番テーマには含めない）
+preview/
+
+# SMTP 等の一時診断スクリプト（本番に置かない / 資格情報露出防止）
+_*_diag.php

@@ -5,7 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
-define('HACHI_VERSION',   '2.3.1');
+define('HACHI_VERSION',   '2.3.2');
 define('HACHI_THEME_DIR', get_template_directory());
 define('HACHI_THEME_URI', get_template_directory_uri());
 
@@ -61,18 +61,20 @@ add_action('after_setup_theme', 'hachi_setup');
 add_filter('show_admin_bar', '__return_false');
 
 /**
- * wp-admin 側の WP Fastest Cache toolbar.js 対策
+ * wp-admin 側の WP Fastest Cache toolbar.js 対策（Nuclear Option）
  *
  * 現象:
  *  - /wp-admin/edit.php 等で `alert("AjaxURL has NOT been defined")` が発火
  *  - toolbar.js は `typeof ajaxurl != "undefined" || typeof wpfc_ajaxurl != "undefined"` を検査
- *  - WP コア側で `ajaxurl` が宣言されるはずだが、他プラグイン/ミニファイ等で
- *    inline script が失われると undefined になりアラート発火
+ *  - `wpfc_ajaxurl` を inline で先行定義する対策（v2.3.1）は効果がなかった
+ *    → WPFC 自身のミニファイ/結合、または他プラグインが inline script を
+ *      処理する過程で定義が失われている可能性
  *
- * 対策:
- *  - `admin_print_scripts` で最優先 priority=1 に `window.wpfc_ajaxurl` を定義
- *  - これにより `ajaxurl` の状態に関係なく toolbar.js のチェックが必ず通る
- *  - キャッシュクリア機能は `wpfc_ajaxurl` をフォールバックに正常動作
+ * 対策（v2.3.2）:
+ *  - `wpfc-toolbar` スクリプトを wp-admin で完全 dequeue + deregister
+ *  - スクリプトが読み込まれない → alert 発火条件が物理的に消滅
+ *  - キャッシュクリアは WP Fastest Cache の設定画面から実行可能 → 機能損失ゼロ
+ *  - 念のため `window.wpfc_ajaxurl` の先行定義も残す（保険）
  */
 add_action('admin_print_scripts', function (): void {
     printf(
@@ -80,6 +82,11 @@ add_action('admin_print_scripts', function (): void {
         wp_json_encode( admin_url('admin-ajax.php') )
     );
 }, 1);
+
+add_action('admin_enqueue_scripts', function (): void {
+    wp_dequeue_script('wpfc-toolbar');
+    wp_deregister_script('wpfc-toolbar');
+}, 9999);
 
 function hachi_enqueue_assets(): void {
     wp_enqueue_style('hachi-fonts',

@@ -5,7 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
-define('HACHI_VERSION',   '2.3.0');
+define('HACHI_VERSION',   '2.3.1');
 define('HACHI_THEME_DIR', get_template_directory());
 define('HACHI_THEME_URI', get_template_directory_uri());
 
@@ -59,6 +59,27 @@ add_action('after_setup_theme', 'hachi_setup');
  *  - キャッシュクリア等の管理操作は `/wp-admin/` 側で可能なため機能損失ゼロ
  */
 add_filter('show_admin_bar', '__return_false');
+
+/**
+ * wp-admin 側の WP Fastest Cache toolbar.js 対策
+ *
+ * 現象:
+ *  - /wp-admin/edit.php 等で `alert("AjaxURL has NOT been defined")` が発火
+ *  - toolbar.js は `typeof ajaxurl != "undefined" || typeof wpfc_ajaxurl != "undefined"` を検査
+ *  - WP コア側で `ajaxurl` が宣言されるはずだが、他プラグイン/ミニファイ等で
+ *    inline script が失われると undefined になりアラート発火
+ *
+ * 対策:
+ *  - `admin_print_scripts` で最優先 priority=1 に `window.wpfc_ajaxurl` を定義
+ *  - これにより `ajaxurl` の状態に関係なく toolbar.js のチェックが必ず通る
+ *  - キャッシュクリア機能は `wpfc_ajaxurl` をフォールバックに正常動作
+ */
+add_action('admin_print_scripts', function (): void {
+    printf(
+        '<script>window.wpfc_ajaxurl = %s;</script>' . "\n",
+        wp_json_encode( admin_url('admin-ajax.php') )
+    );
+}, 1);
 
 function hachi_enqueue_assets(): void {
     wp_enqueue_style('hachi-fonts',

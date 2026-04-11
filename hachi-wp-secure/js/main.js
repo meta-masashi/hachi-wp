@@ -31,12 +31,12 @@ if (typeof window.hachiData === 'undefined') {
     } catch (_) { /* JSON パース失敗時はフォールバック値を使用 */ }
   }
 }
-const hachiData = window.hachiData;
+// hachiData は wp_localize_script の var 宣言を参照（const 再宣言不可のため省略）
 
 /* ============================================================
    DOM READY
    ============================================================ */
-document.addEventListener('DOMContentLoaded', () => {
+function bootAll() {
   initLoader();
   initScrollProgress();
   initNavScroll();
@@ -45,7 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initFadeObserver();
   initParallax();
   initContactForm();
-});
+}
+
+// 確実に実行: DOMContentLoaded + readyState チェック + フォールバック
+let booted = false;
+function safeBoot() {
+  if (booted) return;
+  booted = true;
+  try {
+    bootAll();
+  } catch (err) {
+    console.error('[HACHI] bootAll error:', err);
+  }
+}
+document.addEventListener('DOMContentLoaded', safeBoot);
+if (document.readyState !== 'loading') safeBoot();
 
 /* ============================================================
    PAGE LOADER
@@ -63,6 +77,8 @@ function initLoader() {
       loader.addEventListener('transitionend', () => {
         loader.style.display = 'none';
       }, { once: true });
+      // transitionend が発火しない場合のフォールバック
+      setTimeout(() => { loader.style.display = 'none'; }, 1200);
     }, delay);
   });
 }
@@ -366,7 +382,7 @@ function initContactForm() {
     data.delete('password'); // autocomplete="new-password" フィールドの保護
     data.append('action', 'hachi_contact');
     // nonce: hachiData → フォーム内 contact_nonce hidden field のフォールバック
-    const nonce = hachiData?.nonce
+    const nonce = window.hachiData?.nonce
       || form.querySelector('[name="contact_nonce"]')?.value
       || '';
     data.append('nonce', nonce);
@@ -376,7 +392,7 @@ function initContactForm() {
     const timeoutId  = setTimeout(() => controller.abort(), 20000);
 
     try {
-      const res  = await fetch(hachiData?.ajaxUrl || '/wp-admin/admin-ajax.php', {
+      const res  = await fetch(window.hachiData?.ajaxUrl || '/wp-admin/admin-ajax.php', {
         method:      'POST',
         credentials: 'same-origin',
         body:        data,
@@ -429,3 +445,4 @@ function initContactForm() {
     }
   });
 }
+

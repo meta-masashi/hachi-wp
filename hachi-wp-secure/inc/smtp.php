@@ -58,11 +58,9 @@ add_action( 'phpmailer_init', function ( $phpmailer ): void {
     $phpmailer->SMTPDebug  = defined( 'HACHI_SMTP_DEBUG' )  ? (int) HACHI_SMTP_DEBUG : 0;
     $phpmailer->CharSet    = 'UTF-8';
 
-    // From（wp_mail ヘッダーで指定されていない場合のデフォルト）
-    if ( empty( $phpmailer->From ) || $phpmailer->From === 'wordpress@' . gethostname() ) {
-        $phpmailer->From     = defined( 'HACHI_SMTP_FROM' ) ? HACHI_SMTP_FROM : HACHI_SMTP_USER;
-        $phpmailer->FromName = defined( 'HACHI_SMTP_FROM_NAME' ) ? HACHI_SMTP_FROM_NAME : 'HACHI';
-    }
+    // From を SMTP 認証ユーザーに強制（さくら SMTP は認証ユーザーと一致しないと拒否）
+    $phpmailer->From     = defined( 'HACHI_SMTP_FROM' ) ? HACHI_SMTP_FROM : HACHI_SMTP_USER;
+    $phpmailer->FromName = defined( 'HACHI_SMTP_FROM_NAME' ) ? HACHI_SMTP_FROM_NAME : 'HACHI';
 
 }, 10 );
 
@@ -82,4 +80,40 @@ add_filter( 'wp_mail_from_name', function ( string $name ): string {
         return defined( 'HACHI_SMTP_FROM_NAME' ) ? HACHI_SMTP_FROM_NAME : 'HACHI';
     }
     return $name;
+} );
+
+/**
+ * wp_mail 失敗時のエラーをキャプチャ（デバッグ用）
+ * transient に保存し、管理画面 or AJAX で確認可能
+ */
+add_action( 'wp_mail_failed', function ( $wp_error ): void {
+    if ( is_wp_error( $wp_error ) ) {
+        $error_data = [
+            'time'    => current_time( 'mysql' ),
+            'code'    => $wp_error->get_error_code(),
+            'message' => $wp_error->get_error_message(),
+            'data'    => $wp_error->get_error_data(),
+        ];
+        set_transient( 'hachi_mail_last_error', $error_data, HOUR_IN_SECONDS );
+
+        // デバッグログにも出力（WP_DEBUG_LOG が有効な場合）
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            error_log( '[HACHI SMTP] wp_mail failed: ' . $wp_error->get_error_message() );
+        }
+    }
+} );
+
+/**
+ * AJAX: 最後のメール送信エラーを取得（管理者のみ）
+ */
+add_action( 'wp_ajax_hachi_mail_debug', function (): void {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( 'Unauthorized', 403 );
+    }
+    $error = get_transient( 'hachi_mail_last_error' );
+    if ( $error ) {
+        wp_send_json_success( $error );
+    } else {
+        wp_send_json_success( [ 'message' => 'No recent mail errors.' ] );
+    }
 } );

@@ -11,7 +11,6 @@ $tabs = [
 	'news' => 'NEWS',
 	'work' => 'WORK',
 	'blog' => 'BLOG',
-	'note' => 'NOTE',
 ];
 $active = sanitize_key( $_GET['type'] ?? 'all' );
 if ( ! array_key_exists( $active, $tabs ) ) $active = 'all';

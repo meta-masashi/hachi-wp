@@ -197,9 +197,12 @@ if ( $ticker ) :
 
 		<?php
 		$works_query = new WP_Query( [
-			'post_type'      => 'hachi_work',
+			'post_type'      => 'hachi_news',
 			'posts_per_page' => 3,
 			'post_status'    => 'publish',
+			'meta_query'     => [ [ 'key' => '_hachi_news_type', 'value' => 'work' ] ],
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 		] );
 
 		if ( $works_query->have_posts() ) :
@@ -213,33 +216,10 @@ if ( $ticker ) :
 					<?php endif; ?>
 					<p class="work-card__tag">Case Study</p>
 					<h3 class="work-card__title"><?php the_title(); ?></h3>
-					<p class="work-card__client">
-						<?php echo esc_html( get_post_meta( get_the_ID(), '_hachi_work_client', true ) ); ?>
-					</p>
-					<span class="work-card__num" aria-hidden="true">0<?php echo esc_html( $i ); ?></span>
+					<span class="work-card__num" aria-hidden="true"><?php echo esc_html( str_pad( $i, 2, '0', STR_PAD_LEFT ) ); ?></span>
 				</a>
 			<?php $i++; endwhile; wp_reset_postdata(); ?>
 		</div>
-		<?php else : ?>
-			<!-- Placeholder works if no posts -->
-			<div class="works-grid js-fade js-fade--delay-1">
-				<?php
-				$placeholder_works = [
-					[ 'REBOOT-WORK導入で社員の腰痛訴えが60%減少', '某大手IT企業' ],
-					[ 'PACE v3.0でリハビリ期間が平均30%短縮', 'プロサッカークラブ' ],
-					[ 'AIアセスメントによりアスリートの怪我予防率が向上', '競技スポーツ協会' ],
-				];
-				foreach ( $placeholder_works as $idx => $work ) :
-					$num = str_pad( $idx + 1, 2, '0', STR_PAD_LEFT );
-				?>
-					<div class="work-card">
-						<p class="work-card__tag">Case Study</p>
-						<h3 class="work-card__title"><?php echo esc_html( $work[0] ); ?></h3>
-						<p class="work-card__client"><?php echo esc_html( $work[1] ); ?></p>
-						<span class="work-card__num" aria-hidden="true"><?php echo esc_html( $num ); ?></span>
-					</div>
-				<?php endforeach; ?>
-			</div>
 		<?php endif; ?>
 
 	</div>
@@ -260,21 +240,23 @@ if ( $ticker ) :
 		</div>
 
 		<?php
-		$news_query = hachi_get_recent_news( 3 );
-		if ( $news_query->have_posts() ) :
+		$items = hachi_get_classified_items( [ 'category' => 'all', 'limit' => 5 ] );
+		if ( ! empty( $items ) ) :
 		?>
 		<div style="border-top:1px solid var(--gray2)" class="js-fade js-fade--delay-1">
-			<?php while ( $news_query->have_posts() ) : $news_query->the_post();
-				$type = get_post_meta( get_the_ID(), '_hachi_news_type', true ) ?: 'news';
-				$is_blog = $type === 'blog';
+			<?php foreach ( $items as $it ) :
+				$is_external = $it['source'] === 'note';
+				$cat         = strtoupper( $it['category'] );
+				$is_blog     = $it['category'] === 'blog';
 			?>
-				<a href="<?php the_permalink(); ?>" class="post-row<?php echo $is_blog ? ' post-row--blog' : ''; ?>">
-					<span class="post-row__date"><?php echo esc_html( hachi_get_date() ); ?></span>
-					<span class="post-row__cat"><?php echo esc_html( strtoupper( $type ) ); ?></span>
-					<span class="post-row__title"><?php the_title(); ?></span>
+				<a href="<?php echo esc_url( $it['url'] ); ?>" class="post-row<?php echo $is_blog ? ' post-row--blog' : ''; ?>"
+					<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+					<span class="post-row__date"><?php echo esc_html( $it['date_str'] ); ?></span>
+					<span class="post-row__cat"><?php echo esc_html( $cat ); ?><?php if ( $is_external ) echo ' ↗'; ?></span>
+					<span class="post-row__title"><?php echo esc_html( $it['title'] ); ?></span>
 					<span class="post-row__arrow" aria-hidden="true">→</span>
 				</a>
-			<?php endwhile; wp_reset_postdata(); ?>
+			<?php endforeach; ?>
 		</div>
 		<?php else : ?>
 			<p style="color:var(--gray);padding:40px 0"><?php _e( 'ニュースはありません。', 'hachi' ); ?></p>

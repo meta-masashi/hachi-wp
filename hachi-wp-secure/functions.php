@@ -582,7 +582,10 @@ function hachi_get_classified_items( array $args = [] ): array {
             $cache_key = 'hachi_cls_' . $id . '_' . get_post_modified_time( 'U', false, $id );
             $cat = get_transient( $cache_key );
             if ( ! $cat ) {
-                $cat = hachi_classify_content( get_the_title(), (string) get_the_content() );
+                $meta_type = get_post_meta( $id, '_hachi_news_type', true );
+                $cat = $meta_type && in_array( $meta_type, [ 'work', 'news', 'blog' ], true )
+                    ? $meta_type
+                    : hachi_classify_content( get_the_title(), (string) get_the_content() );
                 set_transient( $cache_key, $cat, DAY_IN_SECONDS );
             }
             $items[] = [

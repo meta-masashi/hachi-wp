@@ -23,7 +23,7 @@ get_header();
 				<?php _e( '現場で積み上げてきた経験と、最新のテクノロジー。<br>HACHIはふたつの軸から、健康の現場に変化をもたらします。', 'hachi' ); ?>
 			</p>
 			<p class="body-copy" style="margin-top:32px;max-width:640px">
-				<?php _e( '「オフィスワーカー向けOn-site Service」と「スポーツ医療SaaS」。対象も届け方も違いますが、データと科学に基づいて人に寄り添うという姿勢は、どちらも変わりません。', 'hachi' ); ?>
+				<?php _e( '「法人向けWorkplace Assessment」と「スポーツ医療SaaS」。対象も届け方も違いますが、データと科学に基づいて人に寄り添うという姿勢は、どちらも変わりません。', 'hachi' ); ?>
 			</p>
 		</div>
 
@@ -32,9 +32,9 @@ get_header();
 			<a href="#reboot" class="service-index__item">
 				<div class="service-index__num">01</div>
 				<div class="service-index__body">
-					<p class="service-index__tag">ON-SITE SERVICE</p>
+					<p class="service-index__tag">WORKPLACE ASSESSMENT</p>
 					<h3 class="service-index__title">REBOOT-WORK</h3>
-					<p class="service-index__desc"><?php _e( 'オフィスワーカー向け / 提供中', 'hachi' ); ?></p>
+					<p class="service-index__desc"><?php _e( '法人向けアセスメントサービス / 詳細はお問い合わせ', 'hachi' ); ?></p>
 				</div>
 				<span class="service-index__arrow" aria-hidden="true">↓</span>
 			</a>
@@ -58,30 +58,30 @@ get_header();
 		<div class="service-detail-header js-fade">
 			<span class="service-detail-header__num">01</span>
 			<div>
-				<?php hachi_section_label( 'O n - s i t e   S e r v i c e' ); ?>
+				<?php hachi_section_label( 'W o r k p l a c e   A s s e s s m e n t' ); ?>
 				<h2 class="heading-en heading-en--sm" style="margin-top:8px">REBOOT-WORK</h2>
-				<p class="heading-jp" style="margin-top:12px"><?php _e( 'オフィスに、専門チームを。', 'hachi' ); ?></p>
+				<p class="heading-jp" style="margin-top:12px"><?php _e( '不調を、記録に変える。', 'hachi' ); ?></p>
 			</div>
 		</div>
 
 		<div class="grid-2 js-fade js-fade--delay-1" style="margin-top:72px">
 
 			<div class="service-photo">
-				<span class="service-photo__label">PHOTO — Reboot Work (4:5, on-site session)</span>
+				<span class="service-photo__label">PHOTO — Reboot Work (4:5)</span>
 			</div>
 
 			<div>
 				<p class="body-copy">
-					<?php _e( 'オフィス内で生じる健康課題を、医学的な評価をもとに、専門チームがご希望の場所で解決する On-site Service。腰痛・肩こり・メンタルヘルスなど、働く人の「なんとなく不調」を、継続的にケアします。', 'hachi' ); ?>
+					<?php _e( 'HACHI の判断知 OS を法人現場に届けるプロダクト。職場の身体コンディションを AT 専門知で設計されたアセスメントにより、人事・労務が扱える数値・報告データに変換します。', 'hachi' ); ?>
 				</p>
 
 				<ul class="service-feature-list" style="margin-top:40px">
 					<?php
 					$reboot_features = [
-						'医学的評価に基づいたオフィスワーカーの健康リスクアセスメント',
-						'企業ごとのカスタマイズプログラム設計と定期的な現地訪問',
-						'腰痛・肩こり・メンタルヘルスなど多岐にわたる課題への専門対応',
-						'継続的なデータ収集とフィードバックレポートの提供',
+						'AT 専門設計の評価フレームによる職場の身体状態の観察と数値化',
+						'組織ごとの観察プロトコル設計とアセスメント実施',
+						'人事・労務向けの観察データ報告書作成',
+						'継続的なデータ収集による職場の身体コンディション変化の可視化',
 					];
 					foreach ( $reboot_features as $feat ) :
 					?>
@@ -111,10 +111,10 @@ get_header();
 			<div class="service-flow">
 				<?php
 				$flow_steps = [
-					[ '01', 'ヒアリング',       '課題・目標をお聞きします。' ],
-					[ '02', 'アセスメント',     '医学的観点から現場調査と評価を実施。' ],
-					[ '03', 'プログラム設計',   '貴社専用のケアプランを策定します。' ],
-					[ '04', '継続支援',         '定期訪問とデータで効果を可視化。' ],
+					[ '01', 'ヒアリング',           '組織の状況と観察目的をお聞きします。' ],
+					[ '02', 'アセスメント設計',     'AT 専門知に基づき、組織向けの観察プロトコルを設計。' ],
+					[ '03', 'データ収集・数値化',   'アセスメントを実施し、観察データを報告に変えます。' ],
+					[ '04', 'レポート・継続観察',   '人事・労務が活用できる報告データを継続的に提供。' ],
 				];
 				foreach ( $flow_steps as $step ) :
 				?>
@@ -214,7 +214,7 @@ get_header();
 			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
 			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
 			<p class="body-copy" style="margin:28px auto 0">
-				<?php _e( 'REBOOT-WORK の導入、PACE の先行案内、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
+				<?php _e( 'REBOOT-WORK へのご関心、PACE の先行案内、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
 			</p>
 			<div class="about-cta__buttons">
 				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">

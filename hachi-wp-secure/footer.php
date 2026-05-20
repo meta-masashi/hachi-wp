@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
 			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
-			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
+			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相諄ください。', 'hachi' ); ?></p>
 			<p class="body-copy" style="margin:28px auto 0">
 				<?php _e( 'サービス導入、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
 			</p>
@@ -89,7 +89,7 @@
 			<div class="footer-social">
 				<?php
 				$social_links = [
-					'X (Twitter)' => 'https://x.com/hachi_inc',
+					'X (Twitter)' => 'https://x.com/PACEathlete',
 				];
 				foreach ( $social_links as $label => $url ) :
 					?>

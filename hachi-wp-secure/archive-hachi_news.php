@@ -57,7 +57,7 @@ $items = hachi_get_classified_items( [ 'category' => $active, 'limit' => 60 ] );
 					<a
 						href="<?php echo esc_url( $it['url'] ); ?>"
 						class="news-card news-card--<?php echo esc_attr( $cat ); ?>"
-						<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
+						<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer nofollow"' : ''; ?>
 					>
 						<div class="news-card__media">
 							<?php if ( $it['thumbnail'] ) : ?>

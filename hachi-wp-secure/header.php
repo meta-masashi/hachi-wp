@@ -29,7 +29,7 @@
 		}
 		?>
 	</div>
-	<p class="loader__tagline">beyond Wellness.</p>
+	<p class="loader__tagline">Condition Insight.</p>
 	<div class="loader__bar" aria-hidden="true"></div>
 </div>
 

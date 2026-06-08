@@ -2,6 +2,7 @@
 /**
  * HACHI Theme — front-page.php
  * Template for the site front page
+ * Updated: 2026-06-08 corp-refresh — copy aligned to コンディション・インサイト / compliance fixes
  */
 
 get_header();
@@ -16,28 +17,25 @@ get_header();
 	<div class="container">
 		<div class="hero__content">
 
-			<p class="hero__eyebrow">beyond Wellness</p>
+			<p class="hero__eyebrow">Condition Insight</p>
 
-			<div class="hero__headline-line">
-				<span>BEYOND</span>
-			</div>
-			<div class="hero__headline-line">
-				<span>THE BODY.</span>
-			</div>
+			<h1 class="hero__headline">
+				変化のサインを、<br>見逃さない。
+			</h1>
 
 			<p class="hero__subheading">
-				<span><?php _e( '身体の、その先へ。', 'hachi' ); ?></span>
+				<span><?php _e( '人は突然、不調になるのではありません。', 'hachi' ); ?></span>
 			</p>
 			<p class="hero__lede" style="font-size:15px;line-height:2;color:#6e6e73;max-width:460px;margin-top:24px">
-				<?php _e( 'スポーツ医療とウェルネスの現場に、<br>テクノロジーで革新をもたらす。', 'hachi' ); ?>
+				<?php _e( '疲れや集中の変化は、じわじわと積み重なります。<br>コンディション・インサイトは、そのサインを組織として早めにつかみ、<br>本人と管理職が動けるきっかけをつくります。', 'hachi' ); ?>
 			</p>
 
 			<div class="hero__cta">
-				<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="btn">
-					<?php _e( 'Service', 'hachi' ); ?>
+				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
+					<?php _e( 'サービス資料を請求する', 'hachi' ); ?>
 					<?php hachi_arrow_icon(); ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn btn--teal">
+				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn">
 					<?php _e( 'About HACHI', 'hachi' ); ?>
 					<?php hachi_arrow_icon(); ?>
 				</a>
@@ -91,7 +89,7 @@ if ( $ticker ) :
 					}
 					?>
 				</div>
-				<div class="about-image__tag">SaaS &times; Agency</div>
+				<div class="about-image__tag">On-site Service</div>
 			</div>
 
 			<!-- Text -->
@@ -99,10 +97,10 @@ if ( $ticker ) :
 				<?php hachi_section_label( 'A b o u t' ); ?>
 				<h2 class="heading-en heading-en--sm">ABOUT</h2>
 				<p class="heading-jp">
-					<?php _e( '私たちはスポーツ医療と<br>ウェルネスに挑む、テクノロジー企業です。', 'hachi' ); ?>
+					<?php _e( '身体の状態を観察し、<br>組織に見える形にする。', 'hachi' ); ?>
 				</p>
 				<p class="body-copy" style="margin-top:28px">
-					<?php _e( '煩雑な評価作業や不確実な意思決定をテクノロジーに委ねることで、医療・トレーニングスタッフは「目の前のアスリート」にひたむきに向き合える。HACHIはOn-site ServiceとSaaSプロダクトの両軸で、健康の現場に革新をもたらします。', 'hachi' ); ?>
+					<?php _e( '20〜100名規模の会社では、専任の産業保健スタッフを置けないケースがほとんどです。本人も言い出せない、管理職も気づけない——その構造が、気づきを遅らせています。HACHIは、社員の状態を組織として把握できる仕組みをつくります。', 'hachi' ); ?>
 				</p>
 				<div style="margin-top:40px">
 					<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn btn--teal">
@@ -122,30 +120,18 @@ if ( $ticker ) :
 		<div class="js-fade">
 			<?php hachi_section_label( 'S e r v i c e s' ); ?>
 			<h2 class="heading-en">SERVICES</h2>
-			<p class="heading-jp"><?php _e( 'リアルとデジタル、2つの現場で挑む。', 'hachi' ); ?></p>
+			<p class="heading-jp"><?php _e( '状態を見える形にする。', 'hachi' ); ?></p>
 		</div>
 
 		<div class="service-list js-fade js-fade--delay-1">
 
-			<a href="<?php echo esc_url( home_url( '/service/#reboot' ) ); ?>" class="service-item">
+			<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="service-item">
 				<span class="service-item__num">01</span>
 				<div class="service-item__body">
 					<p class="service-item__tag">ON-SITE SERVICE</p>
-					<h3 class="service-item__title">REBOOT-WORK</h3>
+					<h3 class="service-item__title">コンディション・インサイト</h3>
 					<p class="service-item__desc">
-						<?php _e( 'オフィス内で生じる健康課題を医学的評価をもとに、専門チームがご希望の場所で課題解決のためのサービス提供を行います。', 'hachi' ); ?>
-					</p>
-				</div>
-				<span class="service-item__arrow" aria-hidden="true">↗</span>
-			</a>
-
-			<a href="<?php echo esc_url( home_url( '/service/#pace' ) ); ?>" class="service-item">
-				<span class="service-item__num">02</span>
-				<div class="service-item__body">
-					<p class="service-item__tag">SPORTS AI-SaaS</p>
-					<h3 class="service-item__title">PACE v3.0</h3>
-					<p class="service-item__desc">
-						<?php _e( '因果推論AIとデジタルツインで、スポーツ医療チームの意思決定を革新するプラットフォーム。', 'hachi' ); ?>
+						<?php _e( '社員の状態変化のサインを、組織として早めにつかむ。10分チェックと現場コンディショニング指導で、気づきのしくみをつくります。', 'hachi' ); ?>
 					</p>
 				</div>
 				<span class="service-item__arrow" aria-hidden="true">↗</span>
@@ -158,7 +144,7 @@ if ( $ticker ) :
 <!-- ===== CULTURE PARALLAX BAND ===== -->
 <div class="culture-band" id="culture">
 	<div class="culture-band__bg" data-parallax="0.14">
-		<div class="culture-band__bg-text" aria-hidden="true">WELLNESS</div>
+		<div class="culture-band__bg-text" aria-hidden="true">HACHI</div>
 	</div>
 	<div class="culture-band__content">
 		<div class="container">
@@ -169,7 +155,7 @@ if ( $ticker ) :
 					<?php _e( '永遠にβ版の、企業文化。', 'hachi' ); ?>
 				</p>
 				<p class="body-copy body-copy--white" style="margin-top:24px;max-width:460px">
-					<?php _e( 'HACHIはチームで挑むことを大切にしています。「目の前の人の健康にこだわり、テクノロジーで創意工夫し続けるチーム」であるために、永遠にβ版の組織づくりを行っています。', 'hachi' ); ?>
+					<?php _e( 'HACHIはチームで挑むことを大切にしています。「目の前の人の状態にこだわり、観察と構造化で創意工夫し続けるチーム」であるために、永遠にβ版の組織づくりを行っています。', 'hachi' ); ?>
 				</p>
 				<div style="margin-top:40px">
 					<a href="<?php echo esc_url( home_url( '/about/#culture' ) ); ?>" class="btn btn--white">
@@ -250,7 +236,7 @@ if ( $ticker ) :
 				$is_blog     = $it['category'] === 'blog';
 			?>
 				<a href="<?php echo esc_url( $it['url'] ); ?>" class="post-row<?php echo $is_blog ? ' post-row--blog' : ''; ?>"
-					<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+					<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer nofollow"' : ''; ?>>
 					<span class="post-row__date"><?php echo esc_html( $it['date_str'] ); ?></span>
 					<span class="post-row__cat"><?php echo esc_html( $cat ); ?><?php if ( $is_external ) echo ' ↗'; ?></span>
 					<span class="post-row__title"><?php echo esc_html( $it['title'] ); ?></span>

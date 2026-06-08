@@ -2,6 +2,7 @@
 /**
  * HACHI Theme — About page (Light Monochrome v2)
  * Auto-applied to page with slug "about" via WP template hierarchy
+ * Updated: 2026-06-08 corp-refresh — PACE/SaaS/アスリート表現除去 / 現ポジション整合
  */
 get_header();
 ?>
@@ -24,7 +25,7 @@ get_header();
 				<?php _e( 'テクノロジーで、<br>人と人の「向き合う時間」を取り戻す。', 'hachi' ); ?>
 			</p>
 			<p class="about-mission__body">
-				<?php _e( '煩雑な評価作業や不確実な意思決定をテクノロジーに委ねることで、医療・トレーニングスタッフは「目の前のアスリート」にひたむきに向き合える。HACHIはOn-site ServiceとSaaSプロダクトの両軸で、健康の現場に革新をもたらします。', 'hachi' ); ?>
+				<?php _e( '状態の観察と構造化をテクノロジーに委ねることで、管理職や経営者は「目の前の社員」に向き合える時間を取り戻せる。HACHIは現場の実証を積み重ねながら、身体の状態を再現可能な判断知へ変換する基盤をつくります。', 'hachi' ); ?>
 			</p>
 		</div>
 	</div>
@@ -48,7 +49,7 @@ get_header();
 
 			<div class="js-fade js-fade--delay-1">
 				<div class="about-vision-image">
-					<span class="about-vision-image__label">PHOTO — Vision (4:5, 85mm, athlete in motion)</span>
+					<span class="about-vision-image__label">PHOTO — Vision (4:5, 85mm)</span>
 				</div>
 			</div>
 
@@ -72,7 +73,7 @@ get_header();
 		<div class="values-grid js-fade js-fade--delay-1">
 			<?php
 			$values = [
-				[ '一', '真実', 'Truth',     'データと科学に基づいた誠実なケアで、確かな答えを届ける。' ],
+				[ '一', '真実', 'Truth',     'データと科学に基づいた誠実な観察で、確かな判断を届ける。' ],
 				[ '二', '至誠', 'Sincerity', '目の前の一人ひとりに、心から向き合い続ける。' ],
 				[ '三', '感謝', 'Gratitude', 'すべての出会いと機会に感謝し、共に成長する。' ],
 			];
@@ -99,16 +100,16 @@ get_header();
 			<h2 class="heading-en heading-en--sm">OUR STORY</h2>
 			<p class="heading-jp"><?php _e( '現場の確信から、テクノロジーへ。', 'hachi' ); ?></p>
 			<p class="body-copy" style="margin-top:24px">
-				<?php _e( 'スポーツ医療の最前線で積み重ねた経験と、「もっと良くできる」という確信から HACHI は生まれました。', 'hachi' ); ?>
+				<?php _e( '専門家の暗黙知は、観察と構造化によって再現可能な判断知に変わる——その確信から HACHI は生まれました。', 'hachi' ); ?>
 			</p>
 		</div>
 
 		<div class="timeline js-fade js-fade--delay-1">
 			<?php
 			$milestones = [
-				[ '2022',   '03',   '株式会社HACHI 設立',        '吉祥寺本町を拠点に、スポーツ医療 × テクノロジーの実証を開始。' ],
-				[ '2023',   '06',   'REBOOT-WORK リリース',      'オフィスワーカー向け On-site Service を展開。初期導入企業と共創。' ],
-				[ 'COMING', 'SOON', 'PACE ローンチ（準備中）',   '因果推論AIとデジタルツインを統合したアスリートケアプラットフォームを、プロクラブ・協会向けに提供予定。' ],
+				[ '2022', '03', '株式会社HACHI 設立',   '吉祥寺本町を拠点に、身体専門知の構造化とテクノロジー実証を開始。' ],
+				[ '2023', '—',  'HACHI Fieldwork リリース', 'オフィスワーカー向け On-site Service を展開。初期導入企業と共創。' ],
+				[ '2024', '—',  'コンディション・インサイト 開発',  '社員の状態変化を組織として把握するしくみを設計・実証。' ],
 			];
 			foreach ( $milestones as $i => $m ) :
 			?>
@@ -157,11 +158,11 @@ get_header();
 				<em class="ceo-section__quote-en">CEO MESSAGE</em>
 			</h2>
 			<p class="body-copy body-copy--white">
-				<?php _e( 'スポーツ医療の現場で長年積み重ねた経験から確信したことがある。テクノロジーは、人と人の間にある「温かさ」を消すためにあるのではない。むしろ、煩雑な作業や曖昧な判断をテクノロジーが担うことで、人はより深く、目の前の人と向き合えるようになる。', 'hachi' ); ?>
+				<?php _e( '現場で長年積み重ねた経験から確信したことがある。テクノロジーは、人と人の間にある「温かさ」を消すためにあるのではない。むしろ、煩雑な作業や曖昧な判断をテクノロジーが担うことで、人はより深く、目の前の人と向き合えるようになる。', 'hachi' ); ?>
 			</p>
 			<br>
 			<p class="body-copy body-copy--white">
-				<?php _e( 'データ活用、AI、ウェアラブル——最新のテクノロジーを最大限に活かしながら、私たちは「人」を中心に置くことを決して忘れない。それがHACHIの原点です。', 'hachi' ); ?>
+				<?php _e( 'データ活用、AI、観察の構造化——最新のテクノロジーを最大限に活かしながら、私たちは「人」を中心に置くことを決して忘れない。それがHACHIの原点です。', 'hachi' ); ?>
 			</p>
 		</div>
 	</div>

@@ -2,6 +2,7 @@
 /**
  * HACHI Theme — Service page (Light Monochrome v2)
  * Auto-applied to page with slug "service"
+ * Updated: 2026-06-08 corp-refresh — コンディション・インサイト一本化 / PACE section removed
  */
 get_header();
 ?>
@@ -11,7 +12,7 @@ get_header();
 	<div class="container">
 		<div class="js-fade"><?php hachi_section_label( 'S e r v i c e' ); ?></div>
 		<h1 class="heading-en js-fade js-fade--delay-1">SERVICE</h1>
-		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( 'リアルとデジタル、2つの現場で挑む。', 'hachi' ); ?></p>
+		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( '状態を見える形にする。', 'hachi' ); ?></p>
 	</div>
 </div>
 
@@ -20,10 +21,10 @@ get_header();
 	<div class="container">
 		<div class="js-fade" style="max-width:820px">
 			<p class="service-intro__lead">
-				<?php _e( '現場で積み上げてきた経験と、最新のテクノロジー。<br>HACHIはふたつの軸から、健康の現場に変化をもたらします。', 'hachi' ); ?>
+				<?php _e( '人は突然、不調になるのではありません。<br>疲れや集中の変化は、じわじわと積み重なります。', 'hachi' ); ?>
 			</p>
 			<p class="body-copy" style="margin-top:32px;max-width:640px">
-				<?php _e( '「法人向けWorkplace Assessment」と「スポーツ医療SaaS」。対象も届け方も違いますが、データと科学に基づいて人に寄り添うという姿勢は、どちらも変わりません。', 'hachi' ); ?>
+				<?php _e( '20〜100名規模の会社では、専任の産業保健スタッフを置けないケースがほとんどです。本人も言い出せない、管理職も気づけない——その構造が、気づきを遅らせています。コンディション・インサイトは、そのサインを組織として早めにつかむしくみです。', 'hachi' ); ?>
 			</p>
 		</div>
 
@@ -32,18 +33,9 @@ get_header();
 			<a href="#reboot" class="service-index__item">
 				<div class="service-index__num">01</div>
 				<div class="service-index__body">
-					<p class="service-index__tag">WORKPLACE ASSESSMENT</p>
-					<h3 class="service-index__title">REBOOT-WORK</h3>
-					<p class="service-index__desc"><?php _e( '法人向けアセスメントサービス / 詳細はお問い合わせ', 'hachi' ); ?></p>
-				</div>
-				<span class="service-index__arrow" aria-hidden="true">↓</span>
-			</a>
-			<a href="#pace" class="service-index__item">
-				<div class="service-index__num">02</div>
-				<div class="service-index__body">
-					<p class="service-index__tag">SPORTS AI-SaaS</p>
-					<h3 class="service-index__title">PACE</h3>
-					<p class="service-index__desc service-index__desc--accent"><?php _e( 'スポーツ医療チーム向け / 準備中', 'hachi' ); ?></p>
+					<p class="service-index__tag">ON-SITE SERVICE</p>
+					<h3 class="service-index__title">コンディション・インサイト</h3>
+					<p class="service-index__desc"><?php _e( '20〜100名中小企業向け / 提供中', 'hachi' ); ?></p>
 				</div>
 				<span class="service-index__arrow" aria-hidden="true">↓</span>
 			</a>
@@ -51,50 +43,57 @@ get_header();
 	</div>
 </section>
 
-<!-- ===== 01: REBOOT-WORK ===== -->
+<!-- ===== 01: コンディション・インサイト ===== -->
 <section class="section--light" id="reboot">
 	<div class="container">
 
 		<div class="service-detail-header js-fade">
 			<span class="service-detail-header__num">01</span>
 			<div>
-				<?php hachi_section_label( 'W o r k p l a c e   A s s e s s m e n t' ); ?>
-				<h2 class="heading-en heading-en--sm" style="margin-top:8px">REBOOT-WORK</h2>
-				<p class="heading-jp" style="margin-top:12px"><?php _e( '不調を、記録に変える。', 'hachi' ); ?></p>
+				<?php hachi_section_label( 'O n - s i t e   S e r v i c e' ); ?>
+				<h2 class="heading-en heading-en--sm" style="margin-top:8px">コンディション・インサイト</h2>
+				<p class="heading-jp" style="margin-top:12px"><?php _e( '社員の状態変化のサインを、組織として早めにつかむ。', 'hachi' ); ?></p>
 			</div>
 		</div>
 
 		<div class="grid-2 js-fade js-fade--delay-1" style="margin-top:72px">
 
 			<div class="service-photo">
-				<span class="service-photo__label">PHOTO — Reboot Work (4:5)</span>
+				<span class="service-photo__label">PHOTO — On-site conditioning session</span>
 			</div>
 
 			<div>
 				<p class="body-copy">
-					<?php _e( 'HACHI の判断知 OS を法人現場に届けるプロダクト。職場の身体コンディションを AT 専門知で設計されたアセスメントにより、人事・労務が扱える数値・報告データに変換します。', 'hachi' ); ?>
+					<?php _e( '社員が10分以内で答える短いチェックをもとに、現在の身体・睡眠・集中・疲労の傾向を整理します。組織全体の状態傾向を経営者・管理職が把握しやすい形でまとめ、希望する企業には現場コンディショニング指導を提供します。', 'hachi' ); ?>
 				</p>
 
-				<ul class="service-feature-list" style="margin-top:40px">
-					<?php
-					$reboot_features = [
-						'AT 専門設計の評価フレームによる職場の身体状態の観察と数値化',
-						'組織ごとの観察プロトコル設計とアセスメント実施',
-						'人事・労務向けの観察データ報告書作成',
-						'継続的なデータ収集による職場の身体コンディション変化の可視化',
-					];
-					foreach ( $reboot_features as $feat ) :
-					?>
-						<li>
-							<span class="service-feature-list__dot" aria-hidden="true"></span>
-							<?php echo esc_html( $feat ); ?>
-						</li>
-					<?php endforeach; ?>
-				</ul>
+				<!-- Section 2: 課題 -->
+				<div style="margin-top:48px">
+					<h3 style="font-size:17px;font-weight:600;margin-bottom:16px"><?php _e( '見えないと、気づきにくい。', 'hachi' ); ?></h3>
+					<p class="body-copy">
+						<?php _e( '「最近ちょっとしんどくて…」と言えずに出社を続けている社員がいます。管理職は「元気そうに見える」と思ったまま、3か月後に休職の連絡を受けた、というケースがあります。', 'hachi' ); ?>
+					</p>
+					<ul class="service-feature-list" style="margin-top:24px">
+						<?php
+						$reboot_scenes = [
+							'「最近元気がないな」で終わっていた',
+							'産業医の面談日まで待ったら、すでに限界だった',
+							'欠勤が続いてから、初めて状態を知った',
+							'健康経営施策を導入したが、誰も使っていない',
+						];
+						foreach ( $reboot_scenes as $scene ) :
+						?>
+							<li>
+								<span class="service-feature-list__dot" aria-hidden="true"></span>
+								<?php echo esc_html( $scene ); ?>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
 
 				<div style="margin-top:48px">
 					<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
-						<?php _e( '資料請求・お問い合わせ', 'hachi' ); ?>
+						<?php _e( 'サービス資料を請求する', 'hachi' ); ?>
 						<?php hachi_arrow_icon(); ?>
 					</a>
 				</div>
@@ -111,10 +110,10 @@ get_header();
 			<div class="service-flow">
 				<?php
 				$flow_steps = [
-					[ '01', 'ヒアリング',           '組織の状況と観察目的をお聞きします。' ],
-					[ '02', 'アセスメント設計',     'AT 専門知に基づき、組織向けの観察プロトコルを設計。' ],
-					[ '03', 'データ収集・数値化',   'アセスメントを実施し、観察データを報告に変えます。' ],
-					[ '04', 'レポート・継続観察',   '人事・労務が活用できる報告データを継続的に提供。' ],
+					[ '01', '状態の可視化',     '社員が10分以内で答える短いチェックをもとに、身体・睡眠・集中・疲労の傾向を整理します。参加者本人の事前同意を取得のうえ実施します。' ],
+					[ '02', '背景の仮説整理',   '個別の回答をそのまま伝えるのではなく、組織全体の傾向として整理します。経営者・管理職が把握しやすい形でまとめます。' ],
+					[ '03', 'コンディショニング介入', 'ご希望の企業には、アスレティックトレーナー(AT)または運動指導資格を持つスタッフが現場に入ります。状態に合ったストレッチ・コンディショニング指導とセルフケアの方法をお伝えします。' ],
+					[ '04', '変化の確認',       '一定期間後に再評価を行い、傾向の推移を確認します。組織の傾向の変化を経営者向け状態傾向レポートでお届けします。' ],
 				];
 				foreach ( $flow_steps as $step ) :
 				?>
@@ -130,78 +129,124 @@ get_header();
 	</div>
 </section>
 
-<!-- ===== 02: PACE (COMING SOON — strategic dark block) ===== -->
-<section class="pace-section" id="pace">
+<!-- ===== 提供範囲・成果物 ===== -->
+<section class="section" id="deliverables">
 	<div class="container">
 
-		<div class="pace-coming js-fade">
-			<?php hachi_section_label( '0 2   S p o r t s   A I - S a a S', 'label--white' ); ?>
-			<div class="pace-coming__tag-wrap">
-				<span class="pace-coming__tag">COMING SOON</span>
+		<div class="grid-2 js-fade" style="margin-top:0">
+
+			<!-- 提供範囲 -->
+			<div>
+				<?php hachi_section_label( 'P r o v i d e d' ); ?>
+				<h3 class="heading-en heading-en--xs" style="margin-top:12px"><?php _e( '提供範囲', 'hachi' ); ?></h3>
+				<ul class="service-feature-list" style="margin-top:24px">
+					<?php
+					$features = [
+						'全社員向け状態評価（チェック実施）',
+						'組織全体の傾向分析',
+						'コンディショニングセミナー',
+						'セルフケア指導',
+						'再評価（フォローアップ）',
+						'状態傾向レポート（経営者向け・本人向け）',
+					];
+					foreach ( $features as $f ) :
+					?>
+						<li>
+							<span class="service-feature-list__dot" aria-hidden="true"></span>
+							<?php echo esc_html( $f ); ?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
 			</div>
-			<h2 class="pace-coming__title">PACE<span class="pace-coming__version">by HACHI</span></h2>
-			<p class="pace-coming__subtitle"><?php _e( 'Progressive Assessment &amp; Conditioning Engine', 'hachi' ); ?></p>
-			<p class="pace-coming__lead">
-				<?php _e( '因果推論AIとデジタルツインを活用し、アスレティックトレーナー・理学療法士の意思決定を支援する、スポーツ医療プラットフォーム。論文エビデンスに基づく推論で、チームの健康を守ります。', 'hachi' ); ?>
+
+			<!-- 届けるレポート -->
+			<div>
+				<?php hachi_section_label( 'D e l i v e r a b l e s' ); ?>
+				<h3 class="heading-en heading-en--xs" style="margin-top:12px"><?php _e( '届けるレポート、2種類。', 'hachi' ); ?></h3>
+				<div style="margin-top:24px">
+					<p style="font-weight:600;margin-bottom:8px"><?php _e( '組織コンディションレポート（経営者・管理職向け）', 'hachi' ); ?></p>
+					<ul class="service-feature-list">
+						<?php
+						$org_report = [
+							'組織全体の状態傾向（睡眠・疲労・集中など）',
+							'注意が必要な傾向の概要',
+							'ご提案事項（セミナー実施・フォローアップ等）',
+						];
+						foreach ( $org_report as $r ) :
+						?>
+							<li><span class="service-feature-list__dot" aria-hidden="true"></span><?php echo esc_html( $r ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<p style="font-size:13px;color:var(--gray);margin-top:8px"><?php _e( '個人を特定する情報は含まれません。', 'hachi' ); ?></p>
+				</div>
+				<div style="margin-top:32px">
+					<p style="font-weight:600;margin-bottom:8px"><?php _e( '個人状態レポート（社員本人向け）', 'hachi' ); ?></p>
+					<ul class="service-feature-list">
+						<?php
+						$personal_report = [
+							'自分自身の現在の状態整理',
+							'セルフケアの提案（ストレッチ・生活習慣の調整等）',
+						];
+						foreach ( $personal_report as $r ) :
+						?>
+							<li><span class="service-feature-list__dot" aria-hidden="true"></span><?php echo esc_html( $r ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<p style="font-size:13px;color:var(--gray);margin-top:8px"><?php _e( '本人にのみ届きます。個人を特定できる情報は、導入企業を含む第三者には提供しません。', 'hachi' ); ?></p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</section>
+
+<!-- ===== やらないことを、明示。===== -->
+<section class="section--light" id="scope">
+	<div class="container">
+
+		<div class="js-fade" style="max-width:820px;margin-bottom:56px">
+			<?php hachi_section_label( 'S c o p e' ); ?>
+			<h2 class="heading-en heading-en--sm" style="margin-top:8px"><?php _e( 'やらないことを、明示。', 'hachi' ); ?></h2>
+			<p class="body-copy" style="margin-top:20px">
+				<?php _e( 'コンディション・インサイトが提供するのは「状態の可視化」と「コンディショニング指導」です。以下は提供の対象外です。', 'hachi' ); ?>
 			</p>
 		</div>
 
-		<!-- PACE Features -->
-		<div class="pace-features js-fade js-fade--delay-1">
+		<div class="values-grid js-fade js-fade--delay-1">
 			<?php
-			$pace_core = [
-				[ '01', "「なぜそう判断したか」が\nわかるAI",              '医学論文のエビデンスをもとに計算するAIなので、なぜそのリスク判定になったかをスタッフが確認・説明できます。' ],
-				[ '02', "毎朝、今日対応が\n必要な選手を自動通知",          '前日までのデータをもとに、コンディションが下がっている選手・今日のメニューを調整すべき選手を自動でリストアップ。' ],
-				[ '03', "「もし〇〇したら？」を\n試してから決断",          '練習強度や復帰スケジュールの仮定シナリオをシステム上で試し、リスクを数値で確認してから判断できます。' ],
-				[ '04', "選手はスマホで\n毎日体調を報告",                  '選手はアプリから痛みや疲労度を入力するだけ。スタッフにリアルタイムで届き、今日のメニュー確認もアプリで完結。' ],
-				[ '05', "「いつ復帰できるか」を\nステップで管理",          '怪我の回復段階をステップで管理し、基準をクリアしたかを自動チェック。担当スタッフが安全に復帰判断を下せます。' ],
-				[ '06', "役割ごとの\n情報アクセス管理",                    '医師・トレーナー・S&Cコーチ・選手それぞれが必要な情報だけを見られる権限設定。データは他クラブと完全分離。' ],
+			$scopes = [
+				[
+					'医療診断・疾病判定は行いません。',
+					'チェックの結果は、医学的な診断や疾患の判定ではありません。疾患が疑われる場合は、医療機関への受診をお勧めします。',
+				],
+				[
+					'精神医学的な評価・メンタルヘルス疾患の判定も行いません。',
+					'専門的な判断が必要と感じる場合は、産業医や医療機関へのご相談を推奨します。',
+				],
+				[
+					'個人の情報を会社に渡しません。',
+					'個人を特定できる情報は、導入企業を含む第三者には提供しません。会社に届くのは、組織全体の傾向をまとめたレポートのみです。',
+				],
+				[
+					'人事査定・離職予測には使いません。',
+					'チェック結果を人事評価や査定に用いることはありません。特定の社員の離職・休職を予測・判定するものではありません。導入企業との契約においても同様の制約を設けています。',
+				],
 			];
-			foreach ( $pace_core as $feat ) :
+			foreach ( $scopes as $s ) :
 			?>
-				<div class="pace-feature">
-					<div class="pace-feature__num"><?php echo esc_html( $feat[0] ); ?></div>
-					<h3 class="pace-feature__title"><?php echo nl2br( esc_html( $feat[1] ) ); ?></h3>
-					<p class="pace-feature__desc"><?php echo esc_html( $feat[2] ); ?></p>
+				<div class="value-card">
+					<h3 class="value-card__name" style="font-size:15px;line-height:1.5"><?php echo esc_html( $s[0] ); ?></h3>
+					<p class="value-card__desc" style="margin-top:12px"><?php echo esc_html( $s[1] ); ?></p>
 				</div>
 			<?php endforeach; ?>
 		</div>
 
-		<!-- Target Users -->
-		<div class="pace-users js-fade js-fade--delay-2">
-			<p class="pace-users__label"><?php _e( 'TARGET USERS', 'hachi' ); ?></p>
-			<div class="pace-users__grid">
-				<?php
-				$roles = [
-					[ 'Master',  '医師・医療責任者',                      '全機能アクセス・Hard Lock制御' ],
-					[ 'AT / PT', 'アスレティックトレーナー / 理学療法士', 'アセスメント・リハビリ管理' ],
-					[ 'S & C',   'S&Cコーチ',                             'チームメニュー生成・配信' ],
-					[ 'Athlete', '選手',                                  'モバイルアプリでチェックイン' ],
-				];
-				foreach ( $roles as $role ) :
-				?>
-					<div class="pace-user">
-						<div class="pace-user__tag"><?php echo esc_html( $role[0] ); ?></div>
-						<div class="pace-user__name"><?php echo esc_html( $role[1] ); ?></div>
-						<div class="pace-user__desc"><?php echo esc_html( $role[2] ); ?></div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-
-		<!-- Waitlist CTA -->
-		<div class="pace-waitlist js-fade js-fade--delay-2">
-			<p class="pace-waitlist__label"><?php _e( 'LAUNCH IS COMING', 'hachi' ); ?></p>
-			<h3 class="pace-waitlist__title"><?php _e( '先行案内リストを受付中', 'hachi' ); ?></h3>
-			<p class="pace-waitlist__desc">
-				<?php _e( 'PACE は現在、プロクラブ・競技団体との協業で実装を進めています。導入にご興味のあるチームの方は、先行案内リストへご登録ください。正式リリース時に優先でご案内いたします。', 'hachi' ); ?>
+		<!-- AT民間資格注記 -->
+		<div class="js-fade js-fade--delay-2" style="margin-top:56px;padding:24px;background:var(--white);border:1px solid var(--gray2);border-radius:4px;max-width:820px">
+			<p class="body-copy" style="font-size:13px;color:var(--gray)">
+				<?php _e( '【担当スタッフについて】現場に入るアスレティックトレーナー（AT）は民間資格です。医療行為（診察・診断・薬の処方・マッサージ等の施術）は行いません。業務範囲はストレッチ指導・コンディショニング指導・身体の状態をうかがい、声がけ・記録を行うことに限ります。', 'hachi' ); ?>
 			</p>
-			<div class="pace-waitlist__buttons">
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--white">
-					<?php _e( '先行案内リストに登録', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-			</div>
 		</div>
 
 	</div>
@@ -214,7 +259,7 @@ get_header();
 			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
 			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
 			<p class="body-copy" style="margin:28px auto 0">
-				<?php _e( 'REBOOT-WORK へのご関心、PACE の先行案内、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
+				<?php _e( 'コンディション・インサイトのご相談、資料請求はメールまたはこちらのフォームから。', 'hachi' ); ?>
 			</p>
 			<div class="about-cta__buttons">
 				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">

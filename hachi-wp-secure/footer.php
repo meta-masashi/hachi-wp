@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
 			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
-			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相諄ください。', 'hachi' ); ?></p>
+			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
 			<p class="body-copy" style="margin:28px auto 0">
 				<?php _e( 'サービス導入、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
 			</p>
@@ -59,8 +59,7 @@
 
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Service</p>
-				<a href="<?php echo esc_url( home_url( '/service/#reboot' ) ); ?>" class="footer-nav__link">REBOOT-WORK</a>
-				<a href="<?php echo esc_url( home_url( '/service/#pace' ) ); ?>" class="footer-nav__link">PACE v3.0</a>
+				<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="footer-nav__link">コンディション・インサイト</a>
 			</div>
 
 			<div class="footer-nav__col">
@@ -75,6 +74,11 @@
 			</div>
 
 		</nav>
+
+		<!-- AT民間資格 最小注記 -->
+		<p style="font-size:11px;color:var(--gray);margin:16px 0 0;line-height:1.8">
+			<?php _e( 'アスレティックトレーナー（AT）は民間資格です。医療行為は行いません。', 'hachi' ); ?>
+		</p>
 
 		<!-- Footer bottom bar -->
 		<div class="footer-bottom">

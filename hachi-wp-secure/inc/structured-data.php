@@ -85,8 +85,8 @@ function hachi_schema_organization(): array {
             'height' => 80,
         ],
         'image'         => $base . '/wp-content/themes/hachi-wp-secure/assets/og-image.png',
-        'description'   => '株式会社HACHIは、スポーツ医療とウェルネスの現場にテクノロジーで革新をもたらす企業です。オフィスワーカー向けOn-site Service「REBOOT-WORK」を提供し、スポーツ医療AI-SaaS「PACE」を開発しています。',
-        'slogan'        => 'beyond the Body. / 身体の、その先へ。',
+        'description'   => '株式会社HACHIは、社員のコンディション（状態）の変化を組織で見える形にする会社です。コンディション・インサイト（状態の可視化）と HACHI Fieldwork（現場でのコンディショニング）を提供しています。',
+        'slogan'        => '変化のサインを、見逃さない。',
         'foundingDate'  => '2022-03-25',
         'founder'       => [
             '@type' => 'Person',
@@ -105,14 +105,10 @@ function hachi_schema_organization(): array {
             [ '@type' => 'Country', 'name' => '日本' ],
         ],
         'knowsAbout'    => [
-            'スポーツ医療',
-            'アスリートケア',
-            '因果推論AI',
-            'デジタルツイン',
-            'オフィスワーカー健康管理',
-            '健康経営',
-            'ウェルネステクノロジー',
-            'リハビリテーション',
+            '社員コンディションの可視化',
+            '状態の観察と記録',
+            'コンディショニング',
+            '組織の判断支援',
         ],
         'sameAs'        => [
             'https://x.com/hachi_inc',
@@ -140,7 +136,7 @@ function hachi_schema_website(): array {
         'url'             => $base . '/',
         'name'            => 'HACHI',
         'alternateName'   => '株式会社HACHI',
-        'description'     => 'スポーツ医療とウェルネスの現場にテクノロジーで革新をもたらす、HACHIの公式サイト。',
+        'description'     => '社員のコンディションの変化を、組織で見える形にする。HACHIの公式サイト。',
         'inLanguage'      => 'ja-JP',
         'publisher'       => [ '@id' => $base . '/#organization' ],
         'potentialAction' => [
@@ -221,42 +217,39 @@ function hachi_schema_webpage(): array {
 function hachi_schema_services(): array {
     $base = hachi_site_base_url();
 
-    $reboot = [
+    $insight = [
         '@context'    => 'https://schema.org',
         '@type'       => 'Service',
-        '@id'         => $base . '/service/#reboot-work',
-        'name'        => 'REBOOT-WORK',
-        'serviceType' => 'On-site Wellness Service',
-        'description' => 'オフィス内で生じる健康課題を医学的評価をもとに、専門チームがご希望の場所で課題解決のためのサービスを提供するOn-site Service。腰痛・肩こり・メンタルヘルスなど、働く人の不調を継続的にケアします。',
+        '@id'         => $base . '/service/#condition-insight',
+        'name'        => 'コンディション・インサイト',
+        'serviceType' => '組織コンディション可視化サービス',
+        'description' => '社員の状態（疲労・睡眠・集中・身体の状態）の変化を、本人の同意のもとで把握し、組織で見える形に整えるアセスメントサービス。',
         'provider'    => [ '@id' => $base . '/#organization' ],
         'areaServed'  => [ '@type' => 'Country', 'name' => '日本' ],
-        'url'         => $base . '/service/#reboot',
-        'category'    => '健康経営 / 産業医学 / ウェルネス',
+        'url'         => $base . '/service/',
         'audience'    => [
             '@type' => 'BusinessAudience',
-            'name'  => '企業・オフィスワーカー',
+            'name'  => '中小企業・経営者',
         ],
     ];
 
-    $pace = [
-        '@context'       => 'https://schema.org',
-        '@type'          => 'SoftwareApplication',
-        '@id'            => $base . '/service/#pace',
-        'name'           => 'PACE',
-        'alternateName'  => 'Progressive Assessment & Conditioning Engine',
-        'applicationCategory' => 'HealthApplication',
-        'operatingSystem'     => 'Web, iOS, Android',
-        'description'    => '因果推論AIとデジタルツインを活用し、アスレティックトレーナー・理学療法士の意思決定を支援するスポーツ医療AI-SaaS。現在開発中・先行案内リスト受付中。',
-        'provider'       => [ '@id' => $base . '/#organization' ],
-        'url'            => $base . '/service/#pace',
-        'releaseNotes'   => 'Coming Soon — 先行案内リスト受付中',
-        'audience'       => [
-            '@type' => 'Audience',
-            'name'  => 'スポーツ医療チーム / プロクラブ / 競技団体',
+    $fieldwork = [
+        '@context'    => 'https://schema.org',
+        '@type'       => 'Service',
+        '@id'         => $base . '/service/#hachi-fieldwork',
+        'name'        => 'HACHI Fieldwork',
+        'serviceType' => 'オンサイト コンディショニングサポート',
+        'description' => '現場でコンディションを整えるオンサイトサポート。観察と声がけ・記録をもとに、社員自身が動くコンディショニングを支援します。',
+        'provider'    => [ '@id' => $base . '/#organization' ],
+        'areaServed'  => [ '@type' => 'Country', 'name' => '日本' ],
+        'url'         => $base . '/service/',
+        'audience'    => [
+            '@type' => 'BusinessAudience',
+            'name'  => '中小企業・経営者',
         ],
     ];
 
-    return [ $reboot, $pace ];
+    return [ $insight, $fieldwork ];
 }
 
 /* ============================================================
@@ -267,23 +260,23 @@ function hachi_schema_faq(): array {
     $faqs = [
         [
             'question' => '株式会社HACHIはどんな会社ですか？',
-            'answer'   => '株式会社HACHIは、2022年3月に設立されたスポーツ医療・ウェルネステック企業です。東京都武蔵野市吉祥寺を拠点に、オフィスワーカー向けOn-site Service「REBOOT-WORK」を提供し、スポーツ医療AI-SaaS「PACE」を開発しています。代表取締役社長は佐々木譲崇。',
+            'answer'   => '株式会社HACHIは、2022年3月に設立された、社員のコンディション（状態）の変化を組織で見える形にする会社です。東京都武蔵野市吉祥寺を拠点に、コンディション・インサイト（状態の可視化）と HACHI Fieldwork（現場でのコンディショニング）を提供しています。代表取締役社長は佐々木譲崇。',
         ],
         [
-            'question' => 'REBOOT-WORKとはどのようなサービスですか？',
-            'answer'   => 'REBOOT-WORKは、企業オフィス内で生じる健康課題を医学的評価に基づいて解決するOn-site Serviceです。専門チームがオフィスを訪問し、腰痛・肩こり・メンタルヘルスなどの課題に対して、アセスメントからプログラム設計、継続支援までを一貫して提供します。',
+            'question' => 'コンディション・インサイトとはどのようなサービスですか？',
+            'answer'   => 'コンディション・インサイトは、社員の状態（疲労・睡眠・集中・身体の状態）の変化を、本人の同意のもとで把握し、組織で見える形に整えるアセスメントサービスです。診断や医療行為は行わず、状態の観察・記録を通じて、本人と管理職が早めに動けるきっかけをつくります。',
         ],
         [
-            'question' => 'PACE はどんなプロダクトですか？いつ利用できますか？',
-            'answer'   => 'PACEは因果推論AIとデジタルツインを活用した、スポーツ医療チーム向けのAI-SaaSプラットフォームです。アスレティックトレーナー・理学療法士の意思決定を支援し、論文エビデンスに基づく判断を可能にします。現在はローンチ準備中で、先行案内リストを受付中です。',
+            'question' => 'HACHI Fieldwork とはどのようなサービスですか？',
+            'answer'   => 'HACHI Fieldwork は、現場でコンディションを整えるオンサイトサポートです。観察と声がけ・記録をもとに、社員自身が動くコンディショニングを支援します。',
         ],
         [
-            'question' => 'REBOOT-WORKの導入を検討したい場合、どうすればよいですか？',
-            'answer'   => 'お問い合わせページのフォームよりご連絡ください。現場訪問によるヒアリング、アセスメント、プログラム設計の流れでご提案いたします。',
+            'question' => '導入を検討したい場合、どうすればよいですか？',
+            'answer'   => 'お問い合わせページのフォームよりご連絡ください。ヒアリングのうえ、貴社の状況に合わせてご提案いたします。',
         ],
         [
             'question' => 'HACHIのセキュリティ対策は？',
-            'answer'   => '医療機関水準のデータ保護を全サービスで徹底しています。HIPAA準拠のシステム設計、TLS 1.3暗号化、Row Level Security（RLS）によるテナントデータ完全分離、動画解析時の顔データ自動マスキングを実装しています。',
+            'answer'   => '個人情報保護法に準拠したデータ管理を行っています。通信の TLS 1.3 暗号化、Row Level Security（RLS）によるテナントデータの分離、アクセス制御を実装しています。',
         ],
         [
             'question' => '会社の所在地はどこですか？',
@@ -377,5 +370,5 @@ function hachi_get_page_description(): string {
             return wp_strip_all_tags( $excerpt );
         }
     }
-    return '株式会社HACHIは、スポーツ医療とウェルネスの現場にテクノロジーで革新をもたらす企業です。オフィスワーカー向けOn-site Service「REBOOT-WORK」提供中、スポーツ医療AI-SaaS「PACE」開発中。';
+    return '株式会社HACHIは、社員のコンディションの変化を組織で見える形にする会社です。コンディション・インサイト提供中、HACHI Fieldwork 提供中。';
 }

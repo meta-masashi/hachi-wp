@@ -29,13 +29,13 @@ defined( 'ABSPATH' ) || exit;
 function hachi_get_contact_categories(): array {
     $defaults = [
         'pace_demo'    => [
-            'label'     => 'PACE 先行案内',
-            'ga4_event' => 'pace_waitlist',
-            'emoji'     => ':rocket:',
+            'label'     => 'HACHI Fieldwork のご相談',
+            'ga4_event' => 'fieldwork_inquiry',
+            'emoji'     => ':office:',
         ],
         'reboot_docs'  => [
-            'label'     => 'REBOOT-WORK 導入相談',
-            'ga4_event' => 'reboot_inquiry',
+            'label'     => 'コンディション・インサイトのご相談',
+            'ga4_event' => 'condition_insight_inquiry',
             'emoji'     => ':page_facing_up:',
         ],
         'media'        => [

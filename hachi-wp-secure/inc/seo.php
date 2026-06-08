@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'document_title_parts', function ( array $title ): array {
 
     if ( is_front_page() ) {
-        $title['title'] = 'HACHI | スポーツ医療×テクノロジー｜REBOOT-WORK・PACE';
+        $title['title'] = 'HACHI | 変化のサインを、見逃さない。';
         unset( $title['tagline'] );
         return $title;
     }
@@ -37,7 +37,7 @@ add_filter( 'document_title_parts', function ( array $title ): array {
     }
 
     if ( is_page( 'service' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'service' ) ) {
-        $title['title'] = 'サービス｜REBOOT-WORK・PACE（AI-SaaS） | HACHI';
+        $title['title'] = 'サービス｜コンディション・インサイト / HACHI Fieldwork | HACHI';
         return $title;
     }
 
@@ -47,7 +47,7 @@ add_filter( 'document_title_parts', function ( array $title ): array {
     }
 
     if ( is_page( 'about' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'about' ) ) {
-        $title['title'] = 'HACHIについて｜スポーツ医療×テクノロジー企業';
+        $title['title'] = 'HACHIについて｜社員のコンディションを組織で見える形に | HACHI';
         return $title;
     }
 
@@ -77,7 +77,7 @@ function hachi_output_seo_meta(): void {
     // --- 基本情報の収集 ---
     $site_name    = get_bloginfo( 'name' ) ?: 'HACHI';
     $site_url     = home_url( '/' );
-    $default_desc = '株式会社HACHIは、スポーツ医療とウェルネスの現場にテクノロジーで革新をもたらす企業です。オフィスワーカー向けOn-site Service「REBOOT-WORK」提供中、スポーツ医療AI-SaaS「PACE」開発中。';
+    $default_desc = '株式会社HACHIは、社員のコンディションを組織で見える形にする会社です。変化のサインを早期に捉え、職場全体で適切な対応を取るための判断基盤を提供しています。';
     $default_img  = HACHI_THEME_URI . '/assets/og-image.png';
 
     // ページ種別ごとの description / OGP 画像 / canonical / robots
@@ -89,20 +89,20 @@ function hachi_output_seo_meta(): void {
     $og_title    = get_bloginfo( 'name' );
 
     if ( is_front_page() ) {
-        $og_title    = 'HACHI | スポーツ医療×テクノロジー｜REBOOT-WORK・PACE';
-        $description = 'HACHIはスポーツ医療とウェルネスの現場にテクノロジーで革新をもたらすテック企業。オフィスワーカー向けOn-site Service「REBOOT-WORK」を提供中。スポーツ医療AI-SaaS「PACE」は現在ローンチ準備中。吉祥寺発。';
+        $og_title    = 'HACHI | 変化のサインを、見逃さない。';
+        $description = 'HACHIは、社員のコンディションを組織で見える形にする会社です。コンディション・インサイトで状態を把握し、HACHI Fieldworkで現場を整える。吉祥寺発。';
     } elseif ( is_page( 'service' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'service' ) ) {
-        $og_title    = 'サービス｜REBOOT-WORK・PACE（AI-SaaS） | HACHI';
-        $description = 'REBOOT-WORKは医学的評価に基づくOn-site Service。PACEは因果推論AIとデジタルツインによるスポーツ医療チーム向けAI-SaaS（開発中・先行案内受付中）。';
+        $og_title    = 'サービス｜コンディション・インサイト / HACHI Fieldwork | HACHI';
+        $description = 'コンディション・インサイトは社員の状態変化を組織で見える形に整えるサービスです。HACHI Fieldworkは現場でコンディションを整えるオンサイトサポートです。';
     } elseif ( is_page( 'company' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'company' ) ) {
         $og_title    = '会社概要｜株式会社HACHI（吉祥寺）';
-        $description = '株式会社HACHI｜2022年3月設立、代表取締役社長 佐々木譲崇。東京都武蔵野市吉祥寺本町を拠点に、スポーツ医療×テクノロジーで健康の現場に革新をもたらします。';
+        $description = '株式会社HACHI｜2022年3月設立、代表取締役社長 佐々木譲崇。東京都武蔵野市吉祥寺本町を拠点に、社員のコンディションを組織で見える形にする事業を展開しています。';
     } elseif ( is_page( 'about' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'about' ) ) {
-        $og_title    = 'HACHIについて｜スポーツ医療×テクノロジー企業';
-        $description = 'HACHIのミッション・ビジョン・バリュー。テクノロジーで人と人の「向き合う時間」を取り戻す。誰もが健康で悩まない世界をつくるため、スポーツ医療とウェルネスに挑みます。';
+        $og_title    = 'HACHIについて｜社員のコンディションを組織で見える形に | HACHI';
+        $description = 'HACHIのミッション・ビジョン・バリュー。変化のサインを見逃さない組織をつくるために、コンディションの観察・判断・改善を支援しています。';
     } elseif ( is_page( 'contact' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'contact' ) ) {
         $og_title    = 'お問い合わせ | HACHI';
-        $description = 'REBOOT-WORKの導入相談、PACEの先行案内登録、取材・その他お問い合わせはこちらから。';
+        $description = 'コンディション・インサイトの導入相談、HACHI Fieldworkのご相談、取材・その他お問い合わせはこちらから。';
         $robots      = 'noindex, follow';
     } elseif ( is_singular( 'hachi_news' ) ) {
         $og_title = get_the_title();
@@ -233,36 +233,35 @@ add_action( 'template_redirect', function (): void {
     header( 'Content-Type: text/plain; charset=UTF-8' );
     header( 'X-Robots-Tag: all' );
     echo "# HACHI Inc. (株式会社HACHI)\n\n";
-    echo "> スポーツ医療とウェルネスの現場に、テクノロジーで革新をもたらすテック企業。\n\n";
-    echo "HACHI is a Japanese sports-medicine & wellness technology company based in Kichijoji, Tokyo. ";
-    echo "Founded in March 2022 by Joso Sasaki, HACHI operates an on-site wellness service for office workers (REBOOT-WORK) ";
-    echo "and is developing an AI-SaaS platform for sports medical teams (PACE, currently pre-launch).\n\n";
+    echo "> 社員のコンディションを組織で見える形にする会社。変化のサインを見逃さないための判断基盤を提供しています。\n\n";
+    echo "HACHI is a Japanese company based in Kichijoji, Tokyo, helping organizations make employee condition changes visible and actionable. ";
+    echo "Founded in March 2022 by Masashi Sasaki, HACHI provides Condition Insight (assessment service) and HACHI Fieldwork (on-site conditioning support).\n\n";
 
     echo "## 主要情報\n";
     echo "- 会社名: 株式会社HACHI / HACHI Inc.\n";
     echo "- 代表: 佐々木 譲崇（Joso Sasaki）\n";
     echo "- 設立: 2022年3月25日\n";
     echo "- 所在地: 〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F\n";
-    echo "- ビジョン: beyond the Body. / 誰もが、「健康」で悩まない世界をつくる。\n";
-    echo "- ミッション: テクノロジーで、人と人の「向き合う時間」を取り戻す。\n\n";
+    echo "- ポジショニング: 社員のコンディション（状態）の変化を、組織で早めに見える形にする。\n";
+    echo "- 考え方: 身体の専門知を、観察・記録・再現できる形にする。\n\n";
 
     echo "## サービス\n";
-    echo "- [REBOOT-WORK]({$base}/service/#reboot) — オフィスワーカー向け On-site Wellness Service。提供中。\n";
-    echo "- [PACE]({$base}/service/#pace) — スポーツ医療チーム向け AI-SaaS（因果推論AI × デジタルツイン）。現在ローンチ準備中・先行案内受付中。\n\n";
+    echo "- [コンディション・インサイト]({$base}/service/) — 社員の状態変化を組織で見える形にするアセスメント。提供中。\n";
+    echo "- [HACHI Fieldwork]({$base}/service/) — 現場でコンディションを整えるオンサイトサポート。提供中。\n\n";
 
     echo "## 主要ページ\n";
     echo "- [トップページ]({$base}/)\n";
     echo "- [HACHIについて]({$base}/about/)\n";
     echo "- [サービス]({$base}/service/)\n";
     echo "- [会社概要]({$base}/company/)\n";
-    echo "- [ニュース]({$base}/hachi_news/)\n";
+    echo "- [ニュース]({$base}/news/)\n";
     echo "- [お問い合わせ]({$base}/contact/)\n\n";
 
     echo "## 取り扱い領域\n";
-    echo "スポーツ医療 / アスリートケア / リハビリテーション / 因果推論AI / デジタルツイン / オフィスワーカー健康管理 / 健康経営 / ウェルネステクノロジー\n\n";
+    echo "社員コンディションの可視化 / 状態の観察と記録 / 現場コンディショニング / 組織の判断支援\n\n";
 
     echo "## セキュリティ\n";
-    echo "HIPAA準拠設計 / TLS 1.3暗号化 / Row Level Security によるテナントデータ完全分離 / 動画解析時の顔データ自動マスキング\n\n";
+    echo "個人情報保護法に準拠したデータ管理 / TLS 1.3 暗号化 / Row Level Security によるテナントデータ分離 / アクセス制御\n\n";
 
     echo "## サイトマップ\n";
     echo "- {$base}/wp-sitemap.xml\n";

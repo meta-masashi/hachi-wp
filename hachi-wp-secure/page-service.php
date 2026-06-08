@@ -201,57 +201,6 @@ get_header();
 	</div>
 </section>
 
-<!-- ===== やらないことを、明示。===== -->
-<section class="section--light" id="scope">
-	<div class="container">
-
-		<div class="js-fade" style="max-width:820px;margin-bottom:56px">
-			<?php hachi_section_label( 'S c o p e' ); ?>
-			<h2 class="heading-en heading-en--sm" style="margin-top:8px"><?php _e( 'やらないことを、明示。', 'hachi' ); ?></h2>
-			<p class="body-copy" style="margin-top:20px">
-				<?php _e( 'コンディション・インサイトが提供するのは「状態の可視化」と「コンディショニング指導」です。以下は提供の対象外です。', 'hachi' ); ?>
-			</p>
-		</div>
-
-		<div class="values-grid js-fade js-fade--delay-1">
-			<?php
-			$scopes = [
-				[
-					'医療診断・疾病判定は行いません。',
-					'チェックの結果は、医学的な診断や疾患の判定ではありません。疾患が疑われる場合は、医療機関への受診をお勧めします。',
-				],
-				[
-					'精神医学的な評価・メンタルヘルス疾患の判定も行いません。',
-					'専門的な判断が必要と感じる場合は、産業医や医療機関へのご相談を推奨します。',
-				],
-				[
-					'個人の情報を会社に渡しません。',
-					'個人を特定できる情報は、導入企業を含む第三者には提供しません。会社に届くのは、組織全体の傾向をまとめたレポートのみです。',
-				],
-				[
-					'人事査定・離職予測には使いません。',
-					'チェック結果を人事評価や査定に用いることはありません。特定の社員の離職・休職を予測・判定するものではありません。導入企業との契約においても同様の制約を設けています。',
-				],
-			];
-			foreach ( $scopes as $s ) :
-			?>
-				<div class="value-card">
-					<h3 class="value-card__name" style="font-size:15px;line-height:1.5"><?php echo esc_html( $s[0] ); ?></h3>
-					<p class="value-card__desc" style="margin-top:12px"><?php echo esc_html( $s[1] ); ?></p>
-				</div>
-			<?php endforeach; ?>
-		</div>
-
-		<!-- AT民間資格注記 -->
-		<div class="js-fade js-fade--delay-2" style="margin-top:56px;padding:24px;background:var(--white);border:1px solid var(--gray2);border-radius:4px;max-width:820px">
-			<p class="body-copy" style="font-size:13px;color:var(--gray)">
-				<?php _e( '【担当スタッフについて】現場に入るアスレティックトレーナー（AT）は民間資格です。医療行為（診察・診断・薬の処方・マッサージ等の施術）は行いません。業務範囲はストレッチ指導・コンディショニング指導・身体の状態をうかがい、声がけ・記録を行うことに限ります。', 'hachi' ); ?>
-			</p>
-		</div>
-
-	</div>
-</section>
-
 <!-- ===== FINAL CTA ===== -->
 <section class="section about-cta">
 	<div class="container">

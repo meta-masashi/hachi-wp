@@ -1,7 +1,8 @@
 <?php
 /**
  * HACHI Theme — Company page (Light Monochrome v2)
- * Auto-applied to page with slug "company"
+ * Auto-applied to page with slug "company" via WP template hierarchy
+ * Updated: 2026-06-08 corp-refresh — PACE除去 / HIPAA→個情法置換 / 事業内容修正
  */
 get_header();
 ?>
@@ -28,7 +29,7 @@ get_header();
 				</h2>
 				<p class="company-profile__en">HACHI Inc.</p>
 				<p class="company-profile__tagline">
-					<?php _e( 'テクノロジーで、人と人の「向き合う時間」を取り戻す。', 'hachi' ); ?>
+					<?php _e( '身体知を、再現可能な判断知へ。', 'hachi' ); ?>
 				</p>
 			</div>
 
@@ -42,7 +43,7 @@ get_header();
 						[ '設立',           '2022年3月25日' ],
 						[ '資本金',         '金100万円' ],
 						[ '所在地',         "〒180-0004\n東京都武蔵野市吉祥寺本町 1-13-2 5F" ],
-						[ '事業内容',       "On-site Service「REBOOT-WORK」の提供\nスポーツ医療AI-SaaS「PACE」の開発（準備中）" ],
+						[ '事業内容',       "On-site Service「RebootWork / コンディション・インサイト」の提供\n身体の状態観察・構造化・判断知変換に関する研究開発" ],
 					];
 					foreach ( $rows as $row ) :
 					?>
@@ -66,20 +67,20 @@ get_header();
 			<?php hachi_section_label( 'S e c u r i t y', 'label--white' ); ?>
 			<h2 class="company-security__title">SECURITY</h2>
 			<p class="company-security__subtitle">
-				<?php _e( '医療・健康情報を守る、妥協なきデータ保護。', 'hachi' ); ?>
+				<?php _e( '健康情報を守る、妥協なきデータ保護。', 'hachi' ); ?>
 			</p>
 			<p class="company-security__lead">
-				<?php _e( '医療機関水準のセキュリティ設計を全サービスで徹底。お預かりするすべてのデータを、暗号化・分離・マスキングの3層で守ります。', 'hachi' ); ?>
+				<?php _e( '個人情報保護法・GDPR に準拠したデータ管理設計を全サービスで徹底。お預かりするすべてのデータを、暗号化・分離・マスキングの3層で守ります。', 'hachi' ); ?>
 			</p>
 		</div>
 
 		<div class="company-security__grid js-fade js-fade--delay-1">
 			<?php
 			$security_items = [
-				[ '01', 'HIPAA準拠設計',          '医療情報取扱の国際基準HIPAAに準拠したシステムアーキテクチャを採用しています。' ],
-				[ '02', 'TLS 1.3 暗号化',          '最新のTLS 1.3プロトコルによる通信暗号化で、データの盗聴・改ざんを防止します。' ],
-				[ '03', 'テナントデータ完全分離', 'Row Level Security（RLS）により、テナント間のデータを完全分離。情報漏洩リスクを低減します。' ],
-				[ '04', '顔データ自動マスキング', '動画解析時に顔データを自動マスキング処理し、プライバシーを確実に保護します。' ],
+				[ '01', '個人情報保護法・GDPR 準拠設計', '個人情報保護法および GDPR の要件に準拠したシステムアーキテクチャを採用しています。' ],
+				[ '02', 'TLS 1.3 暗号化',                 '最新のTLS 1.3プロトコルによる通信暗号化で、データの盗聴・改ざんを防止します。' ],
+				[ '03', 'テナントデータ完全分離',          'Row Level Security（RLS）により、テナント間のデータを完全分離。情報漏洩リスクを低減します。' ],
+				[ '04', '顔データ自動マスキング',          '動画解析時に顔データを自動マスキング処理し、プライバシーを確実に保護します。' ],
 			];
 			foreach ( $security_items as $item ) :
 			?>

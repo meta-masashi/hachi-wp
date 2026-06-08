@@ -5,20 +5,19 @@
  * reCAPTCHA v3, honeypot, and category-aware auto-reply.
  *
  * Slug `contact` で自動適用（WP template hierarchy）。
+ * Updated: 2026-06-08 corp-refresh — PACE先行案内カード削除 / 従業員規模最適化 / ヘッダーコピー修正
  */
 get_header();
 
 // カテゴリー一覧（contact-handler.php の hachi_get_contact_categories() と連動）
 $categories = function_exists( 'hachi_get_contact_categories' ) ? hachi_get_contact_categories() : [
-	'pace_demo'   => [ 'label' => 'PACE 先行案内', 'emoji' => '🚀' ],
-	'reboot_docs' => [ 'label' => 'REBOOT-WORK 導入相談', 'emoji' => '📄' ],
+	'reboot_docs' => [ 'label' => 'コンディション・インサイト 導入相談', 'emoji' => '📄' ],
 	'general'     => [ 'label' => '一般お問い合わせ', 'emoji' => '💬' ],
 ];
 
 // カード表示用メタ（ラベル／キャッチ／アイコン）
 $card_meta = [
-	'pace_demo'   => [ 'title' => 'PACE 先行案内', 'sub' => 'Sports AI-SaaS（準備中） 先行案内登録', 'icon' => '●' ],
-	'reboot_docs' => [ 'title' => 'REBOOT-WORK 導入相談', 'sub' => 'オフィス向け On-site Wellness 資料請求・導入相談', 'icon' => '◆' ],
+	'reboot_docs' => [ 'title' => 'コンディション・インサイト 導入相談', 'sub' => '資料請求・導入ご相談・サービス詳細のご確認', 'icon' => '◆' ],
 	'media'       => [ 'title' => '取材・メディア', 'sub' => 'プレス・取材・メディア掲載のお問い合わせ', 'icon' => '◇' ],
 	'recruit'     => [ 'title' => '採用・パートナー', 'sub' => '採用、業務委託、協業パートナー募集', 'icon' => '◎' ],
 	'general'     => [ 'title' => 'その他', 'sub' => '上記以外のご相談、ご質問はこちら', 'icon' => '○' ],
@@ -30,7 +29,7 @@ $card_meta = [
 	<div class="container">
 		<div class="js-fade"><?php hachi_section_label( 'C o n t a c t' ); ?></div>
 		<h1 class="heading-en js-fade js-fade--delay-1">CONTACT</h1>
-		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( 'お問い合わせ・導入相談・先行案内登録', 'hachi' ); ?></p>
+		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( 'お問い合わせ・導入相談', 'hachi' ); ?></p>
 	</div>
 </div>
 
@@ -139,11 +138,11 @@ $card_meta = [
 						<input type="hidden" name="contact_role" value="">
 					</div>
 
-					<!-- Company size -->
+					<!-- Company size — 20-100名中小企業ターゲットに最適化 -->
 					<div class="form-chip-field">
 						<div class="form-chip-field__label"><?php _e( '従業員規模', 'hachi' ); ?></div>
 						<div class="form-chips" data-field="contact_size">
-							<?php foreach ( [ '〜50名', '51〜300名', '301〜1,000名', '1,001名〜', '個人・その他' ] as $v ) : ?>
+							<?php foreach ( [ '20名未満', '20〜50名', '51〜100名', '101〜300名', '301名以上' ] as $v ) : ?>
 								<button type="button" class="form-chip" data-value="<?php echo esc_attr( $v ); ?>"><?php echo esc_html( $v ); ?></button>
 							<?php endforeach; ?>
 						</div>
@@ -195,7 +194,7 @@ $card_meta = [
 				<p class="form-privacy">
 					<?php _e( '送信ボタンを押すことで', 'hachi' ); ?><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>" style="color:var(--accent)"><?php _e( 'プライバシーポリシー', 'hachi' ); ?></a><?php _e( 'に同意したものとみなします。いただいた個人情報はお問い合わせ対応のみに使用し、第三者への提供は行いません。', 'hachi' ); ?>
 					<br>
-					<span style="font-size:11px;opacity:0.7;display:inline-block;margin-top:6px">🔒 <?php _e( 'このフォームは reCAPTCHA v3 で保護されています。', 'hachi' ); ?></span>
+					<span style="font-size:11px;opacity:0.7;display:inline-block;margin-top:6px"><?php _e( 'このフォームは reCAPTCHA v3 で保護されています。', 'hachi' ); ?></span>
 				</p>
 
 				<button type="submit" class="btn btn--teal" id="form-submit">
@@ -210,6 +209,12 @@ $card_meta = [
 
 		<!-- ===== Direct contact info ===== -->
 		<div class="contact-direct js-fade js-fade--delay-2">
+			<div class="contact-direct__item">
+				<div class="contact-direct__label">EMAIL</div>
+				<p class="contact-direct__text">
+					info@hachi-wellnesshack.com
+				</p>
+			</div>
 			<div class="contact-direct__item">
 				<div class="contact-direct__label">OFFICE</div>
 				<p class="contact-direct__text">

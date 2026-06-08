@@ -190,7 +190,7 @@ function hachi_handle_contact(): void {
     if (function_exists('hachi_get_contact_categories')) {
         $allowed_cats = array_column(hachi_get_contact_categories(), 'label');
     } else {
-        $allowed_cats = ['PACE 先行案内','REBOOT-WORK 導入相談','取材・メディア','採用・パートナー','一般お問い合わせ'];
+        $allowed_cats = ['HACHI Fieldwork のご相談','コンディション・インサイトのご相談','取材・メディア','採用・パートナー','一般お問い合わせ'];
     }
 
     // --- 8. バリデーション ---
@@ -296,16 +296,16 @@ function hachi_build_autoreply_body(string $name, string $cat_key = 'general', s
     // カテゴリー別のメインメッセージ
     $templates = [
         'pace_demo' => [
-            'heading' => 'PACE 先行案内リストにご登録いただき、ありがとうございます',
-            'lead'    => '<strong>PACE</strong>（スポーツ医療チーム向け Sports AI-SaaS）への関心をお寄せいただき誠にありがとうございます。',
-            'body'    => 'PACE は現在ローンチ準備中のプロダクトです。正式リリース前の先行案内・ベータアクセス枠のご案内、開発ロードマップのアップデートを、ご登録のメールアドレス宛てに随時お送りいたします。<br><br>また、個別のユースケース相談・デモご希望の場合は、担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。',
-            'next'    => '<li>先行案内リストへの登録完了</li><li>担当より 2 営業日以内にご連絡</li><li>デモ・ヒアリングのお打ち合わせ日程調整</li>',
+            'heading' => 'HACHI Fieldwork のご相談を承りました',
+            'lead'    => '<strong>HACHI Fieldwork</strong>（現場でコンディションを整えるオンサイトサポート）へのご関心をお寄せいただき、ありがとうございます。',
+            'body'    => 'いただいた情報をもとに、貴社の状況に合わせたご提案を、担当より <strong>2 営業日以内</strong>にお送りいたします。導入の進め方やオンサイトの内容についても、ご希望に応じてご相談を承ります。',
+            'next'    => '<li>担当より詳細のご連絡（2 営業日以内）</li><li>オンラインでのヒアリング日程調整</li><li>導入プランのご提案</li>',
         ],
         'reboot_docs' => [
-            'heading' => 'REBOOT-WORK 導入相談を承りました',
-            'lead'    => '<strong>REBOOT-WORK</strong>（オフィスワーカー向け On-site Wellness Service）へのご関心をお寄せいただきありがとうございます。',
-            'body'    => 'いただいた情報をもとに、貴社の課題に合わせた導入プランと資料を、担当より <strong>2 営業日以内</strong>にお送りいたします。あわせて、無料トライアル・オンサイト体験会のご案内もご希望に応じて調整可能です。',
-            'next'    => '<li>担当より詳細資料の送付（2 営業日以内）</li><li>オンラインヒアリングの日程調整</li><li>導入プラン・お見積りのご提案</li>',
+            'heading' => 'コンディション・インサイトのご相談を承りました',
+            'lead'    => '<strong>コンディション・インサイト</strong>（社員の状態変化を組織で見える形にするアセスメント）へのご関心をお寄せいただきありがとうございます。',
+            'body'    => 'いただいた情報をもとに、貴社の課題に合わせたご案内と資料を、担当より <strong>2 営業日以内</strong>にお送りいたします。導入の進め方についても、ご希望に応じてご相談を承ります。',
+            'next'    => '<li>担当より詳細資料の送付（2 営業日以内）</li><li>オンラインでのヒアリング日程調整</li><li>導入プランのご提案</li>',
         ],
         'media' => [
             'heading' => '取材・メディアのお問い合わせを承りました',
@@ -316,7 +316,7 @@ function hachi_build_autoreply_body(string $name, string $cat_key = 'general', s
         'recruit' => [
             'heading' => '採用・パートナーシップのお問い合わせを承りました',
             'lead'    => 'HACHI への採用・業務委託・協業のご興味をお寄せいただき、ありがとうございます。',
-            'body'    => '担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。HACHI は少数精鋭のチームで、スポーツ医療 × テクノロジーという大きな挑戦に向き合う仲間を歓迎しています。',
+            'body'    => '担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。HACHI は少数精鋭のチームで、身体の専門知を観察・記録・再現できる形にするという挑戦に向き合う仲間を歓迎しています。',
             'next'    => '<li>採用/アライアンス担当より返信（2 営業日以内）</li><li>カジュアル面談・詳細ヒアリング</li>',
         ],
         'general' => [

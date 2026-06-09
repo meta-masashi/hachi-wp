@@ -47,11 +47,7 @@ get_header();
 				</p>
 			</div>
 
-			<div class="js-fade js-fade--delay-1">
-				<div class="about-vision-image">
-					<span class="about-vision-image__label">PHOTO — Vision (4:5, 85mm)</span>
-				</div>
-			</div>
+			<!-- photo slot removed — copy-led single column -->
 
 		</div>
 	</div>
@@ -142,9 +138,8 @@ get_header();
 					'alt'     => __( '代表取締役社長 佐々木 譲崇', 'hachi' ),
 					'loading' => 'lazy',
 				] );
-			} else {
-				echo '<div class="ceo-section__placeholder" aria-hidden="true">佐</div>';
 			}
+			// photo placeholder removed — badge is displayed on the dark panel
 			?>
 			<div class="ceo-section__badge">
 				<p class="ceo-section__name">佐々木 譲崇</p>

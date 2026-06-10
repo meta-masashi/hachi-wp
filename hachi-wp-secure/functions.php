@@ -709,3 +709,37 @@ register_activation_hook(HACHI_THEME_DIR.'/functions.php','hachi_activate');
 if ( ! function_exists( 'wp_body_open' ) ) {
     function wp_body_open(): void { do_action( 'wp_body_open' ); }
 }
+
+/**
+ * プライバシーポリシー固定ページの自動作成（冪等）
+ *
+ * デプロイはファイル同期方式のため after_switch_theme は本番で発火しない。
+ * init フックで option フラグを確認し、ページ未作成の場合のみ一度だけ作成する。
+ * slug=privacy-policy が存在すれば page-privacy-policy.php がテンプレート階層で
+ * 自動適用されるため template_redirect 等の設定は不要。
+ */
+add_action( 'init', function (): void {
+    if ( get_option( 'hachi_pp_page_created' ) ) {
+        return;
+    }
+
+    // 既存ページ確認（重複作成防止）
+    $existing = get_page_by_path( 'privacy-policy', OBJECT, 'page' );
+    if ( $existing ) {
+        update_option( 'hachi_pp_page_created', '1' );
+        return;
+    }
+
+    $result = wp_insert_post( [
+        'post_title'  => 'プライバシーポリシー',
+        'post_name'   => 'privacy-policy',
+        'post_status' => 'publish',
+        'post_type'   => 'page',
+        'post_content' => '',
+    ], true );
+
+    if ( ! is_wp_error( $result ) ) {
+        update_option( 'hachi_pp_page_created', '1' );
+    }
+    // エラー時はフラグを立てず次回 init で再試行（致命化しない）
+} );

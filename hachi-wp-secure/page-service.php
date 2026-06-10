@@ -56,11 +56,8 @@ get_header();
 			</div>
 		</div>
 
+		<!-- photo slot removed — copy-led single column -->
 		<div class="grid-2 js-fade js-fade--delay-1" style="margin-top:72px">
-
-			<div class="service-photo">
-				<span class="service-photo__label">PHOTO — On-site conditioning session</span>
-			</div>
 
 			<div>
 				<p class="body-copy">

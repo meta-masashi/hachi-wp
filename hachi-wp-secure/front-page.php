@@ -72,25 +72,8 @@ if ( $ticker ) :
 <!-- ===== ABOUT ===== -->
 <section class="section" id="about">
 	<div class="container">
+		<!-- Text — copy-led single column (no photo slot) -->
 		<div class="grid-2">
-
-			<!-- Image -->
-			<div class="about-image js-fade js-fade--left">
-				<div class="about-image__inner">
-					<?php
-					$about_img_id = get_theme_mod( 'hachi_about_image' );
-					if ( $about_img_id ) {
-						echo wp_get_attachment_image( $about_img_id, 'hachi-portrait', false, [
-							'alt'     => __( 'HACHIについて', 'hachi' ),
-							'loading' => 'lazy',
-						] );
-					} else {
-						echo '<div class="about-image__placeholder" aria-hidden="true">8</div>';
-					}
-					?>
-				</div>
-				<div class="about-image__tag">On-site Service</div>
-			</div>
 
 			<!-- Text -->
 			<div class="js-fade js-fade--delay-1">

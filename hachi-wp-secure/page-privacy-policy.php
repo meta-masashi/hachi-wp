@@ -1,7 +1,9 @@
 <?php
 /**
  * HACHI Theme — Privacy Policy page
- * Auto-applied to page with slug "privacy-policy" via WP template hierarchy.
+ *
+ * DB ページ不要。functions.php の template_redirect フックから直接 require される。
+ * get_header() / get_footer() を使用するが $post / the_content() 等のループ依存なし。
  *
  * Content: コーポレートサイト用プライバシーポリシー v1.0
  * Legal sign-off: ritsu-legal (2026-06-10)

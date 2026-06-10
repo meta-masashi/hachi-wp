@@ -711,35 +711,24 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 }
 
 /**
- * プライバシーポリシー固定ページの自動作成（冪等）
+ * プライバシーポリシーページを template_redirect で直接描画する
  *
- * デプロイはファイル同期方式のため after_switch_theme は本番で発火しない。
- * init フックで option フラグを確認し、ページ未作成の場合のみ一度だけ作成する。
- * slug=privacy-policy が存在すれば page-privacy-policy.php がテンプレート階層で
- * 自動適用されるため template_redirect 等の設定は不要。
+ * 前方式（init + wp_insert_post）はハードン本番環境で DB 書き込みが抑止され
+ * /privacy-policy/ が常に 404 になる不具合が確認されたため廃止。
+ *
+ * 本方式は DB ページ不要・書き込み不要。
+ * /privacy-policy または /privacy-policy/ へのリクエストを捕捉し、
+ * page-privacy-policy.php テンプレートを直接 require して 200 を返す。
+ * DB に当該 slug のページが存在しても存在しなくても同一の動作になる。
  */
-add_action( 'init', function (): void {
-    if ( get_option( 'hachi_pp_page_created' ) ) {
+add_action( 'template_redirect', function (): void {
+    $path = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+    if ( $path !== 'privacy-policy' ) {
         return;
     }
 
-    // 既存ページ確認（重複作成防止）
-    $existing = get_page_by_path( 'privacy-policy', OBJECT, 'page' );
-    if ( $existing ) {
-        update_option( 'hachi_pp_page_created', '1' );
-        return;
-    }
-
-    $result = wp_insert_post( [
-        'post_title'  => 'プライバシーポリシー',
-        'post_name'   => 'privacy-policy',
-        'post_status' => 'publish',
-        'post_type'   => 'page',
-        'post_content' => '',
-    ], true );
-
-    if ( ! is_wp_error( $result ) ) {
-        update_option( 'hachi_pp_page_created', '1' );
-    }
-    // エラー時はフラグを立てず次回 init で再試行（致命化しない）
+    status_header( 200 );
+    nocache_headers();
+    require get_template_directory() . '/page-privacy-policy.php';
+    exit;
 } );

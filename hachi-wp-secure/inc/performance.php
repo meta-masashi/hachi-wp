@@ -23,28 +23,7 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'wp_head', 'hachi_preload_lcp_resources', 1 );
 
 function hachi_preload_lcp_resources(): void {
-    // ヒーロー画像: トップページと各主要ページで preload
-    $hero_image = '';
-
-    if ( is_front_page() ) {
-        // トップページのヒーロー画像
-        $hero_image = HACHI_THEME_URI . '/assets/hero-top.jpg';
-    } elseif ( is_page() ) {
-        $slug = get_post_field( 'post_name', get_the_ID() );
-        $candidates = [
-            'service' => HACHI_THEME_URI . '/assets/hero-service.jpg',
-            'about'   => HACHI_THEME_URI . '/assets/hero-about.jpg',
-            'company' => HACHI_THEME_URI . '/assets/hero-company.jpg',
-        ];
-        $hero_image = $candidates[ $slug ] ?? '';
-    }
-
-    if ( ! empty( $hero_image ) ) {
-        printf(
-            '<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
-            esc_url( $hero_image )
-        );
-    }
+    // ヒーロー画像 preload は不要(コード化 SVG インライン化により 404 解消済み)
 
     // フォントのプリロード（LCP テキストの FOIT 防止）
     $font_urls = [

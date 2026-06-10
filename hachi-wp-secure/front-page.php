@@ -13,6 +13,7 @@ get_header();
 
 	<div class="hero__bg-ghost ghost-text" aria-hidden="true">HACHI</div>
 	<div class="hero__vertical-line" aria-hidden="true"></div>
+	<div class="hero__signal-svg" aria-hidden="true"><?php include get_template_directory() . '/assets/hero-signal.svg'; ?></div>
 
 	<div class="container">
 		<div class="hero__content">

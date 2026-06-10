@@ -134,26 +134,41 @@ get_header();
 			<div class="privacy-policy__section">
 				<h2 class="privacy-policy__heading"><?php _e( '第5条　業務委託（外部サービスの利用）', 'hachi' ); ?></h2>
 				<p class="privacy-policy__body">
-					<?php _e( '当社は、お問い合わせフォームから送信された情報の受信・保存に際して、以下の外部事業者のサービスを利用しています。当社は、個人情報の保護に関する法律第24条に基づき、委託先の安全管理状況を監督します。', 'hachi' ); ?>
+					<?php _e( '当社は、お問い合わせフォームから送信された情報を外部データベースには保存しません。フォームに入力された情報は、以下の経路でのみ処理されます。', 'hachi' ); ?>
 				</p>
 				<table class="privacy-policy__table">
 					<thead>
 						<tr>
-							<th><?php _e( '委託先', 'hachi' ); ?></th>
-							<th><?php _e( '業務内容', 'hachi' ); ?></th>
-							<th><?php _e( 'データ保存場所', 'hachi' ); ?></th>
+							<th><?php _e( '処理内容', 'hachi' ); ?></th>
+							<th><?php _e( '経由先', 'hachi' ); ?></th>
+							<th><?php _e( '保存場所', 'hachi' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><?php _e( 'Supabase, Inc.', 'hachi' ); ?></td>
-							<td><?php _e( 'フォーム送信データの受信・保存', 'hachi' ); ?></td>
-							<td><?php _e( '日本国内（東京リージョン）', 'hachi' ); ?></td>
+							<td><?php _e( '担当者宛メール通知（info@hachi-wellnesshack.com）', 'hachi' ); ?></td>
+							<td><?php _e( '当社が契約するメールサービス', 'hachi' ); ?></td>
+							<td><?php _e( '当社メール受信箱', 'hachi' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php _e( 'お問い合わせ者への自動返信メール', 'hachi' ); ?></td>
+							<td><?php _e( '当社が契約するメールサービス', 'hachi' ); ?></td>
+							<td><?php _e( 'お問い合わせ者のメール受信箱', 'hachi' ); ?></td>
+						</tr>
+						<tr>
+							<td><?php _e( '社内業務連絡ツール（Slack 等）への通知', 'hachi' ); ?></td>
+							<td><?php _e( 'Slack Technologies, LLC（米国）', 'hachi' ); ?></td>
+							<td><?php _e( 'Slack チャンネル履歴', 'hachi' ); ?></td>
 						</tr>
 					</tbody>
 				</table>
 				<p class="privacy-policy__body">
-					<?php _e( '本サービスのデータは日本国内に保存されます。ただし、Supabase, Inc.（米国）がサービス運用・管理目的でデータにアクセスする場合があります。当社は、Supabaseとのデータ処理契約（DPA）に基づき、適切な保護措置を確保します。', 'hachi' ); ?>
+					<?php _e( 'Slackについて：当社は社内の業務連絡を目的として Slack Technologies, LLC（米国）が提供するサービスを利用しており、お問い合わせ内容が担当者に通知されます。Slack によるデータの取扱いについては、', 'hachi' ); ?>
+					<a href="https://slack.com/intl/ja-jp/trust/privacy/privacy-policy" class="privacy-policy__link" target="_blank" rel="noopener noreferrer"><?php _e( 'Slack のプライバシーポリシー', 'hachi' ); ?></a>
+					<?php _e( 'をご参照ください。当社は、個人情報の保護に関する法律第24条に基づき、委託先の安全管理状況を監督します。', 'hachi' ); ?>
+				</p>
+				<p class="privacy-policy__body">
+					<?php _e( 'なお、お問い合わせ内容はデータベース等の外部ストレージには保存されません。', 'hachi' ); ?>
 				</p>
 			</div>
 
@@ -169,7 +184,7 @@ get_header();
 			<div class="privacy-policy__section">
 				<h2 class="privacy-policy__heading"><?php _e( '第7条　保有期間', 'hachi' ); ?></h2>
 				<p class="privacy-policy__body">
-					<?php _e( 'お問い合わせにより取得した個人データは、お問い合わせ対応の完了後3年を目安に削除します。', 'hachi' ); ?>
+					<?php _e( 'お問い合わせにより取得した個人データは、当社メール受信箱において管理します。お問い合わせ対応の完了後3年を目安にメールを削除します。Slackの通知履歴についても、同様の目安にて削除するよう努めます。', 'hachi' ); ?>
 				</p>
 				<p class="privacy-policy__body">
 					<?php _e( 'ご本人から削除のご請求があった場合は、対応完了後速やかに削除します。', 'hachi' ); ?>

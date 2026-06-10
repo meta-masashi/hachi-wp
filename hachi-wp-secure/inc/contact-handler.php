@@ -451,10 +451,12 @@ function hachi_transform_contact_json_response( string $buffer ): string {
         }
 
         // Supabase に問い合わせデータを保存
-        if ( ! empty( $post_data ) && function_exists( 'hachi_supabase_save_contact' ) ) {
-            $recaptcha_score = (float) ( $GLOBALS['hachi_recaptcha_score'] ?? 0.0 );
-            hachi_supabase_save_contact( $post_data, $cat_info['ga4_event'], $recaptcha_score );
-        }
+        // [DISABLED 2026-06-10] CEO確定: コーポレートお問い合わせはメールのみ。外部DB保存無効化。
+        // 再有効化が必要な場合はコメントを外してレン + リツ sign-off を取ること。
+        // if ( ! empty( $post_data ) && function_exists( 'hachi_supabase_save_contact' ) ) {
+        //     $recaptcha_score = (float) ( $GLOBALS['hachi_recaptcha_score'] ?? 0.0 );
+        //     hachi_supabase_save_contact( $post_data, $cat_info['ga4_event'], $recaptcha_score );
+        // }
 
         hachi_security_log( 'contact_with_ga4', [
             'ip'        => $post_data['ip']  ?? '',

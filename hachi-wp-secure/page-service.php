@@ -104,6 +104,10 @@ get_header();
 				<?php hachi_section_label( 'S e r v i c e   F l o w' ); ?>
 				<h3 class="heading-en heading-en--xs" style="margin-top:12px"><?php _e( 'ご利用の流れ', 'hachi' ); ?></h3>
 			</div>
+			<div class="service-flow-diagram js-fade" aria-label="<?php esc_attr_e( 'サービスの流れ', 'hachi' ); ?>">
+				<?php include get_template_directory() . '/assets/service-flow.svg'; ?>
+			</div>
+
 			<div class="service-flow">
 				<?php
 				$flow_steps = [

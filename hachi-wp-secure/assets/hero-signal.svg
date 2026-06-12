@@ -1,0 +1,143 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1440 900"
+  aria-hidden="true"
+  focusable="false"
+  preserveAspectRatio="xMidYMid slice"
+>
+  <!--
+    HACHI hero-signal.svg
+    Concept: "変化のサインは、じわじわと積み重なる"
+    7 horizontal strata — each stratum is a near-flat line that
+    carries one small, contained deviation (a slow rise or a narrow
+    inflection). From bottom to top the deviation grows incrementally,
+    making accumulation legible without drama.
+    Palette: monochrome dark + #2D4295 indigo accent on the topmost line.
+    No fills, no gradients, no raster. Pure geometry.
+  -->
+
+  <defs>
+    <!-- Clip to canvas -->
+    <clipPath id="hero-clip">
+      <rect width="1440" height="900"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#hero-clip)">
+
+    <!--
+      Seven strata. Y positions spread across the viewport height,
+      weighted toward the lower half to stay below the fold of copy.
+      Each path is a cubic bezier: nearly flat with one gentle undulation.
+      Opacity steps down from bottom (most background) to top (most signal).
+      The topmost stratum (accent) is #2D4295 at higher opacity.
+    -->
+
+    <!-- Stratum 1 — bottom, flattest, most receded -->
+    <path
+      d="M -60 680
+         C 160 680, 340 679, 520 678
+         C 700 677, 820 676, 960 675
+         C 1100 674, 1280 674, 1500 674"
+      fill="none"
+      stroke="rgba(29,29,31,0.04)"
+      stroke-width="0.75"
+    />
+
+    <!-- Stratum 2 -->
+    <path
+      d="M -60 620
+         C 120 620, 280 620, 460 619
+         C 600 618, 700 617, 820 615
+         C 960 613, 1120 613, 1500 613"
+      fill="none"
+      stroke="rgba(29,29,31,0.055)"
+      stroke-width="0.75"
+    />
+
+    <!-- Stratum 3 — first perceptible rise begins -->
+    <path
+      d="M -60 558
+         C 100 558, 260 558, 420 556
+         C 560 554, 660 549, 780 545
+         C 900 541, 1060 541, 1500 541"
+      fill="none"
+      stroke="rgba(29,29,31,0.07)"
+      stroke-width="0.8"
+    />
+
+    <!-- Stratum 4 — rise more visible -->
+    <path
+      d="M -60 495
+         C 80 495, 220 495, 380 492
+         C 520 489, 640 482, 760 474
+         C 880 466, 1060 464, 1500 464"
+      fill="none"
+      stroke="rgba(29,29,31,0.09)"
+      stroke-width="0.85"
+    />
+
+    <!-- Stratum 5 — deviation clearly legible -->
+    <path
+      d="M -60 428
+         C 60 428, 200 428, 360 423
+         C 500 418, 620 407, 740 396
+         C 860 385, 1040 382, 1500 382"
+      fill="none"
+      stroke="rgba(29,29,31,0.11)"
+      stroke-width="0.9"
+    />
+
+    <!-- Stratum 6 — pronounced inflection -->
+    <path
+      d="M -60 356
+         C 50 356, 180 356, 340 349
+         C 480 342, 600 326, 720 312
+         C 840 298, 1020 294, 1500 294"
+      fill="none"
+      stroke="rgba(29,29,31,0.14)"
+      stroke-width="1.0"
+    />
+
+    <!--
+      Stratum 7 — topmost / accent
+      This is the "signal line" — the one that has crossed the threshold
+      of notice. Rendered in #2D4295 indigo, still thin, not aggressive.
+      A gentle but unmistakable upward deflection.
+    -->
+    <path
+      d="M -60 278
+         C 40 278, 160 278, 300 268
+         C 440 258, 560 234, 680 218
+         C 800 202, 980 198, 1500 198"
+      fill="none"
+      stroke="#2D4295"
+      stroke-width="1.25"
+      stroke-opacity="0.55"
+    />
+
+    <!--
+      Three vertical tick marks on the accent line — placed at the
+      inflection zone (x ≈ 600–720) to mark the moment the deviation
+      becomes readable. Deliberately sparse: 3 ticks, not a grid.
+    -->
+    <line x1="600" y1="234" x2="600" y2="246" stroke="#2D4295" stroke-width="0.9" stroke-opacity="0.4"/>
+    <line x1="640" y1="227" x2="640" y2="239" stroke="#2D4295" stroke-width="0.9" stroke-opacity="0.4"/>
+    <line x1="680" y1="218" x2="680" y2="230" stroke="#2D4295" stroke-width="0.9" stroke-opacity="0.4"/>
+
+    <!--
+      A single horizontal reference line at y = 278 (the accent line's
+      origin level) — extends only from left edge to x ≈ 300,
+      the point where the line begins to diverge. This anchors the
+      "before-signal" baseline without decorating the whole canvas.
+    -->
+    <line
+      x1="-60" y1="278"
+      x2="300"  y2="278"
+      stroke="rgba(29,29,31,0.08)"
+      stroke-width="0.6"
+      stroke-dasharray="4 8"
+    />
+
+  </g>
+</svg>

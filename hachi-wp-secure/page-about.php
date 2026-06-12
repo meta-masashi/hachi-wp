@@ -47,7 +47,17 @@ get_header();
 				</p>
 			</div>
 
-			<!-- photo slot removed — copy-led single column -->
+			<!-- about-concept.svg: HACHI思想の構造図 — 観察→構造化→判断 -->
+			<div class="js-fade js-fade--delay-1" style="margin-top:56px">
+				<img
+					src="<?php echo esc_url( get_template_directory_uri() . '/assets/about-concept.svg' ); ?>"
+					alt="<?php esc_attr_e( '観察・構造化・判断 — 身体知を、再現可能な判断知へ。', 'hachi' ); ?>"
+					width="800"
+					height="400"
+					loading="lazy"
+					style="display:block;width:100%;max-width:800px;"
+				/>
+			</div>
 
 		</div>
 	</div>

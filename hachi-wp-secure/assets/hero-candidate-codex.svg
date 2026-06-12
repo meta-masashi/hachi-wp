@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">
+  <path d="M 716 708 A 408 408 0 0 1 716 192" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.04"/>
+  <path d="M 770 680 A 352 352 0 0 1 770 220" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.05"/>
+  <path d="M 824 650 A 296 296 0 0 1 824 250" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.06"/>
+  <path d="M 874 618 A 244 244 0 0 1 874 282" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.07"/>
+  <path d="M 920 584 A 196 196 0 0 1 920 316" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.08"/>
+  <path d="M 962 550 A 152 152 0 0 1 962 350" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.09"/>
+  <path d="M 998 516 A 114 114 0 0 1 998 384" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.10"/>
+  <path d="M 1028 486 A 82 82 0 0 1 1028 414" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.11"/>
+  <path d="M 1052 466 A 56 56 0 0 1 1052 434" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.12"/>
+
+  <line x1="720" y1="450" x2="756" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.04"/>
+  <line x1="784" y1="450" x2="818" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.05"/>
+  <line x1="842" y1="450" x2="874" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.06"/>
+  <line x1="894" y1="450" x2="924" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.07"/>
+  <line x1="940" y1="450" x2="968" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.08"/>
+  <line x1="980" y1="450" x2="1006" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.09"/>
+  <line x1="1016" y1="450" x2="1040" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.10"/>
+  <line x1="1048" y1="450" x2="1070" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.12"/>
+
+  <line x1="1088" y1="179" x2="1088" y2="195" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.04"/>
+  <line x1="1088" y1="231" x2="1088" y2="247" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.05"/>
+  <line x1="1088" y1="279" x2="1088" y2="295" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.06"/>
+  <line x1="1088" y1="323" x2="1088" y2="339" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.07"/>
+  <line x1="1088" y1="363" x2="1088" y2="379" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.08"/>
+  <line x1="1088" y1="399" x2="1088" y2="415" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.09"/>
+  <line x1="1088" y1="425" x2="1088" y2="439" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.11"/>
+  <line x1="1088" y1="461" x2="1088" y2="475" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.11"/>
+  <line x1="1088" y1="485" x2="1088" y2="501" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.09"/>
+  <line x1="1088" y1="521" x2="1088" y2="537" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.08"/>
+  <line x1="1088" y1="561" x2="1088" y2="577" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.07"/>
+  <line x1="1088" y1="605" x2="1088" y2="621" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.06"/>
+  <line x1="1088" y1="653" x2="1088" y2="669" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.05"/>
+  <line x1="1088" y1="705" x2="1088" y2="721" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.04"/>
+
+  <line x1="1110" y1="450" x2="1130" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.12"/>
+  <line x1="1140" y1="450" x2="1162" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.10"/>
+  <line x1="1174" y1="450" x2="1198" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.08"/>
+  <line x1="1212" y1="450" x2="1238" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.07"/>
+  <line x1="1254" y1="450" x2="1282" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.06"/>
+  <line x1="1300" y1="450" x2="1330" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.05"/>
+  <line x1="1350" y1="450" x2="1382" y2="450" fill="none" stroke="#1d1d1f" stroke-width="1" opacity="0.04"/>
+
+  <circle cx="1088" cy="450" r="3.5" fill="#2D4295" opacity="0.5"/>
+</svg>

@@ -6,6 +6,7 @@
  */
 get_header();
 ?>
+<main id="main-content">
 
 <!-- ===== PAGE HERO ===== -->
 <div class="page-hero">
@@ -225,4 +226,5 @@ get_header();
 	</div>
 </section>
 
+</main>
 <?php get_footer(); ?>

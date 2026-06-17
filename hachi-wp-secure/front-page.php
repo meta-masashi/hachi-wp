@@ -7,6 +7,7 @@
 
 get_header();
 ?>
+<main id="main-content">
 
 <!-- ===== HERO ===== -->
 <section class="hero" aria-label="<?php esc_attr_e( 'メインビジュアル', 'hachi' ); ?>">
@@ -235,4 +236,5 @@ if ( $ticker ) :
 	</div>
 </section>
 
+</main>
 <?php get_footer(); ?>

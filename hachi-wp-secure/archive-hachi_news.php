@@ -17,6 +17,7 @@ if ( ! array_key_exists( $active, $tabs ) ) $active = 'all';
 
 $items = hachi_get_classified_items( [ 'category' => $active, 'limit' => 60 ] );
 ?>
+<main id="main-content">
 
 <!-- ===== PAGE HERO ===== -->
 <div class="page-hero">
@@ -91,4 +92,5 @@ $items = hachi_get_classified_items( [ 'category' => $active, 'limit' => 60 ] );
 	</div>
 </section>
 
+</main>
 <?php get_footer(); ?>

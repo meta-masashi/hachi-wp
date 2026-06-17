@@ -23,6 +23,7 @@ $card_meta = [
 	'general'     => [ 'title' => 'その他', 'sub' => '上記以外のご相談、ご質問はこちら', 'icon' => '○' ],
 ];
 ?>
+<main id="main-content">
 
 <!-- ===== PAGE HERO ===== -->
 <div class="page-hero">
@@ -315,4 +316,5 @@ $card_meta = [
 </script>
 <?php endif; ?>
 
+</main>
 <?php get_footer(); ?>

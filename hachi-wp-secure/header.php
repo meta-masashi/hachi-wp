@@ -15,6 +15,7 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<a href="#main-content" class="skip-link"><?php _e( '本文へスキップ', 'hachi' ); ?></a>
 
 <!-- ===== SCROLL PROGRESS ===== -->
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -39,7 +40,7 @@
 <!-- ===== MOBILE DRAWER ===== -->
 <nav class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'ナビゲーションメニュー', 'hachi' ); ?>">
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-drawer__item"><?php _e( 'Home', 'hachi' ); ?></a>
-	<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-drawer__item"><?php _e( 'About', 'hachi' ); ?></a>
+	<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-drawer__item"><?php _e( 'About Us', 'hachi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="nav-drawer__item"><?php _e( 'Service', 'hachi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="nav-drawer__item"><?php _e( 'Company', 'hachi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/news/' ) ); ?>" class="nav-drawer__item"><?php _e( 'News', 'hachi' ); ?></a>
@@ -66,7 +67,7 @@
 			<?php
 			$pages = [
 				''          => __( 'Home', 'hachi' ),
-				'about'     => __( 'About', 'hachi' ),
+				'about'     => __( 'About Us', 'hachi' ),
 				'service'   => __( 'Service', 'hachi' ),
 				'company'   => __( 'Company', 'hachi' ),
 				'news'      => __( 'News', 'hachi' ),

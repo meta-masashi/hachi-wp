@@ -4967,3 +4967,226 @@ footer.site-footer {
 /* ============================================================
    END SERVICE FLOW DIAGRAM — 2026-06-11
    ============================================================ */
+
+/* ============================================================
+   COMPANY PAGE v3 — 2026-06-17
+   (SECURITY / access / 沿革セクション削除版 / 登記住所確定)
+   ============================================================ */
+
+/* content-narrow utility (共通幅制約) */
+.content-narrow {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+/* ── Section 1: ヒーロー ── */
+.company-hero {
+  padding-block: 180px 160px;
+  text-align: center;
+}
+
+.company-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.company-hero .eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: #8a8a90;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.company-hero__h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  color: #1d1d1f;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.company-hero__sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: #8a8a90;
+  margin-top: 4px;
+}
+
+/* ── Section 2: 会社概要 ── */
+.company-overview {
+  padding-block: 120px;
+  border-top: 1px solid #e8e8ed;
+}
+
+.company-overview__heading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 400;
+  color: #1d1d1f;
+  margin-bottom: 56px;
+}
+
+/* v3 company-table (旧 v2 の .company-dl を置き換え) */
+.company-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.company-table__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  padding-block: 22px;
+  border-bottom: 1px solid #e8e8ed;
+}
+
+.company-table__row--first {
+  border-top: 1px solid #e8e8ed;
+}
+
+.company-table__row--divide {
+  border-top: 1px solid #e8e8ed;
+}
+
+.company-table__row--last {
+  border-bottom: 1px solid #e8e8ed;
+}
+
+.company-table__label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: #8a8a90;
+  text-transform: uppercase;
+  width: 28%;
+  flex-shrink: 0;
+  padding-right: 16px;
+  line-height: 1.7;
+}
+
+.company-table__value {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #1d1d1f;
+  flex: 1;
+  margin: 0;
+}
+
+/* ── Section 3: 事業内容 ── */
+.company-business {
+  padding-block: 120px;
+  border-top: 1px solid #e8e8ed;
+}
+
+.company-business__heading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 400;
+  color: #1d1d1f;
+  margin-bottom: 40px;
+}
+
+.company-business__body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  line-height: 2;
+  color: #1d1d1f;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+}
+
+.company-business__link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #1d1d1f;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.company-business__link:hover {
+  opacity: 0.55;
+}
+
+/* ── Section 4: フッター CTA (黒背景) ── */
+.company-footer-cta {
+  background: #0c0c0e;
+  padding-block: 120px;
+}
+
+.company-footer-cta__inner {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.company-footer-cta__heading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 白塗りボタン (黒背景用) */
+.btn--white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #0c0c0e;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 18px 40px;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.btn--white:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+/* ── レスポンシブ ── */
+@media (max-width: 768px) {
+  .company-hero { padding-block: 120px 100px; }
+  .company-overview { padding-block: 80px; }
+  .company-business { padding-block: 80px; }
+  .company-footer-cta { padding-block: 80px; }
+  .company-table__label { width: 36%; font-size: 10px; }
+}
+
+@media (max-width: 480px) {
+  .company-table__row {
+    flex-direction: column;
+    gap: 6px;
+    padding-block: 18px;
+  }
+  .company-table__label { width: 100%; }
+}
+
+/* ============================================================
+   END COMPANY PAGE v3 — 2026-06-17
+   ============================================================ */

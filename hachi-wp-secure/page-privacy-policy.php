@@ -5,13 +5,11 @@
  * DB ページ不要。functions.php の template_redirect フックから直接 require される。
  * get_header() / get_footer() を使用するが $post / the_content() 等のループ依存なし。
  *
- * Content: コーポレートサイト用プライバシーポリシー v1.2
- * Legal sign-off: ritsu-legal (2026-06-17) — B-1ブロッカー解消
+ * Content: コーポレートサイト用プライバシーポリシー v1.0
+ * Legal sign-off: ritsu-legal (2026-06-10)
  * Cookie条項: なし版（GTM/GA4 本番設定状態が確認不能のため安全側を採用）
  *              本番で GTM_CONTAINER_ID / GA4_MEASUREMENT_ID を設定した際は
  *              第6条を Cookie条項あり版に差し替えること（リツに再確認を依頼）
- * v1.2変更内容: 第2条テーブルに「電話番号（任意）」「従業員数（選択肢）」を追記
- *               改訂履歴セクションを本文末尾に追加（個情法17条・18条通知義務充足）
  *
  * @package HACHI
  */
@@ -89,14 +87,6 @@ get_header();
 						<tr>
 							<td><?php _e( 'メールアドレス', 'hachi' ); ?></td>
 							<td><?php _e( 'フォームへの入力', 'hachi' ); ?></td>
-						</tr>
-						<tr>
-							<td><?php _e( '電話番号', 'hachi' ); ?></td>
-							<td><?php _e( 'フォームへの入力（任意）', 'hachi' ); ?></td>
-						</tr>
-						<tr>
-							<td><?php _e( '従業員数（選択肢）', 'hachi' ); ?></td>
-							<td><?php _e( 'フォームへの選択', 'hachi' ); ?></td>
 						</tr>
 						<tr>
 							<td><?php _e( '用件（選択肢）', 'hachi' ); ?></td>
@@ -239,37 +229,6 @@ get_header();
 				<p class="privacy-policy__body">
 					<?php _e( '当社は、法令の改正またはサービス内容の変更により、本ポリシーを改定することがあります。改定後のポリシーは、当社ウェブサイトへの掲載をもって効力を生じます。重要な変更については、ウェブサイト上でお知らせします。', 'hachi' ); ?>
 				</p>
-			</div>
-
-			<!-- 改訂履歴 -->
-			<div class="privacy-policy__section">
-				<h2 class="privacy-policy__heading"><?php _e( '改訂履歴', 'hachi' ); ?></h2>
-				<table class="privacy-policy__table">
-					<thead>
-						<tr>
-							<th><?php _e( '版', 'hachi' ); ?></th>
-							<th><?php _e( '改訂日', 'hachi' ); ?></th>
-							<th><?php _e( '改訂内容', 'hachi' ); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><?php _e( 'v1.2', 'hachi' ); ?></td>
-							<td><?php _e( '2026年6月17日', 'hachi' ); ?></td>
-							<td><?php _e( '第2条の取得項目に「電話番号（任意）」「従業員数（選択肢）」を追記。フォームで実際に取得している項目をプライバシーポリシーに反映（個人情報の保護に関する法律第17条・第18条に基づく通知義務の充足）。', 'hachi' ); ?></td>
-						</tr>
-						<tr>
-							<td><?php _e( 'v1.1', 'hachi' ); ?></td>
-							<td><?php _e( '2026年6月10日', 'hachi' ); ?></td>
-							<td><?php _e( 'フォーム実態（外部DB不使用・Slack通知あり）に合わせて第5条を改訂。', 'hachi' ); ?></td>
-						</tr>
-						<tr>
-							<td><?php _e( 'v1.0', 'hachi' ); ?></td>
-							<td><?php _e( '2026年6月10日', 'hachi' ); ?></td>
-							<td><?php _e( '初版制定。', 'hachi' ); ?></td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 
 			<p class="privacy-policy__company">

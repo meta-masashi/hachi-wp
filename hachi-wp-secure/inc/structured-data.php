@@ -55,6 +55,14 @@ function hachi_output_structured_data(): void {
         }
     }
 
+    // 7. ItemList（ニュースアーカイブページ）
+    if ( is_post_type_archive( 'hachi_news' ) ) {
+        $item_list = hachi_schema_news_itemlist();
+        if ( $item_list ) {
+            $schemas[] = $item_list;
+        }
+    }
+
     foreach ( $schemas as $schema ) {
         if ( empty( $schema ) ) continue;
         printf(
@@ -344,6 +352,51 @@ function hachi_schema_breadcrumb(): ?array {
         '@context'        => 'https://schema.org',
         '@type'           => 'BreadcrumbList',
         'itemListElement' => $items,
+    ];
+}
+
+/* ============================================================
+   ItemList スキーマ（ニュースアーカイブ専用）
+   ============================================================ */
+
+function hachi_schema_news_itemlist(): ?array {
+    $base = hachi_site_base_url();
+
+    $news_query = new WP_Query( [
+        'post_type'      => 'hachi_news',
+        'posts_per_page' => 4,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ] );
+
+    if ( ! $news_query->have_posts() ) {
+        return null;
+    }
+
+    $list_items = [];
+    $position   = 1;
+
+    while ( $news_query->have_posts() ) {
+        $news_query->the_post();
+        $list_items[] = [
+            '@type'    => 'ListItem',
+            'position' => $position++,
+            'name'     => get_the_title(),
+            'url'      => (string) get_permalink(),
+            '@id'      => (string) get_permalink(),
+        ];
+    }
+    wp_reset_postdata();
+
+    return [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'ItemList',
+        'name'            => 'HACHI ニュース・知見',
+        'description'     => 'サービス更新と現場で気づいたことを記録します。',
+        'url'             => $base . '/news/',
+        'numberOfItems'   => count( $list_items ),
+        'itemListElement' => $list_items,
     ];
 }
 

@@ -5033,6 +5033,32 @@ footer.site-footer {
 }
 
 #main-content .cv3-hero__inner {
+   NEWS v3 LIGHT MONOCHROME — 2026-06-18
+   archive-hachi_news.php 専用スタイル
+   #main-content スコープで既存スタイルと独立
+   ============================================================ */
+
+/* --- レイアウト共通 --- */
+#main-content .news-container {
+  width: 100%;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+#main-content .news-content-narrow {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* --- Section 1: ヒーロー --- */
+#main-content .news-hero {
+  padding-block: 180px;
+  text-align: center;
+  background: #ffffff;
+}
+
+#main-content .news-hero__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6650,9 +6676,184 @@ footer.site-footer {
   #main-content .cv3-direct__email-link {
     font-size: 16px;
     word-break: break-all;
+#main-content .news-eyebrow {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3a3a3c;
+}
+
+#main-content .news-hero__h1 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+#main-content .news-hero__sub {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #3a3a3c;
+  letter-spacing: 0.04em;
+}
+
+/* --- Section 2: 記事一覧 --- */
+#main-content .news-list-section {
+  padding-block: 0 200px;
+  background: #ffffff;
+}
+
+/* 縦リスト */
+#main-content .news-post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 72px; /* 記事間余白 64〜80px — v3 設計憲章準拠 */
+}
+
+/* 各記事カード */
+#main-content .news-post-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* メタ行（日付 + カテゴリ） */
+#main-content .news-post-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+#main-content .news-post-item__date {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #3a3a3c;
+}
+
+#main-content .news-post-item__category {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #2D4295; /* アクセント: テキストのみ・塗りなし */
+}
+
+/* 記事タイトル */
+#main-content .news-post-item__title {
+  font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: #1d1d1f;
+  margin: 0 0 16px;
+}
+
+#main-content .news-post-item__title a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+#main-content .news-post-item__title a:hover {
+  opacity: 0.65;
+}
+
+/* 続きを読む */
+#main-content .news-post-item__read-more {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-size: 14px;
+  color: #3a3a3c;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-bottom: 1px solid #E5E5E7;
+  padding-bottom: 1px;
+  align-self: flex-start;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+#main-content .news-post-item__read-more:hover {
+  color: #1d1d1f;
+  border-bottom-color: #1d1d1f;
+}
+
+/* 空状態 */
+#main-content .news-empty {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-size: 15px;
+  color: #3a3a3c;
+  text-align: center;
+  padding: 48px 0;
+}
+
+/* --- Section 3: フッター CTA --- */
+#main-content .news-footer-cta {
+  background: #1d1d1f;
+  padding-block: 120px;
+  text-align: center;
+}
+
+#main-content .news-footer-cta__heading {
+  font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 40px;
+}
+
+#main-content .news-footer-cta__btn {
+  display: inline-block;
+  background: #ffffff;
+  color: #1d1d1f;
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 18px 48px;
+  min-width: 240px;
+  border: 1px solid #ffffff;
+  transition: background 0.2s, color 0.2s;
+}
+
+#main-content .news-footer-cta__btn:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+/* --- モバイル対応 --- */
+@media (max-width: 768px) {
+  #main-content .news-hero {
+    padding-block: 100px;
+  }
+  #main-content .news-list-section {
+    padding-bottom: 120px;
+  }
+  #main-content .news-post-list {
+    gap: 56px;
+  }
+  #main-content .news-footer-cta {
+    padding-block: 80px;
+  }
+  #main-content .news-footer-cta__btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 24px;
   }
 }
 
 /* ============================================================
    END CONTACT PAGE v3 — 2026-06-18
+   END NEWS v3 LIGHT MONOCHROME — 2026-06-18
    ============================================================ */

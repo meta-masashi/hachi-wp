@@ -1,96 +1,84 @@
 <?php
 /**
- * HACHI Theme — archive-hachi_news.php (Light Monochrome v2)
- * 統合フィード: WP hachi_news + note.com RSS
- * 自動分類: News / Work / Blog （hachi_classify_content）
+ * HACHI Theme — archive-hachi_news.php (v3 Light Monochrome)
+ * 3 セクション: ヒーロー / 記事一覧 / フッター CTA
+ * フィルタタブ・ページネーション・サムネイル・物体アイコン 全削除
  */
 get_header();
-
-$tabs = [
-	'all'  => 'ALL',
-	'news' => 'NEWS',
-	'work' => 'WORK',
-	'blog' => 'BLOG',
-];
-$active = sanitize_key( $_GET['type'] ?? 'all' );
-if ( ! array_key_exists( $active, $tabs ) ) $active = 'all';
-
-$items = hachi_get_classified_items( [ 'category' => $active, 'limit' => 60 ] );
 ?>
 <main id="main-content">
 
-<!-- ===== PAGE HERO ===== -->
-<div class="page-hero">
-	<div class="container">
-		<div class="js-fade"><?php hachi_section_label( 'N e w s' ); ?></div>
-		<h1 class="heading-en js-fade js-fade--delay-1">NEWS</h1>
-		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( 'お知らせ・導入事例・ブログ', 'hachi' ); ?></p>
-	</div>
-</div>
+<main id="main-content">
 
-<!-- ===== NEWS LIST ===== -->
-<section class="section news-archive">
-	<div class="container">
-
-		<!-- Filter tabs -->
-		<div class="news-filter js-fade" role="tablist" aria-label="<?php esc_attr_e( 'コンテンツフィルター', 'hachi' ); ?>">
-			<?php foreach ( $tabs as $key => $label ) :
-				$is_active = $key === $active;
-				$url       = add_query_arg( 'type', $key, get_post_type_archive_link( 'hachi_news' ) );
-			?>
-				<a
-					href="<?php echo esc_url( $url ); ?>"
-					class="news-filter__btn<?php echo $is_active ? ' is-active' : ''; ?>"
-					role="tab"
-					aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
-				>
-					<?php echo esc_html( $label ); ?>
-				</a>
-			<?php endforeach; ?>
+<!-- ===== Section 1: ヒーロー ===== -->
+<section class="news-hero">
+	<div class="news-container">
+		<div class="news-hero__inner">
+			<p class="news-eyebrow">NEWS</p>
+			<h1 class="news-hero__h1">ニュース・知見</h1>
+			<p class="news-hero__sub"><?php esc_html_e( 'サービス更新と現場で気づいたことを記録します。', 'hachi' ); ?></p>
 		</div>
-
-		<div class="news-list js-fade js-fade--delay-1" role="tabpanel">
-			<?php if ( ! empty( $items ) ) : ?>
-				<?php foreach ( $items as $it ) :
-					$is_external = $it['source'] === 'note';
-					$cat         = $it['category'];
-				?>
-					<a
-						href="<?php echo esc_url( $it['url'] ); ?>"
-						class="news-card news-card--<?php echo esc_attr( $cat ); ?>"
-						<?php echo $is_external ? 'target="_blank" rel="noopener noreferrer nofollow"' : ''; ?>
-					>
-						<div class="news-card__media">
-							<?php if ( $it['thumbnail'] ) : ?>
-								<img src="<?php echo esc_url( $it['thumbnail'] ); ?>" alt="" loading="lazy">
-							<?php else : ?>
-								<span class="news-card__media-placeholder"><?php echo esc_html( strtoupper( $cat ) ); ?></span>
-							<?php endif; ?>
-						</div>
-						<div class="news-card__body">
-							<div class="news-card__meta">
-								<span class="news-card__cat news-card__cat--<?php echo esc_attr( $cat ); ?>">
-									<?php echo esc_html( strtoupper( $cat ) ); ?>
-								</span>
-								<span class="news-card__date"><?php echo esc_html( $it['date_str'] ); ?></span>
-								<?php if ( $is_external ) : ?>
-									<span class="news-card__external" aria-hidden="true">↗ note</span>
-								<?php endif; ?>
-							</div>
-							<h3 class="news-card__title"><?php echo esc_html( $it['title'] ); ?></h3>
-							<?php if ( $it['excerpt'] ) : ?>
-								<p class="news-card__excerpt"><?php echo esc_html( $it['excerpt'] ); ?></p>
-							<?php endif; ?>
-						</div>
-					</a>
-				<?php endforeach; ?>
-			<?php else : ?>
-				<p class="news-empty"><?php _e( '該当する記事がありません。', 'hachi' ); ?></p>
-			<?php endif; ?>
-		</div>
-
 	</div>
 </section>
 
 </main>
+<!-- ===== Section 2: 記事一覧 ===== -->
+<section class="news-list-section">
+	<div class="news-container">
+		<div class="news-content-narrow">
+			<?php
+			$news_query = new WP_Query( [
+				'post_type'      => 'hachi_news',
+				'posts_per_page' => 4,
+				'post_status'    => 'publish',
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+			] );
+			?>
+			<?php if ( $news_query->have_posts() ) : ?>
+				<ol class="news-post-list">
+					<?php while ( $news_query->have_posts() ) : $news_query->the_post(); ?>
+						<?php
+						$news_type = get_post_meta( get_the_ID(), '_hachi_news_type', true );
+						if ( empty( $news_type ) ) {
+							$terms = get_the_terms( get_the_ID(), 'hachi_news_category' );
+							if ( $terms && ! is_wp_error( $terms ) ) {
+								$news_type = strtoupper( $terms[0]->name );
+							} else {
+								$news_type = 'BLOG';
+							}
+						} else {
+							$news_type = strtoupper( $news_type );
+						}
+						?>
+						<li class="news-post-item">
+							<div class="news-post-item__meta">
+								<time class="news-post-item__date" datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>">
+									<?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?>
+								</time>
+								<span class="news-post-item__category"><?php echo esc_html( $news_type ); ?></span>
+							</div>
+							<h2 class="news-post-item__title">
+								<a href="<?php echo esc_url( get_permalink() ); ?>"><?php echo esc_html( get_the_title() ); ?></a>
+							</h2>
+							<a href="<?php echo esc_url( get_permalink() ); ?>" class="news-post-item__read-more"><?php esc_html_e( '続きを読む →', 'hachi' ); ?></a>
+						</li>
+					<?php endwhile; ?>
+					<?php wp_reset_postdata(); ?>
+				</ol>
+			<?php else : ?>
+				<p class="news-empty"><?php esc_html_e( '現在、記事はありません。', 'hachi' ); ?></p>
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+
+<!-- ===== Section 3: フッター CTA ===== -->
+<section class="news-footer-cta">
+	<h2 class="news-footer-cta__heading"><?php esc_html_e( '導入のご相談はこちらから。', 'hachi' ); ?></h2>
+	<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="news-footer-cta__btn"><?php esc_html_e( 'お問い合わせ', 'hachi' ); ?></a>
+</section>
+
+</main>
+
 <?php get_footer(); ?>

@@ -55,6 +55,11 @@ function hachi_output_structured_data(): void {
         }
     }
 
+    // 7. News archive ItemList（v3.3 固定表示記事）
+    if ( is_post_type_archive( 'hachi_news' ) ) {
+        $schemas[] = hachi_schema_news_item_list();
+    }
+
     foreach ( $schemas as $schema ) {
         if ( empty( $schema ) ) continue;
         printf(
@@ -85,8 +90,8 @@ function hachi_schema_organization(): array {
             'height' => 80,
         ],
         'image'         => $base . '/wp-content/themes/hachi-wp-secure/assets/og-image.png',
-        'description'   => '株式会社HACHIは、社員のコンディション（状態）の変化を組織で見える形にする会社です。コンディション・インサイト（状態の可視化）と HACHI Fieldwork（現場でのコンディショニング）を提供しています。',
-        'slogan'        => '変化のサインを、見逃さない。',
+        'description'   => '株式会社HACHIは、身体領域の専門知を観察・構造化・検証可能な判断知へ変換する会社です。コンディション・インサイトと HACHI Fieldwork を提供しています。',
+        'slogan'        => '身体知を、再現可能な判断知へ。',
         'foundingDate'  => '2022-03-25',
         'founder'       => [
             '@type' => 'Person',
@@ -105,10 +110,10 @@ function hachi_schema_organization(): array {
             [ '@type' => 'Country', 'name' => '日本' ],
         ],
         'knowsAbout'    => [
-            '社員コンディションの可視化',
+            '身体知の構造化',
             '状態の観察と記録',
             'コンディショニング',
-            '組織の判断支援',
+            '組織の判断材料づくり',
         ],
         'sameAs'        => [
             'https://x.com/hachi_inc',
@@ -136,7 +141,7 @@ function hachi_schema_website(): array {
         'url'             => $base . '/',
         'name'            => 'HACHI',
         'alternateName'   => '株式会社HACHI',
-        'description'     => '社員のコンディションの変化を、組織で見える形にする。HACHIの公式サイト。',
+        'description'     => '身体知を、再現可能な判断知へ。HACHIの公式サイト。',
         'inLanguage'      => 'ja-JP',
         'publisher'       => [ '@id' => $base . '/#organization' ],
         'potentialAction' => [
@@ -185,7 +190,7 @@ function hachi_schema_webpage(): array {
     if ( is_front_page() || is_page() ) {
         $schema['speakable'] = [
             '@type' => 'SpeakableSpecification',
-            'cssSelector' => [ '.heading-en', '.heading-jp', '.hero__lede', '.body-copy' ],
+            'cssSelector' => [ '.v3-hero h1', '.v3-section h2', '.v3-page p' ],
         ];
     }
 
@@ -223,7 +228,7 @@ function hachi_schema_services(): array {
         '@id'         => $base . '/service/#condition-insight',
         'name'        => 'コンディション・インサイト',
         'serviceType' => '組織コンディション可視化サービス',
-        'description' => '社員の状態（疲労・睡眠・集中・身体の状態）の変化を、本人の同意のもとで把握し、組織で見える形に整えるアセスメントサービス。',
+        'description' => '社員の身体・睡眠・集中・疲労の傾向を、組織として観察できる材料に整えるサービス。',
         'provider'    => [ '@id' => $base . '/#organization' ],
         'areaServed'  => [ '@type' => 'Country', 'name' => '日本' ],
         'url'         => $base . '/service/',
@@ -239,7 +244,7 @@ function hachi_schema_services(): array {
         '@id'         => $base . '/service/#hachi-fieldwork',
         'name'        => 'HACHI Fieldwork',
         'serviceType' => 'オンサイト コンディショニングサポート',
-        'description' => '現場でコンディションを整えるオンサイトサポート。観察と声がけ・記録をもとに、社員自身が動くコンディショニングを支援します。',
+        'description' => '現場でのストレッチコンディショニングを通じて、観察と介入を一続きにするオンサイトサービス。',
         'provider'    => [ '@id' => $base . '/#organization' ],
         'areaServed'  => [ '@type' => 'Country', 'name' => '日本' ],
         'url'         => $base . '/service/',
@@ -260,11 +265,11 @@ function hachi_schema_faq(): array {
     $faqs = [
         [
             'question' => '株式会社HACHIはどんな会社ですか？',
-            'answer'   => '株式会社HACHIは、2022年3月に設立された、社員のコンディション（状態）の変化を組織で見える形にする会社です。東京都武蔵野市吉祥寺を拠点に、コンディション・インサイト（状態の可視化）と HACHI Fieldwork（現場でのコンディショニング）を提供しています。代表取締役社長は佐々木譲崇。',
+            'answer'   => '株式会社HACHIは、2022年3月に設立された、身体領域の専門知を観察・構造化・検証可能な判断知へ変換する会社です。東京都武蔵野市吉祥寺を拠点に、コンディション・インサイトと HACHI Fieldwork を提供しています。代表取締役社長は佐々木譲崇。',
         ],
         [
             'question' => 'コンディション・インサイトとはどのようなサービスですか？',
-            'answer'   => 'コンディション・インサイトは、社員の状態（疲労・睡眠・集中・身体の状態）の変化を、本人の同意のもとで把握し、組織で見える形に整えるアセスメントサービスです。診断や医療行為は行わず、状態の観察・記録を通じて、本人と管理職が早めに動けるきっかけをつくります。',
+            'answer'   => 'コンディション・インサイトは、社員の身体・睡眠・集中・疲労の傾向を、短いチェックから組織単位で整理するサービスです。状態の観察・記録を通じて、経営者・人事・管理職の日常判断に使える情報を提供します。',
         ],
         [
             'question' => 'HACHI Fieldwork とはどのようなサービスですか？',
@@ -273,10 +278,6 @@ function hachi_schema_faq(): array {
         [
             'question' => '導入を検討したい場合、どうすればよいですか？',
             'answer'   => 'お問い合わせページのフォームよりご連絡ください。ヒアリングのうえ、貴社の状況に合わせてご提案いたします。',
-        ],
-        [
-            'question' => 'HACHIのセキュリティ対策は？',
-            'answer'   => '個人情報保護法に準拠したデータ管理を行っています。通信の TLS 1.3 暗号化、Row Level Security（RLS）によるテナントデータの分離、アクセス制御を実装しています。',
         ],
         [
             'question' => '会社の所在地はどこですか？',
@@ -356,6 +357,40 @@ function hachi_schema_breadcrumb(): ?array {
         '@context'        => 'https://schema.org',
         '@type'           => 'BreadcrumbList',
         'itemListElement' => $items,
+    ];
+}
+
+/* ============================================================
+   News ItemList スキーマ
+   ============================================================ */
+
+function hachi_schema_news_item_list(): array {
+    $base  = hachi_site_base_url();
+    $items = [
+        [ '2026-04-15', 'コンディショニング管理に AI を導入する前に知っておくべき 3 つのこと' ],
+        [ '2026-04-15', 'トレーナーの "なんとなく" を AI に翻訳する ── body-part prior という考え方' ],
+        [ '2026-03-31', 'AI がスポーツ現場の「評価」を変える｜トレーナーの推論は機械に勝てるのか' ],
+        [ '2026-03-25', 'センサーが現場を変えているか？──ウェアラブルデバイスによる傷害リスク評価' ],
+    ];
+
+    return [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'ItemList',
+        '@id'             => $base . '/news/#itemlist',
+        'name'            => 'HACHI ニュース・知見',
+        'itemListElement' => array_map( function ( array $item, int $index ) use ( $base ): array {
+            return [
+                '@type'    => 'ListItem',
+                'position' => $index + 1,
+                'item'     => [
+                    '@type'         => 'Article',
+                    'headline'      => $item[1],
+                    'datePublished' => $item[0],
+                    'url'           => $base . '/news/',
+                    'publisher'     => [ '@id' => $base . '/#organization' ],
+                ],
+            ];
+        }, $items, array_keys( $items ) ),
     ];
 }
 

@@ -23,6 +23,10 @@ function hachi_v3_person(): void {
     <?php
 }
 
+function hachi_v3_blue_mark(): string {
+    return '<span class="v3-blue-mark" aria-hidden="true"><span></span></span>';
+}
+
 function hachi_v3_footer_cta( string $title ): void {
     ?>
     <section class="v3-footer-cta" aria-label="お問い合わせ CTA">
@@ -67,7 +71,7 @@ function hachi_v3_render_home(): void {
     $news = array_slice( hachi_v3_news_items(), 0, 2 );
     ?>
     <main id="main-content" class="v3-page v3-home">
-        <section class="v3-hero v3-hero--split" aria-label="ヒーロー">
+        <section class="v3-hero v3-hero--split v3-hero--home" aria-label="ヒーロー">
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
                     <h1>身体知を、再現可能な<br>判断知へ。</h1>
@@ -78,9 +82,9 @@ function hachi_v3_render_home(): void {
             </div>
         </section>
 
-        <section class="v3-section v3-section--center">
+        <section class="v3-section v3-section--center v3-home-statement">
             <div class="v3-container v3-narrow">
-                <h2>経営判断に、観察できる材料を。</h2>
+                <h2>株式会社 HACHI は、<br>「変化を見抜き、判断を支える」会社です。</h2>
                 <p>コンディション・インサイトは、社員の短いチェックから身体・睡眠・集中・疲労の傾向を組織として整理する法人向けサービスです。経営者・人事・管理職の日常判断に使える情報を提供します。</p>
             </div>
         </section>
@@ -112,18 +116,19 @@ function hachi_v3_render_home(): void {
             </div>
         </section>
 
-        <section class="v3-section">
+        <section class="v3-section v3-service-split">
             <div class="v3-container">
-                <h2 class="v3-center">2 つのサービスで、組織のコンディションを整える</h2>
                 <div class="v3-two-col">
                     <article class="v3-line-card">
+                        <p class="v3-card-kicker">SERVICE 01</p>
                         <h3>コンディション・インサイト</h3>
-                        <p>社員の状態変化のサインを、組織として早めにつかむ。</p>
+                        <p>心身のコンディションを多面的に可視化し、変化の兆しを早期につかむためのインサイトを提供します。</p>
                         <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>">詳細を見る →</a>
                     </article>
                     <article class="v3-line-card">
+                        <p class="v3-card-kicker">SERVICE 02</p>
                         <h3>HACHI Fieldwork</h3>
-                        <p>現場でのストレッチコンディショニングを通じて、組織の状態を直接整える。</p>
+                        <p>専門スタッフが現場に入り、観察・対話・記録を通じて、次の一手につながる情報へ変換します。</p>
                         <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>">詳細を見る →</a>
                     </article>
                 </div>
@@ -154,7 +159,7 @@ function hachi_v3_render_home(): void {
 function hachi_v3_render_service(): void {
     ?>
     <main id="main-content" class="v3-page v3-service">
-        <section class="v3-hero v3-hero--split v3-hero--compact" aria-label="Service ヒーロー">
+        <section class="v3-hero v3-hero--split v3-hero--compact v3-hero--center-figure" aria-label="Service ヒーロー">
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
                     <p class="v3-eyebrow">SERVICE</p>
@@ -167,7 +172,7 @@ function hachi_v3_render_service(): void {
 
         <section class="v3-section v3-section--center">
             <div class="v3-container">
-                <h2>4 つの観察軸でコンディションを把握する</h2>
+                <h2><span>4</span> つの観察軸でコンディションを把握する</h2>
                 <div class="v3-axis-grid">
                     <?php
                     $axes = [
@@ -217,7 +222,7 @@ function hachi_v3_render_service(): void {
             <div class="v3-container v3-narrow-plus">
                 <div class="v3-section-head v3-center">
                     <h2>「実施して終わり」との違い</h2>
-                    <p>出張整体は施術をゴールにします。コンディション・インサイトは、観察・記録・組織レポートを通じて、次の打ち手につなげる仕組みです。</p>
+                    <p>出張整体は施術をゴールにします。コンディション・インサイトは、観察・記録・組織レポートを通じて、次の打ち手を整理する仕組みです。</p>
                 </div>
                 <div class="v3-comparison">
                     <div>
@@ -262,7 +267,7 @@ function hachi_v3_render_service(): void {
 function hachi_v3_render_about(): void {
     ?>
     <main id="main-content" class="v3-page v3-about">
-        <section class="v3-hero v3-hero--split v3-hero--tall" aria-label="About Us ヒーロー">
+        <section class="v3-hero v3-hero--split v3-hero--tall v3-hero--center-figure" aria-label="About Us ヒーロー">
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
                     <p class="v3-eyebrow">ABOUT</p>
@@ -288,7 +293,7 @@ function hachi_v3_render_about(): void {
             </div>
         </section>
 
-        <section class="v3-section v3-section--center">
+        <section class="v3-section v3-section--center v3-about-flow-section">
             <div class="v3-container">
                 <div class="v3-section-head">
                     <h2>観察・構造化・判断</h2>
@@ -331,15 +336,18 @@ function hachi_v3_render_about(): void {
 function hachi_v3_render_company(): void {
     ?>
     <main id="main-content" class="v3-page v3-company">
-        <section class="v3-hero v3-hero--simple" aria-label="Company ヒーロー">
+        <section class="v3-hero v3-hero--simple v3-hero--decorated" aria-label="Company ヒーロー">
             <div class="v3-container v3-narrow">
                 <p class="v3-eyebrow">COMPANY</p>
                 <h1>会社情報</h1>
                 <p>HACHI Inc.</p>
+                <?php echo hachi_v3_blue_mark(); ?>
             </div>
         </section>
 
-        <section class="v3-section">
+        <section class="v3-section v3-ledger-section">
+            <span class="v3-side-ornament v3-side-ornament--left" aria-hidden="true"></span>
+            <span class="v3-side-ornament v3-side-ornament--right" aria-hidden="true"></span>
             <div class="v3-container v3-narrow">
                 <h2 class="v3-center">会社概要</h2>
                 <dl class="v3-company-table">
@@ -352,9 +360,9 @@ function hachi_v3_render_company(): void {
             </div>
         </section>
 
-        <section class="v3-section">
+        <section class="v3-section v3-business-section">
             <div class="v3-container v3-narrow">
-                <h2>事業内容</h2>
+                <h2 class="v3-center">事業内容</h2>
                 <p>On-site Service「HACHI Fieldwork / コンディション・インサイト」の提供、身体の状態観察・構造化・判断知変換に関する研究開発</p>
                 <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="v3-text-link">サービス詳細を見る →</a>
             </div>
@@ -368,15 +376,18 @@ function hachi_v3_render_company(): void {
 function hachi_v3_render_contact(): void {
     ?>
     <main id="main-content" class="v3-page v3-contact">
-        <section class="v3-hero v3-hero--simple" aria-label="Contact ヒーロー">
+        <section class="v3-hero v3-hero--simple v3-hero--decorated" aria-label="Contact ヒーロー">
             <div class="v3-container v3-narrow">
                 <p class="v3-eyebrow">CONTACT</p>
                 <h1>お問い合わせ</h1>
                 <p>コンディション・インサイト / HACHI Fieldwork について、お気軽にご連絡ください。担当より 2 営業日以内にご返信します。</p>
+                <?php echo hachi_v3_blue_mark(); ?>
             </div>
         </section>
 
         <section class="v3-section v3-contact-section">
+            <span class="v3-side-ornament v3-side-ornament--left" aria-hidden="true"></span>
+            <span class="v3-side-ornament v3-side-ornament--right v3-side-ornament--low" aria-hidden="true"></span>
             <div class="v3-container v3-form-wrap">
                 <div id="form-success" class="form-success v3-form-success" role="status" aria-live="polite" tabindex="-1">
                     <strong>お問い合わせを受け付けました。</strong><br>
@@ -392,11 +403,11 @@ function hachi_v3_render_contact(): void {
 
                     <div class="v3-form-field" id="field-company">
                         <label for="contact-company">会社名 <span>必須</span></label>
-                        <input type="text" id="contact-company" name="contact_company" placeholder="株式会社○○" maxlength="200" autocomplete="organization" required>
+                        <input type="text" id="contact-company" name="contact_company" placeholder="入力してください" maxlength="200" autocomplete="organization" required>
                     </div>
                     <div class="v3-form-field" id="field-name">
                         <label for="contact-name">お名前 <span>必須</span></label>
-                        <input type="text" id="contact-name" name="contact_name" placeholder="山田 太郎" maxlength="100" autocomplete="name" required aria-required="true" aria-describedby="err-name">
+                        <input type="text" id="contact-name" name="contact_name" placeholder="入力してください" maxlength="100" autocomplete="name" required aria-required="true" aria-describedby="err-name">
                         <span class="form-field__error" id="err-name" role="alert">お名前をご入力ください。</span>
                     </div>
                     <div class="v3-form-field" id="field-email">
@@ -406,7 +417,7 @@ function hachi_v3_render_contact(): void {
                     </div>
                     <div class="v3-form-field">
                         <label for="contact-phone">電話番号 <em>任意</em></label>
-                        <input type="tel" id="contact-phone" name="contact_phone" placeholder="03-1234-5678" maxlength="20" autocomplete="tel">
+                        <input type="tel" id="contact-phone" name="contact_phone" placeholder="入力してください" maxlength="20" autocomplete="tel">
                     </div>
                     <div class="v3-form-field">
                         <label for="contact-size">従業員数</label>
@@ -440,7 +451,7 @@ function hachi_v3_render_contact(): void {
 function hachi_v3_render_news(): void {
     ?>
     <main id="main-content" class="v3-page v3-news">
-        <section class="v3-hero v3-hero--simple" aria-label="News ヒーロー">
+        <section class="v3-hero v3-hero--simple v3-news-hero" aria-label="News ヒーロー">
             <div class="v3-container v3-narrow">
                 <p class="v3-eyebrow">NEWS</p>
                 <h1>ニュース・知見</h1>

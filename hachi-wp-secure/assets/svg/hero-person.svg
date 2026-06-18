@@ -6,55 +6,75 @@
   style="display:block;width:100%;max-width:400px;"
 >
   <title id="hp-title">横向きで静かに立つ人物 line-art</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M72 520 C138 530 250 532 326 520" stroke="#1d1d1f" stroke-width=".8" opacity=".28"/>
 
-  <g fill="none" stroke="#1d1d1f" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M86 520 C150 528 240 530 314 520" stroke-width=".8" opacity=".38"/>
-
-    <g opacity=".18" stroke-width=".7">
-      <path d="M58 213 C116 185 168 238 222 210 S307 178 356 203" stroke-dasharray="2 8"/>
-      <path d="M62 254 C118 225 167 276 226 248 S316 216 358 240" stroke-dasharray="1 9"/>
-      <circle cx="72" cy="229" r="6"/>
-      <circle cx="336" cy="225" r="5"/>
-      <circle cx="282" cy="187" r="4" stroke="#2D4295" fill="#2D4295" opacity="1"/>
+    <g stroke="#1d1d1f" opacity=".15" stroke-width=".7">
+      <path d="M36 226 C96 194 151 244 212 214 S318 177 374 203" stroke-dasharray="2 9"/>
+      <path d="M45 266 C111 229 159 286 222 254 S321 219 369 239" stroke-dasharray="2 10"/>
+      <circle cx="62" cy="237" r="6"/>
+      <circle cx="344" cy="231" r="5"/>
     </g>
+    <circle cx="286" cy="190" r="5.5" fill="#2d4295"/>
 
-    <g stroke-width=".8" opacity=".18">
-      <path d="M125 112 C159 104 188 112 207 133"/>
-      <path d="M123 126 C159 116 190 126 211 149"/>
-      <path d="M128 140 C162 131 191 140 209 161"/>
+    <g stroke="#1d1d1f">
+      <g opacity=".23" stroke-width=".7">
+        <path d="M198 76 C169 79 147 98 141 126 C136 150 146 174 168 187 C188 199 216 191 231 171"/>
+        <path d="M202 83 C174 86 154 103 149 127 C145 149 155 168 174 180"/>
+        <path d="M206 90 C183 92 164 107 159 127 C156 144 162 161 177 172"/>
+      </g>
+
+      <path d="M199 76 C176 78 157 92 147 113 C135 139 142 166 163 181 C180 194 203 190 218 174" stroke-width="1"/>
+      <path d="M198 77 C222 79 239 96 241 119 C243 139 236 159 218 174" stroke-width="1"/>
+      <path d="M218 114 C232 118 240 127 241 139" stroke-width=".75"/>
+      <path d="M241 139 C234 146 226 150 216 149" stroke-width=".75"/>
+      <path d="M216 149 C212 153 210 157 211 162" stroke-width=".65"/>
+      <path d="M201 124 C207 122 212 123 216 126" stroke-width=".55"/>
+
+      <g opacity=".5" stroke-width=".7">
+        <path d="M155 105 C174 68 220 64 244 98"/>
+        <path d="M156 116 C179 87 219 84 242 112"/>
+        <path d="M159 128 C184 105 218 101 240 128"/>
+        <path d="M165 96 C184 83 213 82 232 99"/>
+        <path d="M176 86 C194 80 216 84 231 101"/>
+      </g>
+
+      <path d="M174 184 C174 202 168 217 156 231" stroke-width=".85"/>
+      <path d="M207 181 C210 198 217 212 230 224" stroke-width=".85"/>
+      <path d="M176 229 C194 216 218 218 235 232" stroke-width="1"/>
+
+      <g opacity=".24" stroke-width=".75">
+        <path d="M176 232 C162 278 164 337 178 386"/>
+        <path d="M235 232 C244 280 243 338 228 386"/>
+        <path d="M181 245 C197 252 218 251 233 241"/>
+        <path d="M175 295 C195 305 219 304 232 290"/>
+      </g>
+
+      <path d="M176 231 C162 278 164 337 179 386" stroke-width="1"/>
+      <path d="M235 231 C246 282 243 340 228 386" stroke-width="1"/>
+      <path d="M179 386 C194 396 215 397 228 386" stroke-width=".85"/>
+
+      <path d="M177 239 C164 278 160 319 164 361" stroke-width=".82"/>
+      <path d="M164 361 C165 380 171 396 180 407" stroke-width=".78"/>
+      <path d="M180 407 C187 407 190 400 187 391" stroke-width=".7"/>
+      <path d="M232 239 C239 276 240 318 235 360" stroke-width=".82"/>
+      <path d="M235 360 C232 379 226 395 217 407" stroke-width=".78"/>
+      <path d="M217 407 C210 408 207 401 211 392" stroke-width=".7"/>
+
+      <path d="M181 391 C178 431 173 471 164 509" stroke-width=".95"/>
+      <path d="M199 398 C199 437 197 475 190 513" stroke-width=".9"/>
+      <path d="M164 509 C149 515 137 522 134 530 C158 533 177 529 193 520" stroke-width=".8"/>
+
+      <path d="M211 398 C216 438 222 476 232 512" stroke-width=".95"/>
+      <path d="M228 388 C237 429 246 473 258 513" stroke-width=".9"/>
+      <path d="M232 512 C220 518 211 524 208 532 C230 535 253 529 271 520" stroke-width=".8"/>
+
+      <g opacity=".22" stroke-width=".7">
+        <path d="M186 391 C183 431 179 471 171 508"/>
+        <path d="M217 398 C221 438 228 476 239 512"/>
+        <path d="M171 234 C158 280 160 337 175 383"/>
+        <path d="M237 236 C250 285 246 341 231 386"/>
+      </g>
     </g>
-
-    <path d="M185 80 C157 86 139 108 138 137 C137 162 154 178 179 181 C204 183 225 169 230 143 C235 114 216 83 185 80Z" stroke-width="1.1"/>
-    <path d="M151 128 C163 121 175 121 187 128" stroke-width=".8"/>
-    <path d="M197 135 C190 142 183 146 174 148" stroke-width=".8"/>
-    <path d="M171 181 C170 196 166 207 158 216" stroke-width=".9"/>
-    <path d="M205 176 C204 191 208 205 218 217" stroke-width=".9"/>
-
-    <path d="M157 217 C185 202 226 205 250 224" stroke-width="1"/>
-    <path d="M156 218 C139 262 136 328 148 374" stroke-width="1.1"/>
-    <path d="M249 224 C267 276 267 336 252 378" stroke-width="1.1"/>
-    <path d="M148 374 C178 392 222 392 252 378" stroke-width=".9"/>
-    <path d="M162 240 C185 252 221 251 245 238" stroke-width=".55" opacity=".42"/>
-    <path d="M154 288 C181 299 219 299 254 286" stroke-width=".55" opacity=".36"/>
-
-    <path d="M158 225 C145 258 138 296 136 337" stroke-width=".9"/>
-    <path d="M136 337 C134 357 137 374 145 389" stroke-width=".85"/>
-    <path d="M145 389 C153 394 161 390 161 381" stroke-width=".75"/>
-
-    <path d="M247 225 C261 258 268 297 269 339" stroke-width=".9"/>
-    <path d="M269 339 C270 360 266 377 258 392" stroke-width=".85"/>
-    <path d="M258 392 C250 396 243 391 244 382" stroke-width=".75"/>
-
-    <path d="M168 386 C165 427 161 466 154 506" stroke-width="1"/>
-    <path d="M196 394 C197 436 196 474 190 512" stroke-width=".95"/>
-    <path d="M154 506 C142 512 132 518 128 526 C149 530 169 528 188 520" stroke-width=".85"/>
-
-    <path d="M224 392 C226 433 230 471 238 510" stroke-width="1"/>
-    <path d="M252 382 C257 426 263 470 271 512" stroke-width=".95"/>
-    <path d="M238 510 C225 516 216 522 212 530 C235 533 258 528 278 519" stroke-width=".85"/>
-
-    <path d="M147 96 C169 66 216 72 235 105" stroke-width=".9" opacity=".8"/>
-    <path d="M148 105 C172 83 212 89 232 116" stroke-width=".7" opacity=".58"/>
-    <path d="M151 116 C177 101 209 105 230 129" stroke-width=".55" opacity=".45"/>
   </g>
 </svg>

@@ -5,7 +5,7 @@
   aria-labelledby="ac-title"
   style="display:block;width:100%;max-width:800px;"
 >
-  <title id="ac-title">HACHIの思想の構造図 — 観察・構造化・判断知への変換：身体知を、再現可能な判断知へ</title>
+  <title id="ac-title">HACHIの思想の構造図 — 観察・構造化・判断知への変換：身体の暗黙知を、再現可能な判断知へ</title>
 
   <!-- Background: white -->
   <rect width="800" height="400" fill="#ffffff"/>
@@ -137,7 +137,7 @@
 
   <!-- ===================================================
        THESIS LABEL — bottom center
-       Drawn from page-about.php copy: 身体知を、再現可能な判断知へ変換する
+       Drawn from page-about.php copy: 身体の暗黙知を、再現可能な判断知へ変換する
   =================================================== -->
 
   <!-- Thin separator line above thesis label -->
@@ -149,7 +149,7 @@
         font-family="Hiragino Sans, SF Pro Display, system-ui, sans-serif"
         font-size="11" letter-spacing="0.10em"
         fill="#1d1d1f" fill-opacity="0.40" text-anchor="middle">
-    身体知を、再現可能な判断知へ。
+    身体の暗黙知を、再現可能な判断知へ。
   </text>
 
 

@@ -91,7 +91,7 @@ function hachi_schema_organization(): array {
         ],
         'image'         => $base . '/wp-content/themes/hachi-wp-secure/assets/og-image.png',
         'description'   => '株式会社HACHIは、身体領域の専門知を観察・構造化・検証可能な判断知へ変換する会社です。コンディション・インサイトと HACHI Fieldwork を提供しています。',
-        'slogan'        => '身体知を、再現可能な判断知へ。',
+        'slogan'        => '身体の暗黙知を、再現可能な判断知へ。',
         'foundingDate'  => '2022-03-25',
         'founder'       => [
             '@type' => 'Person',
@@ -110,7 +110,7 @@ function hachi_schema_organization(): array {
             [ '@type' => 'Country', 'name' => '日本' ],
         ],
         'knowsAbout'    => [
-            '身体知の構造化',
+            '身体の暗黙知の構造化',
             '状態の観察と記録',
             'コンディショニング',
             '組織の判断材料づくり',
@@ -141,7 +141,7 @@ function hachi_schema_website(): array {
         'url'             => $base . '/',
         'name'            => 'HACHI',
         'alternateName'   => '株式会社HACHI',
-        'description'     => '身体知を、再現可能な判断知へ。HACHIの公式サイト。',
+        'description'     => '身体の暗黙知を、再現可能な判断知へ。HACHIの公式サイト。',
         'inLanguage'      => 'ja-JP',
         'publisher'       => [ '@id' => $base . '/#organization' ],
         'potentialAction' => [

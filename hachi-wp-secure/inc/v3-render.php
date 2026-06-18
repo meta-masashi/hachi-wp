@@ -109,7 +109,7 @@ function hachi_v3_render_home(): void {
         </section>
 
         <section class="v3-section v3-news-mini">
-            <div class="v3-container v3-narrow">
+            <div class="v3-container v3-home-news-wrap">
                 <h2 class="v3-center">直近のお知らせ</h2>
                 <?php foreach ( $news as $item ) : ?>
                     <article class="v3-news-row">

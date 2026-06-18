@@ -70,7 +70,7 @@ function hachi_v3_render_home(): void {
         <section class="v3-hero v3-hero--split" aria-label="ヒーロー">
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
-                    <h1>身体知を、<br>再現可能な判断知へ。</h1>
+                    <h1>身体知を、再現可能な<br>判断知へ。</h1>
                     <p>経験と勘で動く現場を、組織が引き継げる判断の体系に変える。社員の身体・睡眠・集中・疲労を、観察できる材料にする。</p>
                     <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="v3-btn v3-btn--accent">サービスを見る</a>
                 </div>
@@ -266,7 +266,7 @@ function hachi_v3_render_about(): void {
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
                     <p class="v3-eyebrow">ABOUT</p>
-                    <h1>身体知を、<br>再現可能な判断知へ。</h1>
+                    <h1>身体知を、再現可能な<br>判断知へ。</h1>
                     <p class="v3-subthesis">経験と勘を、引き継げる体系に。</p>
                 </div>
                 <?php hachi_v3_person(); ?>
@@ -380,7 +380,7 @@ function hachi_v3_render_contact(): void {
             <div class="v3-container v3-form-wrap">
                 <div id="form-success" class="form-success v3-form-success" role="status" aria-live="polite" tabindex="-1">
                     <strong>お問い合わせを受け付けました。</strong><br>
-                    <span>確認メールをお送りしました。2 営業日以内にご連絡いたします。</span>
+                    <span>担当より 2 営業日以内にご連絡いたします。</span>
                 </div>
                 <form id="contact-form" class="v3-contact-form" novalidate aria-label="お問い合わせフォーム">
                     <?php wp_nonce_field( 'hachi_nonce', 'contact_nonce' ); ?>
@@ -401,7 +401,7 @@ function hachi_v3_render_contact(): void {
                     </div>
                     <div class="v3-form-field" id="field-email">
                         <label for="contact-email">メールアドレス <span>必須</span></label>
-                        <input type="email" id="contact-email" name="contact_email" placeholder="name@example.com" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+                        <input type="email" id="contact-email" name="contact_email" placeholder="入力してください" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
                         <span class="form-field__error" id="err-email" role="alert">正しいメールアドレスを入力してください。</span>
                     </div>
                     <div class="v3-form-field">
@@ -431,13 +431,6 @@ function hachi_v3_render_contact(): void {
                     <button type="submit" class="v3-btn v3-btn--accent" id="form-submit"><span id="submit-text">送信する</span></button>
                     <p id="form-general-error" class="v3-form-error" role="alert"></p>
                 </form>
-            </div>
-        </section>
-
-        <section class="v3-contact-direct">
-            <div class="v3-container v3-narrow">
-                <p>直接メールでもご連絡いただけます</p>
-                <a href="mailto:info@hachi-wellnesshack.com">info@hachi-wellnesshack.com</a>
             </div>
         </section>
     </main>

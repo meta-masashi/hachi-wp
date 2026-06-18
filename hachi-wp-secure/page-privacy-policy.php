@@ -56,7 +56,7 @@ get_header();
 						</tr>
 						<tr>
 							<th><?php _e( 'お問い合わせ・開示請求窓口', 'hachi' ); ?></th>
-							<td><a href="mailto:info@hachi-wellnesshack.com" class="privacy-policy__link">info@hachi-wellnesshack.com</a></td>
+							<td><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="privacy-policy__link"><?php _e( 'お問い合わせフォーム', 'hachi' ); ?></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -146,7 +146,7 @@ get_header();
 					</thead>
 					<tbody>
 						<tr>
-							<td><?php _e( '担当者宛メール通知（info@hachi-wellnesshack.com）', 'hachi' ); ?></td>
+							<td><?php _e( '担当者宛通知', 'hachi' ); ?></td>
 							<td><?php _e( '当社が契約するメールサービス', 'hachi' ); ?></td>
 							<td><?php _e( '当社メール受信箱', 'hachi' ); ?></td>
 						</tr>
@@ -206,11 +206,10 @@ get_header();
 				<div class="privacy-policy__note">
 					<p class="privacy-policy__note-heading"><?php _e( '請求窓口', 'hachi' ); ?></p>
 					<p class="privacy-policy__body">
-						<?php _e( '電子メール：', 'hachi' ); ?>
-						<a href="mailto:info@hachi-wellnesshack.com" class="privacy-policy__link">info@hachi-wellnesshack.com</a>
+						<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="privacy-policy__link"><?php _e( 'お問い合わせフォーム', 'hachi' ); ?></a>
 					</p>
 					<p class="privacy-policy__body">
-						<?php _e( '件名に「個人情報に関するご請求」とご記載ください。本人確認のうえ、原則として請求受領後2週間以内に対応いたします。', 'hachi' ); ?>
+						<?php _e( 'お問い合わせ内容に「個人情報に関するご請求」とご記載ください。本人確認のうえ、原則として請求受領後2週間以内に対応いたします。', 'hachi' ); ?>
 					</p>
 				</div>
 			</div>
@@ -219,7 +218,7 @@ get_header();
 			<div class="privacy-policy__section">
 				<h2 class="privacy-policy__heading"><?php _e( '第9条　苦情・相談', 'hachi' ); ?></h2>
 				<p class="privacy-policy__body">
-					<?php _e( '個人情報の取扱いに関するご意見・苦情は、まず当社窓口（info@hachi-wellnesshack.com）にお申し出ください。当社での解決が困難な場合は、個人情報保護委員会（https://www.ppc.go.jp/）にご相談いただくことができます。', 'hachi' ); ?>
+					<?php _e( '個人情報の取扱いに関するご意見・苦情は、まず当社窓口へお申し出ください。当社での解決が困難な場合は、個人情報保護委員会（https://www.ppc.go.jp/）にご相談いただくことができます。', 'hachi' ); ?>
 				</p>
 			</div>
 

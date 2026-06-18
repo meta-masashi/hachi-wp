@@ -255,6 +255,7 @@ body:has(.nav-drawer.is-open) {
 }
 
 .v3-hero__copy h1 {
+  font-size: clamp(40px, 3.8vw, 56px);
   margin-bottom: 36px;
 }
 
@@ -966,6 +967,10 @@ body:has(.nav-drawer.is-open) {
 @media (max-width: 560px) {
   .v3-page h1 {
     font-size: 36px;
+  }
+
+  .v3-hero__copy h1 {
+    font-size: 34px;
   }
 
   .v3-page h2 {

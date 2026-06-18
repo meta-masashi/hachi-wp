@@ -141,25 +141,25 @@ function hachi_output_ga4_event_helpers(): void {
     --------------------------------------------------------- */
 
     /**
-     * demo_request: PACE v3.0 デモ申込み完了
+     * demo_request: コンディション・インサイト 導入相談完了
      * @param {string} method - 'form'
      */
     window.hachiTrackDemoRequest = function(method) {
         hachiTrackEvent('demo_request', {
             event_category: 'conversion',
-            event_label: 'PACE v3.0 デモ申込み',
+            event_label: 'コンディション・インサイト 導入相談',
             method: method || 'form'
         });
     };
 
     /**
-     * resource_request: REBOOT-WORK 資料請求完了
+     * resource_request: コンディション・インサイト 資料請求完了
      * @param {string} method - 'form'
      */
     window.hachiTrackResourceRequest = function(method) {
         hachiTrackEvent('resource_request', {
             event_category: 'conversion',
-            event_label: 'REBOOT-WORK 資料請求',
+            event_label: 'コンディション・インサイト 資料請求',
             method: method || 'form'
         });
     };

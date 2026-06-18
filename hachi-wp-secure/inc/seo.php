@@ -149,7 +149,7 @@ function hachi_output_seo_meta(): void {
 
 <!-- Twitter Card -->
 <meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:site"        content="@hachi_inc">
+<meta name="twitter:site"        content="@PACEathlete">
 <meta name="twitter:title"       content="<?php echo esc_attr( $og_title ); ?>">
 <meta name="twitter:description" content="<?php echo esc_attr( $description ); ?>">
 <meta name="twitter:image"       content="<?php echo esc_url( $og_image ); ?>">

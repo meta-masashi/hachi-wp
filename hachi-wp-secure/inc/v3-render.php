@@ -74,7 +74,7 @@ function hachi_v3_render_home(): void {
         <section class="v3-hero v3-hero--split v3-hero--home" aria-label="ヒーロー">
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
-                    <h1>身体知を、再現可能な<br>判断知へ。</h1>
+                    <h1>身体の暗黙知を、<br>再現可能な判断知へ。</h1>
                     <p>経験と勘で動く現場を、組織が引き継げる判断の体系に変える。社員の身体・睡眠・集中・疲労を、観察できる材料にする。</p>
                     <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="v3-btn v3-btn--accent">サービスを見る</a>
                 </div>
@@ -86,33 +86,6 @@ function hachi_v3_render_home(): void {
             <div class="v3-container v3-narrow">
                 <h2>株式会社 HACHI は、<br>「変化を見抜き、判断を支える」会社です。</h2>
                 <p>コンディション・インサイトは、社員の短いチェックから身体・睡眠・集中・疲労の傾向を組織として整理する法人向けサービスです。経営者・人事・管理職の日常判断に使える情報を提供します。</p>
-            </div>
-        </section>
-
-        <section class="v3-section v3-section--center">
-            <div class="v3-container">
-                <div class="v3-section-head">
-                    <h2>経験と勘を、引き継げる体系へ。</h2>
-                    <p>HACHI は身体知を 4 段のプロセスで再現可能にします。一回限りの施策ではなく、組織として積み上がる判断の体系です。</p>
-                </div>
-                <div class="v3-flow v3-flow--four">
-                    <?php
-                    $steps = [
-                        [ '観察', '現場の身体・睡眠・集中・疲労のサインを取り出す' ],
-                        [ '整理', 'サインを傾向として組織単位で整理する' ],
-                        [ '記録', '経営判断と面談に使える組織レポートとして残す' ],
-                        [ '判断', '次の打ち手を組織として再現可能にする' ],
-                    ];
-                    foreach ( $steps as $index => $step ) :
-                        if ( $index > 0 ) echo '<div class="v3-flow__arrow">' . hachi_v3_arrow() . '</div>';
-                        ?>
-                        <div class="v3-flow__step">
-                            <span class="v3-flow__mark<?php echo $index === 3 ? ' is-accent' : ''; ?>"></span>
-                            <h3><?php echo esc_html( $step[0] ); ?></h3>
-                            <p><?php echo esc_html( $step[1] ); ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
             </div>
         </section>
 
@@ -219,42 +192,12 @@ function hachi_v3_render_service(): void {
         </section>
 
         <section class="v3-section">
-            <div class="v3-container v3-narrow-plus">
-                <div class="v3-section-head v3-center">
-                    <h2>「実施して終わり」との違い</h2>
-                    <p>出張整体は施術をゴールにします。コンディション・インサイトは、観察・記録・組織レポートを通じて、次の打ち手を整理する仕組みです。</p>
-                </div>
-                <div class="v3-comparison">
-                    <div>
-                        <h3>一般的な出張整体・福利厚生サービス</h3>
-                        <dl>
-                            <div><dt>目的</dt><dd>社員のリフレッシュ</dd></div>
-                            <div><dt>単位</dt><dd>個人（その場の体感）</dd></div>
-                            <div><dt>残るもの</dt><dd>体験のみ</dd></div>
-                            <div><dt>経営の使い方</dt><dd>福利厚生コスト</dd></div>
-                        </dl>
-                    </div>
-                    <div>
-                        <h3>コンディション・インサイト（HACHI）</h3>
-                        <dl>
-                            <div><dt>目的</dt><dd>組織として状態を観察・整理する</dd></div>
-                            <div><dt>単位</dt><dd>組織（傾向・パターン）</dd></div>
-                            <div><dt>残るもの</dt><dd>組織レポート + 判断材料</dd></div>
-                            <div><dt>経営の使い方</dt><dd>健康経営施策の実行履歴 + 次の打ち手</dd></div>
-                        </dl>
-                        <span class="v3-dot" aria-hidden="true"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="v3-section">
             <div class="v3-container v3-narrow">
                 <h2 class="v3-center">よくある質問</h2>
                 <div class="v3-faq">
-                    <article><h3>どのような傾向を把握できますか?</h3><p>身体のこわばりや重さ、睡眠の質、仕事中の集中のしやすさ、疲労の蓄積具合を、社員の短いチェックから組織単位で整理します。</p></article>
-                    <article><h3>何名から導入できますか?</h3><p>20 名前後から対応しています。企業規模・目的に応じて、スポット実施から月次継続まで設計します。</p></article>
-                    <article><h3>一般的な出張整体や福利厚生サービスと何が違いますか?</h3><p>出張整体はリフレッシュが主目的です。コンディション・インサイトは、状態の観察・記録・組織レポートを提供します。</p></article>
+                    <article><h3>Q1. どのような傾向を把握できますか?</h3><p>身体のこわばりや重さ、睡眠の質、仕事中の集中のしやすさ、疲労の蓄積具合を、社員の短いチェックから組織単位で整理します。</p></article>
+                    <article><h3>Q2. 何名から導入できますか?</h3><p>20 名前後から対応しています。企業規模・目的に応じて、スポット実施から月次継続まで設計します。</p></article>
+                    <article><h3>Q3. 一般的な出張整体や福利厚生サービスと何が違いますか?</h3><p>出張整体はリフレッシュが主目的です。コンディション・インサイトは、状態の観察・記録・組織レポートを提供します。</p></article>
                 </div>
             </div>
         </section>
@@ -271,7 +214,7 @@ function hachi_v3_render_about(): void {
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
                     <p class="v3-eyebrow">ABOUT</p>
-                    <h1>身体知を、再現可能な<br>判断知へ。</h1>
+                    <h1>身体の暗黙知を、<br>再現可能な判断知へ。</h1>
                     <p class="v3-subthesis">経験と勘を、引き継げる体系に。</p>
                 </div>
                 <?php hachi_v3_person(); ?>
@@ -297,7 +240,7 @@ function hachi_v3_render_about(): void {
             <div class="v3-container">
                 <div class="v3-section-head">
                     <h2>観察・構造化・判断</h2>
-                    <p>身体知を、再現可能な判断知へ変換する 3 つのプロセス</p>
+                    <p>身体の暗黙知を、再現可能な判断知へ変換する 3 つのプロセス</p>
                 </div>
                 <div class="v3-flow v3-flow--three">
                     <?php

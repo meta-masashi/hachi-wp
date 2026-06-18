@@ -28,7 +28,7 @@ add_filter( 'document_title_parts', function ( array $title ): array {
     }
 
     if ( is_front_page() ) {
-        $title['title'] = 'HACHI | 身体知を、再現可能な判断知へ。';
+        $title['title'] = 'HACHI | 身体の暗黙知を、再現可能な判断知へ。';
         unset( $title['tagline'] );
         return $title;
     }
@@ -54,7 +54,7 @@ add_filter( 'document_title_parts', function ( array $title ): array {
     }
 
     if ( is_page( 'about' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'about' ) ) {
-        $title['title'] = 'About Us｜身体知を、再現可能な判断知へ。 | HACHI';
+        $title['title'] = 'About Us｜身体の暗黙知を、再現可能な判断知へ。 | HACHI';
         return $title;
     }
 
@@ -96,7 +96,7 @@ function hachi_output_seo_meta(): void {
     $og_title    = get_bloginfo( 'name' );
 
     if ( is_front_page() ) {
-        $og_title    = 'HACHI | 身体知を、再現可能な判断知へ。';
+        $og_title    = 'HACHI | 身体の暗黙知を、再現可能な判断知へ。';
         $description = '経験と勘で動く現場を、組織が引き継げる判断の体系に変える。社員の身体・睡眠・集中・疲労を、観察できる材料にします。';
     } elseif ( is_page( 'service' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'service' ) ) {
         $og_title    = 'サービス｜コンディション・インサイト / HACHI Fieldwork | HACHI';
@@ -105,8 +105,8 @@ function hachi_output_seo_meta(): void {
         $og_title    = '会社概要｜株式会社HACHI（吉祥寺）';
         $description = '株式会社HACHI｜2022年3月設立、代表取締役社長 佐々木譲崇。東京都武蔵野市吉祥寺本町を拠点に、社員のコンディションを組織で見える形にする事業を展開しています。';
     } elseif ( is_page( 'about' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'about' ) ) {
-        $og_title    = 'About Us｜身体知を、再現可能な判断知へ。 | HACHI';
-        $description = '身体知を、再現可能な判断知へ。経験と勘を、引き継げる体系に。HACHI の思想と専門性をご紹介します。';
+        $og_title    = 'About Us｜身体の暗黙知を、再現可能な判断知へ。 | HACHI';
+        $description = '身体の暗黙知を、再現可能な判断知へ。経験と勘を、引き継げる体系に。HACHI の思想と専門性をご紹介します。';
     } elseif ( is_page( 'contact' ) || ( is_page() && get_post_field( 'post_name', get_the_ID() ) === 'contact' ) ) {
         $og_title    = 'お問い合わせ | HACHI';
         $description = 'コンディション・インサイト / HACHI Fieldwork についてのお問い合わせはこちらから。';
@@ -240,7 +240,7 @@ add_action( 'template_redirect', function (): void {
     header( 'Content-Type: text/plain; charset=UTF-8' );
     header( 'X-Robots-Tag: all' );
     echo "# HACHI Inc. (株式会社HACHI)\n\n";
-    echo "> 身体知を、再現可能な判断知へ。身体領域の専門知を、観察・構造化・検証可能な判断知へ変換する会社です。\n\n";
+    echo "> 身体の暗黙知を、再現可能な判断知へ。身体領域の専門知を、観察・構造化・検証可能な判断知へ変換する会社です。\n\n";
     echo "HACHI is a Japanese company based in Kichijoji, Tokyo, helping organizations structure condition observations into reusable decision knowledge. ";
     echo "Founded in March 2022 by Masashi Sasaki, HACHI provides Condition Insight (assessment service) and HACHI Fieldwork (on-site conditioning support).\n\n";
 
@@ -249,7 +249,7 @@ add_action( 'template_redirect', function (): void {
     echo "- 代表: 佐々木 譲崇（Joso Sasaki）\n";
     echo "- 設立: 2022年3月25日\n";
     echo "- 所在地: 〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F\n";
-    echo "- ポジショニング: 身体知を、再現可能な判断知へ。\n";
+    echo "- ポジショニング: 身体の暗黙知を、再現可能な判断知へ。\n";
     echo "- 考え方: 身体の専門知を、観察・構造化・記録できる形にする。\n\n";
 
     echo "## サービス\n";

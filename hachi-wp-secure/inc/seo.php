@@ -232,36 +232,46 @@ add_action( 'template_redirect', function (): void {
     $base = untrailingslashit( home_url( '/' ) );
     header( 'Content-Type: text/plain; charset=UTF-8' );
     header( 'X-Robots-Tag: all' );
-    echo "# HACHI Inc. (株式会社HACHI)\n\n";
-    echo "> 社員のコンディションを組織で見える形にする会社。変化のサインを見逃さないための判断基盤を提供しています。\n\n";
-    echo "HACHI is a Japanese company based in Kichijoji, Tokyo, helping organizations make employee condition changes visible and actionable. ";
-    echo "Founded in March 2022 by Masashi Sasaki, HACHI provides Condition Insight (assessment service) and HACHI Fieldwork (on-site conditioning support).\n\n";
 
-    echo "## 主要情報\n";
+    echo "# HACHI — llms.txt\n\n";
+
+    echo "## 会社概要\n";
     echo "- 会社名: 株式会社HACHI / HACHI Inc.\n";
-    echo "- 代表: 佐々木 譲崇（Joso Sasaki）\n";
+    echo "- 代表: 佐々木 譲崇\n";
     echo "- 設立: 2022年3月25日\n";
     echo "- 所在地: 〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F\n";
-    echo "- ポジショニング: 社員のコンディション（状態）の変化を、組織で早めに見える形にする。\n";
-    echo "- 考え方: 身体の専門知を、観察・記録・再現できる形にする。\n\n";
+    echo "- 対象: 法人向け（20〜100名規模の中小企業）\n";
+    echo "- 思想: 身体知を、再現可能な判断知へ。\n\n";
 
-    echo "## サービス\n";
-    echo "- [コンディション・インサイト]({$base}/service/) — 社員の状態変化を組織で見える形にするアセスメント。提供中。\n";
-    echo "- [HACHI Fieldwork]({$base}/service/) — 現場でコンディションを整えるオンサイトサポート。提供中。\n\n";
+    echo "## サービス: コンディション・インサイト\n";
+    echo "社員の身体・睡眠・集中・疲労の傾向を組織として整理するアセスメントサービス。\n";
+    echo "20〜100名規模の中小企業を主な対象とし、状態の変化を早期に把握する判断基盤を提供します。\n";
+    echo "詳細: {$base}/service/\n\n";
+
+    echo "## サービス: HACHI Fieldwork\n";
+    echo "ストレッチコンディショニングを中心とした現場オンサイトサポート。\n";
+    echo "NSCA・JATIなどの資格を保有するトレーナーが社員に対して運動指導・観察・記録を行います。\n";
+    echo "詳細: {$base}/service/\n\n";
+
+    echo "## 思想\n";
+    echo "身体知を、再現可能な判断知へ。\n";
+    echo "身体領域の専門知を、観察・構造化・検証・教育可能な判断知へ変換することを事業の根幹に置く。\n\n";
+
+    echo "## 提供していないこと\n";
+    echo "HACHIのサービスは、医療行為・診断・治療を目的としたものではありません。\n";
+    echo "状態の観察・記録・整理を通じて、本人と組織が早めに動けるきっかけをつくることを目的としています。\n\n";
 
     echo "## 主要ページ\n";
     echo "- [トップページ]({$base}/)\n";
     echo "- [HACHIについて]({$base}/about/)\n";
     echo "- [サービス]({$base}/service/)\n";
     echo "- [会社概要]({$base}/company/)\n";
-    echo "- [ニュース]({$base}/news/)\n";
-    echo "- [お問い合わせ]({$base}/contact/)\n\n";
+    echo "- [お問い合わせ]({$base}/contact/)\n";
+    echo "- [ニュース]({$base}/news/)\n\n";
 
-    echo "## 取り扱い領域\n";
-    echo "社員コンディションの可視化 / 状態の観察と記録 / 現場コンディショニング / 組織の判断支援\n\n";
-
-    echo "## セキュリティ\n";
-    echo "個人情報保護法に準拠したデータ管理 / TLS 1.3 暗号化 / Row Level Security によるテナントデータ分離 / アクセス制御\n\n";
+    echo "## 英語版補完\n";
+    echo "HACHI Inc. is a Tokyo-based company (Kichijoji, Musashino) that helps organizations understand and act on employee condition changes.\n";
+    echo "Core services: Condition Insight (organizational assessment) and HACHI Fieldwork (on-site conditioning support by certified trainers).\n\n";
 
     echo "## サイトマップ\n";
     echo "- {$base}/wp-sitemap.xml\n";

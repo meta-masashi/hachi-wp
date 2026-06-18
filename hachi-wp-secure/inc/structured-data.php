@@ -55,14 +55,6 @@ function hachi_output_structured_data(): void {
         }
     }
 
-    // 7. ItemList（ニュースアーカイブページ）
-    if ( is_post_type_archive( 'hachi_news' ) ) {
-        $item_list = hachi_schema_news_itemlist();
-        if ( $item_list ) {
-            $schemas[] = $item_list;
-        }
-    }
-
     foreach ( $schemas as $schema ) {
         if ( empty( $schema ) ) continue;
         printf(
@@ -267,16 +259,28 @@ function hachi_schema_services(): array {
 function hachi_schema_faq(): array {
     $faqs = [
         [
-            'question' => 'どのような傾向を把握できますか?',
-            'answer'   => '身体のこわばりや重さ、睡眠の質、仕事中の集中のしやすさ、疲労の蓄積具合を、社員の短いチェックから組織単位で整理します。',
+            'question' => '株式会社HACHIはどんな会社ですか？',
+            'answer'   => '株式会社HACHIは、2022年3月に設立された、社員のコンディション（状態）の変化を組織で見える形にする会社です。東京都武蔵野市吉祥寺を拠点に、コンディション・インサイト（状態の可視化）と HACHI Fieldwork（現場でのコンディショニング）を提供しています。代表取締役社長は佐々木譲崇。',
         ],
         [
-            'question' => '何名から導入できますか?',
-            'answer'   => '20 名前後から対応しています。企業規模・目的に応じて、スポット実施から月次継続まで設計します。',
+            'question' => 'コンディション・インサイトとはどのようなサービスですか？',
+            'answer'   => 'コンディション・インサイトは、社員の状態（疲労・睡眠・集中・身体の状態）の変化を、本人の同意のもとで把握し、組織で見える形に整えるアセスメントサービスです。診断や医療行為は行わず、状態の観察・記録を通じて、本人と管理職が早めに動けるきっかけをつくります。',
         ],
         [
-            'question' => '一般的な出張整体や福利厚生サービスと何が違いますか?',
-            'answer'   => '出張整体はリフレッシュが主目的です。コンディション・インサイトは、状態の観察・記録・組織レポートを提供します。',
+            'question' => 'HACHI Fieldwork とはどのようなサービスですか？',
+            'answer'   => 'HACHI Fieldwork は、現場でコンディションを整えるオンサイトサポートです。観察と声がけ・記録をもとに、社員自身が動くコンディショニングを支援します。',
+        ],
+        [
+            'question' => '導入を検討したい場合、どうすればよいですか？',
+            'answer'   => 'お問い合わせページのフォームよりご連絡ください。ヒアリングのうえ、貴社の状況に合わせてご提案いたします。',
+        ],
+        [
+            'question' => 'HACHIのセキュリティ対策は？',
+            'answer'   => '個人情報保護法に準拠したデータ管理を行っています。通信の TLS 1.3 暗号化、Row Level Security（RLS）によるテナントデータの分離、アクセス制御を実装しています。',
+        ],
+        [
+            'question' => '会社の所在地はどこですか？',
+            'answer'   => '〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F です。JR中央線・総武線および京王井の頭線「吉祥寺」駅より徒歩圏内です。',
         ],
     ];
 
@@ -352,51 +356,6 @@ function hachi_schema_breadcrumb(): ?array {
         '@context'        => 'https://schema.org',
         '@type'           => 'BreadcrumbList',
         'itemListElement' => $items,
-    ];
-}
-
-/* ============================================================
-   ItemList スキーマ（ニュースアーカイブ専用）
-   ============================================================ */
-
-function hachi_schema_news_itemlist(): ?array {
-    $base = hachi_site_base_url();
-
-    $news_query = new WP_Query( [
-        'post_type'      => 'hachi_news',
-        'posts_per_page' => 4,
-        'post_status'    => 'publish',
-        'orderby'        => 'date',
-        'order'          => 'DESC',
-    ] );
-
-    if ( ! $news_query->have_posts() ) {
-        return null;
-    }
-
-    $list_items = [];
-    $position   = 1;
-
-    while ( $news_query->have_posts() ) {
-        $news_query->the_post();
-        $list_items[] = [
-            '@type'    => 'ListItem',
-            'position' => $position++,
-            'name'     => get_the_title(),
-            'url'      => (string) get_permalink(),
-            '@id'      => (string) get_permalink(),
-        ];
-    }
-    wp_reset_postdata();
-
-    return [
-        '@context'        => 'https://schema.org',
-        '@type'           => 'ItemList',
-        'name'            => 'HACHI ニュース・知見',
-        'description'     => 'サービス更新と現場で気づいたことを記録します。',
-        'url'             => $base . '/news/',
-        'numberOfItems'   => count( $list_items ),
-        'itemListElement' => $list_items,
     ];
 }
 

@@ -180,8 +180,7 @@ function hachi_handle_contact(): void {
 
     // --- 6. chip フィールド allowlist 検証（不正値は空にフォールバック） ---
     $allowed_roles     = ['','経営層','部門責任者','マネージャー','担当者','その他'];
-    $allowed_sizes     = ['','〜50名','51〜300名','301〜1,000名','1,001名〜','個人・その他',
-                           '〜20名','20〜50名','50〜100名','100名以上']; // v3 contact form 追加値
+    $allowed_sizes     = ['','〜50名','51〜300名','301〜1,000名','1,001名〜','個人・その他'];
     $allowed_timelines = ['','すぐに','1〜3ヶ月以内','半年以内','情報収集段階','未定'];
     if (!in_array($role,$allowed_roles,true))         $role='';
     if (!in_array($size,$allowed_sizes,true))         $size='';

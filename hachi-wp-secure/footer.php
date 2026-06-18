@@ -60,13 +60,13 @@
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Service</p>
 				<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="footer-nav__link">コンディション・インサイト</a>
-				<a href="<?php echo esc_url( home_url( '/service/#fieldwork' ) ); ?>" class="footer-nav__link">HACHI Fieldwork</a>
 			</div>
 
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Company</p>
 				<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="footer-nav__link"><?php _e( '会社概要', 'hachi' ); ?></a>
-				</div>
+				<a href="<?php echo esc_url( home_url( '/company/#security' ) ); ?>" class="footer-nav__link">Security</a>
+			</div>
 
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Legal</p>
@@ -74,6 +74,11 @@
 			</div>
 
 		</nav>
+
+		<!-- AT民間資格 最小注記 -->
+		<p style="font-size:11px;color:var(--gray);margin:16px 0 0;line-height:1.8">
+			<?php _e( 'アスレティックトレーナー（AT）は民間資格です。医療行為は行いません。', 'hachi' ); ?>
+		</p>
 
 		<!-- Footer bottom bar -->
 		<div class="footer-bottom">

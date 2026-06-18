@@ -4967,3 +4967,407 @@ footer.site-footer {
 /* ============================================================
    END SERVICE FLOW DIAGRAM — 2026-06-11
    ============================================================ */
+
+/* ============================================================
+   CONTACT PAGE v3 — 2026-06-18
+   スコープ: #main-content 配下 cv3-* クラス群
+   既存スタイルを上書き・削除しない
+   ============================================================ */
+
+/* CSS 変数フォールバック（テーマ変数が未定義の環境向け） */
+#main-content .cv3-hero,
+#main-content .cv3-form-section,
+#main-content .cv3-direct {
+  --cv3-accent:  #2D4295;
+  --cv3-text:    #1d1d1f;
+  --cv3-caption: #6e6e73;
+  --cv3-border:  #E5E5E7;
+  --cv3-white:   #ffffff;
+  --cv3-sans:    'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  --cv3-serif:   'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --cv3-mono:    'SF Mono', 'Fira Code', 'Menlo', monospace;
+}
+
+/* ---------- Section 1: Hero ---------- */
+#main-content .cv3-hero {
+  padding-block: 180px;
+  text-align: center;
+  background: var(--cv3-white, #ffffff);
+}
+
+#main-content .cv3-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+#main-content .cv3-eyebrow {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--cv3-caption, #6e6e73);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+#main-content .cv3-hero__heading {
+  font-family: var(--cv3-serif);
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--cv3-text, #1d1d1f);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+#main-content .cv3-hero__sub {
+  font-family: var(--cv3-sans);
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--cv3-caption, #6e6e73);
+  max-width: 560px;
+  margin: 0;
+  text-align: center;
+}
+
+/* ---------- Section 2: Form ---------- */
+#main-content .cv3-form-section {
+  padding-block: 0 140px;
+  background: var(--cv3-white, #ffffff);
+}
+
+#main-content .cv3-form-wrap {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* 成功メッセージ */
+#main-content .cv3-form-success {
+  padding: 32px 24px;
+  border: 1px solid var(--cv3-border, #E5E5E7);
+  border-radius: 2px;
+  font-family: var(--cv3-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--cv3-text, #1d1d1f);
+  text-align: center;
+}
+
+#main-content .cv3-form-success__sub {
+  font-size: 14px;
+  color: var(--cv3-caption, #6e6e73);
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* フィールド共通 */
+#main-content .cv3-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+#main-content .cv3-field:last-of-type {
+  margin-bottom: 0;
+}
+
+/* ラベル */
+#main-content .cv3-label {
+  font-family: var(--cv3-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cv3-text, #1d1d1f);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* バッジ（必須 / 任意） */
+#main-content .cv3-badge {
+  font-family: var(--cv3-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: 2px;
+  line-height: 1.6;
+}
+
+#main-content .cv3-badge--required {
+  color: var(--cv3-accent, #2D4295);
+  border: 1px solid var(--cv3-accent, #2D4295);
+}
+
+#main-content .cv3-badge--optional {
+  color: var(--cv3-caption, #6e6e73);
+  border: 1px solid var(--cv3-border, #E5E5E7);
+}
+
+/* テキスト入力 */
+#main-content .cv3-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  font-family: var(--cv3-sans);
+  font-size: 16px;
+  color: var(--cv3-text, #1d1d1f);
+  background: var(--cv3-white, #ffffff);
+  border: 1px solid var(--cv3-border, #E5E5E7);
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.15s;
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+}
+
+#main-content .cv3-input::placeholder {
+  color: #b0b0b5;
+  font-size: 15px;
+}
+
+#main-content .cv3-input:focus {
+  border-color: var(--cv3-accent, #2D4295);
+}
+
+/* セレクト */
+#main-content .cv3-select-wrap {
+  position: relative;
+}
+
+#main-content .cv3-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--cv3-caption, #6e6e73);
+  pointer-events: none;
+}
+
+#main-content .cv3-select {
+  width: 100%;
+  height: 48px;
+  padding: 0 40px 0 14px;
+  font-family: var(--cv3-sans);
+  font-size: 16px;
+  color: var(--cv3-text, #1d1d1f);
+  background: var(--cv3-white, #ffffff);
+  border: 1px solid var(--cv3-border, #E5E5E7);
+  border-radius: 2px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+#main-content .cv3-select:focus {
+  border-color: var(--cv3-accent, #2D4295);
+}
+
+/* テキストエリア */
+#main-content .cv3-textarea {
+  width: 100%;
+  padding: 14px;
+  font-family: var(--cv3-sans);
+  font-size: 16px;
+  color: var(--cv3-text, #1d1d1f);
+  background: var(--cv3-white, #ffffff);
+  border: 1px solid var(--cv3-border, #E5E5E7);
+  border-radius: 2px;
+  outline: none;
+  resize: vertical;
+  min-height: 160px;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+#main-content .cv3-textarea::placeholder {
+  color: #b0b0b5;
+  font-size: 15px;
+}
+
+#main-content .cv3-textarea:focus {
+  border-color: var(--cv3-accent, #2D4295);
+}
+
+/* プライバシー同意フィールド */
+#main-content .cv3-field--privacy {
+  margin-top: 8px;
+  margin-bottom: 36px;
+}
+
+#main-content .cv3-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+#main-content .cv3-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--cv3-border, #E5E5E7);
+  border-radius: 2px;
+  accent-color: var(--cv3-accent, #2D4295);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#main-content .cv3-checkbox-text {
+  font-family: var(--cv3-sans);
+  font-size: 14px;
+  color: var(--cv3-caption, #6e6e73);
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+}
+
+#main-content .cv3-privacy-link {
+  color: var(--cv3-accent, #2D4295);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
+  text-decoration: none;
+}
+
+#main-content .cv3-privacy-link:hover {
+  border-bottom-color: var(--cv3-accent, #2D4295);
+}
+
+/* エラーメッセージ */
+#main-content .cv3-error {
+  font-family: var(--cv3-sans);
+  font-size: 13px;
+  color: #c0392b;
+  letter-spacing: 0.03em;
+}
+
+/* 汎用エラー */
+#main-content .cv3-general-error {
+  font-family: var(--cv3-sans);
+  font-size: 14px;
+  color: #c0392b;
+  margin-top: 16px;
+}
+
+/* 送信ボタン */
+#main-content .cv3-submit {
+  text-align: center;
+  margin-top: 8px;
+}
+
+#main-content .cv3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 56px;
+  background: var(--cv3-accent, #2D4295);
+  color: var(--cv3-white, #ffffff);
+  font-family: var(--cv3-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+#main-content .cv3-btn:hover {
+  opacity: 0.88;
+}
+
+#main-content .cv3-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- Section 3: 直接メール案内 ---------- */
+#main-content .cv3-direct {
+  padding-block: 80px;
+  text-align: center;
+  border-top: 1px solid var(--cv3-border, #E5E5E7);
+  background: var(--cv3-white, #ffffff);
+}
+
+#main-content .cv3-direct__inner {
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#main-content .cv3-direct__label {
+  font-family: var(--cv3-sans);
+  font-size: 14px;
+  color: var(--cv3-caption, #6e6e73);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+#main-content .cv3-direct__email {
+  margin: 0;
+}
+
+#main-content .cv3-direct__email-link {
+  font-family: var(--cv3-mono, monospace);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--cv3-text, #1d1d1f);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+
+#main-content .cv3-direct__email-link:hover {
+  border-bottom-color: var(--cv3-text, #1d1d1f);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 768px) {
+  #main-content .cv3-hero {
+    padding-block: 100px;
+  }
+  #main-content .cv3-hero__heading {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+  #main-content .cv3-hero__sub {
+    font-size: 15px;
+  }
+  #main-content .cv3-form-section {
+    padding-bottom: 80px;
+  }
+  #main-content .cv3-form-wrap {
+    padding-inline: 0;
+  }
+  #main-content .cv3-btn {
+    width: 100%;
+  }
+  #main-content .cv3-direct {
+    padding-block: 60px;
+  }
+  #main-content .cv3-direct__email-link {
+    font-size: 16px;
+    word-break: break-all;
+  }
+}
+
+/* ============================================================
+   END CONTACT PAGE v3 — 2026-06-18
+   ============================================================ */

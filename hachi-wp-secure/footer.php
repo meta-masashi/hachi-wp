@@ -4,31 +4,6 @@
  */
 ?>
 
-<!-- ===== FOOTER CTA (白背景・ページ側にCTAがある場合は非表示) ===== -->
-<?php if ( ! is_page( array( 'about', 'service', 'contact', 'company' ) ) ) : ?>
-<section class="section about-cta">
-	<div class="container">
-		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
-			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
-			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
-			<p class="body-copy" style="margin:28px auto 0">
-				<?php _e( 'サービス導入、取材など、お問い合わせはこちらから。', 'hachi' ); ?>
-			</p>
-			<div class="about-cta__buttons">
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
-					<?php _e( 'Contact Us', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn">
-					<?php _e( 'About HACHI', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<?php endif; ?>
-
 <!-- ===== SITE FOOTER ===== -->
 <footer class="site-footer" role="contentinfo">
 	<div class="container">
@@ -41,7 +16,7 @@
 				<?php
 				$nav_links = [
 					home_url( '/' )          => __( 'Home', 'hachi' ),
-					home_url( '/about/' )    => __( 'About', 'hachi' ),
+					home_url( '/about/' )    => __( 'About Us', 'hachi' ),
 					home_url( '/service/' )  => __( 'Service', 'hachi' ),
 					home_url( '/company/' )  => __( 'Company', 'hachi' ),
 					home_url( '/news/' )     => __( 'News', 'hachi' ),
@@ -65,7 +40,6 @@
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Company</p>
 				<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="footer-nav__link"><?php _e( '会社概要', 'hachi' ); ?></a>
-				<a href="<?php echo esc_url( home_url( '/company/#security' ) ); ?>" class="footer-nav__link">Security</a>
 			</div>
 
 			<div class="footer-nav__col">
@@ -74,11 +48,6 @@
 			</div>
 
 		</nav>
-
-		<!-- AT民間資格 最小注記 -->
-		<p style="font-size:11px;color:var(--gray);margin:16px 0 0;line-height:1.8">
-			<?php _e( 'アスレティックトレーナー（AT）は民間資格です。医療行為は行いません。', 'hachi' ); ?>
-		</p>
 
 		<!-- Footer bottom bar -->
 		<div class="footer-bottom">

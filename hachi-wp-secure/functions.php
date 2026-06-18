@@ -5,7 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
-define('HACHI_VERSION',   '2.3.2');
+define('HACHI_VERSION',   '3.3.0');
 define('HACHI_THEME_DIR', get_template_directory());
 define('HACHI_THEME_URI', get_template_directory_uri());
 
@@ -30,7 +30,7 @@ foreach (['/inc/contact-handler.php', '/inc/rest-api.php'] as $mod) {
 }
 
 // グロース・パフォーマンスモジュール読み込み
-foreach (['/inc/seo.php', '/inc/structured-data.php', '/inc/analytics.php', '/inc/performance.php'] as $mod) {
+foreach (['/inc/v3-render.php', '/inc/seo.php', '/inc/structured-data.php', '/inc/analytics.php', '/inc/performance.php'] as $mod) {
     $p = HACHI_THEME_DIR . $mod;
     if (file_exists($p)) require_once $p;
 }
@@ -90,9 +90,10 @@ add_action('admin_enqueue_scripts', function (): void {
 
 function hachi_enqueue_assets(): void {
     wp_enqueue_style('hachi-fonts',
-        'https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&family=Montserrat:wght@300;400;500;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;600&display=swap',
         [], null);
     wp_enqueue_style('hachi-style', HACHI_THEME_URI.'/style.css', ['hachi-fonts'], HACHI_VERSION);
+    wp_enqueue_style('hachi-v3', HACHI_THEME_URI.'/assets/css/v3.css', ['hachi-style'], HACHI_VERSION);
     wp_enqueue_script('hachi-main', HACHI_THEME_URI.'/js/main.js', [], HACHI_VERSION, true);
     wp_localize_script('hachi-main','hachiData',[
         'ajaxUrl'          => admin_url('admin-ajax.php'),

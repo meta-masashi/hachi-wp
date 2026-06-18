@@ -19,6 +19,13 @@ defined( 'ABSPATH' ) || exit;
  * add_theme_support('title-tag') が有効な場合に document_title_parts フィルタで制御する。
  */
 add_filter( 'document_title_parts', function ( array $title ): array {
+    $path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+
+    if ( $path === 'privacy-policy' ) {
+        $title['title'] = 'プライバシーポリシー | HACHI';
+        unset( $title['tagline'] );
+        return $title;
+    }
 
     if ( is_front_page() ) {
         $title['title'] = 'HACHI | 身体知を、再現可能な判断知へ。';

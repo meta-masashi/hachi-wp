@@ -70,7 +70,7 @@ function hachi_v3_render_home(): void {
         <section class="v3-hero v3-hero--split" aria-label="ヒーロー">
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
-                    <h1>身体知を、再現可能な<br>判断知へ。</h1>
+                    <h1>身体知を、<br>再現可能な判断知へ。</h1>
                     <p>経験と勘で動く現場を、組織が引き継げる判断の体系に変える。社員の身体・睡眠・集中・疲労を、観察できる材料にする。</p>
                     <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="v3-btn v3-btn--accent">サービスを見る</a>
                 </div>
@@ -266,7 +266,7 @@ function hachi_v3_render_about(): void {
             <div class="v3-hero__inner">
                 <div class="v3-hero__copy">
                     <p class="v3-eyebrow">ABOUT</p>
-                    <h1>身体知を、再現可能な<br>判断知へ。</h1>
+                    <h1>身体知を、<br>再現可能な判断知へ。</h1>
                     <p class="v3-subthesis">経験と勘を、引き継げる体系に。</p>
                 </div>
                 <?php hachi_v3_person(); ?>

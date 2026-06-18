@@ -5286,6 +5286,107 @@ footer.site-footer {
 #main-content .hero-inner {
   position: relative;
   z-index: 1;
+   PR-C — Service v3.2 + About Us v3.2 CSS (2026-06-18)
+   #main-content スコープで light palette 独立
+   ============================================================ */
+
+/* --- 共通 design tokens (light palette) ------------------- */
+#main-content {
+  --color-text:     #1d1d1f;
+  --color-caption:  #3a3a3c;
+  --color-border:   #E5E5E7;
+  --color-accent:   #2D4295;
+  --color-white:    #FFFFFF;
+  --color-bg-alt:   #F5F5F5;
+  --font-serif:     'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  --font-sans:      'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-mono:      'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --content-max:    720px;
+  --content-max-wide: 960px;
+  --gutter:         40px;
+  background: #FFFFFF;
+  color: #1d1d1f;
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+/* eyebrow / section label */
+#main-content .eyebrow {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3a3a3c;
+}
+
+/* accent dot */
+#main-content .accent-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2D4295;
+}
+
+/* section base */
+#main-content .section {
+  padding-block: 160px;
+}
+
+/* container */
+#main-content .container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 40px;
+}
+
+/* footer CTA (黒背景) */
+#main-content .footer-cta {
+  background: #1d1d1f;
+  padding-block: 120px;
+  text-align: center;
+}
+#main-content .footer-cta h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 40px;
+}
+#main-content .btn-primary {
+  display: inline-block;
+  background: #FFFFFF;
+  color: #1d1d1f;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 16px 48px;
+  min-width: 240px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+#main-content .btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* ============================================================
+   SERVICE PAGE
+   ============================================================ */
+
+/* セクション 1: ヒーロー */
+#main-content .service-hero {
+  padding-block: 180px;
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E5E5E7;
+}
+#main-content .service-hero-inner {
   display: grid;
   grid-template-columns: 60% 40%;
   align-items: center;
@@ -5346,6 +5447,28 @@ footer.site-footer {
 }
 
 #main-content .hero-illustration {
+  padding-inline: 40px;
+  width: 100%;
+}
+#main-content .service-hero-copy .eyebrow {
+  margin-bottom: 24px;
+  display: block;
+}
+#main-content .service-hero-copy h1 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(40px, 3.8vw, 56px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 36px;
+  color: #1d1d1f;
+}
+#main-content .service-hero-copy .sub-copy {
+  font-size: 17px;
+  line-height: 1.85;
+  color: #3a3a3c;
+  max-width: 520px;
+}
+#main-content .service-hero-illustration {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -5437,6 +5560,357 @@ footer.site-footer {
   border-radius: 50%;
   border: 0.8px solid var(--color-text);
   background: transparent;
+#main-content .service-hero-illustration img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+/* セクション 2: 4 観察軸 */
+#main-content .observation-axes {
+  padding-block: 180px;
+}
+#main-content .observation-axes h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 48px;
+  line-height: 1.4;
+  color: #1d1d1f;
+}
+#main-content .axes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 960px;
+  margin-inline: auto;
+}
+#main-content .axis-item {
+  text-align: center;
+}
+#main-content .axis-mark {
+  width: 32px;
+  height: 1px;
+  background: #1d1d1f;
+  margin-inline: auto;
+  margin-bottom: 24px;
+  opacity: 0.3;
+}
+#main-content .axis-title {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+}
+#main-content .axis-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #3a3a3c;
+}
+#main-content .axes-dot {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* セクション 3: 導入の流れ */
+#main-content .intro-flow {
+  padding-block: 180px;
+  background: #FFFFFF;
+}
+#main-content .intro-flow h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 48px;
+  color: #1d1d1f;
+}
+#main-content .flow-steps {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr;
+  gap: 0;
+  align-items: start;
+  max-width: 960px;
+  margin-inline: auto;
+}
+#main-content .flow-step {
+  text-align: center;
+}
+#main-content .flow-step-num {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: #1d1d1f;
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 16px;
+  letter-spacing: 0.04em;
+}
+#main-content .flow-step-title {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+#main-content .flow-step-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #3a3a3c;
+  max-width: 160px;
+  margin-inline: auto;
+}
+#main-content .flow-arrow-col {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+/* セクション 4: 差別化対比表 */
+#main-content .comparison-section {
+  padding-block: 180px;
+}
+#main-content .comparison-section h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #1d1d1f;
+}
+#main-content .comparison-sub {
+  font-size: 16px;
+  color: #3a3a3c;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 560px;
+  margin-inline: auto;
+  margin-bottom: 48px;
+}
+#main-content .comparison-table {
+  max-width: 880px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+#main-content .comparison-col {
+  padding: 0 40px;
+}
+#main-content .comparison-col:first-child {
+  border-right: 1px solid #E5E5E7;
+  padding-left: 0;
+}
+#main-content .comparison-col:last-child {
+  padding-right: 0;
+}
+#main-content .comparison-col-title {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3a3a3c;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E5E5E7;
+  line-height: 1.45;
+}
+#main-content .comparison-col:last-child .comparison-col-title {
+  color: #1d1d1f;
+}
+#main-content .comparison-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+#main-content .comparison-row {
+  padding-block: 20px;
+  border-bottom: 1px solid #E5E5E7;
+}
+#main-content .comparison-row:last-child {
+  border-bottom: none;
+}
+#main-content .comparison-row-label {
+  font-size: 12px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3a3a3c;
+  margin-bottom: 6px;
+}
+#main-content .comparison-row-value {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #1d1d1f;
+}
+#main-content .comparison-col:first-child .comparison-row-value {
+  color: #3a3a3c;
+}
+#main-content .comparison-accent {
+  margin-top: 24px;
+  text-align: right;
+}
+
+/* セクション 5: FAQ */
+#main-content .faq-section {
+  padding-block: 160px;
+}
+#main-content .faq-section h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 56px;
+  color: #1d1d1f;
+}
+#main-content .faq-list {
+  max-width: 720px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+#main-content .faq-item {
+  padding-block: 32px;
+  border-top: 1px solid #E5E5E7;
+}
+#main-content .faq-item:last-child {
+  border-bottom: 1px solid #E5E5E7;
+}
+#main-content .faq-q {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+#main-content .faq-a {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #3a3a3c;
+}
+
+/* ============================================================
+   ABOUT US PAGE
+   ============================================================ */
+
+/* セクション 1: ヒーロー */
+#main-content .about-hero {
+  padding-block: 240px;
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E5E5E7;
+}
+#main-content .about-hero-inner {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  align-items: center;
+  gap: 0;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 40px;
+  width: 100%;
+}
+#main-content .about-hero-copy .eyebrow {
+  margin-bottom: 28px;
+  display: block;
+}
+#main-content .about-hero-copy h1 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(44px, 4.2vw, 64px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 28px;
+  color: #1d1d1f;
+}
+#main-content .about-subthesis {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(18px, 1.7vw, 24px);
+  font-weight: 600;
+  color: #3a3a3c;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+#main-content .about-hero-illustration {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#main-content .about-hero-illustration img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+/* セクション 2: ミッション・ビジョン */
+#main-content .mission-vision {
+  padding-block: 200px;
+}
+#main-content .mission-vision-inner {
+  max-width: 720px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+#main-content .mv-block-label {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3a3a3c;
+  margin-bottom: 20px;
+}
+#main-content .mv-block-lead {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+}
+#main-content .mv-block-body {
+  font-size: 16px;
+  line-height: 2.0;
+  color: #3a3a3c;
+}
+
+/* セクション 3: 思想の構造図 */
+#main-content .philosophy-flow {
+  padding-block: 200px;
+  background: #FFFFFF;
+}
+#main-content .philosophy-flow h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(26px, 2.2vw, 32px);
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1d1d1f;
+}
+#main-content .flow-3 {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  align-items: start;
+  gap: 0;
+  max-width: 720px;
+  margin-inline: auto;
+}
+#main-content .flow-3-step {
+  text-align: center;
+}
+#main-content .flow-3-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 0.8px solid #1d1d1f;
+  margin-inline: auto;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5444,6 +5918,10 @@ footer.site-footer {
 
 /* 4 番目ステップのアクセントドット */
 #main-content .process-step:last-child .step-circle::after {
+#main-content .flow-3-circle.accent {
+  position: relative;
+}
+#main-content .flow-3-circle.accent::after {
   content: '';
   display: block;
   width: 6px;
@@ -5552,6 +6030,37 @@ footer.site-footer {
 
 #main-content .news-section h2 {
   font-family: var(--font-serif);
+  background: #2D4295;
+}
+#main-content .flow-3-title {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+#main-content .flow-3-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #3a3a3c;
+  max-width: 160px;
+  margin-inline: auto;
+}
+#main-content .flow-3-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 14px;
+  color: #E5E5E7;
+}
+
+/* セクション 4: 代表メッセージ */
+#main-content .rep-message {
+  padding-block: 200px;
+}
+#main-content .rep-message h2 {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
   font-size: clamp(24px, 2vw, 30px);
   font-weight: 600;
   text-align: center;
@@ -5719,4 +6228,38 @@ footer.site-footer {
 
 /* ============================================================
    END HOME v3.2 — 2026-06-18
+  color: #1d1d1f;
+}
+#main-content .rep-message-inner {
+  max-width: 720px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#main-content .rep-photo {
+  width: 200px;
+  height: 240px;
+  background: #F5F5F5;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+#main-content .rep-name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: #3a3a3c;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+  text-align: center;
+}
+#main-content .rep-body {
+  font-size: 16px;
+  line-height: 2.0;
+  color: #1d1d1f;
+  text-align: left;
+  width: 100%;
+}
+
+/* ============================================================
+   END PR-C — Service + About Us CSS — 2026-06-18
    ============================================================ */

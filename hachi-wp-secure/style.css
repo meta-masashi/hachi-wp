@@ -5209,4 +5209,514 @@ footer.site-footer {
 
 /* ============================================================
    END COMPANY PAGE v3 — 2026-06-17
+   HOME v3.2 — 2026-06-18
+   front-page.php 専用スタイル
+   Light palette (#FFFFFF 背景) / 既存 dark palette と分離
+   ============================================================ */
+
+/* --- Home v3.2 CSS Variables (light palette override) --- */
+.page-home,
+#main-content {
+  --color-white:   #FFFFFF;
+  --color-text:    #1d1d1f;
+  --color-caption: #3a3a3c;
+  --color-accent:  #2D4295;
+  --color-border:  #E5E5E7;
+  --content-max:   720px;
+  --font-serif:    'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  --font-sans:     'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  --font-mono:     'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --gutter:        40px;
+}
+
+/* front-page.php の #main-content は白背景で上書き */
+#main-content {
+  background: #FFFFFF;
+  color: #1d1d1f;
+}
+
+/* --- Container (Home v3.2 用 / 既存 .container と共存) --- */
+#main-content .container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter, 40px);
+  width: 100%;
+}
+
+/* テキスト幅制限 */
+#main-content .content-narrow {
+  max-width: var(--content-max, 720px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+#main-content .content-full {
+  width: 100%;
+}
+
+/* --- Section 共通 (Home v3.2) --- */
+#main-content .section {
+  padding-block: 180px;
+}
+
+/* ============================================================
+   セクション 1: ヒーロー
+   ============================================================ */
+#main-content .hero {
+  padding-block: 200px;
+  position: relative;
+  overflow: hidden;
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+#main-content .hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border);
+  opacity: 0.4;
+}
+
+#main-content .hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  align-items: center;
+  gap: 0;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter, 40px);
+  width: 100%;
+}
+
+#main-content .hero-copy {
+  max-width: 680px;
+}
+
+#main-content .hero-copy h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 4.2vw, 60px);
+  font-weight: 600;
+  line-height: 1.32;
+  margin-bottom: 36px;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+}
+
+#main-content .hero-copy .sub-copy {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--color-caption);
+  margin-bottom: 48px;
+  max-width: 540px;
+}
+
+/* ヒーロー CTA ボタン */
+#main-content .btn.btn-accent,
+#main-content .btn-accent {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 16px 40px;
+  border-radius: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  min-width: 200px;
+  text-align: center;
+  height: 56px;
+  line-height: 56px;
+  padding-block: 0;
+}
+
+#main-content .btn.btn-accent:hover,
+#main-content .btn-accent:hover {
+  opacity: 0.85;
+}
+
+#main-content .hero-illustration {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#main-content .hero-illustration img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+/* ============================================================
+   セクション 2: 価値命題
+   ============================================================ */
+#main-content .value-prop {
+  padding-block: 180px;
+  background: #FFFFFF;
+  text-align: center;
+}
+
+#main-content .value-prop h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 2.8vw, 42px);
+  font-weight: 600;
+  margin-bottom: 0;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+#main-content .value-prop p {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 2.0;
+  color: var(--color-caption);
+}
+
+/* ============================================================
+   セクション 3: 4 段プロセス図 (差別化セクション)
+   ============================================================ */
+#main-content .process-section {
+  padding-block: 200px;
+  background: #FFFFFF;
+}
+
+#main-content .process-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 2.4vw, 36px);
+  font-weight: 600;
+  margin-bottom: 0;
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+#main-content .process-section .section-sub {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--color-caption);
+  line-height: 1.8;
+}
+
+/* 矢印付き横並び (grid: step / arrow / step / arrow / step / arrow / step) */
+#main-content .process-flow {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr;
+  align-items: start;
+  gap: 0;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+
+#main-content .process-step {
+  position: relative;
+  text-align: center;
+}
+
+#main-content .process-step-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-inline: auto;
+  margin-bottom: 24px;
+}
+
+#main-content .step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 0.8px solid var(--color-text);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4 番目ステップのアクセントドット */
+#main-content .process-step:last-child .step-circle::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+#main-content .process-step-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+#main-content .process-step-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--color-caption);
+  max-width: 180px;
+  margin-inline: auto;
+}
+
+#main-content .process-arrow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#main-content .process-arrow-svg {
+  padding-top: 24px;
+  color: var(--color-border);
+}
+
+/* ============================================================
+   セクション 4: サービス 2 本柱
+   ============================================================ */
+#main-content .services-nav {
+  padding-block: 180px;
+  background: #FFFFFF;
+}
+
+#main-content .services-nav h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 64px;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+#main-content .services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+#main-content .service-card {
+  border-top: 1px solid var(--color-border);
+  padding-top: 32px;
+}
+
+#main-content .service-card h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+#main-content .service-card p {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-caption);
+  margin-bottom: 24px;
+}
+
+#main-content .text-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-caption);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.18s ease;
+}
+
+#main-content .text-link:hover {
+  color: var(--color-text);
+}
+
+/* ============================================================
+   セクション 5: 直近のお知らせ
+   ============================================================ */
+#main-content .news-section {
+  padding-block: 160px;
+  background: #FFFFFF;
+}
+
+#main-content .news-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2vw, 30px);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 48px;
+  color: var(--color-text);
+}
+
+#main-content .news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: var(--content-max, 720px);
+  margin-inline: auto;
+}
+
+#main-content .news-item {
+  padding-block: 40px;
+}
+
+#main-content .news-item + .news-item {
+  border-top: none;
+}
+
+#main-content .news-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+#main-content .news-date {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-caption);
+  letter-spacing: 0.04em;
+}
+
+#main-content .news-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#main-content .news-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+#main-content .news-readmore {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-caption);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+#main-content .news-readmore:hover {
+  color: var(--color-text);
+}
+
+/* ============================================================
+   セクション 6: フッター CTA (黒背景)
+   ============================================================ */
+#main-content .footer-cta {
+  background: #1d1d1f;
+  padding-block: 120px;
+  text-align: center;
+}
+
+#main-content .footer-cta h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 48px;
+  line-height: 1.4;
+}
+
+/* フッター CTA ボタン (白背景・黒文字) */
+#main-content .footer-cta .btn-primary {
+  display: inline-block;
+  background: #FFFFFF;
+  color: #1d1d1f;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0 48px;
+  text-decoration: none;
+  min-width: 240px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+#main-content .footer-cta .btn-primary:hover {
+  opacity: 0.88;
+}
+
+/* ============================================================
+   HOME v3.2 レスポンシブ (タブレット〜モバイル)
+   ============================================================ */
+@media (max-width: 900px) {
+  #main-content .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #main-content .hero-illustration {
+    display: none;
+  }
+
+  #main-content .hero-copy {
+    max-width: 100%;
+  }
+
+  #main-content .hero-copy .sub-copy {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  #main-content .process-flow {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  #main-content .process-arrow {
+    display: none;
+  }
+
+  #main-content .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #main-content .hero {
+    padding-block: 120px;
+  }
+
+  #main-content .value-prop,
+  #main-content .services-nav,
+  #main-content .news-section {
+    padding-block: 100px;
+  }
+
+  #main-content .process-section {
+    padding-block: 120px;
+  }
+
+  #main-content .footer-cta {
+    padding-block: 80px;
+  }
+}
+
+/* ============================================================
+   END HOME v3.2 — 2026-06-18
    ============================================================ */

@@ -1,0 +1,210 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1040 280"
+  role="img"
+  aria-labelledby="p4-title"
+  style="display:block;width:100%;max-width:1040px;"
+>
+  <title id="p4-title">HACHIコンディション・インサイト — 4ステッププロセス：観察 → 整理 → 記録 → 判断</title>
+
+  <!--
+    process-4steps.svg
+    Design: Luka CDO / 2026-06-17
+    viewBox: 1040×280
+    Cliché avoided: card borders / icon illustrations / colored backgrounds / filled bars
+    Style: Swiss restraint — circle-number-label-caption vertical stack, hairline arrows
+    4 steps: 観察 → 整理 → 記録 → 判断
+    Step positions: x=130, x=370, x=610, x=850 (spaced 240px apart)
+    Circle r=24, center y=72
+    Label y=130 (22px Noto Serif JP)
+    Caption y=158 (12px Noto Sans JP, max 60chars, word-wrapped at ~30chars)
+    #2D4295 accent: 1 point — inside 「判断」circle only
+    No card borders / no fill backgrounds on steps
+  -->
+
+  <!-- Background: white -->
+  <rect width="1040" height="280" fill="#ffffff"/>
+
+  <!-- ═══════════════════════════════════════════════
+       STEP 1 — 観察
+       x=130, circle-cy=72
+  ════════════════════════════════════════════════ -->
+
+  <!-- Circle (r=24, stroke only) -->
+  <circle cx="130" cy="72" r="24"
+          fill="none"
+          stroke="#1d1d1f" stroke-width="0.8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Number inside circle -->
+  <text x="130" y="77"
+        font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="400"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.02em">1</text>
+
+  <!-- Large label -->
+  <text x="130" y="130"
+        font-family="'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif"
+        font-size="22" font-weight="600"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.06em">観察</text>
+
+  <!-- Caption line 1 -->
+  <text x="130" y="162"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">現場の身体・睡眠・集中・</text>
+
+  <!-- Caption line 2 -->
+  <text x="130" y="180"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">疲労のサインを取り出す</text>
+
+  <!-- ═══════════════════════════════════════════════
+       ARROW 1 → 2
+  ════════════════════════════════════════════════ -->
+
+  <line x1="196" y1="72" x2="302" y2="72"
+        stroke="#1d1d1f" stroke-width="1.0" stroke-opacity="0.45"
+        stroke-linecap="round"/>
+  <path d="M 297 67 L 306 72 L 297 77"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="1.0" stroke-opacity="0.45"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ═══════════════════════════════════════════════
+       STEP 2 — 整理
+       x=370
+  ════════════════════════════════════════════════ -->
+
+  <circle cx="370" cy="72" r="24"
+          fill="none"
+          stroke="#1d1d1f" stroke-width="0.8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="370" y="77"
+        font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="400"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.02em">2</text>
+
+  <text x="370" y="130"
+        font-family="'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif"
+        font-size="22" font-weight="600"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.06em">整理</text>
+
+  <text x="370" y="162"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">サインを傾向として</text>
+
+  <text x="370" y="180"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">組織単位で整理する</text>
+
+  <!-- ═══════════════════════════════════════════════
+       ARROW 2 → 3
+  ════════════════════════════════════════════════ -->
+
+  <line x1="436" y1="72" x2="542" y2="72"
+        stroke="#1d1d1f" stroke-width="1.0" stroke-opacity="0.45"
+        stroke-linecap="round"/>
+  <path d="M 537 67 L 546 72 L 537 77"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="1.0" stroke-opacity="0.45"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ═══════════════════════════════════════════════
+       STEP 3 — 記録
+       x=610
+  ════════════════════════════════════════════════ -->
+
+  <circle cx="610" cy="72" r="24"
+          fill="none"
+          stroke="#1d1d1f" stroke-width="0.8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="610" y="77"
+        font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="400"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.02em">3</text>
+
+  <text x="610" y="130"
+        font-family="'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif"
+        font-size="22" font-weight="600"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.06em">記録</text>
+
+  <text x="610" y="162"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">経営判断と面談に使える</text>
+
+  <text x="610" y="180"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">組織レポートとして残す</text>
+
+  <!-- ═══════════════════════════════════════════════
+       ARROW 3 → 4
+  ════════════════════════════════════════════════ -->
+
+  <line x1="676" y1="72" x2="782" y2="72"
+        stroke="#1d1d1f" stroke-width="1.0" stroke-opacity="0.55"
+        stroke-linecap="round"/>
+  <path d="M 777 67 L 786 72 L 777 77"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="1.0" stroke-opacity="0.55"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ═══════════════════════════════════════════════
+       STEP 4 — 判断 (focal / #2D4295 accent)
+       x=850
+  ════════════════════════════════════════════════ -->
+
+  <!-- Outer circle — slightly heavier to mark convergence -->
+  <circle cx="850" cy="72" r="24"
+          fill="none"
+          stroke="#1d1d1f" stroke-width="1.1"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- #2D4295 accent dot — 1 per figure rule, inside 判断 circle -->
+  <circle cx="850" cy="72" r="3"
+          fill="#2D4295"/>
+
+  <text x="850" y="130"
+        font-family="'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif"
+        font-size="22" font-weight="600"
+        fill="#1d1d1f"
+        text-anchor="middle" letter-spacing="0.06em">判断</text>
+
+  <text x="850" y="162"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">次の打ち手を組織として</text>
+
+  <text x="850" y="180"
+        font-family="'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif"
+        font-size="12" font-weight="400"
+        fill="#3a3a3c"
+        text-anchor="middle" letter-spacing="0.03em">再現可能にする</text>
+
+  <!-- ─── HAIRLINE BASELINE ─── -->
+  <!-- Thin horizontal reference at circle center height — very faint -->
+  <line x1="52" y1="72" x2="988" y2="72"
+        stroke="#1d1d1f" stroke-width="0.5" stroke-opacity="0.06"
+        stroke-linecap="round"/>
+
+</svg>

@@ -18,7 +18,7 @@ function hachi_v3_arrow(): string {
 function hachi_v3_person(): void {
     ?>
     <div class="v3-hero-figure" aria-hidden="true">
-        <img src="<?php echo esc_url( hachi_v3_asset( 'assets/svg/hero-person.svg' ) ); ?>" alt="" width="340" height="510">
+        <img src="<?php echo esc_url( hachi_v3_asset( 'assets/images/v3-person-lineart.png' ) ); ?>" alt="" width="260" height="460">
     </div>
     <?php
 }

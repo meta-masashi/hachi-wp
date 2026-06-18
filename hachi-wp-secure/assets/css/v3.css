@@ -124,16 +124,21 @@ body:has(.nav-drawer.is-open) {
 }
 
 .nav-cta {
+  background: transparent !important;
   border: 1.5px solid var(--v3-accent);
   border-radius: 2px;
-  color: var(--v3-accent);
+  box-shadow: none !important;
+  color: var(--v3-accent) !important;
   padding: 8px 18px;
 }
 
 .nav-cta:hover,
-.nav-cta.is-current {
-  background: transparent;
-  color: var(--v3-accent);
+.nav-cta.is-current,
+.site-header.is-scrolled .nav-cta,
+.site-header.is-scrolled .nav-cta:hover {
+  background: transparent !important;
+  border-color: var(--v3-accent) !important;
+  color: var(--v3-accent) !important;
 }
 
 .hamburger {
@@ -415,6 +420,7 @@ body:has(.nav-drawer.is-open) {
 
 .v3-home-statement h2 {
   font-size: clamp(26px, 2.35vw, 36px);
+  text-wrap: balance;
 }
 
 .v3-section--center,

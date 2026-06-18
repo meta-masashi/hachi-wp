@@ -1,0 +1,159 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 400 600"
+  role="img"
+  aria-labelledby="hp-title"
+  style="display:block;width:100%;max-width:400px;"
+>
+  <title id="hp-title">立位・観察姿勢の人物 line-art — HACHI コーポレートサイト hero</title>
+
+  <!--
+    hero-person.svg
+    Design: Luka CDO / 2026-06-17
+    viewBox: 400×600
+    Cliché avoided: muscle silhouette / white coat / smiling face / medical instruments / gendered uniform
+    Style: Swiss restraint × Clinical-premium minimalism
+    Single figure, lateral-facing, quiet observation stance
+    #2D4295 accent: 1 point only — focal point of gaze (approx where the subject is looking)
+    stroke: #1d1d1f / fill: none / stroke-linecap: round / stroke-linejoin: round
+    Deliberate ambiguity: head shape minimal, clothing absent, form is universal
+  -->
+
+  <!-- Background: white -->
+  <rect width="400" height="600" fill="#ffffff"/>
+
+  <!-- ─── HEAD ─── -->
+  <!-- Slightly left-facing oval, positioned upper center-right -->
+  <!-- cx=210, cy=118, rx=28, ry=34 — understated, no facial features except implied gaze direction -->
+  <ellipse cx="210" cy="118" rx="28" ry="34"
+           fill="none"
+           stroke="#1d1d1f" stroke-width="1.0"
+           stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ─── NECK ─── -->
+  <line x1="210" y1="152" x2="210" y2="176"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round"/>
+
+  <!-- ─── SHOULDERS ─── -->
+  <!-- Slight asymmetry: right shoulder slightly higher (observing posture — slight forward lean) -->
+  <!-- Left shoulder (viewer's right): x=154, y=186 -->
+  <!-- Right shoulder (viewer's left): x=266, y=180 -->
+  <path d="M 154 186 Q 182 178 210 176 Q 238 178 266 180"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="1.0"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ─── LEFT ARM (viewer's right) — slightly extended forward, observation gesture ─── -->
+  <!-- Upper arm down from left shoulder -->
+  <path d="M 154 186 Q 140 224 136 264"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Forearm: elbow at ~136,264 → extends slightly forward (toward subject of observation) -->
+  <path d="M 136 264 Q 132 296 128 322"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Hand: simple oval suggestion -->
+  <ellipse cx="125" cy="330" rx="8" ry="11"
+           fill="none"
+           stroke="#1d1d1f" stroke-width="0.8"
+           stroke-linecap="round"/>
+
+  <!-- ─── RIGHT ARM (viewer's left) — resting at side, slight bend ─── -->
+  <path d="M 266 180 Q 278 220 282 260"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 282 260 Q 284 296 280 328"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Hand resting -->
+  <ellipse cx="279" cy="336" rx="8" ry="10"
+           fill="none"
+           stroke="#1d1d1f" stroke-width="0.8"
+           stroke-linecap="round"/>
+
+  <!-- ─── TORSO — single outline, no clothing details ─── -->
+  <!-- Lateral outline from shoulders down to hip -->
+  <!-- Left side of torso -->
+  <path d="M 154 186 Q 148 248 150 316 Q 152 340 162 352"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="1.0"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right side of torso -->
+  <path d="M 266 180 Q 272 244 270 314 Q 268 338 258 352"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="1.0"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Hip base — connecting bottom of torso -->
+  <path d="M 162 352 Q 210 358 258 352"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ─── LEFT LEG (viewer's right) ─── -->
+  <!-- Upper leg from hip -->
+  <path d="M 162 352 Q 176 400 178 452"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lower leg — slight natural angle -->
+  <path d="M 178 452 Q 180 496 180 536"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Foot suggestion -->
+  <path d="M 180 536 Q 175 548 165 554"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.8"
+        stroke-linecap="round"/>
+
+  <!-- ─── RIGHT LEG (viewer's left) ─── -->
+  <path d="M 258 352 Q 244 400 240 452"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 240 452 Q 238 496 238 536"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.9"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Foot suggestion -->
+  <path d="M 238 536 Q 234 548 248 554"
+        fill="none"
+        stroke="#1d1d1f" stroke-width="0.8"
+        stroke-linecap="round"/>
+
+  <!-- ─── GAZE LINE — very faint hairline from head toward subject ─── -->
+  <!-- Implied direction of observation: forward-left (subject is to viewer's left) -->
+  <!-- From eye-area (cx~185, cy~112) extending leftward and slightly downward -->
+  <line x1="183" y1="112" x2="108" y2="118"
+        stroke="#1d1d1f" stroke-width="0.5" stroke-opacity="0.12"
+        stroke-linecap="round"
+        stroke-dasharray="2 4"/>
+
+  <!-- ─── #2D4295 ACCENT DOT — focal point of gaze ─── -->
+  <!-- Placed at the terminus of the implied gaze: x=102, y=118 -->
+  <!-- "The point being observed — the moment of attention" -->
+  <circle cx="102" cy="118" r="3"
+          fill="#2D4295"/>
+
+  <!-- ─── BACKGROUND TEXTURE — subtle structural grid (Type C) ─── -->
+  <!-- 80px pitch, hairline, opacity strict ≤0.09 -->
+  <g stroke="#1d1d1f" stroke-width="0.5" stroke-opacity="0.042">
+    <line x1="80"  y1="0"   x2="80"  y2="600"/>
+    <line x1="160" y1="0"   x2="160" y2="600"/>
+    <line x1="240" y1="0"   x2="240" y2="600"/>
+    <line x1="320" y1="0"   x2="320" y2="600"/>
+    <line x1="0"   y1="80"  x2="400" y2="80"/>
+    <line x1="0"   y1="160" x2="400" y2="160"/>
+    <line x1="0"   y1="240" x2="400" y2="240"/>
+    <line x1="0"   y1="320" x2="400" y2="320"/>
+    <line x1="0"   y1="400" x2="400" y2="400"/>
+    <line x1="0"   y1="480" x2="400" y2="480"/>
+    <line x1="0"   y1="560" x2="400" y2="560"/>
+  </g>
+
+</svg>

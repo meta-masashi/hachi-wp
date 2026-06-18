@@ -301,9 +301,11 @@ function initContactForm() {
 
   // Field references
   const fields = {
+    company: { input: form.querySelector('[name="contact_company"]'), wrapper: $('#field-company'), errEl: null },
     name:    { input: form.querySelector('[name="contact_name"]'),    wrapper: $('#field-name'),    errEl: $('#err-name') },
     email:   { input: form.querySelector('[name="contact_email"]'),   wrapper: $('#field-email'),   errEl: $('#err-email') },
     message: { input: form.querySelector('[name="contact_message"]'), wrapper: $('#field-message'), errEl: $('#err-message') },
+    privacy: { input: form.querySelector('[name="privacy"]'), wrapper: $('#field-privacy'), errEl: $('#err-privacy') },
   };
 
   // Sanitize display value
@@ -332,7 +334,12 @@ function initContactForm() {
   // Validate and return boolean
   function validate() {
     let valid = true;
-    const { name, email, message } = fields;
+    const { company, name, email, message, privacy } = fields;
+
+    if (company.input && !company.input.value.trim()) {
+      company.wrapper.classList.add('has-error');
+      valid = false;
+    }
 
     if (!name.input.value.trim()) {
       name.wrapper.classList.add('has-error');
@@ -355,13 +362,19 @@ function initContactForm() {
       valid = false;
     }
 
+    if (privacy.input && !privacy.input.checked) {
+      privacy.wrapper.classList.add('has-error');
+      valid = false;
+    }
+
     return valid;
   }
 
   // Clear error on input
   Object.values(fields).forEach(({ input, wrapper }) => {
     if (!input) return;
-    input.addEventListener('input', () => {
+    const eventName = input.type === 'checkbox' ? 'change' : 'input';
+    input.addEventListener(eventName, () => {
       wrapper.classList.remove('has-error');
     });
   });
@@ -445,4 +458,3 @@ function initContactForm() {
     }
   });
 }
-

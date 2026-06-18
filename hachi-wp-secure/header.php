@@ -16,30 +16,10 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- ===== SCROLL PROGRESS ===== -->
-<div id="scroll-progress" aria-hidden="true"></div>
-
-<!-- ===== PAGE LOADER ===== -->
-<div id="hachi-loader" role="status" aria-label="読み込み中">
-	<div class="loader__logo" aria-hidden="true">
-		<?php
-		$chars = str_split( 'HACHI' );
-		foreach ( $chars as $char ) {
-			echo '<span class="loader__logo-char">' . esc_html( $char ) . '</span>';
-		}
-		?>
-	</div>
-	<p class="loader__tagline">Condition Insight.</p>
-	<div class="loader__bar" aria-hidden="true"></div>
-</div>
-
-<!-- ===== PAGE TRANSITION CURTAIN ===== -->
-<div id="page-curtain" aria-hidden="true"></div>
-
 <!-- ===== MOBILE DRAWER ===== -->
 <nav class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'ナビゲーションメニュー', 'hachi' ); ?>">
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-drawer__item"><?php _e( 'Home', 'hachi' ); ?></a>
-	<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-drawer__item"><?php _e( 'About', 'hachi' ); ?></a>
+	<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="nav-drawer__item"><?php _e( 'About Us', 'hachi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="nav-drawer__item"><?php _e( 'Service', 'hachi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="nav-drawer__item"><?php _e( 'Company', 'hachi' ); ?></a>
 	<a href="<?php echo esc_url( home_url( '/news/' ) ); ?>" class="nav-drawer__item"><?php _e( 'News', 'hachi' ); ?></a>
@@ -66,7 +46,7 @@
 			<?php
 			$pages = [
 				''          => __( 'Home', 'hachi' ),
-				'about'     => __( 'About', 'hachi' ),
+				'about'     => __( 'About Us', 'hachi' ),
 				'service'   => __( 'Service', 'hachi' ),
 				'company'   => __( 'Company', 'hachi' ),
 				'news'      => __( 'News', 'hachi' ),
@@ -91,7 +71,7 @@
 			endforeach;
 			?>
 
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="nav-cta">
+			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="nav-cta<?php echo $current_top === 'contact' ? ' is-current' : ''; ?>"<?php echo $current_top === 'contact' ? ' aria-current="page"' : ''; ?>>
 				<?php _e( 'Contact', 'hachi' ); ?>
 			</a>
 		</nav>

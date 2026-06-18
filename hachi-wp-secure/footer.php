@@ -66,8 +66,7 @@
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Company</p>
 				<a href="<?php echo esc_url( home_url( '/company/' ) ); ?>" class="footer-nav__link"><?php _e( '会社概要', 'hachi' ); ?></a>
-				<a href="<?php echo esc_url( home_url( '/company/#security' ) ); ?>" class="footer-nav__link">Security</a>
-			</div>
+				</div>
 
 			<div class="footer-nav__col">
 				<p class="footer-nav__heading">Legal</p>

@@ -1,228 +1,252 @@
 <?php
 /**
- * HACHI Theme — Service page (Light Monochrome v2)
+ * HACHI Theme — Service page (v3.2 copy-led / 6 sections)
  * Auto-applied to page with slug "service"
- * Updated: 2026-06-08 corp-refresh — コンディション・インサイト一本化 / PACE section removed
+ * Updated: 2026-06-18 PR-C — v3.2 全面書き換え
  */
 get_header();
 ?>
 
-<!-- ===== PAGE HERO ===== -->
-<div class="page-hero">
-	<div class="container">
-		<div class="js-fade"><?php hachi_section_label( 'S e r v i c e' ); ?></div>
-		<h1 class="heading-en js-fade js-fade--delay-1">SERVICE</h1>
-		<p class="heading-jp js-fade js-fade--delay-2"><?php _e( '状態を見える形にする。', 'hachi' ); ?></p>
-	</div>
-</div>
+<main id="main-content">
 
-<!-- ===== INTRO ===== -->
-<section class="section service-intro">
-	<div class="container">
-		<div class="js-fade" style="max-width:820px">
-			<p class="service-intro__lead">
-				<?php _e( '人は突然、不調になるのではありません。<br>疲れや集中の変化は、じわじわと積み重なります。', 'hachi' ); ?>
-			</p>
-			<p class="body-copy" style="margin-top:32px;max-width:640px">
-				<?php _e( '20〜100名規模の会社では、専任の産業保健スタッフを置けないケースがほとんどです。本人も言い出せない、管理職も気づけない——その構造が、気づきを遅らせています。コンディション・インサイトは、そのサインを組織として早めにつかむしくみです。', 'hachi' ); ?>
-			</p>
-		</div>
+<!-- ============================================================
+     セクション 1: ヒーロー
+     ============================================================ -->
+<section class="service-hero" aria-label="Serviceページ ヒーロー">
+  <div class="service-hero-inner">
 
-		<!-- Service index -->
-		<div class="service-index js-fade js-fade--delay-1">
-			<a href="#reboot" class="service-index__item">
-				<div class="service-index__num">01</div>
-				<div class="service-index__body">
-					<p class="service-index__tag">ON-SITE SERVICE</p>
-					<h3 class="service-index__title">コンディション・インサイト</h3>
-					<p class="service-index__desc"><?php _e( '20〜100名中小企業向け / 提供中', 'hachi' ); ?></p>
-				</div>
-				<span class="service-index__arrow" aria-hidden="true">↓</span>
-			</a>
-		</div>
-	</div>
+    <div class="service-hero-copy">
+      <span class="eyebrow"><?php esc_html_e( 'SERVICE', 'hachi' ); ?></span>
+      <h1><?php esc_html_e( '状態を見える形にする。', 'hachi' ); ?></h1>
+      <p class="sub-copy">
+        <?php esc_html_e( '社員の状態変化のサインを、組織として早めにつかむ。', 'hachi' ); ?><br>
+        <?php esc_html_e( 'コンディション・インサイトと HACHI Fieldwork で、', 'hachi' ); ?><br>
+        <?php esc_html_e( '観察と介入を一続きの仕組みにします。', 'hachi' ); ?>
+      </p>
+    </div>
+
+    <div class="service-hero-illustration" aria-hidden="true">
+      <img
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/hero-person.svg' ); ?>"
+        alt=""
+        width="320"
+        height="480"
+      >
+    </div>
+
+  </div>
 </section>
 
-<!-- ===== 01: コンディション・インサイト ===== -->
-<section class="section--light" id="reboot">
-	<div class="container">
+<!-- ============================================================
+     セクション 2: 4 つの観察軸
+     ============================================================ -->
+<section class="observation-axes section" aria-label="4つの観察軸">
+  <div class="container">
+    <h2><?php esc_html_e( '4 つの観察軸でコンディションを把握する', 'hachi' ); ?></h2>
 
-		<div class="service-detail-header js-fade">
-			<span class="service-detail-header__num">01</span>
-			<div>
-				<?php hachi_section_label( 'O n - s i t e   S e r v i c e' ); ?>
-				<h2 class="heading-en heading-en--sm" style="margin-top:8px">コンディション・インサイト</h2>
-				<p class="heading-jp" style="margin-top:12px"><?php _e( '社員の状態変化のサインを、組織として早めにつかむ。', 'hachi' ); ?></p>
-			</div>
-		</div>
+    <div class="axes-grid" style="margin-top:48px;">
 
-		<!-- photo slot removed — copy-led single column -->
-		<div class="grid-2 js-fade js-fade--delay-1" style="margin-top:72px">
+      <div class="axis-item">
+        <div class="axis-mark" aria-hidden="true"></div>
+        <div class="axis-title"><?php esc_html_e( '身体', 'hachi' ); ?></div>
+        <p class="axis-desc"><?php esc_html_e( 'こわばり・重さ・可動域の変化を把握する', 'hachi' ); ?></p>
+      </div>
 
-			<div>
-				<p class="body-copy">
-					<?php _e( '社員が10分以内で答える短いチェックをもとに、現在の身体・睡眠・集中・疲労の傾向を整理します。組織全体の状態傾向を経営者・管理職が把握しやすい形でまとめ、希望する企業には現場コンディショニング指導を提供します。', 'hachi' ); ?>
-				</p>
+      <div class="axis-item">
+        <div class="axis-mark" aria-hidden="true"></div>
+        <div class="axis-title"><?php esc_html_e( '睡眠', 'hachi' ); ?></div>
+        <p class="axis-desc"><?php esc_html_e( '睡眠の質と回復状態の傾向を整理する', 'hachi' ); ?></p>
+      </div>
 
-				<!-- Section 2: 課題 -->
-				<div style="margin-top:48px">
-					<h3 style="font-size:17px;font-weight:600;margin-bottom:16px"><?php _e( '見えないと、気づきにくい。', 'hachi' ); ?></h3>
-					<p class="body-copy">
-						<?php _e( '「最近ちょっとしんどくて…」と言えずに出社を続けている社員がいます。管理職は「元気そうに見える」と思ったまま、3か月後に休職の連絡を受けた、というケースがあります。', 'hachi' ); ?>
-					</p>
-					<ul class="service-feature-list" style="margin-top:24px">
-						<?php
-						$reboot_scenes = [
-							'「最近元気がないな」で終わっていた',
-							'産業医の面談日まで待ったら、すでに限界だった',
-							'欠勤が続いてから、初めて状態を知った',
-							'健康経営施策を導入したが、誰も使っていない',
-						];
-						foreach ( $reboot_scenes as $scene ) :
-						?>
-							<li>
-								<span class="service-feature-list__dot" aria-hidden="true"></span>
-								<?php echo esc_html( $scene ); ?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
+      <div class="axis-item">
+        <div class="axis-mark" aria-hidden="true"></div>
+        <div class="axis-title"><?php esc_html_e( '集中', 'hachi' ); ?></div>
+        <p class="axis-desc"><?php esc_html_e( '仕事中の集中のしやすさの変化を見る', 'hachi' ); ?></p>
+      </div>
 
-				<div style="margin-top:48px">
-					<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
-						<?php _e( 'サービス資料を請求する', 'hachi' ); ?>
-						<?php hachi_arrow_icon(); ?>
-					</a>
-				</div>
-			</div>
+      <div class="axis-item">
+        <div class="axis-mark" aria-hidden="true"></div>
+        <div class="axis-title"><?php esc_html_e( '疲労', 'hachi' ); ?></div>
+        <p class="axis-desc"><?php esc_html_e( '疲労の蓄積具合を組織単位で把握する', 'hachi' ); ?></p>
+      </div>
 
-		</div>
+    </div>
 
-		<!-- FLOW -->
-		<div class="js-fade js-fade--delay-2" style="margin-top:120px">
-			<div style="max-width:680px;margin-bottom:56px">
-				<?php hachi_section_label( 'S e r v i c e   F l o w' ); ?>
-				<h3 class="heading-en heading-en--xs" style="margin-top:12px"><?php _e( 'ご利用の流れ', 'hachi' ); ?></h3>
-			</div>
-			<div class="service-flow-diagram js-fade" aria-label="<?php esc_attr_e( 'サービスの流れ', 'hachi' ); ?>">
-				<?php include get_template_directory() . '/assets/service-flow.svg'; ?>
-			</div>
+    <div class="axes-dot" aria-hidden="true">
+      <span class="accent-dot"></span>
+    </div>
 
-			<div class="service-flow">
-				<?php
-				$flow_steps = [
-					[ '01', '状態の可視化',     '社員が10分以内で答える短いチェックをもとに、身体・睡眠・集中・疲労の傾向を整理します。参加者本人の事前同意を取得のうえ実施します。' ],
-					[ '02', '背景の仮説整理',   '個別の回答をそのまま伝えるのではなく、組織全体の傾向として整理します。経営者・管理職が把握しやすい形でまとめます。' ],
-					[ '03', 'コンディショニング介入', 'ご希望の企業には、アスレティックトレーナー(AT)または運動指導資格を持つスタッフが現場に入ります。状態に合ったストレッチ・コンディショニング指導とセルフケアの方法をお伝えします。' ],
-					[ '04', '変化の確認',       '一定期間後に再評価を行い、傾向の推移を確認します。組織の傾向の変化を経営者向け状態傾向レポートでお届けします。' ],
-				];
-				foreach ( $flow_steps as $step ) :
-				?>
-					<div class="service-flow__step">
-						<div class="service-flow__num"><?php echo esc_html( $step[0] ); ?></div>
-						<div class="service-flow__title"><?php echo esc_html( $step[1] ); ?></div>
-						<p class="service-flow__desc"><?php echo esc_html( $step[2] ); ?></p>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-
-	</div>
+  </div>
 </section>
 
-<!-- ===== 提供範囲・成果物 ===== -->
-<section class="section" id="deliverables">
-	<div class="container">
+<!-- ============================================================
+     セクション 3: 導入の流れ
+     ============================================================ -->
+<section class="intro-flow section" aria-label="導入の流れ">
+  <div class="container">
+    <h2><?php esc_html_e( '導入の流れ', 'hachi' ); ?></h2>
 
-		<div class="grid-2 js-fade" style="margin-top:0">
+    <div class="flow-steps" style="margin-top:48px;">
 
-			<!-- 提供範囲 -->
-			<div>
-				<?php hachi_section_label( 'P r o v i d e d' ); ?>
-				<h3 class="heading-en heading-en--xs" style="margin-top:12px"><?php _e( '提供範囲', 'hachi' ); ?></h3>
-				<ul class="service-feature-list" style="margin-top:24px">
-					<?php
-					$features = [
-						'全社員向け状態評価（チェック実施）',
-						'組織全体の傾向分析',
-						'コンディショニングセミナー',
-						'セルフケア指導',
-						'再評価（フォローアップ）',
-						'状態傾向レポート（経営者向け・本人向け）',
-					];
-					foreach ( $features as $f ) :
-					?>
-						<li>
-							<span class="service-feature-list__dot" aria-hidden="true"></span>
-							<?php echo esc_html( $f ); ?>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
+      <div class="flow-step">
+        <div class="flow-step-num">01</div>
+        <div class="flow-step-title"><?php esc_html_e( '状態の可視化', 'hachi' ); ?></div>
+        <p class="flow-step-desc"><?php esc_html_e( '社員の短いチェックから身体・睡眠・集中・疲労の傾向を組織として整理する', 'hachi' ); ?></p>
+      </div>
 
-			<!-- 届けるレポート -->
-			<div>
-				<?php hachi_section_label( 'D e l i v e r a b l e s' ); ?>
-				<h3 class="heading-en heading-en--xs" style="margin-top:12px"><?php _e( '届けるレポート、2種類。', 'hachi' ); ?></h3>
-				<div style="margin-top:24px">
-					<p style="font-weight:600;margin-bottom:8px"><?php _e( '組織コンディションレポート（経営者・管理職向け）', 'hachi' ); ?></p>
-					<ul class="service-feature-list">
-						<?php
-						$org_report = [
-							'組織全体の状態傾向（睡眠・疲労・集中など）',
-							'注意が必要な傾向の概要',
-							'ご提案事項（セミナー実施・フォローアップ等）',
-						];
-						foreach ( $org_report as $r ) :
-						?>
-							<li><span class="service-feature-list__dot" aria-hidden="true"></span><?php echo esc_html( $r ); ?></li>
-						<?php endforeach; ?>
-					</ul>
-					<p style="font-size:13px;color:var(--gray);margin-top:8px"><?php _e( '個人を特定する情報は含まれません。', 'hachi' ); ?></p>
-				</div>
-				<div style="margin-top:32px">
-					<p style="font-weight:600;margin-bottom:8px"><?php _e( '個人状態レポート（社員本人向け）', 'hachi' ); ?></p>
-					<ul class="service-feature-list">
-						<?php
-						$personal_report = [
-							'自分自身の現在の状態整理',
-							'セルフケアの提案（ストレッチ・生活習慣の調整等）',
-						];
-						foreach ( $personal_report as $r ) :
-						?>
-							<li><span class="service-feature-list__dot" aria-hidden="true"></span><?php echo esc_html( $r ); ?></li>
-						<?php endforeach; ?>
-					</ul>
-					<p style="font-size:13px;color:var(--gray);margin-top:8px"><?php _e( '本人にのみ届きます。個人を特定できる情報は、導入企業を含む第三者には提供しません。', 'hachi' ); ?></p>
-				</div>
-			</div>
+      <div class="flow-arrow-col" aria-hidden="true">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
+          <line x1="0" y1="8" x2="14" y2="8" stroke="#E5E5E7" stroke-width="1"/>
+          <polyline points="10,4 16,8 10,12" stroke="#E5E5E7" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-		</div>
+      <div class="flow-step">
+        <div class="flow-step-num">02</div>
+        <div class="flow-step-title"><?php esc_html_e( '背景の仮説整理', 'hachi' ); ?></div>
+        <p class="flow-step-desc"><?php esc_html_e( '状態のパターンから、背景にある要因を仮説として整理する', 'hachi' ); ?></p>
+      </div>
 
-	</div>
+      <div class="flow-arrow-col" aria-hidden="true">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
+          <line x1="0" y1="8" x2="14" y2="8" stroke="#E5E5E7" stroke-width="1"/>
+          <polyline points="10,4 16,8 10,12" stroke="#E5E5E7" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">03</div>
+        <div class="flow-step-title"><?php esc_html_e( 'コンディショニング介入', 'hachi' ); ?></div>
+        <p class="flow-step-desc"><?php esc_html_e( 'HACHI Fieldwork によるストレッチコンディショニングで現場に介入する', 'hachi' ); ?></p>
+      </div>
+
+      <div class="flow-arrow-col" aria-hidden="true">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
+          <line x1="0" y1="8" x2="14" y2="8" stroke="#E5E5E7" stroke-width="1"/>
+          <polyline points="10,4 16,8 10,12" stroke="#E5E5E7" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">04</div>
+        <div class="flow-step-title"><?php esc_html_e( '変化の確認', 'hachi' ); ?></div>
+        <p class="flow-step-desc"><?php esc_html_e( '介入前後の変化を組織レポートとして記録し、次の打ち手に接続する', 'hachi' ); ?></p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- ===== FINAL CTA ===== -->
-<section class="section about-cta">
-	<div class="container">
-		<div class="js-fade" style="text-align:center;max-width:760px;margin:0 auto">
-			<h2 class="heading-en heading-en--sm"><?php _e( 'GET IN TOUCH', 'hachi' ); ?></h2>
-			<p class="heading-jp" style="margin-top:20px"><?php _e( 'まずは、お気軽にご相談ください。', 'hachi' ); ?></p>
-			<p class="body-copy" style="margin:28px auto 0">
-				<?php _e( 'コンディション・インサイトのご相談、資料請求はメールまたはこちらのフォームから。', 'hachi' ); ?>
-			</p>
-			<div class="about-cta__buttons">
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn--teal">
-					<?php _e( 'Contact Us', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-				<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="btn">
-					<?php _e( 'About HACHI', 'hachi' ); ?>
-					<?php hachi_arrow_icon(); ?>
-				</a>
-			</div>
-		</div>
-	</div>
+<!-- ============================================================
+     セクション 4: 差別化対比表 — 「実施して終わり」との違い
+     ============================================================ -->
+<section class="comparison-section section" aria-label="一般的な出張整体との違い — 差別化セクション">
+  <div class="container">
+
+    <h2><?php esc_html_e( '「実施して終わり」との違い', 'hachi' ); ?></h2>
+    <p class="comparison-sub">
+      <?php esc_html_e( '出張整体は施術をゴールにします。コンディション・インサイトは、観察・記録・組織レポートを通じて、次の改善につなげる仕組みです。', 'hachi' ); ?>
+    </p>
+
+    <div class="comparison-table">
+
+      <div class="comparison-col">
+        <div class="comparison-col-title"><?php esc_html_e( '一般的な出張整体・福利厚生サービス', 'hachi' ); ?></div>
+        <div class="comparison-rows">
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '目的', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '社員のリフレッシュ', 'hachi' ); ?></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '単位', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '個人（その場の体感）', 'hachi' ); ?></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '残るもの', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '体験のみ', 'hachi' ); ?></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '経営の使い方', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '福利厚生コスト', 'hachi' ); ?></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-col">
+        <div class="comparison-col-title"><?php esc_html_e( 'コンディション・インサイト（HACHI）', 'hachi' ); ?></div>
+        <div class="comparison-rows">
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '目的', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '組織として状態を観察・整理する', 'hachi' ); ?></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '単位', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '組織（傾向・パターン）', 'hachi' ); ?></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '残るもの', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '組織レポート + 判断材料', 'hachi' ); ?></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-row-label"><?php esc_html_e( '経営の使い方', 'hachi' ); ?></div>
+            <div class="comparison-row-value"><?php esc_html_e( '健康経営施策の実行履歴 + 次の打ち手', 'hachi' ); ?></div>
+          </div>
+        </div>
+        <div class="comparison-accent" aria-hidden="true">
+          <span class="accent-dot"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
+
+<!-- ============================================================
+     セクション 5: FAQ
+     ============================================================ -->
+<section class="faq-section section" aria-label="よくある質問">
+  <div class="container">
+    <h2><?php esc_html_e( 'よくある質問', 'hachi' ); ?></h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q"><?php esc_html_e( 'どのような傾向を把握できますか?', 'hachi' ); ?></div>
+        <p class="faq-a">
+          <?php esc_html_e( '身体のこわばりや重さ、睡眠の質、仕事中の集中のしやすさ、疲労の蓄積具合を、社員の短いチェックから組織単位で整理します。', 'hachi' ); ?>
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><?php esc_html_e( '何名から導入できますか?', 'hachi' ); ?></div>
+        <p class="faq-a">
+          <?php esc_html_e( '20 名前後から対応しています。企業規模・目的に応じて、スポット実施から月次継続まで設計します。', 'hachi' ); ?>
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><?php esc_html_e( '一般的な出張整体や福利厚生サービスと何が違いますか?', 'hachi' ); ?></div>
+        <p class="faq-a">
+          <?php esc_html_e( '出張整体はリフレッシュが主目的です。コンディション・インサイトは、状態の観察・記録・組織レポートを提供します。', 'hachi' ); ?>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     セクション 6: フッター CTA（黒背景）
+     ============================================================ -->
+<section class="footer-cta" aria-label="お問い合わせ CTA">
+  <div class="container">
+    <h2><?php esc_html_e( 'サービスの詳細・導入時期をご相談ください。', 'hachi' ); ?></h2>
+    <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn-primary">
+      <?php esc_html_e( 'お問い合わせ', 'hachi' ); ?>
+    </a>
+  </div>
+</section>
+
+</main>
 
 <?php get_footer(); ?>

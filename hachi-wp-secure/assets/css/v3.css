@@ -112,21 +112,22 @@ body::before,
   display: inline-flex;
   align-items: center;
   padding: 9px 22px;
-  border: 1px solid var(--cd-ink);
+  border: 1px solid var(--cd-ink) !important;
   border-radius: 999px;
-  background: transparent;
+  background: transparent !important;
+  color: var(--cd-ink) !important;
 }
 
 .nav-cta:hover {
-  background: var(--cd-ink);
-  border-color: var(--cd-ink);
-  color: var(--cd-surface);
+  background: var(--cd-ink) !important;
+  border-color: var(--cd-ink) !important;
+  color: var(--cd-surface) !important;
 }
 
 .nav-cta.is-current {
-  background: transparent;
-  border-color: var(--cd-ink);
-  color: var(--cd-ink);
+  background: transparent !important;
+  border-color: var(--cd-ink) !important;
+  color: var(--cd-ink) !important;
 }
 
 .hamburger {

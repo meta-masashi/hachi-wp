@@ -33,8 +33,7 @@ function hachi_cd_contact_dark(): void {
             <?php hachi_cd_eyebrow( 'Contact' ); ?>
             <div class="cd-deco">CONTACT</div>
             <h2>お問い合わせ</h2>
-            <p>コンディション・インサイトのご相談、資料請求、取材・協業のご連絡はメールにてお気軽にどうぞ。</p>
-            <p class="cd-contact-email">Email: <a href="mailto:info@hachi-wellnesshack.com">info@hachi-wellnesshack.com</a></p>
+            <p>コンディション・インサイトのご相談、資料請求、取材・協業のご連絡はお問い合わせフォームよりお気軽にどうぞ。</p>
             <div class="cd-btn-group">
                 <a class="cd-btn cd-btn--light" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせフォーム <?php echo hachi_cd_arrow(); ?></a>
                 <a class="cd-btn cd-btn--ghost" href="<?php echo esc_url( home_url( '/service/' ) ); ?>">サービスを見る <?php echo hachi_cd_arrow(); ?></a>
@@ -92,7 +91,7 @@ function hachi_v3_render_home(): void {
                 <div class="cd-deco">ABOUT</div>
                 <h2>HACHIとは</h2>
                 <div class="cd-copy">
-                    <p>HACHIは、社員のコンディションの変化を組織で見える形にする会社です。20〜100名規模の中小企業で「なんとなく不調」のサインが見えづらい構造に、状態の可視化とコンディショニング指導で向き合います。</p>
+                    <p>HACHIは、社員のコンディションの変化を組織で見える形にする会社です。「なんとなく不調」のサインが見えづらい構造に、状態の可視化とコンディショニング指導で向き合います。</p>
                     <p class="cd-serif-copy">身体の専門知を、観察・記録・再現できる形にする。それが、HACHIの事業の土台にある考え方です。</p>
                 </div>
                 <?php hachi_cd_more( home_url( '/about/' ), 'HACHIについて' ); ?>
@@ -191,7 +190,6 @@ function hachi_v3_render_service(): void {
                     <div>有資格スタッフによる現場指導</div>
                     <div>セルフケア・ストレッチの指導</div>
                 </div>
-                <p class="cd-note">対象：20〜100名規模の中小企業・法人。個人を特定できる情報を会社に渡すことはありません。</p>
             </div>
         </section>
 
@@ -241,8 +239,7 @@ function hachi_v3_render_contact(): void {
 
         <section class="cd-section cd-section--flush">
             <div class="cd-container cd-form-wrap">
-                <p>コンディション・インサイトのご相談、サービス資料の請求、取材・協業のご連絡は、下記フォームよりお気軽にお問い合わせください。<br>対象：20〜100名規模の中小企業・法人のご担当者様。</p>
-                <p class="cd-contact-email cd-contact-email--light">Email: <a href="mailto:info@hachi-wellnesshack.com">info@hachi-wellnesshack.com</a></p>
+                <p>コンディション・インサイトのご相談、サービス資料の請求、取材・協業のご連絡は、下記フォームよりお気軽にお問い合わせください。</p>
 
                 <div id="form-success" class="form-success cd-form-success" role="status" aria-live="polite" tabindex="-1">
                     <strong>お問い合わせを受け付けました。</strong><br>

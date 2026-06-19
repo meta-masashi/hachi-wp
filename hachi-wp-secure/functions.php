@@ -5,7 +5,7 @@
  */
 defined('ABSPATH') || exit;
 
-define('HACHI_VERSION',   '3.3.5');
+define('HACHI_VERSION',   '3.4.0');
 define('HACHI_THEME_DIR', get_template_directory());
 define('HACHI_THEME_URI', get_template_directory_uri());
 
@@ -90,7 +90,7 @@ add_action('admin_enqueue_scripts', function (): void {
 
 function hachi_enqueue_assets(): void {
     wp_enqueue_style('hachi-fonts',
-        'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;600&display=swap',
+        'https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&family=Montserrat:wght@300;400;500;700&display=swap',
         [], null);
     wp_enqueue_style('hachi-style', HACHI_THEME_URI.'/style.css', ['hachi-fonts'], HACHI_VERSION);
     wp_enqueue_style('hachi-v3', HACHI_THEME_URI.'/assets/css/v3.css', ['hachi-style'], HACHI_VERSION);
@@ -191,7 +191,7 @@ function hachi_handle_contact(): void {
     if (function_exists('hachi_get_contact_categories')) {
         $allowed_cats = array_column(hachi_get_contact_categories(), 'label');
     } else {
-        $allowed_cats = ['HACHI Fieldwork のご相談','コンディション・インサイトのご相談','取材・メディア','採用・パートナー','一般お問い合わせ'];
+        $allowed_cats = ['コンディション・インサイトのご相談','取材・メディア','採用・パートナー','一般お問い合わせ'];
     }
 
     // --- 8. バリデーション ---
@@ -297,34 +297,34 @@ function hachi_build_autoreply_body(string $name, string $cat_key = 'general', s
     // カテゴリー別のメインメッセージ
     $templates = [
         'pace_demo' => [
-            'heading' => 'HACHI Fieldwork のご相談を承りました',
-            'lead'    => '<strong>HACHI Fieldwork</strong>（現場でコンディションを整えるオンサイトサポート）へのご関心をお寄せいただき、ありがとうございます。',
-            'body'    => 'いただいた情報をもとに、貴社の状況に合わせたご提案を、担当より <strong>2 営業日以内</strong>にお送りいたします。導入の進め方やオンサイトの内容についても、ご希望に応じてご相談を承ります。',
-            'next'    => '<li>担当より詳細のご連絡（2 営業日以内）</li><li>オンラインでのヒアリング日程調整</li><li>導入プランのご提案</li>',
+            'heading' => 'コンディション・インサイトのご相談を承りました',
+            'lead'    => '<strong>コンディション・インサイト</strong>へのご関心をお寄せいただき、ありがとうございます。',
+            'body'    => 'いただいた情報をもとに、貴社の状況に合わせて担当よりご連絡いたします。導入の進め方についても、ご希望に応じてご相談を承ります。',
+            'next'    => '<li>担当より詳細のご連絡</li><li>オンラインでのヒアリング日程調整</li><li>導入内容のご相談</li>',
         ],
         'reboot_docs' => [
             'heading' => 'コンディション・インサイトのご相談を承りました',
             'lead'    => '<strong>コンディション・インサイト</strong>（社員の状態変化を組織で見える形にするアセスメント）へのご関心をお寄せいただきありがとうございます。',
-            'body'    => 'いただいた情報をもとに、貴社の課題に合わせたご案内と資料を、担当より <strong>2 営業日以内</strong>にお送りいたします。導入の進め方についても、ご希望に応じてご相談を承ります。',
-            'next'    => '<li>担当より詳細資料の送付（2 営業日以内）</li><li>オンラインでのヒアリング日程調整</li><li>導入プランのご提案</li>',
+            'body'    => 'いただいた情報をもとに、貴社の状況に合わせたご案内と資料を、担当よりお送りいたします。導入の進め方についても、ご希望に応じてご相談を承ります。',
+            'next'    => '<li>担当より詳細資料の送付</li><li>オンラインでのヒアリング日程調整</li><li>導入内容のご相談</li>',
         ],
         'media' => [
             'heading' => '取材・メディアのお問い合わせを承りました',
             'lead'    => 'HACHI への取材・メディア掲載のお問い合わせを頂き、誠にありがとうございます。',
-            'body'    => '広報担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。取材ご希望日・媒体情報・お問い合わせ内容を踏まえ、最適な対応者をアサインしてご回答いたします。',
-            'next'    => '<li>広報担当より返信（2 営業日以内）</li><li>取材詳細・日程のすり合わせ</li>',
+            'body'    => '取材ご希望日・媒体情報・お問い合わせ内容を踏まえ、担当よりご連絡いたします。',
+            'next'    => '<li>担当より返信</li><li>取材詳細・日程のすり合わせ</li>',
         ],
         'recruit' => [
             'heading' => '採用・パートナーシップのお問い合わせを承りました',
             'lead'    => 'HACHI への採用・業務委託・協業のご興味をお寄せいただき、ありがとうございます。',
-            'body'    => '担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。HACHI は少数精鋭のチームで、身体の専門知を観察・記録・再現できる形にするという挑戦に向き合う仲間を歓迎しています。',
-            'next'    => '<li>採用/アライアンス担当より返信（2 営業日以内）</li><li>カジュアル面談・詳細ヒアリング</li>',
+            'body'    => 'HACHI は、身体の専門知を観察・記録・再現できる形にするという挑戦に向き合う仲間を歓迎しています。担当よりご連絡いたします。',
+            'next'    => '<li>採用/アライアンス担当より返信</li><li>カジュアル面談・詳細ヒアリング</li>',
         ],
         'general' => [
             'heading' => 'お問い合わせありがとうございます',
             'lead'    => 'HACHI へのお問い合わせをいただき、誠にありがとうございます。',
-            'body'    => 'いただいた内容を確認のうえ、担当より <strong>2 営業日以内</strong>にご連絡を差し上げます。',
-            'next'    => '<li>担当より返信（2 営業日以内）</li>',
+            'body'    => 'いただいた内容を確認のうえ、担当よりご連絡を差し上げます。',
+            'next'    => '<li>担当より返信</li>',
         ],
     ];
     $tpl = $templates[$cat_key] ?? $templates['general'];
@@ -568,43 +568,42 @@ function hachi_get_classified_items( array $args = [] ): array {
     $items = [];
 
     // ---- WP hachi_news ----
-    if ( $cat_filter !== 'note' ) {
-        $q = new WP_Query( [
-            'post_type'      => 'hachi_news',
-            'posts_per_page' => 60,
-            'post_status'    => 'publish',
-            'orderby'        => 'date',
-            'order'          => 'DESC',
-            'no_found_rows'  => true,
-        ] );
-        while ( $q->have_posts() ) { $q->the_post();
-            $id    = get_the_ID();
-            // 1 時間キャッシュ（記事編集でクリア）
-            $cache_key = 'hachi_cls_' . $id . '_' . get_post_modified_time( 'U', false, $id );
-            $cat = get_transient( $cache_key );
-            if ( ! $cat ) {
-                $meta_type = get_post_meta( $id, '_hachi_news_type', true );
-                $cat = $meta_type && in_array( $meta_type, [ 'work', 'news', 'blog' ], true )
-                    ? $meta_type
-                    : hachi_classify_content( get_the_title(), (string) get_the_content() );
-                set_transient( $cache_key, $cat, DAY_IN_SECONDS );
-            }
-            $items[] = [
-                'source'    => 'wp',
-                'category'  => $cat,
-                'date_ts'   => (int) get_the_date( 'U' ),
-                'date_str'  => hachi_get_date(),
-                'title'     => get_the_title(),
-                'url'       => get_permalink(),
-                'excerpt'   => wp_trim_words( get_the_excerpt(), 36, '…' ),
-                'thumbnail' => has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'medium' ) : '',
-            ];
+    $q = new WP_Query( [
+        'post_type'      => 'hachi_news',
+        'posts_per_page' => 60,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'  => true,
+    ] );
+    while ( $q->have_posts() ) { $q->the_post();
+        $id    = get_the_ID();
+        // 1 時間キャッシュ（記事編集でクリア）
+        $cache_key = 'hachi_cls_' . $id . '_' . get_post_modified_time( 'U', false, $id );
+        $cat = get_transient( $cache_key );
+        if ( ! $cat ) {
+            $meta_type = get_post_meta( $id, '_hachi_news_type', true );
+            $cat = $meta_type && in_array( $meta_type, [ 'work', 'news', 'blog', 'press', 'media' ], true )
+                ? $meta_type
+                : hachi_classify_content( get_the_title(), (string) get_the_content() );
+            set_transient( $cache_key, $cat, DAY_IN_SECONDS );
         }
-        wp_reset_postdata();
+        $note_url = function_exists( 'hachi_cd_note_url_for_post' ) ? hachi_cd_note_url_for_post( $id ) : '';
+        $items[] = [
+            'source'    => $note_url ? 'note' : 'wp',
+            'category'  => $cat,
+            'date_ts'   => (int) get_the_date( 'U' ),
+            'date_str'  => hachi_get_date(),
+            'title'     => get_the_title(),
+            'url'       => $note_url ?: get_permalink(),
+            'excerpt'   => wp_trim_words( get_the_excerpt(), 36, '…' ),
+            'thumbnail' => has_post_thumbnail() ? get_the_post_thumbnail_url( null, 'medium' ) : '',
+        ];
     }
+    wp_reset_postdata();
 
     // ---- note.com RSS（blog に統合）----
-    if ( $cat_filter === 'all' || $cat_filter === 'blog' ) {
+    if ( $cat_filter === 'all' || $cat_filter === 'blog' || $cat_filter === 'note' ) {
         foreach ( hachi_get_note_posts( 30 ) as $n ) {
             $items[] = [
                 'source'    => 'note',
@@ -620,7 +619,9 @@ function hachi_get_classified_items( array $args = [] ): array {
     }
 
     // カテゴリフィルタ
-    if ( $cat_filter !== 'all' ) {
+    if ( $cat_filter === 'note' ) {
+        $items = array_values( array_filter( $items, fn( $i ) => $i['source'] === 'note' ) );
+    } elseif ( $cat_filter !== 'all' ) {
         $items = array_values( array_filter( $items, fn( $i ) => $i['category'] === $cat_filter ) );
     }
 
@@ -639,7 +640,7 @@ function hachi_get_classified_items( array $args = [] ): array {
  */
 add_action( 'customize_register', function ( $wp_customize ) {
     $wp_customize->add_setting( 'hachi_note_username', [
-        'default'           => 'masashi_sasaki',
+        'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
         'capability'        => 'edit_theme_options',
     ] );
@@ -657,16 +658,26 @@ add_action('add_meta_boxes',function():void{
 function hachi_news_meta_callback(WP_Post $post): void {
     wp_nonce_field('hachi_news_meta_save','hachi_news_meta_nonce');
     $type=get_post_meta($post->ID,'_hachi_news_type',true)?:'news';
+    $note_url=get_post_meta($post->ID,'_hachi_note_url',true);
     echo '<p><label><strong>Type</strong></label><br><select name="hachi_news_type" style="width:100%;margin-top:6px">';
     foreach(['news'=>'NEWS','press'=>'PRESS RELEASE','media'=>'MEDIA','blog'=>'BLOG','work'=>'WORK'] as $v=>$l)
         echo '<option value="'.esc_attr($v).'"'.selected($type,$v,false).'>'.esc_html($l).'</option>';
     echo '</select></p>';
+    echo '<p><label><strong>note.com URL</strong></label><br><input type="url" name="hachi_note_url" value="'.esc_attr($note_url).'" placeholder="https://note.com/..." style="width:100%;margin-top:6px"></label></p>';
+    echo '<p style="color:#666;font-size:12px;margin-top:6px">設定すると一覧では note リンクカードとして表示し、個別ページは note.com へ転送します。</p>';
 }
 add_action('save_post_hachi_news',function(int $id):void{
     if(!isset($_POST['hachi_news_meta_nonce'])||!wp_verify_nonce($_POST['hachi_news_meta_nonce'],'hachi_news_meta_save')
        ||(defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)||!current_user_can('edit_post',$id)) return;
     $t=sanitize_key($_POST['hachi_news_type']??'news');
     update_post_meta($id,'_hachi_news_type',in_array($t,['news','press','media','blog','work'],true)?$t:'news');
+    $note_url = esc_url_raw( trim( (string) ( $_POST['hachi_note_url'] ?? '' ) ) );
+    $host = $note_url ? wp_parse_url( $note_url, PHP_URL_HOST ) : '';
+    if ( $note_url && is_string( $host ) && preg_match( '/(^|\.)note\.com$/i', $host ) ) {
+        update_post_meta( $id, '_hachi_note_url', $note_url );
+    } else {
+        delete_post_meta( $id, '_hachi_note_url' );
+    }
 });
 // REST API でメタフィールドを読み書き可能にする
 add_action('init',function(){
@@ -677,6 +688,18 @@ add_action('init',function(){
         'show_in_rest'   => true,
         'auth_callback'  => fn()=>current_user_can('edit_posts'),
         'sanitize_callback' => function($v){ return in_array($v,['news','press','media','blog','work'],true)?$v:'news'; },
+    ]);
+    register_meta('post','_hachi_note_url',[
+        'object_subtype' => 'hachi_news',
+        'type'           => 'string',
+        'single'         => true,
+        'show_in_rest'   => true,
+        'auth_callback'  => fn()=>current_user_can('edit_posts'),
+        'sanitize_callback' => function($v){
+            $url = esc_url_raw( trim( (string) $v ) );
+            $host = $url ? wp_parse_url( $url, PHP_URL_HOST ) : '';
+            return ( $url && is_string( $host ) && preg_match( '/(^|\.)note\.com$/i', $host ) ) ? $url : '';
+        },
     ]);
 },20);
 

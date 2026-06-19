@@ -16,7 +16,7 @@
 				<?php
 				$nav_links = [
 					home_url( '/' )          => __( 'Home', 'hachi' ),
-					home_url( '/about/' )    => __( 'About Us', 'hachi' ),
+					home_url( '/about/' )    => __( 'About', 'hachi' ),
 					home_url( '/service/' )  => __( 'Service', 'hachi' ),
 					home_url( '/company/' )  => __( 'Company', 'hachi' ),
 					home_url( '/news/' )     => __( 'News', 'hachi' ),
@@ -81,6 +81,8 @@
 				<?php endforeach; ?>
 			</div>
 		</div>
+
+		<p class="footer-note"><?php echo esc_html( hachi_cd_footer_note() ); ?></p>
 
 	</div>
 </footer>

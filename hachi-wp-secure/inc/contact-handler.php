@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || exit;
 function hachi_get_contact_categories(): array {
     $defaults = [
         'pace_demo'    => [
-            'label'     => 'HACHI Fieldwork のご相談',
+            'label'     => 'コンディション・インサイトのご相談',
             'ga4_event' => 'fieldwork_inquiry',
             'emoji'     => ':office:',
         ],

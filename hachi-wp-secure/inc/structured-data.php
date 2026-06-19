@@ -55,7 +55,7 @@ function hachi_output_structured_data(): void {
         }
     }
 
-    // 7. News archive ItemList（v3.3 固定表示記事）
+    // 7. News archive ItemList（WP hachi_news + note.com）
     if ( is_post_type_archive( 'hachi_news' ) ) {
         $schemas[] = hachi_schema_news_item_list();
     }
@@ -90,7 +90,7 @@ function hachi_schema_organization(): array {
             'height' => 80,
         ],
         'image'         => $base . '/wp-content/themes/hachi-wp-secure/assets/og-image.png',
-        'description'   => '株式会社HACHIは、身体領域の専門知を観察・構造化・検証可能な判断知へ変換する会社です。コンディション・インサイトと HACHI Fieldwork を提供しています。',
+        'description'   => '株式会社HACHIは、社員のコンディションの変化を組織で見える形にする会社です。コンディション・インサイトを提供しています。',
         'slogan'        => '身体の暗黙知を、再現可能な判断知へ。',
         'foundingDate'  => '2022-03-25',
         'founder'       => [
@@ -238,23 +238,7 @@ function hachi_schema_services(): array {
         ],
     ];
 
-    $fieldwork = [
-        '@context'    => 'https://schema.org',
-        '@type'       => 'Service',
-        '@id'         => $base . '/service/#hachi-fieldwork',
-        'name'        => 'HACHI Fieldwork',
-        'serviceType' => 'オンサイト コンディショニングサポート',
-        'description' => '現場でのストレッチコンディショニングを通じて、観察と介入を一続きにするオンサイトサービス。',
-        'provider'    => [ '@id' => $base . '/#organization' ],
-        'areaServed'  => [ '@type' => 'Country', 'name' => '日本' ],
-        'url'         => $base . '/service/',
-        'audience'    => [
-            '@type' => 'BusinessAudience',
-            'name'  => '中小企業・経営者',
-        ],
-    ];
-
-    return [ $insight, $fieldwork ];
+    return [ $insight ];
 }
 
 /* ============================================================
@@ -265,15 +249,11 @@ function hachi_schema_faq(): array {
     $faqs = [
         [
             'question' => '株式会社HACHIはどんな会社ですか？',
-            'answer'   => '株式会社HACHIは、2022年3月に設立された、身体領域の専門知を観察・構造化・検証可能な判断知へ変換する会社です。東京都武蔵野市吉祥寺を拠点に、コンディション・インサイトと HACHI Fieldwork を提供しています。代表取締役社長は佐々木譲崇。',
+            'answer'   => '株式会社HACHIは、2022年3月に設立された、社員のコンディションの変化を組織で見える形にする会社です。東京都武蔵野市吉祥寺を拠点に、コンディション・インサイトを提供しています。代表取締役社長は佐々木譲崇。',
         ],
         [
             'question' => 'コンディション・インサイトとはどのようなサービスですか？',
             'answer'   => 'コンディション・インサイトは、社員の身体・睡眠・集中・疲労の傾向を、短いチェックから組織単位で整理するサービスです。状態の観察・記録を通じて、経営者・人事・管理職の日常判断に使える情報を提供します。',
-        ],
-        [
-            'question' => 'HACHI Fieldwork とはどのようなサービスですか？',
-            'answer'   => 'HACHI Fieldwork は、現場でコンディションを整えるオンサイトサポートです。観察と声がけ・記録をもとに、社員自身が動くコンディショニングを支援します。',
         ],
         [
             'question' => '導入を検討したい場合、どうすればよいですか？',
@@ -366,27 +346,23 @@ function hachi_schema_breadcrumb(): ?array {
 
 function hachi_schema_news_item_list(): array {
     $base  = hachi_site_base_url();
-    $items = [
-        [ '2026-04-15', 'コンディショニング管理に AI を導入する前に知っておくべき 3 つのこと' ],
-        [ '2026-04-15', 'トレーナーの "なんとなく" を AI に翻訳する ── body-part prior という考え方' ],
-        [ '2026-03-31', 'AI がスポーツ現場の「評価」を変える｜トレーナーの推論は機械に勝てるのか' ],
-        [ '2026-03-25', 'センサーが現場を変えているか？──ウェアラブルデバイスによる傷害リスク評価' ],
-    ];
+    $items = function_exists( 'hachi_cd_news_items' ) ? hachi_cd_news_items( 30 ) : [];
 
     return [
         '@context'        => 'https://schema.org',
         '@type'           => 'ItemList',
         '@id'             => $base . '/news/#itemlist',
-        'name'            => 'HACHI ニュース・知見',
+        'name'            => 'HACHI お知らせ',
         'itemListElement' => array_map( function ( array $item, int $index ) use ( $base ): array {
+            $url = $item['url'] ?? ( $base . '/news/' );
             return [
                 '@type'    => 'ListItem',
                 'position' => $index + 1,
                 'item'     => [
                     '@type'         => 'Article',
-                    'headline'      => $item[1],
-                    'datePublished' => $item[0],
-                    'url'           => $base . '/news/',
+                    'headline'      => $item['title'] ?? '',
+                    'datePublished' => ! empty( $item['date_ts'] ) ? date_i18n( 'Y-m-d', (int) $item['date_ts'] ) : '',
+                    'url'           => $url,
                     'publisher'     => [ '@id' => $base . '/#organization' ],
                 ],
             ];
@@ -405,5 +381,5 @@ function hachi_get_page_description(): string {
             return wp_strip_all_tags( $excerpt );
         }
     }
-    return '株式会社HACHIは、社員のコンディションの変化を組織で見える形にする会社です。コンディション・インサイト提供中、HACHI Fieldwork 提供中。';
+    return '株式会社HACHIは、社員のコンディションの変化を組織で見える形にする会社です。コンディション・インサイトを提供しています。';
 }

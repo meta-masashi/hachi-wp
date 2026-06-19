@@ -1,389 +1,304 @@
 <?php
 /**
- * HACHI Corporate Site v3.3 render helpers.
+ * HACHI Corporate Site render helpers.
  *
  * @package HACHI
  */
 
 defined( 'ABSPATH' ) || exit;
 
-function hachi_v3_asset( string $path ): string {
-    return HACHI_THEME_URI . '/' . ltrim( $path, '/' );
+function hachi_cd_arrow(): string {
+    return '<span aria-hidden="true">&rarr;</span>';
 }
 
-function hachi_v3_arrow(): string {
-    return '<svg width="24" height="16" viewBox="0 0 24 16" fill="none" aria-hidden="true"><line x1="0" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="1"/><polyline points="14,4 20,8 14,12" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-}
-
-function hachi_v3_person(): void {
+function hachi_cd_eyebrow( string $label ): void {
     ?>
-    <div class="v3-hero-figure" aria-hidden="true">
-        <img src="<?php echo esc_url( hachi_v3_asset( 'assets/images/v3-person-lineart.png' ) ); ?>" alt="" width="260" height="460">
-    </div>
+    <div class="cd-eyebrow"><span></span><p><?php echo esc_html( $label ); ?></p></div>
     <?php
 }
 
-function hachi_v3_blue_mark(): string {
-    return '<span class="v3-blue-mark" aria-hidden="true"><span></span></span>';
+function hachi_cd_more( string $url, string $label ): void {
+    printf(
+        '<a class="cd-more" href="%s">%s %s</a>',
+        esc_url( $url ),
+        esc_html( $label ),
+        hachi_cd_arrow()
+    );
 }
 
-function hachi_v3_footer_cta( string $title ): void {
+function hachi_cd_contact_dark(): void {
     ?>
-    <section class="v3-footer-cta" aria-label="お問い合わせ CTA">
-        <div class="v3-container">
-            <h2><?php echo esc_html( $title ); ?></h2>
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="v3-btn v3-btn--light">お問い合わせ</a>
+    <section class="cd-section cd-contact-dark" id="contact">
+        <div class="cd-container">
+            <?php hachi_cd_eyebrow( 'Contact' ); ?>
+            <div class="cd-deco">CONTACT</div>
+            <h2>お問い合わせ</h2>
+            <p>コンディション・インサイトのご相談、資料請求、取材・協業のご連絡はメールにてお気軽にどうぞ。</p>
+            <p class="cd-contact-email">Email: <a href="mailto:info@hachi-wellnesshack.com">info@hachi-wellnesshack.com</a></p>
+            <div class="cd-btn-group">
+                <a class="cd-btn cd-btn--light" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせフォーム <?php echo hachi_cd_arrow(); ?></a>
+                <a class="cd-btn cd-btn--ghost" href="<?php echo esc_url( home_url( '/service/' ) ); ?>">サービスを見る <?php echo hachi_cd_arrow(); ?></a>
+            </div>
         </div>
     </section>
     <?php
 }
 
-function hachi_v3_news_items(): array {
-    return [
-        [
-            'date' => '2026.04.15',
-            'datetime' => '2026-04-15',
-            'category' => 'BLOG',
-            'title' => 'コンディショニング管理に AI を導入する前に知っておくべき 3 つのこと',
-        ],
-        [
-            'date' => '2026.04.15',
-            'datetime' => '2026-04-15',
-            'category' => 'BLOG',
-            'title' => 'トレーナーの "なんとなく" を AI に翻訳する ── body-part prior という考え方',
-        ],
-        [
-            'date' => '2026.03.31',
-            'datetime' => '2026-03-31',
-            'category' => 'BLOG',
-            'title' => 'AI がスポーツ現場の「評価」を変える｜トレーナーの推論は機械に勝てるのか',
-        ],
-        [
-            'date' => '2026.03.25',
-            'datetime' => '2026-03-25',
-            'category' => 'BLOG',
-            'title' => 'センサーが現場を変えているか？──ウェアラブルデバイスによる傷害リスク評価',
-        ],
-    ];
+function hachi_cd_footer_note(): string {
+    return 'コンディション・インサイトは医療行為ではありません。健康状態に不安がある場合は医療機関へご相談ください。';
+}
+
+function hachi_cd_note_url_for_post( int $post_id ): string {
+    $url = trim( (string) get_post_meta( $post_id, '_hachi_note_url', true ) );
+    if ( $url === '' || ! wp_http_validate_url( $url ) ) {
+        return '';
+    }
+    $host = wp_parse_url( $url, PHP_URL_HOST );
+    if ( ! is_string( $host ) || ! preg_match( '/(^|\.)note\.com$/i', $host ) ) {
+        return '';
+    }
+    return esc_url_raw( $url );
+}
+
+function hachi_cd_news_items( int $limit = 30 ): array {
+    if ( function_exists( 'hachi_get_classified_items' ) ) {
+        return hachi_get_classified_items( [ 'category' => 'all', 'limit' => $limit ] );
+    }
+    return [];
 }
 
 function hachi_v3_render_home(): void {
-    $news = array_slice( hachi_v3_news_items(), 0, 2 );
     ?>
-    <main id="main-content" class="v3-page v3-home">
-        <section class="v3-hero v3-hero--split v3-hero--home" aria-label="ヒーロー">
-            <div class="v3-hero__inner">
-                <div class="v3-hero__copy">
-                    <h1>身体の暗黙知を、<br>再現可能な判断知へ。</h1>
-                    <p>経験と勘で動く現場を、組織が引き継げる判断の体系に変える。社員の身体・睡眠・集中・疲労を、観察できる材料にする。</p>
-                    <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="v3-btn v3-btn--accent">サービスを見る</a>
+    <main id="main-content" class="cd-page cd-home">
+        <section class="cd-hero">
+            <div class="cd-container cd-hero-grid">
+                <div class="cd-hero-copy">
+                    <?php hachi_cd_eyebrow( 'Condition Insight' ); ?>
+                    <h1>変化のサインを、<br>見逃さない。</h1>
+                    <p class="cd-hero-sub">社員のコンディションの変化を、組織で早めに気づける形に。</p>
+                    <div class="cd-btn-group">
+                        <a class="cd-btn cd-btn--dark" href="<?php echo esc_url( home_url( '/service/' ) ); ?>">サービスを見る <?php echo hachi_cd_arrow(); ?></a>
+                        <a class="cd-btn cd-btn--outline" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせ <?php echo hachi_cd_arrow(); ?></a>
+                    </div>
                 </div>
-                <?php hachi_v3_person(); ?>
+                <p class="cd-hero-tagline">身体の暗黙知を、再現可能な判断知へ。</p>
             </div>
+            <span class="cd-scroll">Scroll</span>
         </section>
 
-        <section class="v3-section v3-section--center v3-home-statement">
-            <div class="v3-container v3-narrow">
-                <h2>株式会社 HACHI は、<br>「変化を見抜き、判断を支える」会社です。</h2>
-                <p>コンディション・インサイトは、社員の短いチェックから身体・睡眠・集中・疲労の傾向を組織として整理する法人向けサービスです。経営者・人事・管理職の日常判断に使える情報を提供します。</p>
-            </div>
-        </section>
-
-        <section class="v3-section v3-service-split">
-            <div class="v3-container">
-                <div class="v3-two-col">
-                    <article class="v3-line-card">
-                        <p class="v3-card-kicker">SERVICE 01</p>
-                        <h3>コンディション・インサイト</h3>
-                        <p>心身のコンディションを多面的に可視化し、変化の兆しを早期につかむためのインサイトを提供します。</p>
-                        <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>">詳細を見る →</a>
-                    </article>
-                    <article class="v3-line-card">
-                        <p class="v3-card-kicker">SERVICE 02</p>
-                        <h3>HACHI Fieldwork</h3>
-                        <p>専門スタッフが現場に入り、観察・対話・記録を通じて、次の一手につながる情報へ変換します。</p>
-                        <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>">詳細を見る →</a>
-                    </article>
+        <section class="cd-section cd-section--gray">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'About' ); ?>
+                <div class="cd-deco">ABOUT</div>
+                <h2>HACHIとは</h2>
+                <div class="cd-copy">
+                    <p>HACHIは、社員のコンディションの変化を組織で見える形にする会社です。20〜100名規模の中小企業で「なんとなく不調」のサインが見えづらい構造に、状態の可視化とコンディショニング指導で向き合います。</p>
+                    <p class="cd-serif-copy">身体の専門知を、観察・記録・再現できる形にする。それが、HACHIの事業の土台にある考え方です。</p>
                 </div>
+                <?php hachi_cd_more( home_url( '/about/' ), 'HACHIについて' ); ?>
             </div>
         </section>
 
-        <section class="v3-section v3-news-mini">
-            <div class="v3-container v3-home-news-wrap">
-                <h2 class="v3-center">直近のお知らせ</h2>
-                <?php foreach ( $news as $item ) : ?>
-                    <article class="v3-news-row">
-                        <div class="v3-news-meta">
-                            <time datetime="<?php echo esc_attr( $item['datetime'] ); ?>"><?php echo esc_html( $item['date'] ); ?></time>
-                            <span><?php echo esc_html( $item['category'] ); ?></span>
-                        </div>
-                        <h3><?php echo esc_html( $item['title'] ); ?></h3>
-                        <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>">続きを読む →</a>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <?php hachi_v3_footer_cta( '組織のコンディションを、整理してみませんか。' ); ?>
-    </main>
-    <?php
-}
-
-function hachi_v3_render_service(): void {
-    ?>
-    <main id="main-content" class="v3-page v3-service">
-        <section class="v3-hero v3-hero--split v3-hero--compact v3-hero--center-figure" aria-label="Service ヒーロー">
-            <div class="v3-hero__inner">
-                <div class="v3-hero__copy">
-                    <p class="v3-eyebrow">SERVICE</p>
-                    <h1>状態を見える形にする。</h1>
-                    <p>社員の状態変化のサインを、組織として早めにつかむ。コンディション・インサイトと HACHI Fieldwork で、観察と介入を一続きの仕組みにします。</p>
+        <section class="cd-section">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'Service' ); ?>
+                <div class="cd-deco">SERVICE</div>
+                <h2>状態を、見える形にする。</h2>
+                <div class="cd-copy">
+                    <p>人は突然、不調になるのではありません。疲れや集中の変化は、じわじわと積み重なります。コンディション・インサイトは、そのサインを4つのステップで組織に見える形にします。</p>
                 </div>
-                <?php hachi_v3_person(); ?>
-            </div>
-        </section>
-
-        <section class="v3-section v3-section--center">
-            <div class="v3-container">
-                <h2><span>4</span> つの観察軸でコンディションを把握する</h2>
-                <div class="v3-axis-grid">
-                    <?php
-                    $axes = [
-                        [ '身体', 'こわばり・重さ・可動域の変化を把握する' ],
-                        [ '睡眠', '睡眠の質と回復状態の傾向を整理する' ],
-                        [ '集中', '仕事中の集中のしやすさの変化を見る' ],
-                        [ '疲労', '疲労の蓄積具合を組織単位で把握する' ],
-                    ];
-                    foreach ( $axes as $axis ) :
-                        ?>
-                        <article class="v3-axis">
-                            <span></span>
-                            <h3><?php echo esc_html( $axis[0] ); ?></h3>
-                            <p><?php echo esc_html( $axis[1] ); ?></p>
-                        </article>
-                    <?php endforeach; ?>
+                <div class="cd-step-grid cd-step-grid--compact">
+                    <div class="cd-step-compact"><span>01</span><p>状態の可視化</p></div>
+                    <div class="cd-step-compact"><span>02</span><p>背景の仮説整理</p></div>
+                    <div class="cd-step-compact"><span>03</span><p>コンディショニング介入</p></div>
+                    <div class="cd-step-compact"><span>04</span><p>変化の確認</p></div>
                 </div>
-                <span class="v3-dot" aria-hidden="true"></span>
+                <?php hachi_cd_more( home_url( '/service/' ), 'サービス詳細' ); ?>
             </div>
         </section>
 
-        <section class="v3-section v3-section--center">
-            <div class="v3-container">
-                <h2>導入の流れ</h2>
-                <div class="v3-flow v3-flow--four">
-                    <?php
-                    $steps = [
-                        [ '01', '状態の可視化', '社員の短いチェックから身体・睡眠・集中・疲労の傾向を組織として整理する' ],
-                        [ '02', '背景の仮説整理', '状態のパターンから、背景にある要因を仮説として整理する' ],
-                        [ '03', 'コンディショニング介入', 'HACHI Fieldwork によるストレッチコンディショニングで現場に介入する' ],
-                        [ '04', '変化の確認', '介入前後の変化を組織レポートとして記録し、次の打ち手に接続する' ],
-                    ];
-                    foreach ( $steps as $index => $step ) :
-                        if ( $index > 0 ) echo '<div class="v3-flow__arrow">' . hachi_v3_arrow() . '</div>';
-                        ?>
-                        <div class="v3-flow__step v3-flow__step--numbered">
-                            <span><?php echo esc_html( $step[0] ); ?></span>
-                            <h3><?php echo esc_html( $step[1] ); ?></h3>
-                            <p><?php echo esc_html( $step[2] ); ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-        <section class="v3-section">
-            <div class="v3-container v3-narrow">
-                <h2 class="v3-center">よくある質問</h2>
-                <div class="v3-faq">
-                    <article><h3>Q1. どのような傾向を把握できますか?</h3><p>身体のこわばりや重さ、睡眠の質、仕事中の集中のしやすさ、疲労の蓄積具合を、社員の短いチェックから組織単位で整理します。</p></article>
-                    <article><h3>Q2. 何名から導入できますか?</h3><p>20 名前後から対応しています。企業規模・目的に応じて、スポット実施から月次継続まで設計します。</p></article>
-                    <article><h3>Q3. 一般的な出張整体や福利厚生サービスと何が違いますか?</h3><p>出張整体はリフレッシュが主目的です。コンディション・インサイトは、状態の観察・記録・組織レポートを提供します。</p></article>
-                </div>
-            </div>
-        </section>
-
-        <?php hachi_v3_footer_cta( 'サービスの詳細・導入時期をご相談ください。' ); ?>
+        <?php hachi_cd_contact_dark(); ?>
     </main>
     <?php
 }
 
 function hachi_v3_render_about(): void {
     ?>
-    <main id="main-content" class="v3-page v3-about">
-        <section class="v3-hero v3-hero--split v3-hero--tall v3-hero--center-figure" aria-label="About Us ヒーロー">
-            <div class="v3-hero__inner">
-                <div class="v3-hero__copy">
-                    <p class="v3-eyebrow">ABOUT</p>
-                    <h1>身体の暗黙知を、<br>再現可能な判断知へ。</h1>
-                    <p class="v3-subthesis">経験と勘を、引き継げる体系に。</p>
-                </div>
-                <?php hachi_v3_person(); ?>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'About' ); ?>
+                <h1>HACHIとは</h1>
+                <p class="cd-page-lead">身体の専門知を、属人化させない。<br>HACHIは、観察・記録・再現できる判断知へと変換することを事業の土台に置いています。</p>
             </div>
         </section>
 
-        <section class="v3-section">
-            <div class="v3-container v3-narrow v3-stack">
-                <article>
-                    <p class="v3-label">ミッション</p>
-                    <h2>テクノロジーで、人と人の「向き合う時間」を取り戻す。</h2>
-                    <p>状態の観察と構造化をテクノロジーに委ねることで、管理職や経営者は「目の前の社員」に向き合える時間を取り戻せる。HACHIは現場の実証を積み重ねながら、身体の状態を再現可能な判断知へ変換する基盤をつくります。</p>
-                </article>
-                <article>
-                    <p class="v3-label">ビジョン</p>
-                    <h2>誰もが、「健康」で悩まない世界をつくる。</h2>
-                    <p>もし、病気や怪我の心配をせず、今を思いきり楽しめる世界があったなら。私たちは最新のテクノロジーや科学の力を使いながら、一人ひとりが確かな健康を抱き、人生の可能性を広げる鍵になることを目指しています。</p>
-                </article>
+        <section class="cd-section">
+            <div class="cd-container cd-narrow">
+                <h2>「なんとなく不調」を、組織で扱える形に。</h2>
+                <p>多くの中小企業では、社員の身体の不調が「個人の問題」として扱われ、見えないまま進行します。HACHIは、社員のコンディションの変化を組織で見える形にし、本人と管理職が早めに動けるきっかけをつくります。</p>
+                <p>私たちが大切にするのは、決めつけではありません。状態を観察し、傾向を整理し、次に確認すべきことを明らかにする。その積み重ねを、再現できる形で残していくことです。</p>
+                <div class="cd-thesis"><p>身体の専門知を、観察・記録・再現できる形にする。それが、HACHIの事業の土台にある考え方です。</p></div>
             </div>
         </section>
 
-        <section class="v3-section v3-section--center v3-about-flow-section">
-            <div class="v3-container">
-                <div class="v3-section-head">
-                    <h2>観察・構造化・判断</h2>
-                    <p>身体の暗黙知を、再現可能な判断知へ変換する 3 つのプロセス</p>
-                </div>
-                <div class="v3-flow v3-flow--three">
-                    <?php
-                    $steps = [
-                        [ '観察', '現場の身体・睡眠・集中・疲労のサインを取り出す' ],
-                        [ '構造化', 'サインを傾向として組織単位で整理・体系化する' ],
-                        [ '判断', '次の打ち手を組織として再現可能にする' ],
-                    ];
-                    foreach ( $steps as $index => $step ) :
-                        if ( $index > 0 ) echo '<div class="v3-flow__arrow">' . hachi_v3_arrow() . '</div>';
-                        ?>
-                        <div class="v3-flow__step">
-                            <span class="v3-flow__mark<?php echo $index === 2 ? ' is-accent' : ''; ?>"></span>
-                            <h3><?php echo esc_html( $step[0] ); ?></h3>
-                            <p><?php echo esc_html( $step[1] ); ?></p>
-                        </div>
-                    <?php endforeach; ?>
+        <section class="cd-section cd-section--gray">
+            <div class="cd-container cd-narrow">
+                <?php hachi_cd_eyebrow( 'Values' ); ?>
+                <h2>私たちの姿勢</h2>
+                <div class="cd-values">
+                    <article><span>01</span><div><h3>観察する</h3><p>結論を急がず、身体・睡眠・集中・疲労の状態を丁寧に観る。</p></div></article>
+                    <article><span>02</span><div><h3>構造化する</h3><p>個別の訴えを、組織全体の傾向として整理し、判断できる情報に変える。</p></div></article>
+                    <article><span>03</span><div><h3>再現できる形にする</h3><p>属人的な勘に閉じず、誰が見ても辿れる記録として残す。</p></div></article>
                 </div>
             </div>
         </section>
+    </main>
+    <?php
+}
 
-        <section class="v3-section v3-rep">
-            <div class="v3-container v3-narrow">
-                <h2 class="v3-center">代表より</h2>
-                <div class="v3-rep__photo" role="img" aria-label="代表取締役社長 佐々木譲崇 写真プレースホルダ"></div>
-                <p class="v3-rep__name">代表取締役社長 佐々木譲崇</p>
-                <p>現場で長年積み重ねた経験から確信したことがある。テクノロジーは、人と人の間にある「温かさ」を消すためにあるのではない。むしろ、煩雑な作業や曖昧な判断をテクノロジーが担うことで、人はより深く、目の前の人と向き合えるようになる。</p>
+function hachi_v3_render_service(): void {
+    ?>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'Condition Insight' ); ?>
+                <h1>状態を、見える形にする。</h1>
+                <p class="cd-page-lead">コンディション・インサイトは、社員の身体・睡眠・集中・疲労の傾向を組織で見える形にし、現場のコンディショニング指導までを一貫して支えるサービスです。</p>
             </div>
         </section>
 
-        <?php hachi_v3_footer_cta( 'HACHI と話す' ); ?>
+        <section class="cd-section">
+            <div class="cd-container cd-narrow">
+                <h2>4つのステップ</h2>
+                <div class="cd-steps">
+                    <article><span>Step 1</span><h3>状態の可視化</h3><p>社員が10分以内で答える短いチェックをもとに、現在の身体・睡眠・集中・疲労の傾向を整理します。参加者本人の事前同意を取得のうえ実施します。</p></article>
+                    <article><span>Step 2</span><h3>背景の仮説整理</h3><p>個別の回答をそのまま伝えるのではなく、組織全体の傾向として整理します。どのような状態の社員が多いか、経営者・管理職が把握しやすい形でまとめます。</p></article>
+                    <article><span>Step 3</span><h3>コンディショニング介入</h3><p>希望する企業には、有資格スタッフが現場に入り、状態に合ったストレッチ・コンディショニング指導とセルフケアの方法をお伝えします。</p></article>
+                    <article><span>Step 4</span><h3>変化の確認</h3><p>一定期間後に再評価を行い、傾向の推移を確認します。組織の傾向の変化を、経営者向けの状態傾向レポートでお届けします。</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cd-section cd-section--gray">
+            <div class="cd-container cd-narrow">
+                <?php hachi_cd_eyebrow( 'Scope' ); ?>
+                <h2>提供する範囲</h2>
+                <p>コンディション・インサイトが提供するのは「状態の可視化」と「コンディショニング指導」です。</p>
+                <div class="cd-scope">
+                    <div>身体・睡眠・集中・疲労の傾向の可視化</div>
+                    <div>組織全体の状態傾向レポート</div>
+                    <div>有資格スタッフによる現場指導</div>
+                    <div>セルフケア・ストレッチの指導</div>
+                </div>
+                <p class="cd-note">対象：20〜100名規模の中小企業・法人。個人を特定できる情報を会社に渡すことはありません。</p>
+            </div>
+        </section>
+
+        <?php hachi_cd_contact_dark(); ?>
     </main>
     <?php
 }
 
 function hachi_v3_render_company(): void {
     ?>
-    <main id="main-content" class="v3-page v3-company">
-        <section class="v3-hero v3-hero--simple v3-hero--decorated" aria-label="Company ヒーロー">
-            <div class="v3-container v3-narrow">
-                <p class="v3-eyebrow">COMPANY</p>
-                <h1>会社情報</h1>
-                <p>HACHI Inc.</p>
-                <?php echo hachi_v3_blue_mark(); ?>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'Company' ); ?>
+                <h1>会社概要</h1>
             </div>
         </section>
 
-        <section class="v3-section v3-ledger-section">
-            <span class="v3-side-ornament v3-side-ornament--left" aria-hidden="true"></span>
-            <span class="v3-side-ornament v3-side-ornament--right" aria-hidden="true"></span>
-            <div class="v3-container v3-narrow">
-                <h2 class="v3-center">会社概要</h2>
-                <dl class="v3-company-table">
-                    <div><dt>会社名</dt><dd>株式会社 HACHI / HACHI Inc.</dd></div>
-                    <div><dt>代表者</dt><dd>佐々木 譲崇（代表取締役社長）</dd></div>
-                    <div><dt>設立</dt><dd>2022 年 3 月 25 日</dd></div>
-                    <div><dt>資本金</dt><dd>100 万円</dd></div>
-                    <div><dt>所在地</dt><dd>〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F</dd></div>
-                </dl>
+        <section class="cd-section cd-section--flush">
+            <div class="cd-container cd-narrow">
+                <table class="cd-company-table">
+                    <tbody>
+                        <tr><th>会社名</th><td>株式会社HACHI<br>HACHI Inc.</td></tr>
+                        <tr><th>代表者</th><td>佐々木 譲崇（代表取締役社長）</td></tr>
+                        <tr><th>設立</th><td>2022年3月25日</td></tr>
+                        <tr><th>資本金</th><td>100万円</td></tr>
+                        <tr><th>所在地</th><td>〒180-0004 東京都武蔵野市吉祥寺本町 1-13-2 5F</td></tr>
+                        <tr><th>事業内容</th><td>コンディション・インサイトの提供<br>身体領域の専門知の構造化・判断支援に関する研究開発</td></tr>
+                        <tr><th>お問い合わせ</th><td><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせフォーム</a></td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
-
-        <section class="v3-section v3-business-section">
-            <div class="v3-container v3-narrow">
-                <h2 class="v3-center">事業内容</h2>
-                <p>On-site Service「HACHI Fieldwork / コンディション・インサイト」の提供、身体の状態観察・構造化・判断知変換に関する研究開発</p>
-                <a href="<?php echo esc_url( home_url( '/service/' ) ); ?>" class="v3-text-link">サービス詳細を見る →</a>
-            </div>
-        </section>
-
-        <?php hachi_v3_footer_cta( '導入のご相談はお気軽に。' ); ?>
     </main>
     <?php
 }
 
 function hachi_v3_render_contact(): void {
     ?>
-    <main id="main-content" class="v3-page v3-contact">
-        <section class="v3-hero v3-hero--simple v3-hero--decorated" aria-label="Contact ヒーロー">
-            <div class="v3-container v3-narrow">
-                <p class="v3-eyebrow">CONTACT</p>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'Contact' ); ?>
                 <h1>お問い合わせ</h1>
-                <p>コンディション・インサイト / HACHI Fieldwork について、お気軽にご連絡ください。担当より 2 営業日以内にご返信します。</p>
-                <?php echo hachi_v3_blue_mark(); ?>
             </div>
         </section>
 
-        <section class="v3-section v3-contact-section">
-            <span class="v3-side-ornament v3-side-ornament--left" aria-hidden="true"></span>
-            <span class="v3-side-ornament v3-side-ornament--right v3-side-ornament--low" aria-hidden="true"></span>
-            <div class="v3-container v3-form-wrap">
-                <div id="form-success" class="form-success v3-form-success" role="status" aria-live="polite" tabindex="-1">
+        <section class="cd-section cd-section--flush">
+            <div class="cd-container cd-form-wrap">
+                <p>コンディション・インサイトのご相談、サービス資料の請求、取材・協業のご連絡は、下記フォームよりお気軽にお問い合わせください。<br>対象：20〜100名規模の中小企業・法人のご担当者様。</p>
+                <p class="cd-contact-email cd-contact-email--light">Email: <a href="mailto:info@hachi-wellnesshack.com">info@hachi-wellnesshack.com</a></p>
+
+                <div id="form-success" class="form-success cd-form-success" role="status" aria-live="polite" tabindex="-1">
                     <strong>お問い合わせを受け付けました。</strong><br>
-                    <span>担当より 2 営業日以内にご連絡いたします。</span>
+                    <span>担当よりご連絡いたします。</span>
                 </div>
-                <form id="contact-form" class="v3-contact-form" novalidate aria-label="お問い合わせフォーム">
+
+                <form id="contact-form" class="cd-form" novalidate aria-label="お問い合わせフォーム">
                     <?php wp_nonce_field( 'hachi_nonce', 'contact_nonce' ); ?>
                     <input type="hidden" name="contact_cat" value="コンディション・インサイトのご相談">
                     <input type="hidden" name="contact_timeline" value="">
-                    <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none" aria-hidden="true">
+                    <div class="cd-honeypot" aria-hidden="true">
                         <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
                     </div>
 
-                    <div class="v3-form-field" id="field-company">
+                    <div class="cd-field" id="field-company">
                         <label for="contact-company">会社名 <span>必須</span></label>
-                        <input type="text" id="contact-company" name="contact_company" placeholder="入力してください" maxlength="200" autocomplete="organization" required>
+                        <input type="text" id="contact-company" name="contact_company" placeholder="株式会社〇〇" maxlength="200" autocomplete="organization" required>
                     </div>
-                    <div class="v3-form-field" id="field-name">
+                    <div class="cd-field" id="field-name">
                         <label for="contact-name">お名前 <span>必須</span></label>
-                        <input type="text" id="contact-name" name="contact_name" placeholder="入力してください" maxlength="100" autocomplete="name" required aria-required="true" aria-describedby="err-name">
+                        <input type="text" id="contact-name" name="contact_name" placeholder="山田 太郎" maxlength="100" autocomplete="name" required aria-required="true" aria-describedby="err-name">
                         <span class="form-field__error" id="err-name" role="alert">お名前をご入力ください。</span>
                     </div>
-                    <div class="v3-form-field" id="field-email">
+                    <div class="cd-field" id="field-email">
                         <label for="contact-email">メールアドレス <span>必須</span></label>
-                        <input type="email" id="contact-email" name="contact_email" placeholder="入力してください" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+                        <input type="email" id="contact-email" name="contact_email" placeholder="you@example.com" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
                         <span class="form-field__error" id="err-email" role="alert">正しいメールアドレスを入力してください。</span>
                     </div>
-                    <div class="v3-form-field">
+                    <div class="cd-field">
                         <label for="contact-phone">電話番号 <em>任意</em></label>
                         <input type="tel" id="contact-phone" name="contact_phone" placeholder="入力してください" maxlength="20" autocomplete="tel">
                     </div>
-                    <div class="v3-form-field">
+                    <div class="cd-field">
                         <label for="contact-size">従業員数</label>
                         <select id="contact-size" name="contact_size">
                             <option value="">選択してください</option>
-                            <option value="〜50名">〜20 名</option>
-                            <option value="〜50名">20〜50 名</option>
-                            <option value="51〜300名">50〜100 名</option>
-                            <option value="51〜300名">100 名以上</option>
+                            <option value="〜50名">〜20名</option>
+                            <option value="〜50名">20〜50名</option>
+                            <option value="51〜300名">50〜100名</option>
+                            <option value="51〜300名">100名以上</option>
                         </select>
                     </div>
-                    <div class="v3-form-field" id="field-message">
+                    <div class="cd-field" id="field-message">
                         <label for="contact-message">お問い合わせ内容</label>
-                        <textarea id="contact-message" name="contact_message" rows="6" maxlength="1000" placeholder="ご質問・ご要望をご記入ください（最大 1000 字）" aria-required="true" aria-describedby="err-message"></textarea>
+                        <textarea id="contact-message" name="contact_message" rows="6" maxlength="1000" placeholder="ご相談内容をご記入ください" aria-required="true" aria-describedby="err-message"></textarea>
                         <span class="form-field__error" id="err-message" role="alert">お問い合わせ内容をご入力ください。</span>
                     </div>
-                    <label class="v3-form-privacy" id="field-privacy">
+
+                    <p class="cd-privacy-purpose">いただいた情報はお問い合わせ対応の目的にのみ利用します。詳しくはプライバシーポリシーをご確認ください。</p>
+                    <label class="cd-form-privacy" id="field-privacy">
                         <input type="checkbox" name="privacy" required>
                         <span><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>" target="_blank" rel="noopener">プライバシーポリシー</a>をご確認ください</span>
                         <span class="form-field__error" id="err-privacy" role="alert">プライバシーポリシーをご確認ください。</span>
                     </label>
-                    <button type="submit" class="v3-btn v3-btn--accent" id="form-submit"><span id="submit-text">送信する</span></button>
-                    <p id="form-general-error" class="v3-form-error" role="alert"></p>
+                    <button type="submit" class="cd-btn cd-btn--dark cd-submit" id="form-submit"><span id="submit-text">送信する <?php echo hachi_cd_arrow(); ?></span></button>
+                    <p id="form-general-error" class="cd-form-error" role="alert"></p>
                 </form>
             </div>
         </section>
@@ -392,36 +307,67 @@ function hachi_v3_render_contact(): void {
 }
 
 function hachi_v3_render_news(): void {
+    $items = hachi_cd_news_items( 30 );
     ?>
-    <main id="main-content" class="v3-page v3-news">
-        <section class="v3-hero v3-hero--simple v3-news-hero" aria-label="News ヒーロー">
-            <div class="v3-container v3-narrow">
-                <p class="v3-eyebrow">NEWS</p>
-                <h1>ニュース・知見</h1>
-                <p>サービス更新と現場で気づいたことを記録します。</p>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'News' ); ?>
+                <h1>お知らせ</h1>
             </div>
         </section>
 
-        <section class="v3-section">
-            <div class="v3-container v3-narrow">
-                <ol class="v3-news-list">
-                    <?php foreach ( hachi_v3_news_items() as $item ) : ?>
-                        <li>
-                            <article class="v3-news-row">
-                                <div class="v3-news-meta">
-                                    <time datetime="<?php echo esc_attr( $item['datetime'] ); ?>"><?php echo esc_html( $item['date'] ); ?></time>
-                                    <span><?php echo esc_html( $item['category'] ); ?></span>
-                                </div>
-                                <h2><?php echo esc_html( $item['title'] ); ?></h2>
-                                <a href="<?php echo esc_url( home_url( '/news/' ) ); ?>">続きを読む →</a>
-                            </article>
-                        </li>
-                    <?php endforeach; ?>
-                </ol>
+        <section class="cd-section cd-section--flush">
+            <div class="cd-container cd-news-wrap">
+                <?php if ( $items ) : ?>
+                    <ol class="cd-news-list">
+                        <?php foreach ( $items as $item ) : ?>
+                            <?php
+                            $is_note = ( $item['source'] ?? '' ) === 'note';
+                            $url     = $item['url'] ?? '';
+                            ?>
+                            <li>
+                                <a class="cd-news-item" href="<?php echo esc_url( $url ); ?>"<?php echo $is_note ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+                                    <time class="cd-news-date" datetime="<?php echo esc_attr( $item['date_ts'] ? date_i18n( 'Y-m-d', (int) $item['date_ts'] ) : '' ); ?>"><?php echo esc_html( $item['date_str'] ?? '' ); ?></time>
+                                    <span class="cd-news-label"><?php echo esc_html( $is_note ? 'note' : strtoupper( $item['category'] ?? 'news' ) ); ?></span>
+                                    <span class="cd-news-title"><?php echo esc_html( $item['title'] ?? '' ); ?></span>
+                                    <span class="cd-news-arrow" aria-hidden="true"><?php echo $is_note ? '&#8599;' : '&rarr;'; ?></span>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                <?php else : ?>
+                    <p class="cd-empty">公開中のお知らせはまだありません。</p>
+                <?php endif; ?>
+            </div>
+        </section>
+    </main>
+    <?php
+}
+
+function hachi_v3_render_privacy(): void {
+    ?>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'Privacy' ); ?>
+                <h1>プライバシーポリシー</h1>
             </div>
         </section>
 
-        <?php hachi_v3_footer_cta( '導入のご相談はこちらから。' ); ?>
+        <section class="cd-section cd-section--flush">
+            <div class="cd-container cd-policy">
+                <p class="cd-policy-intro">株式会社HACHI（以下「当社」）は、お客様の個人情報の重要性を認識し、個人情報の保護に関する法律および関連法令を遵守するとともに、以下の方針に基づき個人情報を適切に取り扱います。</p>
+
+                <article><h2>1. 取得する情報</h2><p>当社は、お問い合わせやサービスのご利用にあたり、以下の情報を取得することがあります。</p><ul><li>会社名・お名前・メールアドレス等、お問い合わせフォームにご入力いただく情報</li><li>サービス提供の過程で取得する、業務上必要な情報</li><li>ウェブサイトのアクセス情報（Cookie・アクセス解析により取得する利用状況）</li></ul></article>
+                <article><h2>2. 利用目的</h2><ul><li>お問い合わせへの対応およびご連絡のため</li><li>サービスのご提供・ご案内・品質向上のため</li><li>ウェブサイトの改善および利用状況の把握のため</li></ul></article>
+                <article><h2>3. 第三者提供</h2><p>当社は、法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。サービスの提供にあたり業務委託を行う場合は、適切な管理のもとで必要な範囲に限り情報を取り扱います。</p></article>
+                <article><h2>4. 安全管理措置</h2><p>当社は、取得した個人情報の漏えい・滅失・毀損を防止するため、必要かつ適切な安全管理措置を講じ、取り扱う従業者・委託先に対して必要な監督を行います。</p></article>
+                <article><h2>5. 開示・訂正・削除等のご請求</h2><p>ご本人からの個人情報の開示・訂正・利用停止・削除等のご請求については、<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせフォーム</a>よりご連絡ください。ご本人であることを確認のうえ、法令に従い対応いたします。</p></article>
+                <article><h2>6. 本ポリシーの改定</h2><p>当社は、法令の変更やサービス内容の変更に応じて、本ポリシーを予告なく改定することがあります。改定後の内容は本ページに掲載した時点から適用されます。</p></article>
+                <article><h2>7. お問い合わせ窓口</h2><p>本ポリシーおよび個人情報の取り扱いに関するお問い合わせは、<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせフォーム</a>よりご連絡ください。</p></article>
+            </div>
+        </section>
     </main>
     <?php
 }

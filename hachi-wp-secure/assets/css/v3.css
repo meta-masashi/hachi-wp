@@ -131,35 +131,35 @@ body::before,
 }
 
 .site-header.is-scrolled {
-  background: var(--cd-surface) !important;
-  border-bottom-color: var(--cd-border) !important;
+  background: rgba(34, 43, 53, .96) !important;
+  border-bottom-color: rgba(255,255,255,.12) !important;
 }
 
 .site-header.is-scrolled .site-header__inner,
 .site-header.is-scrolled .site-logo,
 .site-header.is-scrolled .primary-nav__item {
-  color: var(--cd-ink) !important;
+  color: var(--cd-surface) !important;
 }
 
 .site-header.is-scrolled .primary-nav__item:hover,
 .site-header.is-scrolled .primary-nav__item.is-current {
-  color: var(--cd-accent) !important;
+  color: var(--cd-surface) !important;
 }
 
 .site-header.is-scrolled .nav-cta {
-  background: transparent !important;
-  border-color: var(--cd-ink) !important;
+  background: var(--cd-surface) !important;
+  border-color: var(--cd-surface) !important;
   color: var(--cd-ink) !important;
 }
 
 .site-header.is-scrolled .nav-cta:hover {
-  background: var(--cd-ink) !important;
-  border-color: var(--cd-ink) !important;
+  background: var(--cd-accent) !important;
+  border-color: var(--cd-accent) !important;
   color: var(--cd-surface) !important;
 }
 
 .site-header.is-scrolled .hamburger__line {
-  background: var(--cd-ink) !important;
+  background: var(--cd-surface) !important;
 }
 
 .hamburger {

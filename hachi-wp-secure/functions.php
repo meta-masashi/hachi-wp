@@ -756,3 +756,25 @@ add_action( 'template_redirect', function (): void {
     require get_template_directory() . '/page-privacy-policy.php';
     exit;
 } );
+
+/**
+ * 自動アクセス（HACHI-LeadFinder）の説明ページを template_redirect で直接描画する
+ *
+ * 当社のプログラムが企業サイトへアクセスする際、User-Agent に本ページの URL を
+ * 含めて名乗る。相手サイト運営者がアクセスログから当社を識別し、停止方法と
+ * 連絡先に到達できるようにするためのページ。
+ *
+ * privacy-policy と同方式（DB ページ不要・書き込み不要）。
+ * /bot または /bot/ へのリクエストを捕捉し page-bot.php を直接 require して 200 を返す。
+ */
+add_action( 'template_redirect', function (): void {
+    $path = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+    if ( $path !== 'bot' ) {
+        return;
+    }
+
+    status_header( 200 );
+    nocache_headers();
+    require get_template_directory() . '/page-bot.php';
+    exit;
+} );

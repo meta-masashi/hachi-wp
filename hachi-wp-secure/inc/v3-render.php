@@ -368,3 +368,41 @@ function hachi_v3_render_privacy(): void {
     </main>
     <?php
 }
+
+/**
+ * 自動アクセス（HACHI-LeadFinder）の説明ページ。
+ *
+ * 当社のプログラムが企業サイトへアクセスする際、User-Agent に本ページの URL を
+ * 含めて名乗る。相手サイトの運営者がアクセスログから当社を識別し、
+ * 停止方法と連絡先に到達できるようにするためのページ。
+ */
+function hachi_v3_render_bot(): void {
+    ?>
+    <main id="main-content" class="cd-page">
+        <section class="cd-page-hero">
+            <div class="cd-container">
+                <?php hachi_cd_eyebrow( 'Bot Information' ); ?>
+                <h1>当社の自動アクセスについて</h1>
+            </div>
+        </section>
+
+        <section class="cd-section cd-section--flush">
+            <div class="cd-container cd-policy">
+                <p class="cd-policy-intro">貴社サイトのアクセス記録に <strong>HACHI-LeadFinder</strong> という名前が残っていた場合、それは株式会社HACHI によるアクセスです。本ページは、そのアクセスが何であるかをご確認いただき、必要であれば停止していただくためのものです。</p>
+
+                <article><h2>1. 何をしているか</h2><p>当社は、身体のコンディションに関するサービスを法人向けにご案内しています。ご案内をお送りする前に、<strong>公開されている連絡先が実際に掲載されているか</strong>と、<strong>営業のご連絡をお断りされていないか</strong>を確認しています。この確認のため、貴社の公式サイトの公開ページを数ページのみ閲覧しています。</p></article>
+
+                <article><h2>2. アクセスの範囲</h2><ul><li>対象は貴社ご自身の公式サイトの公開ページのみです。ログインが必要なページには一切アクセスしません。</li><li>1 社あたり最大 4 ページまでです（トップ／お問い合わせ／会社概要／サイトポリシー）。</li><li>同一サイトへのアクセスは 5 秒以上の間隔を空け、同時に複数の接続は行いません。</li><li>当社全体で 1 日あたり 20 社・100 リクエストまでに制限しています。</li><li>robots.txt に従います。取得をお断りいただいている場合はアクセスしません。robots.txt を取得できなかった場合も、アクセスを行いません。</li></ul></article>
+
+                <article><h2>3. 行わないこと</h2><ul><li>サイト本文の収集・保存・再配布・機械学習への利用は行いません。</li><li>画像化されたメールアドレスの文字読み取りは行いません。</li><li>意図的に崩して記載されたアドレス（<code>info(at)example.co.jp</code> 等）の復元は行いません。そうした記載は「自動的に収集しないでほしい」というご意思と受け取り、対象から外しています。</li><li>お問い合わせフォームへの自動送信は行いません。</li><li>一般のブラウザを装うことはしません。当社は常に上記の名称で名乗ります。</li></ul></article>
+
+                <article><h2>4. アクセスを停止するには</h2><p>次のいずれの方法でも停止できます。理由のご説明は不要です。</p><p><strong>robots.txt で指定する</strong><br>貴社サイトの robots.txt に <code>User-agent: HACHI-LeadFinder</code> と <code>Disallow: /</code> を記載していただければ、以後アクセスしません。</p><p><strong>サイト上で営業のご連絡をお断りいただく</strong><br>「営業目的のお問い合わせはお断りします」等の記載を確認した場合、ご案内の送付対象から自動的に除外します。</p><p><strong>ご連絡いただく</strong><br><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせフォーム</a>より「自動アクセスについて」としてご一報ください。対象から除外いたします。</p></article>
+
+                <article><h2>5. 記録する情報について</h2><p>当社が記録するのは、公開されている法人の連絡先と、それがどのページに掲載されていたかの記録のみです。個人の氏名を含むメールアドレスは対象から除外しています。個人情報の取り扱いについては<a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">プライバシーポリシー</a>をご覧ください。</p></article>
+
+                <article><h2>6. 運営者</h2><p>株式会社HACHI<br>〒180-0004 東京都武蔵野市吉祥寺本町1-13-2 5F</p></article>
+            </div>
+        </section>
+    </main>
+    <?php
+}

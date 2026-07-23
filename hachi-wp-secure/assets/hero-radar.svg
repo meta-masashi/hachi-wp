@@ -1,0 +1,150 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 760 520"
+  role="img"
+  aria-labelledby="radar-title"
+  style="background:#ffffff;"
+>
+  <title id="radar-title">身体・睡眠・集中・疲労の状態レーダー</title>
+
+  <!--
+    HACHI hero-radar.svg
+    Design: Luka CDO / 2026-06-11
+    Language: Swiss restraint × Clinical-premium minimalism
+    Cliché avoided: filled radar polygon, health-app color coding, grid lines, score numbers
+    Center: cx=490 cy=260 (right-of-center, left 1/3 reserved for copy)
+    Axes: 身体(top 270°) / 睡眠(right 5°) / 集中(lower-right 130°) / 疲労(left 185°)
+    Blue #2D4295: center focal point only — "all axes converge here"
+  -->
+
+  <defs>
+    <!-- No gradients, no filters. Pure path/line/circle/text per spec. -->
+  </defs>
+
+  <!-- ─── Concentric rings — center cx=490 cy=260 ─── -->
+  <!-- 5 rings: r=40,80,130,185,245 — very faint, thin stroke -->
+  <circle cx="490" cy="260" r="42"  fill="none" stroke="#1d1d1f" stroke-width="0.6" opacity="0.07"/>
+  <circle cx="490" cy="260" r="88"  fill="none" stroke="#1d1d1f" stroke-width="0.6" opacity="0.06"/>
+  <circle cx="490" cy="260" r="142" fill="none" stroke="#1d1d1f" stroke-width="0.5" opacity="0.05"/>
+  <circle cx="490" cy="260" r="200" fill="none" stroke="#1d1d1f" stroke-width="0.5" opacity="0.05"/>
+  <circle cx="490" cy="260" r="255" fill="none" stroke="#1d1d1f" stroke-width="0.5" opacity="0.04"/>
+
+  <!-- ─── 4 axis lines from center ─── -->
+  <!-- 身体: up (270°) -->
+  <line x1="490" y1="260" x2="490" y2="20"
+        stroke="#1d1d1f" stroke-width="0.8" opacity="0.09" stroke-linecap="round"/>
+  <!-- 睡眠: right-ish (5°) — slight downward tilt -->
+  <line x1="490" y1="260" x2="735" y2="239"
+        stroke="#1d1d1f" stroke-width="0.8" opacity="0.09" stroke-linecap="round"/>
+  <!-- 集中: lower-right (128°) -->
+  <line x1="490" y1="260" x2="648" y2="465"
+        stroke="#1d1d1f" stroke-width="0.8" opacity="0.09" stroke-linecap="round"/>
+  <!-- 疲労: left (185°) -->
+  <line x1="490" y1="260" x2="242" y2="282"
+        stroke="#1d1d1f" stroke-width="0.8" opacity="0.09" stroke-linecap="round"/>
+
+  <!-- ─── Axis terminal dots (small white-filled circle with thin border) ─── -->
+  <!-- 身体 top -->
+  <circle cx="490" cy="20"  r="3.5" fill="#ffffff" stroke="#6e6e73" stroke-width="0.7" opacity="0.7"/>
+  <!-- 睡眠 right -->
+  <circle cx="735" cy="239" r="3.5" fill="#ffffff" stroke="#6e6e73" stroke-width="0.7" opacity="0.7"/>
+  <!-- 集中 lower-right -->
+  <circle cx="648" cy="465" r="3.5" fill="#ffffff" stroke="#6e6e73" stroke-width="0.7" opacity="0.7"/>
+  <!-- 疲労 left -->
+  <circle cx="242" cy="282" r="3.5" fill="#ffffff" stroke="#6e6e73" stroke-width="0.7" opacity="0.7"/>
+
+  <!-- ─── Axis labels — fine Gothic, grey #6e6e73 ─── -->
+  <text x="490" y="12"
+        font-family="'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif"
+        font-size="11" font-weight="400" fill="#6e6e73" opacity="0.85"
+        text-anchor="middle" letter-spacing="0.04em">身体</text>
+
+  <text x="744" y="236"
+        font-family="'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif"
+        font-size="11" font-weight="400" fill="#6e6e73" opacity="0.85"
+        text-anchor="start" letter-spacing="0.04em">睡眠</text>
+
+  <text x="655" y="482"
+        font-family="'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif"
+        font-size="11" font-weight="400" fill="#6e6e73" opacity="0.85"
+        text-anchor="middle" letter-spacing="0.04em">集中</text>
+
+  <text x="218" y="284"
+        font-family="'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif"
+        font-size="11" font-weight="400" fill="#6e6e73" opacity="0.85"
+        text-anchor="end" letter-spacing="0.04em">疲労</text>
+
+  <!-- ─── Sparse observation dots — scattered across field ─── -->
+  <!-- Varied sizes/opacity to feel organic, not uniform data-vis -->
+  <!-- Upper-right cluster -->
+  <circle cx="572" cy="118" r="2.2" fill="#1d1d1f" opacity="0.08"/>
+  <circle cx="614" cy="148" r="1.4" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="596" cy="96"  r="1.8" fill="#1d1d1f" opacity="0.07"/>
+  <circle cx="548" cy="167" r="1.0" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="638" cy="174" r="2.6" fill="#1d1d1f" opacity="0.07"/>
+  <circle cx="663" cy="130" r="1.2" fill="#1d1d1f" opacity="0.05"/>
+
+  <!-- Right mid cluster -->
+  <circle cx="672" cy="218" r="1.6" fill="#1d1d1f" opacity="0.07"/>
+  <circle cx="698" cy="244" r="2.0" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="710" cy="270" r="1.2" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="685" cy="196" r="1.4" fill="#1d1d1f" opacity="0.06"/>
+
+  <!-- Lower-right sweep -->
+  <circle cx="634" cy="330" r="2.4" fill="#1d1d1f" opacity="0.08"/>
+  <circle cx="618" cy="368" r="1.6" fill="#1d1d1f" opacity="0.07"/>
+  <circle cx="655" cy="398" r="1.2" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="598" cy="412" r="1.8" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="576" cy="450" r="1.0" fill="#1d1d1f" opacity="0.04"/>
+
+  <!-- Upper-center scatter -->
+  <circle cx="510" cy="72"  r="1.8" fill="#1d1d1f" opacity="0.07"/>
+  <circle cx="468" cy="88"  r="1.2" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="524" cy="114" r="1.4" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="456" cy="128" r="2.0" fill="#1d1d1f" opacity="0.06"/>
+
+  <!-- Mid-field scattered — crossing rings -->
+  <circle cx="552" cy="210" r="2.8" fill="#1d1d1f" opacity="0.07"/>
+  <circle cx="530" cy="192" r="1.6" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="574" cy="236" r="1.2" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="536" cy="316" r="1.8" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="560" cy="298" r="1.0" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="514" cy="348" r="2.2" fill="#1d1d1f" opacity="0.07"/>
+
+  <!-- Left/upper-left lean -->
+  <circle cx="392" cy="192" r="1.6" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="368" cy="220" r="1.2" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="420" cy="244" r="2.0" fill="#1d1d1f" opacity="0.06"/>
+  <circle cx="348" cy="264" r="1.4" fill="#1d1d1f" opacity="0.05"/>
+  <circle cx="376" cy="288" r="1.8" fill="#1d1d1f" opacity="0.06"/>
+
+  <!-- Outer / near-edge hints -->
+  <circle cx="490" cy="508" r="1.4" fill="#1d1d1f" opacity="0.04"/>
+  <circle cx="726" cy="316" r="1.2" fill="#1d1d1f" opacity="0.04"/>
+  <circle cx="456" cy="34"  r="1.0" fill="#1d1d1f" opacity="0.04"/>
+
+  <!-- ─── Faint trajectory curves — "trace of movement across the field" ─── -->
+  <!-- Curve 1: upper-right arc, very ghostly -->
+  <path d="M 614 112 Q 672 180 698 258"
+        fill="none" stroke="#1d1d1f" stroke-width="0.6" opacity="0.05"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Curve 2: mid-right to lower sweep -->
+  <path d="M 668 228 Q 650 316 618 392"
+        fill="none" stroke="#1d1d1f" stroke-width="0.5" opacity="0.04"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Curve 3: subtle arc near center, left-leaning -->
+  <path d="M 536 168 Q 490 220 420 258"
+        fill="none" stroke="#1d1d1f" stroke-width="0.5" opacity="0.04"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ─── Center focal point — #2D4295, only solid blue element ─── -->
+  <!-- This is the single convergence point. All axes meet here. -->
+  <circle cx="490" cy="260" r="6" fill="#2D4295" opacity="1"/>
+
+  <!-- Soft presence ring around focal point — very faint, #2D4295 -->
+  <circle cx="490" cy="260" r="11"
+          fill="none" stroke="#2D4295" stroke-width="0.7" opacity="0.18"/>
+
+</svg>

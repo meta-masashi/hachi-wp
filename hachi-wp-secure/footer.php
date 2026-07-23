@@ -62,7 +62,7 @@
 			<div class="footer-social">
 				<?php
 				$social_links = [
-					'X (Twitter)' => 'https://x.com/hachi_inc',
+					'X (Twitter)' => 'https://x.com/PACEathlete',
 				];
 				foreach ( $social_links as $label => $url ) :
 					?>
